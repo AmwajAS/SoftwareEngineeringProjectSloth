@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "questions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string"
+            },
+            "answers": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "correct_ans": {
+              "type": "string"
+            },
+            "level": {
+              "type": "string"
+            },
+            "team": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "question",
+            "answers",
+            "correct_ans",
+            "level",
+            "team"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "questions"
+  ]
+}
