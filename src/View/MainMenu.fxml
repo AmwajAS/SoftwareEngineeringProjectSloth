@@ -70,7 +70,7 @@
                </graphic>
             </Tooltip>
          </tooltip></TextField>
-      <Button fx:id="signup" layoutX="407.0" layoutY="496.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="99.0" style="-fx-background-color: transparent; -fx-border-color: #c39555;" text="Sign up">
+      <Button fx:id="signup" layoutX="407.0" layoutY="496.0" mnemonicParsing="false" onAction="#questionMang" prefHeight="17.0" prefWidth="99.0" style="-fx-background-color: transparent; -fx-border-color: #c39555;" text="Sign up">
          <font>
             <Font name="Times New Roman Bold Italic" size="14.0" />
          </font>

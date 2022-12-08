@@ -26,9 +26,18 @@ public class Sysdata {
 	static ArrayList<Question> importedQuestions = new ArrayList<>();
 	static ObjectMapper mapper = new ObjectMapper();
 
-   /*This method read the Json file and creates a Questions Object. and returns an array with all the imported questions -importedQuestions- 
-	after validating the Json schema. In Order to do this we Used the Jackson Libraries,
-	 we also created a helper class to convert the Object into a Question Object ( import and the export methods) */
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		importQuestionsFromJSON();
+		System.out.println(importedQuestions);
+	}
+
+	/*
+	 * This method read the Json file and creates a Questions Object. and returns an
+	 * array with all the imported questions -importedQuestions- after validating
+	 * the Json schema. In Order to do this we Used the Jackson Libraries, we also
+	 * created a helper class to convert the Object into a Question Object ( import
+	 * and the export methods)
+	 */
 	public static ArrayList<Question> importQuestionsFromJSON() throws FileNotFoundException {
 
 		try {

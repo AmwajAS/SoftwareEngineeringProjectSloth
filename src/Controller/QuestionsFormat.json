@@ -1,28 +1,184 @@
 {
     "questions":[
         {
-            "question": "q1",
+            "question": "Software can be tested as:",
             "answers": [
-                "answer1",
-                "answer2",
-                "answer3",
-                "answer4"
+                "Black box (functional)",
+                "White box (structural)",
+                "Answers 1 and 2 are correct",
+                "Non of the above"
             ],
-            "correct_ans": "2",
+            "correct_ans": "3",
             "level": "1",
-            "team": "animal"
+            "team": "Sloth"
         },
         {
-            "question": "q2",
+            "question": "What does AGILE means?",
             "answers": [
-                "answer1",
-                "answer2",
-                "answer3",
-                "answer4"
+                "iterative approach to project management and software development that helps teams deliver value to their customers faster and with                  fewer headaches.",
+                "The operational domain imposes requirements.",
+                "Describe functionality or system services.",
+                "All of the above"
             ],
             "correct_ans": "1",
             "level": "2",
-            "team": "animal"
+            "team": "Sloth"
+        },
+        {
+            "question": "In black box testing graph, the nodes represent:",
+            "answers": [
+                "Properties",
+                "Entities",
+                "Relations",
+                "Links"
+            ],
+            "correct_ans": "2",
+            "level": "2",
+            "team": "Sloth"
+        },
+        {
+            "question": "The first step of the Software Life-Cycle is:",
+            "answers": [
+                "Specification phase",
+                "Design phase",
+                "Implementation phase",
+                "Requirements phase"
+            ],
+            "correct_ans": "4",
+            "level": "1",
+            "team": "Sloth"
+        },
+        {
+            "question": "Software process models:",
+            "answers": [
+                "The waterfall model",
+                "Incremental development",
+                "Reuse-oriented software engineering",
+                "All of the above"
+            ],
+            "correct_ans": "4",
+            "level": "1",
+            "team": "Sloth"
+        },
+        {
+            "question": "One of the Incremental development disadvange:",
+            "answers": [
+                "Customers are able to use and gain value from the software earlier than is possible with a waterfall process.",
+                "System structure tends to degrade as new increments are added.",
+                "Less analysis and documentation required than with the waterfall model.",
+                "The cost of accommodating changing customer requirements is reduced."
+            ],
+            "correct_ans": "2",
+            "level": "3",
+            "team": "Sloth"
+        },
+        {
+            "question": "What is true about the Incremental delivery:",
+            "answers": [
+                "Early increments act as a prototype to help elicit requirements for later increments.",
+                "Lower risk of overall project failure.",
+                "The highest priority system services tend to receive the most testing.",
+                "All of the above."
+            ],
+            "correct_ans": "4",
+            "level": "3",
+            "team": "Sloth"
+        },
+        {
+            "question": "Why software fails?",
+            "answers": [
+                "Unrealistic or unarticulated project goals.",
+                "Poor reporting of the project's status.",
+                "Use of immature technology.",
+                "All of the above."
+            ],
+            "correct_ans": "4",
+            "level": "1",
+            "team": "Sloth"
+        },
+        {
+            "question": "What are the key challenges facing software engineering ?",
+            "answers": [
+                "Coping with increasing diversity.",
+                "Demands for reduce delivery times.",
+                "Developing trustworthy software.",
+                "All of the above."
+            ],
+            "correct_ans": "4",
+            "level": "1",
+            "team": "Sloth"
+        },
+        {
+            "question": "Essential attributes of good software",
+            "answers": [
+                "Maintainability, Dependability and security.",
+                "Efficiency, Acceptability, security, Dependability, cheap price",
+                "Maintainability, Efficiency, Acceptability,Dependability and security.",
+                "cheap price, Supports the customer, Maintainability, security."
+            ],
+            "correct_ans": "3",
+            "level": "2",
+            "team": "Sloth"
+        },
+        {
+            "question": "Factors affecting software pricing: ",
+            "answers": [
+                "Market opportunity, Contractual terms and Requirements volatility.",
+                "Cost estimate uncertainty and Financial health.",
+                "Requirements volatility",
+                "Answers 1 and 2 is correct."
+            ],
+            "correct_ans": "4",
+            "level": "2",
+            "team": "Sloth"
+        },
+        {
+            "question": "what is The COCOMO 2 model ?",
+            "answers": [
+                "Based on a standard formula for algorithmic models.",
+                "Based on standard estimates of developer productivity in application (object) points/month.",
+                "An empirical model based on project experience.",
+                "Takes into account black-box code that is reused without change and code that has to be adapted to integrate it with new code."
+            ],
+            "correct_ans": "3",
+            "level": "3",
+            "team": "Sloth"
+        },
+        {
+            "question": "The risk management process Include: ",
+            "answers": [
+                "Risk identification > Risk analysis > Risk monitoring > Risk planning.",
+                "Risk identification > Risk analysis > Risk planning > Risk monitoring.",
+                "Risk planning > Risk identification > Risk analysis > Risk monitoring.",
+                "Non of the above."
+            ],
+            "correct_ans": "2",
+            "level": "2",
+            "team": "Sloth"
+        },
+        {
+            "question": "One of the Risks types is risk types, what does it mean? ",
+            "answers": [
+                "The time required to develop the software is underestimated.",
+                "The rate of defect repair is underestimated.",
+                "The size of the software is underestimated.",
+                "All of the above."
+            ],
+            "correct_ans": "4",
+            "level": "3",
+            "team": "Sloth"
+        },
+        {
+            "question": "There are different types of review with different objectives:  ",
+            "answers": [
+                "Product, Product and process, Product and standards.",
+                "Product, Product and process, Product enviroment.",
+                "Product and process, Product and standards, Product entites.",
+                "Non of the above."
+            ],
+            "correct_ans": "1",
+            "level": "3",
+            "team": "Sloth"
         }
     ]
 }
