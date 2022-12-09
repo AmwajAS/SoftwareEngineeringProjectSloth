@@ -12,18 +12,22 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
 public class QuestionMangController implements Initializable {
@@ -35,8 +39,6 @@ public class QuestionMangController implements Initializable {
 	@FXML
 	private TableColumn<Question, String> action;
 	@FXML
-	private TextField searchText;
-	@FXML
 	private Button search;
 	@FXML
 	private Button addBt;
@@ -44,11 +46,11 @@ public class QuestionMangController implements Initializable {
 	private PieChart chart;
 	@FXML
 	private ComboBox<QuestionLevel> diffSelect;
-	@FXML Button clearBt;
+	@FXML
+	Button clearBt;
 	private ObservableList<Question> ObList;
-	private ObservableList<Question> filterdList;	
-	private ObservableList<String> ObPiechar;
-
+	private ObservableList<Question> filterdList;
+//	private ObservableList<String> ObPiechar;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -61,12 +63,7 @@ public class QuestionMangController implements Initializable {
 		for (QuestionLevel ql : QuestionLevel.values()) {
 			diffSelect.getItems().add(ql);
 		}
-		
-		ObPiechar = FXCollections.observableArrayList(Sysdata.getImportedQuestions().toString());
-		//chart.setData(ObPiechar);
-		chart.setTitle("Question Levels Chart");
-		
-	
+		loadChart();
 
 	}
 
@@ -79,10 +76,9 @@ public class QuestionMangController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public void showTableContent() {
-		
+
 		question.setCellValueFactory(new PropertyValueFactory<Question, String>("Question"));
 		Callback<TableColumn<Question, String>, TableCell<Question, String>> cellFoctory = (
 				TableColumn<Question, String> param) -> {
@@ -96,8 +92,8 @@ public class QuestionMangController implements Initializable {
 						setText(null);
 
 					} else {
-						Button edit = new Button("edit");
-						Button delete = new Button("delete");
+					//	Button edit = new Button("edit");
+						//Button delete = new Button("delete");
 						FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
 						FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
 						deleteIcon.setStyle(" -fx-cursor: hand ;" + "-glyph-size:28px;" + "-fx-fill:#ff1744;");
@@ -115,37 +111,35 @@ public class QuestionMangController implements Initializable {
 			return cell;
 		};
 		action.setCellFactory(cellFoctory);
-		questionsTable.setItems(ObList);	
+		questionsTable.setItems(ObList);
 	}
-	
-	
-	
 
 	@FXML
-	public void filterByQuestionLevel(ActionEvent event) throws IOException
-	 {
-		QuestionLevel filt = diffSelect.getSelectionModel().getSelectedItem();
-		System.out.println(filt);
-		int levelCompare;
+	public void filterByQuestionLevel(ActionEvent event) throws IOException {
 
-		if (filt == QuestionLevel.Easy) {
-			levelCompare = 1;
-		} else if (filt == QuestionLevel.Meduim) {
-			levelCompare = 2;
-		} else {
-			levelCompare = 3;
-		}
+		if (diffSelect.getSelectionModel().getSelectedItem() != null) {
+			QuestionLevel filt = diffSelect.getSelectionModel().getSelectedItem();
+			System.out.println(filt);
+			int levelCompare;
 
-		ArrayList<Question> result = new ArrayList<>();
-		for (Question question : Sysdata.getImportedQuestions()) {
-			if (question.getLevel() == levelCompare) {
-				result.add(question);
-				System.out.println(result);
-
+			if (filt == QuestionLevel.Easy) {
+				levelCompare = 1;
+			} else if (filt == QuestionLevel.Meduim) {
+				levelCompare = 2;
+			} else {
+				levelCompare = 3;
 			}
-		}
+
+			ArrayList<Question> result = new ArrayList<>();
+			for (Question question : Sysdata.getImportedQuestions()) {
+				if (question.getLevel() == levelCompare) {
+					result.add(question);
+					System.out.println(result);
+
+				}
+			}
 		
-		
+
 		filterdList = FXCollections.observableList(result);
 		question.setCellValueFactory(new PropertyValueFactory<Question, String>("Question"));
 		Callback<TableColumn<Question, String>, TableCell<Question, String>> cellFoctory = (
@@ -160,8 +154,8 @@ public class QuestionMangController implements Initializable {
 						setText(null);
 
 					} else {
-						Button edit = new Button("edit");
-						Button delete = new Button("delete");
+						//Button edit = new Button("edit");
+						//Button delete = new Button("delete");
 						FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
 						FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
 						deleteIcon.setStyle(" -fx-cursor: hand ;" + "-glyph-size:28px;" + "-fx-fill:#ff1744;");
@@ -181,8 +175,53 @@ public class QuestionMangController implements Initializable {
 		action.setCellFactory(cellFoctory);
 		questionsTable.setItems(filterdList);
 
+		}
 	}
-	
+
+	public void loadChart() {
+
+		int easyCounter = 0;
+		int meduimCounter = 0;
+		int hardCounter = 0;
+
+		for (Question question : Sysdata.getImportedQuestions()) {
+			if (question.getLevel() == 1) {
+				easyCounter++;
+			} else if (question.getLevel() == 2) {
+				meduimCounter++;
+			} else {
+				hardCounter++;
+			}
+		}
+		chart.setTitle("Questions By Levels");
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+				new PieChart.Data(QuestionLevel.Easy.toString(), easyCounter),
+				new PieChart.Data(QuestionLevel.Meduim.toString(), meduimCounter),
+				new PieChart.Data(QuestionLevel.Hard.toString(), hardCounter));
+		
+		
+		chart.setStartAngle(90);
+		chart.setData(pieChartData);
+		chart.setLegendVisible(true);
+		chart.setLegendSide(Side.BOTTOM);
+		chart.setLabelLineLength(10);
+		
+		
+		final Label caption = new Label("");
+		caption.setTextFill(Color.DARKORANGE);
+		caption.setStyle("-fx-font: 24 arial;");
+		for (final PieChart.Data data : chart.getData()) {
+		 data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+		 new EventHandler<MouseEvent>() {
+		 @Override public void handle(MouseEvent e) {
+		 caption.setTranslateX(e.getSceneX());
+		 caption.setTranslateY(e.getSceneY());
+		 caption.setText(String.valueOf(data.getPieValue()) + "%");
+		 }
+		 });
+		}
+	}
+
 	@FXML
 	void clear() {
 		clearning();
@@ -190,12 +229,8 @@ public class QuestionMangController implements Initializable {
 
 	public void clearning() {
 		diffSelect.getSelectionModel().clearSelection();
-		searchText.setText("");
 		showTableContent();
 
 	}
-
-	
-	
 
 }

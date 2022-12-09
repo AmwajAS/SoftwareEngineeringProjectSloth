@@ -1,61 +1,103 @@
 package Model;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 
 /**
  * Data structure to control a queen's movement
  * on a chess board.
  */
-public class Queen {
-	
-    public static final int MAX_MOVE_NUM = 8;
-   //public static final int[] horizontal  = new int[]{ 1, 1, 1, 0, 0, -1, -1, -1 };
-   //public static final int[] vertical    = new int[]{ 1, 0, -1, 1, -1, 1, 0, -1 };
-    private ImageIcon icon;
-    private int currentRow;
-    private int currentColumn;
 
-    public Queen(String imageFile, int initialRow, int initialColumn) {
-        setIcon(imageFile);
-        this.currentRow = initialRow;
-        this.currentColumn = initialColumn;
-    }
+	public class Queen extends Piece {
+	    public Queen(String color, int posX, int posY) {
+	        super(color, posX, posY);
+	        this.type = "Queen";
+	        setImage();
+	    }
 
-	public ImageIcon getIcon() {
-		return icon;
+	    @Override
+	    public void getAllPossibleMoves() {
+	        int x = this.posX;
+	        int y = this.posY;
+	        String name;
+
+	        this.possibleMoves = new ArrayList<>();
+
+	        for(int i=x-1; i>=0; i--){
+	            name = "Square" + i + y;
+	            if(getSquareByName(name).occupied && getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+
+	            possibleMoves.add(name);
+
+	            if(getSquareByName(name).occupied && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+	        }
+
+	        for(int i=x+1; i<8; i++){
+	            name = "Square" + i + y;
+	            if(getSquareByName(name).occupied && getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+
+	            possibleMoves.add(name);
+
+	            if(getSquareByName(name).occupied && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+	        }
+
+	        for(int j=y-1; j>=0; j--){
+	            name = "Square" + x + j;
+	            if(getSquareByName(name).occupied && getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+
+	            possibleMoves.add(name);
+
+	            if(getSquareByName(name).occupied && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+	        }
+
+	        for(int j=y+1; j<8; j++){
+	            name = "Square" + x + j;
+	            if(getSquareByName(name).occupied && getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+
+	            possibleMoves.add(name);
+
+	            if(getSquareByName(name).occupied && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+	        }
+
+	        for(int i=x-1, j=y+1; i>=0 && j<8; i--, j++){
+	            name = "Square" + i + j;
+	            if(getSquareByName(name).occupied && getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+
+	            possibleMoves.add(name);
+
+	            if(getSquareByName(name).occupied && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+	        }
+
+	        for(int i=x+1, j=y+1; i<8 && j<8; i++, j++){
+	            name = "Square" + i + j;
+	            if(getSquareByName(name).occupied && getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+
+	            possibleMoves.add(name);
+
+	            if(getSquareByName(name).occupied && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+	        }
+
+	        for(int i=x+1, j=y-1; i<8 && j>=0; i++, j--){
+	            name = "Square" + i + j;
+	            if(getSquareByName(name).occupied && getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+
+	            possibleMoves.add(name);
+
+	            if(getSquareByName(name).occupied && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+	        }
+
+	        for(int i=x-1, j=y-1; i>=0 && j>=0; i--, j--){
+	            name = "Square" + i + j;
+	            if(getSquareByName(name).occupied && getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+
+	            possibleMoves.add(name);
+
+	            if(getSquareByName(name).occupied && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
+	        }
+
+
+	    }
 	}
-
-    public void setIcon(String imageFile) {
-        this.icon = new ImageIcon(imageFile);
-    }
-
-	public int getCurrentRow() {
-		return currentRow;
-	}
-
-	public void setCurrentRow(int currentRow) {
-		this.currentRow = currentRow;
-	}
-
-	public int getCurrentColumn() {
-		return currentColumn;
-	}
-
-	public void setCurrentColumn(int currentColumn) {
-		this.currentColumn = currentColumn;
-	}
-
-	public static int getMaxMoveNum() {
-		return MAX_MOVE_NUM;
-	}
-/*
-	public static int[] getHorizontal() {
-		return horizontal;
-	}
-
-	public static int[] getVertical() {
-		return vertical;
-	}
-	*/
     
     
-}
+

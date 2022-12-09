@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import java.net.URL?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -12,29 +11,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionMangController">
    <children>
-      <TableView fx:id="questionsTable" layoutX="-1.0" layoutY="102.0" prefHeight="570.0" prefWidth="666.0">
+      <TableView fx:id="questionsTable" layoutX="-1.0" layoutY="102.0" prefHeight="570.0" prefWidth="558.0" styleClass="list-cell" stylesheets="@application.css">
         <columns>
-          <TableColumn fx:id="question" prefWidth="582.400079369545" text="Question" />
-            <TableColumn fx:id="action" prefWidth="85.5999755859375" text="Action" />
+          <TableColumn fx:id="question" prefWidth="463.9999634027481" text="Question" />
+            <TableColumn fx:id="action" prefWidth="96.00009155273438" text="Action" />
         </columns>
       </TableView>
-      <Button fx:id="search" layoutX="294.0" layoutY="59.0" mnemonicParsing="false" onAction="#filterByQuestionLevel" prefHeight="23.0" prefWidth="76.0" stylesheets="@../../../../../../eclipse-workspace/BIG3/src/application/application.css" text="SEARCH">
+      <Button fx:id="search" layoutX="294.0" layoutY="59.0" mnemonicParsing="false" onAction="#filterByQuestionLevel" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="SEARCH">
          <font>
             <Font name="Times New Roman Bold" size="13.0" />
          </font>
       </Button>
-      <ComboBox fx:id="diffSelect" layoutX="74.0" layoutY="40.0" prefHeight="38.0" prefWidth="182.0">
-         <stylesheets>
-            <URL value="@../../../../../../eclipse-workspace/BIG3/src/application/media.css" />
-            <URL value="@../../../../../../eclipse-workspace/BIG3/src/application/application.css" />
-         </stylesheets>
+      <ComboBox fx:id="diffSelect" layoutX="74.0" layoutY="40.0" prefHeight="38.0" prefWidth="182.0" stylesheets="@application.css">
          <styleClass>
             <String fx:value="Feild" />
             <String fx:value="list-cell" />
          </styleClass>
       </ComboBox>
-      <PieChart fx:id="chart" layoutX="665.0" layoutY="191.0" prefHeight="123.0" prefWidth="140.0" />
-      <Button fx:id="clearBt" layoutX="399.0" layoutY="59.0" mnemonicParsing="false" onAction="#clear" prefHeight="23.0" prefWidth="76.0" stylesheets="@../../../../../../eclipse-workspace/BIG3/src/application/application.css" text="CLEAR">
+      <PieChart fx:id="chart" layoutX="560.0" layoutY="100.0" onMouseEntered="#loadChart" prefHeight="424.0" prefWidth="314.0" style="-fx-border-radius: 000000;" stylesheets="@application.css" />
+      <Button fx:id="clearBt" layoutX="399.0" layoutY="59.0" mnemonicParsing="false" onAction="#clear" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="CLEAR">
          <font>
             <Font name="Times New Roman Bold" size="13.0" />
          </font>

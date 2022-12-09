@@ -1,28 +1,29 @@
 package Model;
 import javax.swing.JButton;
 
-public class Cell  extends JButton{
-	private int row;
-	private int column;
-	
-	public Cell(int row,int column) {
-		this.row=row;
-		this.column=column;
-	}
-	
-	public int getRow() {
-		return row;
-	}
+import javafx.scene.layout.StackPane;
 
-	public void setRow(int row) {
-		this.row = row;
-	}
+public class Cell extends StackPane{
+    int x,y;
+    boolean occupied;
+    String name;
 
-	public int getColumn() {
-		return column;
-	}
+    public Cell(int x, int y){
+        this.x = x;
+        this.y = y;
+        this.occupied = false;
+    }
 
-	public void setColumn(int column) {
-		this.column = column;
-	}	
+    @Override
+    public String toString() {
+        String status;
+        if(this.occupied) status = "Occupied";
+        else status = "Not occupied";
+//        return "Square" + this.x + this.y + " - " + status;
+        return "Square";
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
 }
