@@ -34,7 +34,7 @@ public class Game {
 	            public void handle(MouseEvent event) {
 	                EventTarget target = event.getTarget();
 
-	                // Clicked on square
+	                // Clicked on cell
 	                if(target.toString().equals("Square")){
 	                    Cell cell = (Cell) target;
 	                    if(cell.occupied){

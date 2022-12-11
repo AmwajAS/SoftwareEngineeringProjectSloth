@@ -1,11 +1,10 @@
 package Model;
-import javax.swing.JButton;
 
 import javafx.scene.layout.StackPane;
 
 public class Cell extends StackPane{
     int x,y;
-    boolean occupied;
+    boolean occupied;  //מבוקרת
     String name;
 
     public Cell(int x, int y){
@@ -20,7 +19,7 @@ public class Cell extends StackPane{
         if(this.occupied) status = "Occupied";
         else status = "Not occupied";
 //        return "Square" + this.x + this.y + " - " + status;
-        return "Square";
+        return "Cell";
     }
 
     public void setName(String name){
