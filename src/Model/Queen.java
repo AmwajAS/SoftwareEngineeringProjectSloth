@@ -95,8 +95,13 @@ public class Queen extends Piece {
 			if(getSquareByName(name).isOccupied() && !getPieceByName(name).getColor().equals(Game.currentPlayer)) break;
 		}
 
-
 	}
+
+	@Override
+	public String toString() {
+		return "Queen [getType()=" + getType() + ", getPosX()=" + getPosX() + ", getPosY()=" + getPosY() + "]";
+	}
+	
 }
 
 

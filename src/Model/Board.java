@@ -121,10 +121,10 @@ public class Board {
 
 			else if(cell.getY()== 0){
 				if(cell.getX() == 7){
-					addPiece(cell, new Queen("white", cell.getX(), cell.getY()));
+					addPiece(cell, PieceFactory.newPieceByFactory("Queen","white",cell.getX(), cell.getY()));      //new Queen("white", cell.getX(), cell.getY()));
 				}
 				if(cell.getX()== 0){
-					addPiece(cell, new Knight("black", cell.getX(), cell.getY()));
+					addPiece(cell, 	PieceFactory.newPieceByFactory("Knight","black", cell.getX(), cell.getY()));	//new Knight("black", cell.getX(), cell.getY()));
 				}
 			}
 		}

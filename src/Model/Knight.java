@@ -16,7 +16,7 @@ public class Knight extends Piece{
 		int y = this.getPosY();
 		ArrayList<String> moves = new ArrayList<>();
 		this.setPossibleMoves(new ArrayList<>());
-	
+
 		//this.possibleMoves = new ArrayList<>();
 
 		moves.add("Square" + (x+2) + (y+1));
@@ -33,12 +33,15 @@ public class Knight extends Piece{
 			if(getSquareByName(move) != null){
 				if(getSquareByName(move).isOccupied() && getPieceByName(move).getColor().equals(Game.currentPlayer)) continue;
 
-				   this.getPossibleMoves().add(move);
+				this.getPossibleMoves().add(move);
 
 			}
 		}
 
-
+	}
+	@Override
+	public String toString() {
+		return "Knight [getType()=" + getType() + ", getPosX()=" + getPosX() + ", getPosY()=" + getPosY() + "]";
 	}
 
 }

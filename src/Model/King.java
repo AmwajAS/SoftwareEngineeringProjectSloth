@@ -35,7 +35,11 @@ public class King extends Piece{
 
             }
         }
-
-
     }
+
+	@Override
+	public String toString() {
+		return "King [getType()=" + getType() + ", getPosX()=" + getPosX() + ", getPosY()=" + getPosY()+ "]";
+	}
+    
 }
