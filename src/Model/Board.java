@@ -33,7 +33,7 @@ public class Board {
 		for(int i=0; i<8; i++){
 			for(int j=0; j<8; j++){
 				Cell cell = new Cell(i,j);
-				cell.setName("Cell" + i + j);
+				cell.setName("Square" + i + j);
 				cell.setPrefHeight(100);
 				cell.setPrefWidth(100);
 				cell.setBorder(new Border(new BorderStroke(Color.BLACK,
@@ -86,9 +86,9 @@ public class Board {
 
 	}
 
-	private void addPiece(Cell cell, Piece piece){
-		cell.getChildren().add(piece);
-		cell.occupied = true;
+	private void addPiece(Cell square, Piece piece){
+		square.getChildren().add(piece);
+		square.occupied = true;
 	}
 
 	private void addPieces(){

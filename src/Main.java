@@ -24,8 +24,6 @@ public class Main extends Application {
 	public static Stage primaryStage = null;
 	@Override
 	public void start(Stage stage) throws IOException {
-		
-
 		primaryStage = stage;
 		Parent root =FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 		Scene scene = new Scene(root);

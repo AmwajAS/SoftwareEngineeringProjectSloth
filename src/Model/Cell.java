@@ -19,7 +19,7 @@ public class Cell extends StackPane{
         if(this.occupied) status = "Occupied";
         else status = "Not occupied";
 //        return "Square" + this.x + this.y + " - " + status;
-        return "Cell";
+        return "Square";
     }
 
     public void setName(String name){
