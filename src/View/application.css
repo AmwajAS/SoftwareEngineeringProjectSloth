@@ -79,3 +79,39 @@ SplitMenuButton:hover{
         -fx-font-family: "Times New Roman";
         -fx-font-weight: bold;
 }
+.Feild{
+	-fx-border-color: #2e7d32;
+	-fx-border-width: 0.0px 0.0px 2px 0.0px;
+	-fx-background-color:transparent;
+}
+
+.table-row-cell:filled:selected {
+    
+  	-fx-background-color: #81c784;
+ 	-fx-background-insets: 0.0;
+	-fx-background-radius: 0.0;
+}
+
+.table-view .placeholder .label {
+	-fx-text-fill: red;
+	-fx-padding:20px;
+}
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #2e7d32; 
+}
+.table-view .column-header .label{
+   -fx-text-fill: white;
+   -fx-font-weight: bold; 
+   -fx-alignment: CENTER_LEFT;
+}
+
+.table-row-cell:selected {
+   -fx-background-color: whitesmoke; 
+   -fx-text-background-color:  #000000;
+   -fx-font-weight: bold;   
+}
+.separator .line {
+    -fx-border-color: #2e7d32;
+    -fx-border-width: 2;    
+}

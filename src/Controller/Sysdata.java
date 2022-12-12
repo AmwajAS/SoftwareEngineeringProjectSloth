@@ -82,7 +82,7 @@ public class Sysdata {
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
 		try {
-			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("QuestionsFormat2.json"), importedQuestions);
+			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("QuestionsFormat.json"), importedQuestions);
 
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block

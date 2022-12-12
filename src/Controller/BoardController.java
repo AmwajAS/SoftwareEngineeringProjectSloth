@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -41,11 +42,10 @@ public class BoardController implements Initializable {
 	private Text playerName;
 	@FXML
 	private GridPane chessBoard;
-	
-	//var to the doTime() method
-	private final Integer startTime=60;
-	private Integer seconds=startTime;
 
+	// var to the doTime() method
+	private final Integer startTime = 60;
+	private Integer seconds = startTime;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +53,8 @@ public class BoardController implements Initializable {
 		doTime();
 		Game game = new Game(chessBoard, "Coral");
 		first.setStyle("-fx-background-color: #b9f6ca; ");
+
+
 	}
 
 		//Countdown Timer
@@ -63,10 +65,15 @@ public class BoardController implements Initializable {
 			timer.stop();
 		}
 		KeyFrame frame=new KeyFrame(Duration.seconds(1) ,new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent event) {
 				seconds--;
+
+				time.setText("RemaingTime: 00:" + seconds.toString());
+				if (seconds <= 0) {
+					timer.stop();
+				}
+
 				time.setText("RemaingTime: 00:"+seconds.toString());
 				if(seconds<=0) {
 					timer.stop();
@@ -76,6 +83,4 @@ public class BoardController implements Initializable {
 		timer.getKeyFrames().add(frame);
 		timer.playFromStart();
 	}
-
-
 }
