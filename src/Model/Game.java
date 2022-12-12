@@ -191,7 +191,6 @@ public class Game {
 				if (!cell.isVisited()) {
 					score++;
 					setScore(score);
-					System.out.println(score);
 					cell.setVisited(true);
 				}
 			}
@@ -212,6 +211,7 @@ public class Game {
 		cell.getChildren().remove(0);
 		cell.getChildren().add(currentPiece);
 		if (temp instanceof Knight) {
+			this.game=false;
 			System.out.println("Game Over!!!");
 		}
 		cell.setOccupied(true);
