@@ -1,20 +1,10 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
-import javax.swing.*;
-import Model.Game;
-import Model.Question;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import Controller.Sysdata;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 
 public class Main extends Application {

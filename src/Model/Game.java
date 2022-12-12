@@ -44,6 +44,7 @@ public class Game {
 			public void handle(MouseEvent event) {
 				EventTarget target = event.getTarget();
 
+<<<<<<< HEAD
 				// Clicked on cell
 				if(target.toString().equals("Square")){
 					Cell cell = (Cell) target;
@@ -71,6 +72,35 @@ public class Game {
 								killPiece(cell);
 							}
 						}
+=======
+	                // Clicked on square
+	                if(target.toString().equals("Square")){
+	                    Cell cell = (Cell) target;
+	                    if(cell.occupied){
+	                        Piece newPiece = (Piece) cell.getChildren().get(0);
+	                        // Selecting a new piece
+	                        if(currentPiece == null){
+	                            currentPiece = newPiece;
+	                            currentPiece.getAllPossibleMoves();
+	                            if(!currentPiece.getColor().equals(currentPlayer)){
+	                                currentPiece = null;
+	                                return;
+	                            }
+	                            selectPiece(game);
+	                        }
+	                        // Selecting other piece of same color || Killing a piece
+	                        else{
+	                            if(currentPiece.color.equals(newPiece.color)){
+	                                deselectPiece(false);
+	                                currentPiece = newPiece;
+	                                currentPiece.getAllPossibleMoves();
+	                                selectPiece(game);
+	                            }
+	                            else{
+	                                killPiece(cell);
+	                            }
+	                        }
+>>>>>>> parent of f970382 (little changes.)
 
 					}
 					// Dropping a piece on blank square
