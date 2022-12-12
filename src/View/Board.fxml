@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardController">
@@ -57,7 +58,13 @@
             <Button fx:id="forth" mnemonicParsing="false" prefHeight="34.0" prefWidth="64.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: transparent;" stylesheets="@application.css" text="4" />
          </children>
       </HBox>
-      <Text fx:id="playerName" layoutX="26.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Name" />
-      <Text fx:id="time" layoutX="67.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIEMRR" />
+      <Text fx:id="playerName" layoutX="26.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Name">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fx:id="time" layoutX="485.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timer" wrappingWidth="116.681640625">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
    </children>
 </AnchorPane>

@@ -41,9 +41,6 @@ public class BoardController implements Initializable {
 	@FXML
 	private Text playerName;
 	@FXML
-	private BorderPane allBoard;
-
-	@FXML
 	private GridPane chessBoard;
 
 	// var to the doTime() method
@@ -56,31 +53,34 @@ public class BoardController implements Initializable {
 		doTime();
 		Game game = new Game(chessBoard, "Coral");
 		first.setStyle("-fx-background-color: #b9f6ca; ");
-		allBoard.setMinHeight(600);
-		allBoard.setMinWidth(600);
+
 
 	}
 
-	// Countdown Timer
-	private void doTime() {
-		Timeline timer = new Timeline();
+		//Countdown Timer
+		private void doTime() {
+		Timeline timer=new Timeline();
 		timer.setCycleCount(Timeline.INDEFINITE);
-		if (timer != null) {
+		if(timer!=null){
 			timer.stop();
 		}
-		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-
+		KeyFrame frame=new KeyFrame(Duration.seconds(1) ,new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				seconds--;
+
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
 					timer.stop();
 				}
+
+				time.setText("RemaingTime: 00:"+seconds.toString());
+				if(seconds<=0) {
+					timer.stop();
+				} 
 			}
 		});
 		timer.getKeyFrames().add(frame);
 		timer.playFromStart();
 	}
-
 }

@@ -1,29 +1,60 @@
 package Model;
-import javax.swing.JButton;
+
 
 import javafx.scene.layout.StackPane;
 
+//Cell equals Square
 public class Cell extends StackPane{
-    int x,y;
-    boolean occupied;
-    String name;
+    private int x,y;
+    private boolean isOccupied;  //has a piece on it
+    private String name;
+    private boolean isVisited;
+
 
     public Cell(int x, int y){
         this.x = x;
         this.y = y;
-        this.occupied = false;
+        this.isOccupied = false;
     }
+    
+    public int getX() {
+		return x;
+	}
 
-    @Override
-    public String toString() {
-        String status;
-        if(this.occupied) status = "Occupied";
-        else status = "Not occupied";
-//        return "Square" + this.x + this.y + " - " + status;
-        return "Square";
-    }
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public boolean isOccupied() {
+		return isOccupied;
+	}
+
+	public void setOccupied(boolean occupied) {
+		this.isOccupied = occupied;
+	}
+
+	public String getName() {
+		return name;
+	}
 
     public void setName(String name){
         this.name = name;
+    }
+
+	@Override
+    public String toString() {
+        String status;
+        if(this.isOccupied) status = "Occupied";
+        else status = "Not occupied";
+//        return "Square" + this.x + this.y + " - " + status;
+        return "Square";
     }
 }

@@ -1,4 +1,3 @@
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
 		primaryStage.show();
-
+		
 		stage.setOnCloseRequest((EventHandler<WindowEvent>) new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
