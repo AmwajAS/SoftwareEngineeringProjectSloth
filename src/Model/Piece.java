@@ -15,10 +15,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
 public class Piece extends ImageView {
-    String type;
-    String color;
-    int posX, posY;
-    ArrayList<String> possibleMoves;
+    private String type;
+    private String color;
+    private int posX, posY;
+    private ArrayList<String> possibleMoves;  
 
     public Piece(String color, int posX, int posY){
         this.color = color;
@@ -26,11 +26,49 @@ public class Piece extends ImageView {
         this.posY = posY;
         addEventHandler();
     }
+    
+    public String getType() {
+		return type;
+	}
 
-    public String getColor(){
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public ArrayList<String> getPossibleMoves() {
+		return possibleMoves;
+	}
+
+	public void setPossibleMoves(ArrayList<String> possibleMoves) {
+		this.possibleMoves = possibleMoves;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getColor(){
         return this.color;
     }
 
+	
+	
     public void setPiece(Image image){
         this.setImage(image);
     }
@@ -40,6 +78,7 @@ public class Piece extends ImageView {
 
     }
 
+    
     private void addEventHandler(){
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -56,7 +95,7 @@ public class Piece extends ImageView {
     public void showAllPossibleMoves(boolean val){
         if(val){
             Glow glow = new Glow();
-            glow.setLevel(0.3);
+            glow.setLevel(0.5);
             for(String move : possibleMoves){
                 Cell square = getSquareByName(move);
                 square.setEffect(glow);
@@ -84,8 +123,8 @@ public class Piece extends ImageView {
     }
 
     public Cell getSquareByName(String name){
-        for(Cell square : Game.cb.cells){
-            if(square.name.equals(name)){
+        for(Cell square : Game.cb.getCells()){
+            if(square.getName().equals(name)){
                 return square;
             }
         }
@@ -94,10 +133,10 @@ public class Piece extends ImageView {
     }
 
     public Piece getPieceByName(String name){
-        for(Cell cell : Game.cb.cells){
+        for(Cell cell : Game.cb.getCells()){
             if(cell.getChildren().size() == 0) continue;
 
-            if(cell.name.equals(name))
+            if(cell.getName().equals(name))
                 return (Piece) cell.getChildren().get(0);
 
         }

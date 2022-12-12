@@ -2,27 +2,57 @@ package Model;
 
 import javafx.scene.layout.StackPane;
 
+//Cell equals Square
 public class Cell extends StackPane{
-    int x,y;
-    boolean occupied;  //מבוקרת
-    String name;
+    private int x,y;
+    private boolean isOccupied;  //מבוקרת
+    private String name;
 
     public Cell(int x, int y){
         this.x = x;
         this.y = y;
-        this.occupied = false;
+        this.isOccupied = false;
+    }
+    
+    public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public boolean isOccupied() {
+		return isOccupied;
+	}
+
+	public void setOccupied(boolean occupied) {
+		this.isOccupied = occupied;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+    public void setName(String name){
+        this.name = name;
     }
 
-    @Override
+	@Override
     public String toString() {
         String status;
-        if(this.occupied) status = "Occupied";
+        if(this.isOccupied) status = "Occupied";
         else status = "Not occupied";
 //        return "Square" + this.x + this.y + " - " + status;
         return "Square";
     }
 
-    public void setName(String name){
-        this.name = name;
-    }
 }

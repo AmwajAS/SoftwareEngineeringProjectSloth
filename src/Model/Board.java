@@ -17,16 +17,41 @@ import javafx.scene.layout.GridPane;
  * Data structure for managing interaction with a board.
  */
 public class Board {
-	GridPane chessBoard;
-	String theme;
-	public ArrayList<Cell> cells = new ArrayList<>();
+	private GridPane chessBoard;
+	private String theme;
+	private ArrayList<Cell> cells = new ArrayList<>();
 
 	public Board(GridPane chessBoard, String theme){
 		this.chessBoard = chessBoard;
 		this.theme = theme;
-
 		makeBoard(this.chessBoard, theme);
 	}
+
+
+	public GridPane getChessBoard() {
+		return chessBoard;
+	}
+
+	public void setChessBoard(GridPane chessBoard) {
+		this.chessBoard = chessBoard;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public ArrayList<Cell> getCells() {
+		return cells;
+	}
+
+	public void setCells(ArrayList<Cell> cells) {
+		this.cells = cells;
+	}
+
 
 
 	private void makeBoard(GridPane chessBoard, String theme){
@@ -88,19 +113,19 @@ public class Board {
 
 	private void addPiece(Cell square, Piece piece){
 		square.getChildren().add(piece);
-		square.occupied = true;
+		square.setOccupied(true);
 	}
 
 	private void addPieces(){
 		for(Cell cell : cells){
-			if(cell.occupied) continue;
+			if(cell.isOccupied() ) continue;
 
-			else if(cell.y == 0){
-				if(cell.x == 7){
-					addPiece(cell, new Queen("white", cell.x, cell.y));
+			else if(cell.getY()== 0){
+				if(cell.getX() == 7){
+					addPiece(cell, new Queen("white", cell.getX(), cell.getY()));
 				}
-				if(cell.x == 0){
-					addPiece(cell, new Knight("black", cell.x, cell.y));
+				if(cell.getX()== 0){
+					addPiece(cell, new Knight("black", cell.getX(), cell.getY()));
 				}
 			}
 		}

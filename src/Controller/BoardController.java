@@ -55,6 +55,7 @@ public class BoardController implements Initializable {
 		first.setStyle("-fx-background-color: #b9f6ca; ");
 	}
 
+		//Countdown Timer
 		private void doTime() {
 		Timeline timer=new Timeline();
 		timer.setCycleCount(Timeline.INDEFINITE);
