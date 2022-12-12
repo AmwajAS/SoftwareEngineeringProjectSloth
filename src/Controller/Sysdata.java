@@ -24,7 +24,7 @@ import Model.User;
 
 public class Sysdata {
 
-	private static ArrayList<User> thPlayers= new ArrayList<>();   //saves our game players
+	private static ArrayList<User> thPlayers= new ArrayList<>();  //saves the game players
 	static ArrayList<Question> importedQuestions = new ArrayList<>();
 	static ObjectMapper mapper = new ObjectMapper();
 
@@ -109,13 +109,13 @@ public class Sysdata {
 		Sysdata.thPlayers = thPlayers;
 	}
 
-	//madding methods with test
+	//methods with test
 	public boolean addUser(User user) {
 		if(user==null || getThPlayers().contains(user)) 
 			return false;
 		return 	getThPlayers().add(user);
 	}
-	//adding ,ethods with test
+	//methods with test
 	public boolean removeUser(User user) {
 		if(user == null || !getThPlayers().contains(user))   
 			return false;
