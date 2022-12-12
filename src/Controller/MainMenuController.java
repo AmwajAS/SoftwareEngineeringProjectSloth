@@ -42,20 +42,45 @@ public class MainMenuController implements Initializable {
 	@FXML Button signup;
 	@FXML Button vol;
 	@FXML Button loginBt;
-	
-	
-	
+
+
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
-		
-		
+
 	}
-	
+
+	/*@FXML
+	public void startGame(ActionEvent event) throws IOException {
+		String n = userid.getText().toString();
+		String p = pass.getText().toString();
+		if(n.equals("arwad") && p.equals("1234") ){ //Check if the manager logging in
+			Stage primaryStage = new Stage();
+			try {
+
+				Parent root = FXMLLoader.load(getClass().getResource("/View/Board.fxml"));
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.setTitle("Chess");
+				primaryStage.show();
+				primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					@Override
+					public void handle(WindowEvent t) {
+						Platform.exit();
+						System.exit(0);
+					}
+				});  
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}*/
+
+
+
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
-
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/Board.fxml"));
 		Scene scene = new Scene(root);
@@ -63,17 +88,16 @@ public class MainMenuController implements Initializable {
 		primaryStage.setTitle("Chess");
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-		    @Override
-		    public void handle(WindowEvent t) {
-		        Platform.exit();
-		        System.exit(0);
-		    }
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
 		});        
-}
-	
+	}
+
 	@FXML
 	public void questionMang(ActionEvent event) throws IOException {
-
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionsManagement.fxml"));
 		Scene scene = new Scene(root);
@@ -81,16 +105,16 @@ public class MainMenuController implements Initializable {
 		primaryStage.setTitle("Chess");
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-		    @Override
-		    public void handle(WindowEvent t) {
-		        Platform.exit();
-		        System.exit(0);
-		    }
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
 		});
-	
-}
-	
-	
+
+	}
+
+
 
 
 }

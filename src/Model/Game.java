@@ -38,19 +38,71 @@ public class Game {
 			public void handle(MouseEvent event) {
 				try{
 					EventTarget target = event.getTarget();
-				// Clicked on cell
-				if (target.toString().equals("Square")) {
-					Cell cell = (Cell) target;
-					if (cell.isOccupied()) {
-						Piece newPiece = (Piece) cell.getChildren().get(0);
+					// Clicked on cell
+					if (target.toString().equals("Square")) {
+						Cell cell = (Cell) target;
+						if (cell.isOccupied()) {
+							Piece newPiece = (Piece) cell.getChildren().get(0);
+							// Selecting a new piece
+							if (currentPiece == null) {
+								currentPiece = newPiece;
+								currentPiece.getAllPossibleMoves();
+								if (!currentPiece.getColor().equals("black")) {
+									currentPiece = null;
+									return;
+								}
+								selectPiece(game);
+							}
+							// Selecting other piece of same color || Killing a piece
+							else {
+								if (currentPiece.getColor().equals(newPiece.getColor())) {
+									deselectPiece(false);
+									currentPiece = newPiece;
+									currentPiece.getAllPossibleMoves();
+									selectPiece(game);
+								} else {
+									killPiece(cell);
+								}
+
+							}
+						}
+						// Dropping a piece on blank square
+						else {
+							if (currentPiece != null) {
+								dropPiece(cell);
+								if (currentPlayer.equals("white")) {
+									for (Cell temp : cb.getCells()) {
+										if (!temp.getChildren().isEmpty()) {
+											if ((Piece) temp.getChildren().get(0) != null) {
+												Piece tempPiece = (Piece) temp.getChildren().get(0);
+
+												if (tempPiece.getColor().equals("white") && currentPlayer.equals("white")) {
+													findBestRoute(temp);
+												}
+											}
+
+										}
+									}
+								}
+							}
+
+						}
+
+					}
+					// Clicked on piece
+					else {
+
+						Piece newPiece = (Piece) target;
+						Cell square = (Cell) newPiece.getParent();
+
 						// Selecting a new piece
 						if (currentPiece == null) {
 							currentPiece = newPiece;
-							currentPiece.getAllPossibleMoves();
 							if (!currentPiece.getColor().equals("black")) {
 								currentPiece = null;
 								return;
 							}
+
 							selectPiece(game);
 						}
 						// Selecting other piece of same color || Killing a piece
@@ -58,69 +110,17 @@ public class Game {
 							if (currentPiece.getColor().equals(newPiece.getColor())) {
 								deselectPiece(false);
 								currentPiece = newPiece;
-								currentPiece.getAllPossibleMoves();
 								selectPiece(game);
 							} else {
-								killPiece(cell);
+								killPiece(square);
 							}
-				
-						}
-					}
-					// Dropping a piece on blank square
-					else {
-						if (currentPiece != null) {
-							dropPiece(cell);
-							if (currentPlayer.equals("white")) {
-								for (Cell temp : cb.getCells()) {
-									if (!temp.getChildren().isEmpty()) {
-										if ((Piece) temp.getChildren().get(0) != null) {
-											Piece tempPiece = (Piece) temp.getChildren().get(0);
-
-											if (tempPiece.getColor().equals("white") && currentPlayer.equals("white")) {
-												findBestRoute(temp);
-											}
-										}
-
-									}
-								}
-							}
-						}
-
-					}
-
-				}
-				// Clicked on piece
-				else {
-
-					Piece newPiece = (Piece) target;
-					Cell square = (Cell) newPiece.getParent();
-
-					// Selecting a new piece
-					if (currentPiece == null) {
-						currentPiece = newPiece;
-						if (!currentPiece.getColor().equals("black")) {
-							currentPiece = null;
-							return;
-						}
-
-						selectPiece(game);
-					}
-					// Selecting other piece of same color || Killing a piece
-					else {
-						if (currentPiece.getColor().equals(newPiece.getColor())) {
-							deselectPiece(false);
-							currentPiece = newPiece;
-							selectPiece(game);
-						} else {
-							killPiece(square);
 						}
 					}
 				}
-			}
-			catch(Exception e) {
-				System.out.println("Do not drag, just click!!");
-				System.out.println(e.getMessage());
-			}
+				catch(Exception e) {
+					System.out.println("Do not drag, just click!!");
+					System.out.println(e.getMessage());
+				}
 			}
 
 		});

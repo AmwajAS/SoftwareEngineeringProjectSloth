@@ -18,11 +18,13 @@ import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
-
+ 
 import Model.Question;
+import Model.User;
 
 public class Sysdata {
 
+	private static ArrayList<User> thPlayers= new ArrayList<>();   //saves our game players
 	static ArrayList<Question> importedQuestions = new ArrayList<>();
 	static ObjectMapper mapper = new ObjectMapper();
 
@@ -97,6 +99,27 @@ public class Sysdata {
 
 	public static void setImportedQuestions(ArrayList<Question> importedQuestions) {
 		Sysdata.importedQuestions = importedQuestions;
+	}
+
+	public static ArrayList<User> getThPlayers() {
+		return thPlayers;
+	}
+
+	public static void setThPlayers(ArrayList<User> thPlayers) {
+		Sysdata.thPlayers = thPlayers;
+	}
+
+	//madding methods with test
+	public boolean addUser(User user) {
+		if(user==null || getThPlayers().contains(user)) 
+			return false;
+		return 	getThPlayers().add(user);
+	}
+	//adding ,ethods with test
+	public boolean removeUser(User user) {
+		if(user == null || !getThPlayers().contains(user))   
+			return false;
+		return getThPlayers().remove(user);
 	}
 
 }
