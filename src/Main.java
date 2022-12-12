@@ -23,7 +23,7 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
 		primaryStage.show();
-		
+
 		stage.setOnCloseRequest((EventHandler<WindowEvent>) new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
@@ -38,12 +38,7 @@ public class Main extends Application {
 		Main.loadLogo();
 	}
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		launch(args);
-
-	}
-
-   static void loadLogo() {
+	static void loadLogo() {
 
 		FileInputStream input;
 		try {

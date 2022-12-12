@@ -14,13 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -28,12 +22,12 @@ public class MainMenuController implements Initializable {
 
 	@FXML
 	private Button startBt;
-
 	@FXML
 	private Button questionBt;
-
 	@FXML
 	private Button historyBt;
+
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -43,16 +37,14 @@ public class MainMenuController implements Initializable {
 
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
-
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/ChessBoard.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Chess");
+		primaryStage.setTitle("Sloth Chess Board");
 		primaryStage.setMinHeight(800);
 		primaryStage.setMinWidth(900);
 		primaryStage.show();
-
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent t) {
@@ -71,10 +63,8 @@ public class MainMenuController implements Initializable {
 		}
 
 	}
-
 	@FXML
 	public void questionMang(ActionEvent event) throws IOException {
-
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionMangement.fxml"));
 		Scene scene = new Scene(root);
@@ -101,5 +91,6 @@ public class MainMenuController implements Initializable {
 		}
 
 	}
+
 
 }
