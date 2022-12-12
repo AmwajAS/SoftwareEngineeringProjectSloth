@@ -41,6 +41,8 @@ public class EditQuestionController implements Initializable {
 	@FXML
 	private Button editBt;
 	@FXML
+	private Button clearBt;
+	@FXML
 	private Button back;
 	private Question qedit = QuestionMangController.getEditSelection();
 
@@ -48,10 +50,9 @@ public class EditQuestionController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
-
 		qtext.setText(qedit.getQuestion());
 		correctAnswer.getItems().addAll(1, 2, 3, 4);
-		
+
 		for (QuestionLevel ql : QuestionLevel.values()) {
 			level.getItems().add(ql);
 		}
@@ -100,7 +101,7 @@ public class EditQuestionController implements Initializable {
 			Question question = new Question(questionEdited, answersEdited, correctEdited, checkLevelToInt(qlEdited),
 					"Sloth");
 			try {
-				//Sysdata.importQuestionsFromJSON();
+				// Sysdata.importQuestionsFromJSON();
 				Sysdata.getImportedQuestions().remove(qedit);
 				Sysdata.getImportedQuestions().add(question);
 				Sysdata.exportQuestionsToJSON();

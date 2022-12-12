@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddQuestionController">
+   <top>
+      <VBox prefHeight="41.0" prefWidth="870.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0">
+                     <graphic>
+                        <ImageView fx:id="backImg" fitHeight="15.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../eclipse-workspace/BIG3/Images/undo_30px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label prefHeight="34.0" prefWidth="328.0" text="A D D    Q U E S T I O N" textAlignment="CENTER" textFill="#1b5e20" textOverrun="CLIP" wrapText="true">
+                     <font>
+                        <Font name="Times New Roman Bold" size="30.0" />
+                     </font>
+                     <effect>
+                        <Reflection bottomOpacity="0.83" fraction="1.0" topOpacity="0.0" />
+                     </effect>
+                     <HBox.margin>
+                        <Insets left="250.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator prefHeight="14.0" prefWidth="882.0" styleClass="list-cell" stylesheets="@application.css">
+               <VBox.margin>
+                  <Insets top="-5.0" />
+               </VBox.margin>
+            </Separator>
+         </children>
+      </VBox>
+   </top>
+   <left>
+      <VBox prefHeight="584.0" prefWidth="651.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="qtext" prefHeight="110.0" prefWidth="591.0" promptText="Please enter the Question Text.." styleClass="Feild" stylesheets="@application.css">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </TextArea>
+            <TextArea fx:id="firstAnswer" prefHeight="38.0" prefWidth="475.0" promptText="First Answer..." styleClass="Feild" stylesheets="@application.css">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </TextArea>
+            <TextArea fx:id="fourthAnswer" prefHeight="34.0" prefWidth="475.0" promptText="Fourth Answer..." styleClass="Feild" stylesheets="@application.css">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </TextArea>
+            <TextArea fx:id="thirdAnswer" prefHeight="39.0" prefWidth="475.0" promptText="Third Answer..." styleClass="Feild" stylesheets="@application.css">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </TextArea>
+            <TextArea fx:id="secondAnswer" prefHeight="39.0" prefWidth="475.0" promptText="Second Answer..." styleClass="Feild" stylesheets="@application.css">
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </TextArea>
+            <ComboBox fx:id="level" prefHeight="38.0" prefWidth="182.0" promptText="Level" stylesheets="@application.css">
+               <styleClass>
+                  <String fx:value="Feild" />
+                  <String fx:value="list-cell" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="correctAnswer" prefHeight="38.0" prefWidth="182.0" promptText="Correct Answer" stylesheets="@application.css">
+               <styleClass>
+                  <String fx:value="Feild" />
+                  <String fx:value="list-cell" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </VBox.margin>
+            </ComboBox>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="614.0" prefWidth="211.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <Button fx:id="addBt" mnemonicParsing="false" onAction="#addQuestion" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="ADD">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" top="500.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="clearBt" mnemonicParsing="false" onAction="#clear" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="CLEAR">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

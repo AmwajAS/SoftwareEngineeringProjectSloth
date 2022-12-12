@@ -75,7 +75,6 @@ public class QuestionMangController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
-		//questionsTable.getStyleClass().addAll("visible-lg", "visible-md");
 		loadData();
 		ObList = FXCollections.observableList(Sysdata.getImportedQuestions());
 		showTableContent();
@@ -133,7 +132,7 @@ public class QuestionMangController implements Initializable {
 							Stage primaryStage = new Stage();
 							Parent root;
 							try {
-								root = FXMLLoader.load(getClass().getResource("/View/EditQuestionView.fxml"));
+								root = FXMLLoader.load(getClass().getResource("/View/EditQuestion.fxml"));
 								Scene scene = new Scene(root);
 								primaryStage.setScene(scene);
 								primaryStage.setTitle("Sloth Chess - Edit Question");
@@ -281,7 +280,7 @@ public class QuestionMangController implements Initializable {
 	public void addMoreQuestions(ActionEvent event) throws IOException {
 
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/View/AddQuestionView.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/View/AddQuestion.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
