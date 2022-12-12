@@ -6,8 +6,5 @@ public class BlockCell extends Cell{
 		super(row, column);
 		// TODO Auto-generated constructor stub
 	}
-	
-	void isVisited() {
-		
-	}
+
 }

@@ -10,11 +10,11 @@ public class Cell extends StackPane{
     private String name;
     private boolean isVisited;
 
-
-    public Cell(int x, int y){
+	public Cell(int x, int y){
         this.x = x;
         this.y = y;
         this.isOccupied = false;
+        this.isVisited = false;
     }
     
     public int getX() {
@@ -47,7 +47,16 @@ public class Cell extends StackPane{
 
     public void setName(String name){
         this.name = name;
-    }
+    }    
+    
+    public boolean isVisited() {
+		return isVisited;
+	}
+
+	public void setVisited(boolean isVisited) {
+		this.isVisited = isVisited;
+	}
+
 
 	@Override
     public String toString() {

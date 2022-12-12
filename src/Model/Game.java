@@ -23,6 +23,7 @@ public class Game {
 	public static String currentPlayer;
 	public static Board cb;
 	private boolean game;
+	private int score = 0;
 
 	public Game(GridPane chessBoard, String theme) {
 		cb = new Board(chessBoard, theme);
@@ -36,7 +37,7 @@ public class Game {
 		chessBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				try{
+				try {
 					EventTarget target = event.getTarget();
 					// Clicked on cell
 					if (target.toString().equals("Square")) {
@@ -61,9 +62,8 @@ public class Game {
 									currentPiece.getAllPossibleMoves();
 									selectPiece(game);
 								} else {
-									killPiece(cell);
+									return;
 								}
-
 							}
 						}
 						// Dropping a piece on blank square
@@ -76,7 +76,8 @@ public class Game {
 											if ((Piece) temp.getChildren().get(0) != null) {
 												Piece tempPiece = (Piece) temp.getChildren().get(0);
 
-												if (tempPiece.getColor().equals("white") && currentPlayer.equals("white")) {
+												if (tempPiece.getColor().equals("white")
+														&& currentPlayer.equals("white")) {
 													findBestRoute(temp);
 												}
 											}
@@ -85,7 +86,6 @@ public class Game {
 									}
 								}
 							}
-
 						}
 
 					}
@@ -112,17 +112,16 @@ public class Game {
 								currentPiece = newPiece;
 								selectPiece(game);
 							} else {
-								killPiece(square);
+								return;
 							}
 						}
+
 					}
-				}
-				catch(Exception e) {
+				} catch (Exception e) {
 					System.out.println("Do not drag, just click!!");
 					System.out.println(e.getMessage());
 				}
 			}
-
 		});
 	}
 
@@ -149,16 +148,6 @@ public class Game {
 
 				}
 			}
-			// tempPiece.posX
-			// System.out.println(temp);
-			/*
-			 * temp.setPiece(cl.getpiece());
-			 * 
-			 * cl.removePiece(); cl.setcheck(); cl.removecheck();
-			 * 
-			 * bdestinationlist = temp.getpiece().move(boardState, temp.x, temp.y);
-			 * bdestinationlist.clear(); check = false;
-			 */
 		}
 	}
 
@@ -198,6 +187,14 @@ public class Game {
 			initialCell.setOccupied(false);
 			currentPiece.setPosX(cell.getX());
 			currentPiece.setPosY(cell.getY());
+			if (currentPiece instanceof Knight) {
+				if (!cell.isVisited()) {
+					score++;
+					setScore(score);
+					System.out.println(score);
+					cell.setVisited(true);
+				}
+			}
 			deselectPiece(true);
 		}
 	}
@@ -211,8 +208,12 @@ public class Game {
 			this.game = false;
 
 		Cell initialSquare = (Cell) currentPiece.getParent();
+		Piece temp = (Piece) cell.getChildren().get(0);
 		cell.getChildren().remove(0);
 		cell.getChildren().add(currentPiece);
+		if (temp instanceof Knight) {
+			System.out.println("Game Over!!!");
+		}
 		cell.setOccupied(true);
 		initialSquare.getChildren().removeAll();
 		initialSquare.setOccupied(false);
@@ -244,4 +245,13 @@ public class Game {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 }
