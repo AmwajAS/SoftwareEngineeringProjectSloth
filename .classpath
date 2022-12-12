@@ -6,12 +6,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/USER/OneDrive/מסמכים/שנה ג/סמסטר א/הנדסת תוכנה/JAR&apos;S/jars/commons-lang3-3.12.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/OneDrive/מסמכים/שנה ג/סמסטר א/הנדסת תוכנה/JAR&apos;S/jars/jackson-annotations-2.9.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/OneDrive/מסמכים/שנה ג/סמסטר א/הנדסת תוכנה/JAR&apos;S/jars/jackson-core-2.9.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/OneDrive/מסמכים/שנה ג/סמסטר א/הנדסת תוכנה/JAR&apos;S/jars/jackson-databind-2.9.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/OneDrive/מסמכים/שנה ג/סמסטר א/הנדסת תוכנה/JAR&apos;S/jars/json-schema-validator-1.0.73.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/OneDrive/מסמכים/שנה ג/סמסטר א/הנדסת תוכנה/JAR&apos;S/jars/slf4j-api-2.0.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/OneDrive/מסמכים/שנה ג/סמסטר א/הנדסת תוכנה/JAR&apos;S/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amwaj/Desktop/jars/jars/jackson-core-2.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amwaj/Desktop/jars/jars/jackson-databind-2.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amwaj/Downloads/jackson-annotations-2.9.6.jar/jackson-annotations-2.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amwaj/Downloads/json-schema-validator-1.0.73.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amwaj/Downloads/commons-lang3-3.12.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amwaj/Downloads/slf4j-api-2.0.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
