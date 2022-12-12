@@ -32,6 +32,9 @@ public class MainMenuController implements Initializable {
 	@FXML
 	private Button questionBt;
 
+	@FXML
+	private Button historyBt;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -46,8 +49,8 @@ public class MainMenuController implements Initializable {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
-		primaryStage.setMinHeight(700);
-		primaryStage.setMinWidth(700);
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(900);
 		primaryStage.show();
 
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -73,10 +76,12 @@ public class MainMenuController implements Initializable {
 	public void questionMang(ActionEvent event) throws IOException {
 
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionsManagement.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionMangement.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(900);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override

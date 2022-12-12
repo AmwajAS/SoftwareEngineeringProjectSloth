@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionMangController">
+   <top>
+      <VBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="870.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="252.0" text=" Q U E S T I O N S   " textAlignment="CENTER" textFill="#1b5e20" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Times New Roman Bold" size="30.0" />
+               </font>
+            </Label>
+            <Separator prefHeight="23.0" prefWidth="889.0" styleClass="list-cell" stylesheets="@application.css">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Separator>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="diffSelect" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="182.0" promptText="All Questions" stylesheets="@application.css">
+                     <styleClass>
+                        <String fx:value="Feild" />
+                        <String fx:value="list-cell" />
+                     </styleClass>
+                  </ComboBox>
+                  <Button fx:id="search" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#filterByQuestionLevel" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="SEARCH">
+                     <font>
+                        <Font name="Times New Roman Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="clearBt" mnemonicParsing="false" onAction="#clear" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="CLEAR">
+                     <font>
+                        <Font name="Times New Roman Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <left>
+      <HBox prefHeight="586.0" prefWidth="871.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="questionsTable" prefHeight="586.0" prefWidth="590.0" styleClass="list-cell" stylesheets="@application.css">
+               <columns>
+                  <TableColumn fx:id="question" prefWidth="461.9100284576416" text="Question" />
+                  <TableColumn fx:id="action" prefWidth="124.0" text="Action" />
+               </columns>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </TableView>
+            <VBox prefHeight="587.0" prefWidth="276.0">
+               <children>
+                  <PieChart fx:id="chart" onMouseEntered="#loadChart" prefHeight="463.0" prefWidth="268.0" style="-fx-border-radius: 000000;" stylesheets="@application.css" />
+                  <Button fx:id="addMoreBt" mnemonicParsing="false" onAction="#addMoreQuestions" prefHeight="23.0" prefWidth="122.0" stylesheets="@application.css" text="ADD QUESTION">
+                     <font>
+                        <Font name="Times New Roman Bold" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </left>
+</BorderPane>

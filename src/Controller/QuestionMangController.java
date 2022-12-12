@@ -75,6 +75,7 @@ public class QuestionMangController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
+		//questionsTable.getStyleClass().addAll("visible-lg", "visible-md");
 		loadData();
 		ObList = FXCollections.observableList(Sysdata.getImportedQuestions());
 		showTableContent();
