@@ -1,12 +1,22 @@
+
 package Model;
 
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent; 
-
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+
+/*constructor for the different levels
+public Game(GridPane chessBoard, String theme, int level) {
+	cb = new Board(chessBoard, theme);
+	this.level = level;
+	currentPiece = null;
+	currentPlayer = "black";
+	this.game = true;
+	addEventHandlers(cb.getChessBoard());	
+}*/
 
 
 public class Game {
@@ -19,16 +29,6 @@ public class Game {
 	public static String currentPlayer;
 	public static Board cb;
 	private boolean game;
-
-	//constructor for the different levels
-	public Game(GridPane chessBoard, String theme, int level) {
-		cb = new Board(chessBoard, theme);
-		this.level = level;
-		currentPiece = null;
-		currentPlayer = "black";
-		this.game = true;
-		addEventHandlers(cb.getChessBoard());	
-	}
 
 	public Game(GridPane chessBoard, String theme) {
 		cb = new Board(chessBoard, theme);
@@ -44,12 +44,11 @@ public class Game {
 			public void handle(MouseEvent event) {
 				EventTarget target = event.getTarget();
 
-<<<<<<< HEAD
-				// Clicked on cell
+				// Clicked on square
 				if(target.toString().equals("Square")){
 					Cell cell = (Cell) target;
 					if(cell.isOccupied()){
-						Piece newPiece = (Piece) cell.getChildren().get(0);    //the piece we clicked on
+						Piece newPiece = (Piece) cell.getChildren().get(0);
 						// Selecting a new piece
 						if(currentPiece == null){
 							currentPiece = newPiece;
@@ -72,35 +71,6 @@ public class Game {
 								killPiece(cell);
 							}
 						}
-=======
-	                // Clicked on square
-	                if(target.toString().equals("Square")){
-	                    Cell cell = (Cell) target;
-	                    if(cell.occupied){
-	                        Piece newPiece = (Piece) cell.getChildren().get(0);
-	                        // Selecting a new piece
-	                        if(currentPiece == null){
-	                            currentPiece = newPiece;
-	                            currentPiece.getAllPossibleMoves();
-	                            if(!currentPiece.getColor().equals(currentPlayer)){
-	                                currentPiece = null;
-	                                return;
-	                            }
-	                            selectPiece(game);
-	                        }
-	                        // Selecting other piece of same color || Killing a piece
-	                        else{
-	                            if(currentPiece.color.equals(newPiece.color)){
-	                                deselectPiece(false);
-	                                currentPiece = newPiece;
-	                                currentPiece.getAllPossibleMoves();
-	                                selectPiece(game);
-	                            }
-	                            else{
-	                                killPiece(cell);
-	                            }
-	                        }
->>>>>>> parent of f970382 (little changes.)
 
 					}
 					// Dropping a piece on blank square
@@ -162,7 +132,7 @@ public class Game {
 	}
 
 	private void dropPiece(Cell cell) {
-		if (!currentPiece.getPossibleMoves().contains(cell.getName() ))
+		if (!currentPiece.getPossibleMoves().contains(cell.getName()))
 			return;
 
 		Cell initialCell = (Cell) currentPiece.getParent();
@@ -176,7 +146,7 @@ public class Game {
 	}
 
 	private void killPiece(Cell cell) {
-		if (!currentPiece.getPossibleMoves().contains(cell.getName() ))
+		if (!currentPiece.getPossibleMoves().contains(cell.getName()))
 			return;
 
 		Piece killedPiece = (Piece) cell.getChildren().get(0);
