@@ -1,46 +1,60 @@
-import java.awt.*;
-import java.awt.event.*;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import javax.swing.*;
-import Model.Game;
-import Model.Question;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import Controller.Sysdata;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
+import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
-
-
 	public static Stage primaryStage = null;
+
 	@Override
 	public void start(Stage stage) throws IOException {
-		
 
 		primaryStage = stage;
-		Parent root =FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
 		primaryStage.show();
 
+		stage.setOnCloseRequest((EventHandler<WindowEvent>) new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent event) {
+				try {
+					stop();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		Main.loadLogo();
 	}
 
-	public static void main(String[] args)throws IOException, ClassNotFoundException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		launch(args);
 
-
 	}
 
+   static void loadLogo() {
 
+		FileInputStream input;
+		try {
+			input = new FileInputStream("./src/images/logo.png");
+			Image img = new Image(input);
+			primaryStage.getIcons().add(img); // icon
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+	}
 }
