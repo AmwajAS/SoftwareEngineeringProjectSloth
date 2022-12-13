@@ -16,7 +16,6 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws IOException {
-
 		primaryStage = stage;
 		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 		Scene scene = new Scene(root);
@@ -39,7 +38,6 @@ public class Main extends Application {
 	}
 
 	static void loadLogo() {
-
 		FileInputStream input;
 		try {
 			input = new FileInputStream("./src/images/logo.png");
@@ -49,6 +47,10 @@ public class Main extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
+
+	public static void main(String[] args)throws IOException, ClassNotFoundException {
+		launch(args);
+	}
+
 }
