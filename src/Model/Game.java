@@ -6,10 +6,13 @@ import java.util.Random;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
@@ -175,6 +178,7 @@ public class Game {
 	}
 
 	private void dropPiece(Cell cell) {
+		Color color = Color.web("white");
 		if (currentPiece != null && !currentPiece.getPossibleMoves().isEmpty()) {
 			if (!currentPiece.getPossibleMoves().contains(cell.getName()))
 				return;
@@ -202,6 +206,9 @@ public class Game {
 				}
 			}
 			deselectPiece(true);
+			if(cell.isVisited()) {
+				cell.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+			}
 		}
 	}
 
