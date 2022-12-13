@@ -28,10 +28,7 @@ public class Sysdata {
 	static ArrayList<Question> importedQuestions = new ArrayList<>();
 	static ObjectMapper mapper = new ObjectMapper();
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		importQuestionsFromJSON();
-		System.out.println(importedQuestions);
-	}
+
 
 	/*
 	 * This method read the Json file and creates a Questions Object. and returns an

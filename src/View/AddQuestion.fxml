@@ -24,7 +24,7 @@
                <children>
                   <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0">
                      <graphic>
-                        <ImageView fx:id="backImg" fitHeight="15.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="15.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../eclipse-workspace/BIG3/Images/undo_30px.png" />
                            </image>
