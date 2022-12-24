@@ -22,7 +22,7 @@ public class Question {
 
 	public Question(String question, String[] answers, int correct_ans, int level, String team) {
 		super();
-		this.quesidCounter = quesidCounter++;
+		//this.quesidCounter = quesidCounter++;
 		this.question = question;
 		this.answers = answers;
 		this.correct_ans = correct_ans;

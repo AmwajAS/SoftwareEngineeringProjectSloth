@@ -95,7 +95,7 @@ public class Piece extends ImageView {
     public void showAllPossibleMoves(boolean val){
         if(val){
             Glow glow = new Glow();
-            glow.setLevel(0.5);
+            glow.setLevel(0.9);
             for(String move : possibleMoves){
                 Cell square = getSquareByName(move);
                 square.setEffect(glow);
