@@ -14,29 +14,49 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class MainMenuController implements Initializable {
 
+	static String themeSelected; // save the selected theme
 	@FXML
 	private Button startBt;
 	@FXML
 	private Button questionBt;
 	@FXML
 	private Button historyBt;
-
-
+	@FXML
+	private ComboBox<String> theme;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		theme.getItems().addAll("Coral", "Dusk", "Wheat", "Marine", "Emerald", "Sandcastle");
 
+	}
+
+	public static String getThemeSelected() {
+		return themeSelected;
+	}
+
+	public static void setThemeSelected(String themeSelected) {
+		MainMenuController.themeSelected = themeSelected;
 	}
 
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
+		themeSelected = theme.getSelectionModel().getSelectedItem();
+		
+		if (themeSelected == null) {
+		//	theme.getSelectionModel().select("Coral");
+			setThemeSelected("Coral");
+		}
+
+		// TODO: handle exception
+
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/ChessBoard.fxml"));
 		Scene scene = new Scene(root);
@@ -61,8 +81,10 @@ public class MainMenuController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 
 	}
+
 	@FXML
 	public void questionMang(ActionEvent event) throws IOException {
 		Stage primaryStage = new Stage();
@@ -91,6 +113,5 @@ public class MainMenuController implements Initializable {
 		}
 
 	}
-
 
 }

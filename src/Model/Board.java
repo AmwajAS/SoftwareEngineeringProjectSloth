@@ -1,6 +1,8 @@
 package Model;
 
 import java.util.ArrayList;
+
+import Controller.MainMenuController;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -22,7 +24,7 @@ public class Board {
 
 	public Board(GridPane chessBoard, String theme){
 		this.chessBoard = chessBoard;
-		this.theme = theme;
+		this.theme = MainMenuController.getThemeSelected();
 		makeBoard(this.chessBoard, theme);
 	}
 
@@ -79,27 +81,31 @@ public class Board {
 			color1 = Color.web("#b1e4b9");
 			color2 = Color.web("#70a2a3");
 			break;
-
 		case "Dusk": {
 			color1 = Color.web("#cbb7ae");
 			color2 = Color.web("#716677");
+			break;
 		}
 		case "Wheat": {
 			color1 = Color.web("#eaefce");
 			color2 = Color.web("#bbbe65");
+			break;
 		}
-		case "Marine": {
-			color1 = Color.web("#9dacff");
-			color2 = Color.web("#6f74d2");
-		}
+        case "Marine" : {
+            color1 = Color.web("#9dacff");
+            color2 = Color.web("#6f74d2");
+			break;
+        }
 		case "Emerald": {
 			color1 = Color.web("#adbd90");
 			color2 = Color.web("#6e8f72");
+			break;
 		}
-		case "Sandcastle": {
-			color1 = Color.web("#e4c16f");
-			color2 = Color.web("#b88b4a");
-		}
+	     case "Sandcastle" : {
+             color1 = Color.web("#e4c16f");
+             color2 = Color.web("#b88b4a");
+ 			break;
+         }
 		}
 
 		if((i+j)%2==0){

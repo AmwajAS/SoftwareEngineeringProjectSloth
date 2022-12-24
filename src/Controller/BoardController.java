@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -42,7 +43,7 @@ public class BoardController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		Game game = new Game(chessBoard, "Coral");
+		Game game = new Game(chessBoard, MainMenuController.getThemeSelected());
 		doTime(game);
 		doScore(game);
 		first.setStyle("-fx-background-color: #b9f6ca; ");

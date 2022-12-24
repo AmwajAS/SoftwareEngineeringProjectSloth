@@ -25,8 +25,8 @@ import Model.User;
 public class Sysdata {
 
 	private static ArrayList<User> thPlayers= new ArrayList<>();  //saves the game players
-	static ArrayList<Question> importedQuestions = new ArrayList<>();
-	static ObjectMapper mapper = new ObjectMapper();
+	static ArrayList<Question> importedQuestions = new ArrayList<>();  //saves the imported questions from the JSON file.
+	static ObjectMapper mapper = new ObjectMapper();  // We can use the mapper to parse or deserialize JSON content into a Java object.
 
 
 

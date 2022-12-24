@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -34,4 +35,11 @@
          </children>
       </HBox>
    </center>
+   <top>
+      <ComboBox fx:id="theme" prefWidth="150.0" promptText="select theme" stylesheets="@application.css" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="650.0" top="20.0" />
+         </BorderPane.margin>
+      </ComboBox>
+   </top>
 </BorderPane>
