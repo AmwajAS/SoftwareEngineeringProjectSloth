@@ -89,7 +89,6 @@ public class Piece extends ImageView {
 
 
     }
-
     public void getAllPossibleMoves() {}
 
     public void showAllPossibleMoves(boolean val){

@@ -19,19 +19,19 @@ public class Knight extends Piece{
 
 		//this.possibleMoves = new ArrayList<>();
 
-		moves.add("Square" + (x+2) + (y+1));
-		moves.add("Square" + (x+2) + (y-1));
-		moves.add("Square" + (x+1) + (y+2));
-		moves.add("Square" + (x-1) + (y+2));
-		moves.add("Square" + (x-2) + (y+1));
-		moves.add("Square" + (x-2) + (y-1));
-		moves.add("Square" + (x+1) + (y-2));
-		moves.add("Square" + (x-1) + (y-2));
+		moves.add("Square" + (((x+2) % 8 + 8) % 8 ) + (((y+1) % 8 + 8) % 8 ));
+		moves.add("Square" + (((x+2) % 8 + 8) % 8 ) + (((y-1) % 8 + 8) % 8 ));
+		moves.add("Square" + (((x+1) % 8 + 8) % 8 ) + (((y+2) % 8 + 8) % 8 ));
+		moves.add("Square" + (((x-1) % 8 + 8) % 8 ) + (((y+2) % 8 + 8) % 8 ));
+		moves.add("Square" + (((x-2) % 8 + 8) % 8 ) + (((y+1) % 8 + 8) % 8 ));
+		moves.add("Square" + (((x-2) % 8 + 8) % 8 ) + (((y-1) % 8 + 8) % 8 ));
+		moves.add("Square" + (((x+1) % 8 + 8) % 8 ) + (((y-2) % 8 + 8) % 8 ));
+		moves.add("Square" + (((x-1) % 8 + 8) % 8 ) + (((y-2) % 8 + 8) % 8 ));
 
 
 		for(String move : moves){
 			if(getSquareByName(move) != null){
-				if(getSquareByName(move).isOccupied() && getPieceByName(move).getColor().equals(Game.currentPlayer)) continue;
+				if(getSquareByName(move).isOccupied() && !(getSquareByName(move) instanceof BlockCell) &&getPieceByName(move).getColor().equals(Game.currentPlayer)) continue;
 
 				this.getPossibleMoves().add(move);
 

@@ -4,6 +4,7 @@ public class BlockCell extends Cell{
 
 	public BlockCell(int x, int y) {
 		super(x, y);
+		this.setStyle("-fx-background-color: black;");
 	}
 
 	@Override

@@ -2,7 +2,10 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
@@ -15,21 +18,32 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import Controller.BoardController;
+import Model.Board;
+import Model.Piece;
+import Model.User;
 
 public class Game {
 
 	private Board chessboard;
 	private int level;
 	private User user;
-
 	public static Piece currentPiece;
 	public static String currentPlayer;
+	public static Piece tempKing;
 	public static Board cb;
 	private boolean game;
 	private int score = 0;
+	private int flag = 0;
+	private static Timer timer = new Timer();
 
-	public Game(GridPane chessBoard, String theme) {
-		cb = new Board(chessBoard, theme);
+	public Game(GridPane chessBoard, String theme, int lvl) {
+		this.level = lvl;
+		cb = new Board(chessBoard, theme, lvl);
 		currentPiece = null;
 		currentPlayer = "black";
 		this.game = true;
@@ -73,18 +87,27 @@ public class Game {
 						else {
 							if (currentPiece != null) {
 								dropPiece(cell);
-								if (currentPlayer.equals("white")) {
-									for (Cell temp : cb.getCells()) {
-										if (!temp.getChildren().isEmpty()) {
-											if ((Piece) temp.getChildren().get(0) != null) {
-												Piece tempPiece = (Piece) temp.getChildren().get(0);
+								// The king will start moving as soon as the knight makes the first move;
+								// the flag is originally 0, then the first time it goes inside the if it
+								// changes to 1;
+								// which means we call this function only once;
+								if (flag == 0 && (level == 3 || level == 4)) {
+									startTimer();
+								} else if (level == 1 || level == 2) {
+									if (currentPlayer.equals("white")) {
+										for (Cell temp : cb.getCells()) {
+											if (!temp.getChildren().isEmpty()) {
+												if ((Piece) temp.getChildren().get(0) != null) {
+													Piece tempPiece = (Piece) temp.getChildren().get(0);
 
-												if (tempPiece.getColor().equals("white")
-														&& currentPlayer.equals("white")) {
-													findBestRoute(temp);
+													if (tempPiece.getColor().equals("white")
+															&& tempPiece instanceof Queen
+															&& currentPlayer.equals("white")) {
+														findBestRoute(temp, cell);
+													}
 												}
-											}
 
+											}
 										}
 									}
 								}
@@ -121,14 +144,24 @@ public class Game {
 
 					}
 				} catch (Exception e) {
-					System.out.println("Do not drag, just click!!");
 					System.out.println(e.getMessage());
 				}
 			}
 		});
 	}
 
-	public void findBestRoute(Cell tempCell) {
+	// This function is for the queen's move it works like this:
+	/*
+	 * if the queen can kill the knight it kills him. if not, the queen will block
+	 * one of the future possible destination for the knight(To make it harder). if
+	 * none of the above is available it moves randomly.
+	 */
+	/*
+	 * tempCell is the queen, cell is the knight
+	 */
+	public void findBestRoute(Cell tempCell, Cell cell) {
+		Piece tempKnight = (Piece) cell.getChildren().get(0);
+		tempKnight.getAllPossibleMoves();
 		Piece tempPiece = (Piece) tempCell.getChildren().get(0);
 		currentPiece = tempPiece;
 		tempPiece.getAllPossibleMoves();
@@ -137,21 +170,96 @@ public class Game {
 			return;
 		} else {
 			ArrayList<String> tempMoves = tempPiece.getPossibleMoves();
+			for (String move : tempMoves) {
+				if (move.equals(cell.getName())) {
+
+					killPiece(cell);
+					dropPiece(cell);
+				}
+			}
+			for (String move : tempMoves) {
+				for (String knightMove : tempKnight.getPossibleMoves()) {
+					if (move.equals(knightMove)) {
+						for (Cell temp : cb.getCells()) {
+							if (temp.getName().equals(move)) {
+								dropPiece(temp);
+							}
+						}
+					}
+				}
+			}
 			Random rand = new Random();
 			int len = tempMoves.size();
+
 			String tempName = tempMoves.get(rand.nextInt(len));
 			for (Cell temp : cb.getCells()) {
 				if (temp.getName().equals(tempName)) {
-					if (temp.isOccupied()) {
-						killPiece(temp);
-						dropPiece(temp);
-					} else {
-						dropPiece(temp);
-					}
-
+					dropPiece(temp);
 				}
+
 			}
 		}
+	}
+
+	// this function returns the best cell for the king to jump on.
+
+	public void findBestRouteKing(Cell cTemp) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				tempKing.getAllPossibleMoves();
+				ArrayList<String> kingTempMoves = tempKing.getPossibleMoves();
+				Cell help = cTemp;
+				for (Cell temp : cb.getCells()) {
+					if (!temp.getChildren().isEmpty()) {
+						if ((Piece) temp.getChildren().get(0) != null) {
+							Piece tempPiece = (Piece) temp.getChildren().get(0);
+							if (tempPiece instanceof Knight) {
+								help = temp;
+								System.out.println(tempPiece);
+								break;
+							}
+						}
+					}
+				}
+				//If the king can kill the knight he does it.
+				for (String move : kingTempMoves) {
+					System.out.println(move);
+					if (move.equals(help.getName())) {
+						kingKillPiece(help);
+						dropKingPiece(help);
+					}
+				}
+				/*
+				 * if the king can't kill the knight
+				 * he will go to the closest cell to the knight
+				 */
+				Cell closestCell = null;
+				int minDistance = Math.max(Math.abs(help.getX() - tempKing.getPosX()),
+						Math.abs(help.getY() - tempKing.getPosY()));
+				for (String move : kingTempMoves) {
+					int distance = Math.max(Math.abs(help.getX() - tempKing.getSquareByName(move).getX()),
+							Math.abs(help.getY() - tempKing.getSquareByName(move).getY()));
+					if (distance < minDistance) {
+						closestCell = tempKing.getSquareByName(move);
+						minDistance = distance;
+					}
+				}
+				if (closestCell != null)
+					dropKingPiece(closestCell);
+				//just in case something went wrong and we don't want the game to collapse, we choose a random cell for the king to jump on;
+				else {
+					Random rand = new Random();
+					int len = kingTempMoves.size();
+					String kingTempCellName = kingTempMoves.get(rand.nextInt(len));
+					for (Cell tempCellCheck : cb.getCells()) {
+						if (tempCellCheck.getName().equals(kingTempCellName)) {
+							dropKingPiece(tempCellCheck);
+						}
+					}
+				}
+			}
+		});
 	}
 
 	private void selectPiece(boolean game) {
@@ -170,11 +278,37 @@ public class Game {
 	}
 
 	private void deselectPiece(boolean changePlayer) {
-		currentPiece.setEffect(null);
-		currentPiece.showAllPossibleMoves(false);
-		currentPiece = null;
-		if (changePlayer)
-			currentPlayer = currentPlayer.equals("white") ? "black" : "white";
+		if (currentPiece != null) {
+			currentPiece.setEffect(null);
+			currentPiece.showAllPossibleMoves(false);
+			currentPiece = null;
+			if (changePlayer)
+				currentPlayer = currentPlayer.equals("white") ? "black" : "white";
+		}
+	}
+
+	private void dropKingPiece(Cell c) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (tempKing != null && !tempKing.getPossibleMoves().isEmpty()) {
+					if (!tempKing.getPossibleMoves().contains(c.getName()))
+						return;
+				}
+				if (tempKing != null && !tempKing.getPossibleMoves().isEmpty() && !c.getChildren().contains(tempKing)) {
+					Cell initialCellKing = (Cell) tempKing.getParent();
+					if (c.getChildren().isEmpty()) {
+						c.getChildren().add(tempKing);
+						c.setOccupied(true);
+						initialCellKing.getChildren().removeAll();
+						initialCellKing.setOccupied(false);
+						tempKing.setPosX(c.getX());
+						tempKing.setPosY(c.getY());
+					}
+				}
+			}
+
+		});
 	}
 
 	private void dropPiece(Cell cell) {
@@ -206,10 +340,42 @@ public class Game {
 				}
 			}
 			deselectPiece(true);
-			if(cell.isVisited()) {
+			if (cell.isVisited()) {
 				cell.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
 			}
 		}
+	}
+
+	// function when the king kills the knight.
+	private void kingKillPiece(Cell cell) {
+		Platform.runLater(new Runnable() {
+			int flag = 0;
+
+			@Override
+			public void run() {
+				if (!tempKing.getPossibleMoves().contains(cell.getName()))
+					return;
+				Cell initialSquare = (Cell) tempKing.getParent();
+				Piece temp = (Piece) cell.getChildren().get(0);
+				cell.getChildren().remove(0);
+				cell.getChildren().add(tempKing);
+				if (temp instanceof Knight) {
+					System.out.println("Game Over!!!");
+					flag = 1;
+				}
+				cell.setOccupied(true);
+				initialSquare.getChildren().removeAll();
+				initialSquare.setOccupied(false);
+				dropKingPiece(cell);
+				deselectPiece(true);
+				if (flag == 1) {
+					if (timer != null) {
+						timer.cancel();
+					}
+				}
+
+			}
+		});
 	}
 
 	private void killPiece(Cell cell) {
@@ -234,6 +400,36 @@ public class Game {
 		currentPiece.setPosX(cell.getX());
 		currentPiece.setPosY(cell.getY());
 		deselectPiece(true);
+	}
+
+	public void stopTimer() {
+		timer.cancel();
+	}
+
+	// implementing a thread to make a move very second for the king.
+	// just in case we're at level 3/4.
+	public void startTimer() {
+		flag = 1;
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+
+				Cell helper = null;
+				for (Cell kingTempCell : cb.getCells()) {
+					if (!kingTempCell.getChildren().isEmpty()) {
+						if ((Piece) kingTempCell.getChildren().get(0) != null) {
+							Piece tempKingCheck = (Piece) kingTempCell.getChildren().get(0);
+							if (tempKingCheck.getColor().equals("white") && tempKingCheck instanceof King) {
+								helper = kingTempCell;
+								tempKing = tempKingCheck;
+								findBestRouteKing(helper);
+							}
+						}
+					}
+				}
+			}
+		}, 1000, 1000);
 	}
 
 	public Board getChessboard() {
