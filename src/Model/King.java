@@ -35,7 +35,7 @@ public class King extends Piece {
 			if (getSquareByName(move) != null) {
 				if (!(getSquareByName(move) instanceof BlockCell)) {
 					if (getSquareByName(move).isOccupied()
-							&& getPieceByName(move).getColor().equals(Game.currentPlayer))
+							&& getPieceByName(move).getColor().equals("white"))
 						continue;
 
 					this.getPossibleMoves().add(move);
