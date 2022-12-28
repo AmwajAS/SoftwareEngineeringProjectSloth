@@ -17,7 +17,6 @@ public class JumpCell extends Cell {
 
 	public JumpCell(int x, int y) {
 		super(x, y);
-		this.setStyle("-fx-background-color: red;");
 	}
 	@Override
 	public String toString() {
@@ -74,7 +73,8 @@ public class JumpCell extends Cell {
 				if (!(c instanceof BlockCell) && !(c instanceof QuesCell) && !(c instanceof JumpCell)) {
 					if (c.getChildren().isEmpty()) {
 						if (c.getX() != 0 && c.getY() != 0) {
-							temp = c;						}
+							temp = c;
+							}
 					}
 				}
 			}
