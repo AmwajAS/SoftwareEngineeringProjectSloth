@@ -129,6 +129,7 @@ public class Board {
 							if (c.getX() != 0 && c.getY() != 0) {
 								temp = c;
 								times--;
+								System.out.println(temp.getName());
 							}
 						}
 					}

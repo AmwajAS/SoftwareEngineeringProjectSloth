@@ -51,6 +51,7 @@ public class JumpCell extends Cell {
 		int i=cell.getX();
 		int j=cell.getY();
 		board.getCells().remove(cell);
+		System.out.println("****This Is the new jumpcell****");
 		Cell newCell = new Cell(i,j);
 		newCell.setName("Square" + i + j);
 		newCell.setPrefHeight(100);
@@ -74,6 +75,7 @@ public class JumpCell extends Cell {
 					if (c.getChildren().isEmpty()) {
 						if (c.getX() != 0 && c.getY() != 0) {
 							temp = c;
+							System.out.println(temp.getName());
 							}
 					}
 				}

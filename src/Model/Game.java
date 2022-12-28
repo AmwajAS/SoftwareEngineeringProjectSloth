@@ -356,7 +356,6 @@ public class Game {
 				}
 			}
 		}
-		
 		if(cell instanceof JumpCell && flagging == 1){
 			Cell temp = ((JumpCell) cell).Jump(cb);
 			dropPiece(temp);

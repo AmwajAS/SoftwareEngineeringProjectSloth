@@ -93,7 +93,7 @@ public class Piece extends ImageView {
 
     public void showAllPossibleMoves(boolean val){
         if(val){
-            for(String move : possibleMoves){
+            for(String move : possibleMoves) {
                 Cell square = getSquareByName(move);
                 square.setBorder(new Border(new BorderStroke(Color.WHITE,
                         BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(10))));
