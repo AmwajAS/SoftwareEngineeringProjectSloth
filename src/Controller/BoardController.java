@@ -160,9 +160,10 @@ public class BoardController implements Initializable {
 
 		scores.stop();
 		timer.stop();
+		timer = new Timeline();
 		seconds=60;
 		Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),currentlevel);	
-		game.setScore(0);
+		game.setScore(1);
 		game.stopTimer();
 		doTime(game);
 		doScore(game);
