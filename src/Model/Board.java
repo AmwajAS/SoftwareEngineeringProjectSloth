@@ -11,11 +11,14 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.effect.Glow;
+
 
 /**
  * Data structure for managing interaction with a board.
  */
 public class Board {
+	Color color = Color.web("#F0E68C");
 	private int level;
 	private GridPane chessBoard;
 	private String theme;
@@ -70,6 +73,14 @@ public class Board {
 		 * creating 8 blocked cells in level 4 making sure that there is 8 different
 		 * blocked cells blocked cells are not under each of the pieces
 		 */
+		if (level == 1) {
+			createJumpCell(3);
+		}
+		if (level == 3) {
+			createJumpCell(2);
+		}
+		
+		
 		if (level == 4) {
 			int eightTimes = 0;
 			while (eightTimes < 8) {
@@ -103,6 +114,39 @@ public class Board {
 		}
 		addPieces();
 	}
+	
+	private void createJumpCell(int times) {
+		while (times > 0) {
+			Random randI = new Random();
+			Random randJ = new Random();
+			int iRand = randI.nextInt(7);
+			int jRand = randJ.nextInt(7);
+			Cell temp = null;
+			for (Cell c : cells) {
+				if (c.getX() == iRand && c.getY() == jRand) {
+					if (!(c instanceof BlockCell) && !(c instanceof QuesCell) && !(c instanceof JumpCell)) {
+						if (c.getChildren().isEmpty()) {
+							if (c.getX() != 0 && c.getY() != 0) {
+								temp = c;
+								times--;
+							}
+						}
+					}
+				}
+			}
+			if (temp != null) {
+				cells.remove(temp);
+				temp = new JumpCell(iRand, jRand);
+				temp.setName("Square" + iRand + jRand);
+				temp.setPrefHeight(100);
+				temp.setPrefWidth(100);
+				chessBoard.add(temp, iRand, jRand, 1, 1);
+				cells.add(temp);
+			}
+
+		}
+	}
+
 
 	private void setTheme(Cell cell, String theme, int i, int j) {
 		Color color1 = Color.web("#ffffff00");
@@ -171,9 +215,7 @@ public class Board {
 				}
 				if (cell.getX() == 0) {
 					addPiece(cell, PieceFactory.newPieceByFactory("Knight", "black", cell.getX(), cell.getY())); // new
-					cell.setVisited(true);																							// Knight("black",
-																													// cell.getX(),
-																													// cell.getY()));
+					cell.setVisited(true);																								// Knight("black",																													// cell.getX(),																						// cell.getY()));
 				}
 			}
 		}

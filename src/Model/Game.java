@@ -39,6 +39,7 @@ public class Game {
 	private boolean game;
 	private int score = 1;
 	private int flag = 0;
+	private int flagging = 0;
 	private static Timer timer = new Timer();
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
@@ -54,11 +55,13 @@ public class Game {
 		chessBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				try {
 					EventTarget target = event.getTarget();
 					// Clicked on cell
 					if (target.toString().equals("Square")) {
 						Cell cell = (Cell) target;
+						if(cell instanceof JumpCell) {
+							flagging = 1;
+						}
 						if (cell.isOccupied()) {
 							Piece newPiece = (Piece) cell.getChildren().get(0);
 							// Selecting a new piece
@@ -117,7 +120,6 @@ public class Game {
 					}
 					// Clicked on piece
 					else {
-
 						Piece newPiece = (Piece) target;
 						Cell square = (Cell) newPiece.getParent();
 
@@ -141,11 +143,8 @@ public class Game {
 								return;
 							}
 						}
-
 					}
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
+
 			}
 		});
 	}
@@ -160,6 +159,17 @@ public class Game {
 	 * tempCell is the queen, cell is the knight
 	 */
 	public void findBestRoute(Cell tempCell, Cell cell) {
+		for (Cell temp : cb.getCells()) {
+			if (!temp.getChildren().isEmpty()) {
+				if ((Piece) temp.getChildren().get(0) != null) {
+					Piece tempPiece = (Piece) temp.getChildren().get(0);
+					if (tempPiece instanceof Knight) {
+						cell = temp;
+						break;
+					}
+				}
+			}
+		}
 		Piece tempKnight = (Piece) cell.getChildren().get(0);
 		tempKnight.getAllPossibleMoves();
 		Piece tempPiece = (Piece) tempCell.getChildren().get(0);
@@ -216,23 +226,21 @@ public class Game {
 							Piece tempPiece = (Piece) temp.getChildren().get(0);
 							if (tempPiece instanceof Knight) {
 								help = temp;
-								System.out.println(tempPiece);
 								break;
 							}
 						}
 					}
 				}
-				//If the king can kill the knight he does it.
+				// If the king can kill the knight he does it.
 				for (String move : kingTempMoves) {
-					System.out.println(move);
 					if (move.equals(help.getName())) {
 						kingKillPiece(help);
 						dropKingPiece(help);
 					}
 				}
 				/*
-				 * if the king can't kill the knight
-				 * he will go to the closest cell to the knight
+				 * if the king can't kill the knight he will go to the closest cell to the
+				 * knight
 				 */
 				Cell closestCell = null;
 				int minDistance = Math.max(Math.abs(help.getX() - tempKing.getPosX()),
@@ -247,7 +255,8 @@ public class Game {
 				}
 				if (closestCell != null)
 					dropKingPiece(closestCell);
-				//just in case something went wrong and we don't want the game to collapse, we choose a random cell for the king to jump on;
+				// just in case something went wrong and we don't want the game to collapse, we
+				// choose a random cell for the king to jump on;
 				else {
 					Random rand = new Random();
 					int len = kingTempMoves.size();
@@ -312,9 +321,12 @@ public class Game {
 	}
 
 	private void dropPiece(Cell cell) {
-		if (currentPiece != null && !currentPiece.getPossibleMoves().isEmpty()) {
-			if (!currentPiece.getPossibleMoves().contains(cell.getName()))
-				return;
+		if (flagging == 0) {
+			if (currentPiece != null && !currentPiece.getPossibleMoves().isEmpty()) {
+				if (!currentPiece.getPossibleMoves().contains(cell.getName())) {
+					return;
+				}
+			}
 		}
 		if (currentPiece != null && !currentPiece.getPossibleMoves().isEmpty()) {
 			Cell initialCell = (Cell) currentPiece.getParent();
@@ -324,22 +336,30 @@ public class Game {
 			initialCell.setOccupied(false);
 			currentPiece.setPosX(cell.getX());
 			currentPiece.setPosY(cell.getY());
-			if (currentPiece instanceof Knight) {
-				if (!cell.isVisited()) {
-					score++;
-					setScore(score);
-					cell.setVisited(true);
-				} else {
-					if (cell.isVisited()) {
-						if (score >= 1) {
-							score--;
-							setScore(score);
-						}
+		}
+		if (currentPiece instanceof Knight) {
+			if (!cell.isVisited()) {
+				score++;
+				setScore(score);
+				cell.setVisited(true);
+			} else {
+				if (cell.isVisited()) {
+					if (score >= 1) {
+						score--;
+						setScore(score);
 					}
 				}
 			}
-			deselectPiece(true);
 		}
+		
+		if(cell instanceof JumpCell && flagging == 1){
+			Cell temp = ((JumpCell) cell).Jump(cb);
+			dropPiece(temp);
+			flagging = 0 ;
+			JumpCell help = (JumpCell)cell;
+			help.createNewJumpCell(cb,cell);
+		}
+		deselectPiece(true);
 	}
 
 	// function when the king kills the knight.

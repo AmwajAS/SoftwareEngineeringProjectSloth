@@ -22,8 +22,8 @@ public class Cell extends StackPane{
         this.isOccupied = false;
         this.isVisited = false;
     }
-    
-    public int getX() {
+   
+	public int getX() {
 		return x;
 	}
 
@@ -58,6 +58,7 @@ public class Cell extends StackPane{
     public boolean isVisited() {
 		return isVisited;
 	}
+
 
 	public void setVisited(boolean isVisited) {
 		this.isVisited = isVisited;
