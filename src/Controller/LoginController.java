@@ -52,26 +52,7 @@ public class LoginController implements Initializable {
 
 	@FXML
 	void login(ActionEvent event) throws IOException {
-		String uname = username.getText().toString();
-		String passw = password.getText().toString();
-		if (uname == null || uname.isEmpty()) {
-			Alerts.showAlert(AlertType.ERROR, "Login ", "The Username is Empty, Please Enter your username!",
-					ButtonType.CANCEL);
-
-		} else if (passw == null || passw.isEmpty()) {
-			Alerts.showAlert(AlertType.ERROR, "Login Scene", "The Password is Empty, Please Enter your username!",
-					ButtonType.CANCEL);
-
-		} else if (isAdmin(uname, passw)) {
-			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Resturant");
-			primaryStage.show();
-		}
-
-		else if (isUser(uname, passw)) {
+		
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 			Scene scene = new Scene(root);
@@ -96,12 +77,37 @@ public class LoginController implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else
-			Alerts.showAlert(AlertType.ERROR, "Login ",
-					"Invalid Values - No user account found, Please Enter valid username & password!",
-					ButtonType.CANCEL);
+
 	}
 
+	@FXML
+	public void signup(ActionEvent event) throws IOException {
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/View/Signup.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Chess");
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(900);
+		primaryStage.show();
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
+		});
+		FileInputStream input;
+		try {
+			input = new FileInputStream("./src/images/logo.png");
+			Image img = new Image(input);
+			primaryStage.getIcons().add(img); // icon
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	private boolean isAdmin(String uname, String pass) {
 
 		return false;
@@ -119,6 +125,8 @@ public class LoginController implements Initializable {
 
 		}
 	}
+	
+	
 
 	public static User getUser() {
 		return user;
