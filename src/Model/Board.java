@@ -171,7 +171,7 @@ public class Board {
 				}
 				if (cell.getX() == 0) {
 					addPiece(cell, PieceFactory.newPieceByFactory("Knight", "black", cell.getX(), cell.getY())); // new
-																													// Knight("black",
+					cell.setVisited(true);																							// Knight("black",
 																													// cell.getX(),
 																													// cell.getY()));
 				}

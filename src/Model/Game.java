@@ -37,7 +37,7 @@ public class Game {
 	public static Piece tempKing;
 	public static Board cb;
 	private boolean game;
-	private int score = 0;
+	private int score = 1;
 	private int flag = 0;
 	private static Timer timer = new Timer();
 
@@ -312,7 +312,6 @@ public class Game {
 	}
 
 	private void dropPiece(Cell cell) {
-		Color color = Color.web("white");
 		if (currentPiece != null && !currentPiece.getPossibleMoves().isEmpty()) {
 			if (!currentPiece.getPossibleMoves().contains(cell.getName()))
 				return;
@@ -340,9 +339,6 @@ public class Game {
 				}
 			}
 			deselectPiece(true);
-			if (cell.isVisited()) {
-				cell.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-			}
 		}
 	}
 

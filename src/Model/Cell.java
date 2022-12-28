@@ -1,10 +1,16 @@
 package Model;
 
 
+import javafx.geometry.Insets;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 //Cell equals Square
 public class Cell extends StackPane{
+	Color color = Color.web("#F0E68C");
     private int x,y;
     private boolean isOccupied;  //has a piece on it
     private String name;
@@ -55,6 +61,9 @@ public class Cell extends StackPane{
 
 	public void setVisited(boolean isVisited) {
 		this.isVisited = isVisited;
+		if(isVisited) {
+			setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+		}
 	}
 
 
