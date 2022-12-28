@@ -24,7 +24,7 @@
                   <Font name="Times New Roman Bold" size="22.0" />
                </font>
             </Button>
-            <Button maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="123.0" prefWidth="138.0" text="History" textAlignment="CENTER">
+            <Button fx:id="historyBt" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#login" prefHeight="123.0" prefWidth="138.0" text="History" textAlignment="CENTER">
                <font>
                   <Font name="Times New Roman Bold" size="22.0" />
                </font>

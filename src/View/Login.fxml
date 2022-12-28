@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="loginframe" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="727.0" styleClass="loginframe" stylesheets="@application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="51.0" prefWidth="727.0">
+               <children>
+                  <ImageView fitHeight="36.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="username" promptText="username" styleClass="Feild" stylesheets="@application.css">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="200.0" right="200.0" top="300.0" />
+               </VBox.margin>
+            </HBox>
+            <Button fx:id="loginBt" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="74.0" styleClass="list-cell" stylesheets="@application.css" text="Login">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="480.0" />
+               </VBox.margin>
+            </Button>
+            <HBox prefHeight="51.0" prefWidth="727.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../../../../lock_5dd00px.png" />
+                     </image>
+                  </ImageView>
+                  <PasswordField fx:id="password" promptText="Password" styleClass="Feild" stylesheets="@application.css">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+               <VBox.margin>
+                  <Insets left="200.0" right="200.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dont have an account? join us now ">
+                     <HBox.margin>
+                        <Insets left="200.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Italic" size="13.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="signupBt" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" styleClass="list-cell" stylesheets="@application.css" text="Sign up">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

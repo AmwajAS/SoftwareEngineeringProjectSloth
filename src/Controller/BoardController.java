@@ -27,7 +27,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
+import java.awt.Color;
+ 
 public class BoardController implements Initializable {
 
 	@FXML

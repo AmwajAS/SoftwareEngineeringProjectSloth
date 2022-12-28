@@ -1,10 +1,10 @@
 package Model;
 
 public class User {
-	private String username;
-	private String password;
-	private int pointsInGame;
-	private int highScore;
+	private String username;                      //the player or the user name
+	private String password;                      //the player or the user password - for security
+	private int pointsInGame;                     
+	private int highScore;                        //the player highest score all time
 
 	public User(String username, String password) {
 		super();
