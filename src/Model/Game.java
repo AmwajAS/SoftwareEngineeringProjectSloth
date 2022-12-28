@@ -55,6 +55,7 @@ public class Game {
 		chessBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				try {
 					EventTarget target = event.getTarget();
 					// Clicked on cell
 					if (target.toString().equals("Square")) {
@@ -144,6 +145,10 @@ public class Game {
 							}
 						}
 					}
+				} catch (Exception e) {
+
+					System.out.println(e.getMessage());
+				}
 
 			}
 		});
