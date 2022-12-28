@@ -152,7 +152,7 @@ public class BoardController implements Initializable {
 		if(currentlevel==2) {
 			second.setStyle("-fx-background-color: #89efa5; ");
 		}else if(currentlevel==3) {
-			third.setStyle("-fx-background-color: ##78e495; ");
+			third.setStyle("-fx-background-color: #78e495; ");
 		}else if(currentlevel==4) {
 			forth.setStyle("-fx-background-color: #4da865; ");
 		}else if(currentlevel==5) {
@@ -181,7 +181,7 @@ public class BoardController implements Initializable {
 				seconds--;
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if(g.getScore()>=2) {
+					if(g.getScore()>=4) {  // must 15 !! 4 for tests
 						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
 						timer.stop();
 						level++;
