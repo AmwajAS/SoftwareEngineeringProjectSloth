@@ -76,6 +76,7 @@ public class JumpCell extends Cell {
 						if (c.getX() != 0 && c.getY() != 0) {
 							temp = c;
 							System.out.println(temp.getName());
+
 							}
 					}
 				}
