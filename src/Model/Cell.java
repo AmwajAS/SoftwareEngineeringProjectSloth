@@ -4,6 +4,10 @@ package Model;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -15,13 +19,15 @@ public class Cell extends StackPane{
     private boolean isOccupied;  //has a piece on it
     private String name;
     private boolean isVisited;
+    private int counter;
 
 	public Cell(int x, int y){
         this.x = x;
         this.y = y;
         this.isOccupied = false;
         this.isVisited = false;
-    }
+        this.counter=0;
+       }
    
 	public int getX() {
 		return x;
@@ -58,7 +64,14 @@ public class Cell extends StackPane{
     public boolean isVisited() {
 		return isVisited;
 	}
+   
+	public int getCounter() {
+		return counter;
+	}
 
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
 
 	public void setVisited(boolean isVisited) {
 		this.isVisited = isVisited;

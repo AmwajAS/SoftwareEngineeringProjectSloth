@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,6 +41,7 @@ public class Game {
 	private int score = 1;
 	private int flag = 0;
 	private int flagging = 0;
+	private ArrayList<Cell> lastMoves;
 	private static Timer timer = new Timer();
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
@@ -48,6 +50,8 @@ public class Game {
 		currentPiece = null;
 		currentPlayer = "black";
 		this.game = true;
+		lastMoves = new ArrayList<>();
+		lastMoves.add(cb.getCells().get(0));
 		addEventHandlers(cb.getChessBoard());
 	}
 
@@ -60,7 +64,7 @@ public class Game {
 					// Clicked on cell
 					if (target.toString().equals("Square")) {
 						Cell cell = (Cell) target;
-						if(cell instanceof JumpCell) {
+						if (cell instanceof JumpCell) {
 							flagging = 0;
 						}
 						if (cell.isOccupied()) {
@@ -343,6 +347,8 @@ public class Game {
 			currentPiece.setPosY(cell.getY());
 		}
 		if (currentPiece instanceof Knight) {
+			cell.setCounter(cell.getCounter()+1);
+			addCellsToArraylist(cell);
 			if (!cell.isVisited()) {
 				score++;
 				setScore(score);
@@ -356,13 +362,18 @@ public class Game {
 				}
 			}
 		}
-		if(cell instanceof JumpCell ){
+		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
+			setScore(((UndoCell) cell).undoMoves(cb, lastMoves,score));
+			UndoCell help = (UndoCell) cell;
+			help.createNewUndoCell(cb, cell);
+		}
+		if (cell instanceof JumpCell && currentPiece instanceof Knight) {
 			flagging = 1;
 			Cell temp = ((JumpCell) cell).Jump(cb);
 			dropPiece(temp);
-			flagging = 0 ;
-			JumpCell help = (JumpCell)cell;
-			help.createNewJumpCell(cb,cell);
+			flagging = 0;
+			JumpCell help = (JumpCell) cell;
+			help.createNewJumpCell(cb, cell);
 		}
 		deselectPiece(true);
 	}
@@ -451,6 +462,13 @@ public class Game {
 				}
 			}
 		}, 1000, 1000);
+	}
+
+	public void addCellsToArraylist(Cell c) {
+		if (lastMoves.size() > 3) {
+			lastMoves.remove(0);
+		}
+		lastMoves.add(c);
 	}
 
 	public Board getChessboard() {
