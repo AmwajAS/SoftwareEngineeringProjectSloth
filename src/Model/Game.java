@@ -61,7 +61,7 @@ public class Game {
 					if (target.toString().equals("Square")) {
 						Cell cell = (Cell) target;
 						if(cell instanceof JumpCell) {
-							flagging = 1;
+							flagging = 0;
 						}
 						if (cell.isOccupied()) {
 							Piece newPiece = (Piece) cell.getChildren().get(0);
@@ -356,7 +356,8 @@ public class Game {
 				}
 			}
 		}
-		if(cell instanceof JumpCell && flagging == 1){
+		if(cell instanceof JumpCell ){
+			flagging = 1;
 			Cell temp = ((JumpCell) cell).Jump(cb);
 			dropPiece(temp);
 			flagging = 0 ;
