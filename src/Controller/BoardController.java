@@ -1,8 +1,11 @@
 package Controller;
 
 import java.awt.Label;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -11,6 +14,7 @@ import javax.swing.Timer;
 import Alerts.Alerts;
 import Model.Board;
 import Model.Game;
+import Model.User;
 import javafx.scene.control.Alert;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,6 +30,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -37,7 +42,6 @@ import javafx.util.Duration;
 import java.awt.Color;
 
 public class BoardController implements Initializable {
-
 	@FXML
 	private Text time;
 	@FXML
@@ -59,19 +63,27 @@ public class BoardController implements Initializable {
 	private Text totalScoreText;
 
 
-
 	// var to the doTime() method
 	private final Integer startTime = 60;
 	private Integer seconds = startTime;
 	private int level=1;
 	public Timeline scores;
 	public Timeline timer;
-	//var to save the higher score
-	public int highScore=0;
+	// var to save the total score 
+	public int totalScore=0;
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
+		if(LoginController.getUser()==null) { // checks for me
+			System.out.println("no user");
+			playerName.setText("Player Name: me ");
+		}else {  //the right code 
+			playerName.setText("Player: " +LoginController.getUser().getUsername());
+
+		}
+
 		scores=new Timeline();
 		timer = new Timeline();
 		// TODO Auto-generated method stub
@@ -94,6 +106,8 @@ public class BoardController implements Initializable {
 			}
 
 		});
+
+
 		/*
 		second.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -144,10 +158,10 @@ public class BoardController implements Initializable {
 	//Level up function initialize a new game by the new level 
 	//It get the level and also the score in order to save the higher score 
 	public void levelUp(int currentlevel, int currentScore){
-		int totalScore=0;
-		if(currentScore>=totalScore) {
-			totalScore=totalScore+currentScore;
-		}
+	/*	totalScore=totalScore+currentScore;
+		if(LoginController.getUser().getHighScore()<currentScore) {
+			LoginController.getUser().setHighScore(currentScore);
+		}*/
 
 		if(currentlevel==2) {
 			second.setStyle("-fx-background-color: #89efa5; ");
@@ -182,16 +196,17 @@ public class BoardController implements Initializable {
 				seconds--;
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if(g.getScore()>=4) {  // must 15 !! 4 for tests
-						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
-						timer.stop();
-						level++;
-						levelUp(level, g.getScore());
-					}else {
-						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
-						timer.stop();
-					}
-
+					if(level<5){
+						if(g.getScore()>=4) {  // must 15 !! 4 for tests
+							Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
+							timer.stop();
+							level++;
+							levelUp(level, g.getScore());
+						}else {
+							Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
+							timer.stop();
+						}
+					} // we he wins??
 				}
 			}
 		});
@@ -220,3 +235,31 @@ public class BoardController implements Initializable {
 	}
 
 }
+
+
+
+/*	Alerts.showAlert(AlertType.INFORMATION, "Game Completed!", "congratulations, you finished the last level!!", ButtonType.OK);
+	scores.stop();
+	timer.stop();
+	totalScoreText.setText("-->" +currentScore);
+
+	Stage primaryStage = new Stage();
+	try {
+		Parent root = FXMLLoader.load(getClass().getResource("/View/TotalScore.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Total Score of the game!");
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(900);
+		primaryStage.show();
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
+		});
+	}catch (IOException e) {
+		e.printStackTrace();
+	}
+ */

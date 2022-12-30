@@ -39,5 +39,10 @@
     "password" : "ddd",
     "pointsInGame" : 0,
     "highScore" : 0
+  }, {
+    "username" : "arwad",
+    "password" : "1234",
+    "pointsInGame" : 0,
+    "highScore" : 0
   } ]
 }

@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Alerts.Alerts;
@@ -28,7 +29,7 @@ import javafx.stage.WindowEvent;
 
 public class LoginController implements Initializable {
 
-	private static User user;
+	private static User user;  //we save the current user/player
 
 	@FXML
 	private BorderPane loginframe;
@@ -44,39 +45,82 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+	
 
-//	Image image = new Image(new File("./src/images/game.gif").toURI().toString());
-//		ImageView imageView = new ImageView(image);
+		//	Image image = new Image(new File("./src/images/game.gif").toURI().toString());
+		//		ImageView imageView = new ImageView(image);
 
 	}
+	/*@FXML
+	void login(ActionEvent event) throws IOException {
+		if(name == null || name.isEmpty()) {
+			Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "Please enter you'r username.",
+					ButtonType.OK);
+		}else if(pass == null) {
+			Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "Please enter you'r password.",
+					ButtonType.OK);
+		}else if(!Sysdata.getThPlayers().isEmpty()) {
+			for(User u : Sysdata.getThPlayers()) {
+				if(u.getUsername().equals(name) && u.getPassword().equals(pass)) {
+					this.user = new User(name,pass);
+					Stage primaryStage = new Stage();
+					Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+					Scene scene = new Scene(root);
+					primaryStage.setScene(scene);
+					primaryStage.setTitle("Sloth Chess Board");
+					primaryStage.setMinHeight(800);
+					primaryStage.setMinWidth(900);
+					primaryStage.show();
+					primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+						@Override
+						public void handle(WindowEvent t) {
+							Platform.exit();
+							System.exit(0);
+						}
+					});
+					FileInputStream input;
+					try {
+						input = new FileInputStream("./src/images/logo.png");
+						Image img = new Image(input);
+						primaryStage.getIcons().add(img); // icon
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else{
+					Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn" ,"Invalid Access Or No User", ButtonType.OK);
+				} }}else {
+					Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn" ,"No User Founds", ButtonType.OK);
+				}
 
+	}*/	
 	@FXML
 	void login(ActionEvent event) throws IOException {
-		
-			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Sloth Chess Board");
-			primaryStage.setMinHeight(800);
-			primaryStage.setMinWidth(900);
-			primaryStage.show();
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				@Override
-				public void handle(WindowEvent t) {
-					Platform.exit();
-					System.exit(0);
-				}
-			});
-			FileInputStream input;
-			try {
-				input = new FileInputStream("./src/images/logo.png");
-				Image img = new Image(input);
-				primaryStage.getIcons().add(img); // icon
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Sloth Chess Board");
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(900);
+		primaryStage.show();
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
 			}
+		});
+		FileInputStream input;
+		try {
+			input = new FileInputStream("./src/images/logo.png");
+			Image img = new Image(input);
+			primaryStage.getIcons().add(img); // icon
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -116,7 +160,7 @@ public class LoginController implements Initializable {
 
 		if (uname.equals("Amwaj") && pass.equals("123")) {
 			this.user = new User(uname, pass);
-			
+
 			return true;
 
 		} else {
@@ -124,8 +168,7 @@ public class LoginController implements Initializable {
 
 		}
 	}
-	
-	
+
 
 	public static User getUser() {
 		return user;

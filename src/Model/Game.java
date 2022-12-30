@@ -12,6 +12,8 @@ import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -23,6 +25,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import Alerts.Alerts;
 import Controller.BoardController;
 import Model.Board;
 import Model.Piece;
@@ -394,6 +397,7 @@ public class Game {
 				if (temp instanceof Knight) {
 					System.out.println("Game Over!!!");
 					flag = 1;
+					Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 				}
 				cell.setOccupied(true);
 				initialSquare.getChildren().removeAll();
@@ -425,6 +429,7 @@ public class Game {
 		if (temp instanceof Knight) {
 			this.game = false;
 			System.out.println("Game Over!!!");
+			Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 		}
 		cell.setOccupied(true);
 		initialSquare.getChildren().removeAll();
