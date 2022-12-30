@@ -1,10 +1,17 @@
 package Model;
 
+
 public class User {
 	private String username;                      //the player or the user name
 	private String password;                      //the player or the user password - for security
 	private int pointsInGame;                     
 	private int highScore;                        //the player highest score all time
+	             
+
+	public User() {
+		super();
+	}
+
 
 	public User(String username, String password) {
 		super();
@@ -13,6 +20,7 @@ public class User {
 		this.pointsInGame = 0;
 		this.highScore = 0;
 	}
+
 
 	public String getUsername() {
 		return username;
@@ -46,6 +54,9 @@ public class User {
 		this.highScore = highScore;
 	}
 
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -56,6 +67,7 @@ public class User {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -83,10 +95,13 @@ public class User {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", pointsInGame=" + pointsInGame
-				+ ", highScore=" + highScore + "]";
+				+ ", highScore=" + highScore +"]";
 	}
+
+
 
 }

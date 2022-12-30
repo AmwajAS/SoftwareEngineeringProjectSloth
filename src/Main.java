@@ -1,6 +1,8 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import Model.Admin;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +53,9 @@ public class Main extends Application {
 
 	public static void main(String[] args)throws IOException, ClassNotFoundException {
 		launch(args);
+		
+		
+		Admin admin = new Admin("amwaj", "123");
 	}
 
 }

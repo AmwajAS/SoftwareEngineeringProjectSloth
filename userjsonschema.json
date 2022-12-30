@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "users": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "pointsInGame": {
+              "type": "integer"
+            },
+            "highScore": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "username",
+            "password",
+            "pointsInGame",
+            "highScore"
+          ]
+        }
+      ]
+    }
+  }
+}

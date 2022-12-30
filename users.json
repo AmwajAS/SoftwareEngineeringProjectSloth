@@ -1,0 +1,43 @@
+{
+  "users" : [ {
+    "username" : "dc",
+    "password" : "dd",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  }, {
+    "username" : "dc",
+    "password" : "dd",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  }, {
+    "username" : "ass",
+    "password" : "ass",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  }, {
+    "username" : "dc",
+    "password" : "dd",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  }, {
+    "username" : "dc",
+    "password" : "dd",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  }, {
+    "username" : "ass",
+    "password" : "ass",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  }, {
+    "username" : "asd",
+    "password" : "asd",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  }, {
+    "username" : "ddd",
+    "password" : "ddd",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  } ]
+}

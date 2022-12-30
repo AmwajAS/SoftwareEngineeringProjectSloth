@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,9 +25,11 @@ import Model.User;
 
 public class Sysdata {
 
-	private static ArrayList<User> thPlayers= new ArrayList<>();  //saves the game players
+    static ArrayList<User> thPlayers = new ArrayList<>();  //saves the game players
 	static ArrayList<Question> importedQuestions = new ArrayList<>();  //saves the imported questions from the JSON file.
 	static ObjectMapper mapper = new ObjectMapper();  // We can use the mapper to parse or deserialize JSON content into a Java object.
+	static ObjectMapper usermapper = new ObjectMapper(); 
+	
 
 
 
@@ -79,7 +82,9 @@ public class Sysdata {
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
 		try {
-			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("QuestionsFormat.json"), importedQuestions);
+			HashMap<String, ArrayList<Question>> outHashMap = new HashMap<>();
+			outHashMap.put("questions", importedQuestions);
+			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("QuestionsFormat.json"), outHashMap);
 
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
@@ -89,6 +94,65 @@ public class Sysdata {
 		}
 
 	}
+	
+	
+	public static ArrayList<User> importUsersFromJSON() throws FileNotFoundException {
+
+		try {
+			InputStream inputStream = new FileInputStream("users.json");
+			JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909);
+			InputStream schemaStream = new FileInputStream("userjsonschema.json");
+
+			//
+			JsonNode json = usermapper.readTree(inputStream);
+			JsonSchema schema = schemaFactory.getSchema(schemaStream);
+			Set<ValidationMessage> validationResult = schema.validate(json);
+
+			if (validationResult.isEmpty()) {
+				System.out.println("no validation errors :-)");
+				UserJson input = usermapper.treeToValue(json, UserJson.class);
+				for (User u : input.getUsers()) {
+					thPlayers.add(u);
+				}
+
+			} else {
+				validationResult.forEach(vm -> System.out.println(vm.getMessage()));
+			}
+
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return thPlayers;
+	}
+
+
+	public static void exportUsersToJSON() throws FileNotFoundException {
+
+		usermapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+		try {
+			HashMap<String, ArrayList<User>> outHashMap = new HashMap<>();
+			outHashMap.put("users", thPlayers);
+			usermapper.writerWithDefaultPrettyPrinter().writeValue(new File("users.json"), outHashMap);
+			
+
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	
 
 	public static ArrayList<Question> getImportedQuestions() {
 		return importedQuestions;
@@ -106,17 +170,17 @@ public class Sysdata {
 		Sysdata.thPlayers = thPlayers;
 	}
 
-	//methods with test
-	public boolean addUser(User user) {
-		if(user==null || getThPlayers().contains(user)) 
-			return false;
-		return 	getThPlayers().add(user);
-	}
-	//methods with test
-	public boolean removeUser(User user) {
-		if(user == null || !getThPlayers().contains(user))   
-			return false;
-		return getThPlayers().remove(user);
-	}
+//	//methods with test
+//	public boolean addUser(User user) {
+//		if(user==null || getThPlayers().contains(user)) 
+//			return false;
+//		return 	getThPlayers().add(user);
+//	}
+//	//methods with test
+//	public boolean removeUser(User user) {
+//		if(user == null || !getThPlayers().contains(user))   
+//			return false;
+//		return getThPlayers().remove(user);
+//	}
 
 }
