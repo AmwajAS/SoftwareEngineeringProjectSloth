@@ -95,9 +95,10 @@ public class Piece extends ImageView {
         if(val){
             for(String move : possibleMoves) {
                 Cell square = getSquareByName(move);
+                if(!(square instanceof BlockCell)) {
                 square.setBorder(new Border(new BorderStroke(Color.WHITE,
                         BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(10))));
-                
+                }
                 Piece piece = getPieceByName(move);
                 if(piece == null) continue;
                 if(piece.type.equals("King")){
