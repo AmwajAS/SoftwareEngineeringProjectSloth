@@ -31,7 +31,6 @@ public class UndoCell extends Cell {
 		int i ;
 		for(i=0;i<lastMoves.size()-1;i++) {
 			Cell c = lastMoves.get(i);
-			System.out.println(c.getName());
 			for (Cell temp : board.getCells()) {
 				
 				if (c == temp) {
@@ -47,7 +46,6 @@ public class UndoCell extends Cell {
 							score--;
 							break;
 						}
-						break;
 					}
 					
 				}
@@ -55,18 +53,10 @@ public class UndoCell extends Cell {
 		return score;
 	}
 
-	private Cell getCellByName(String name) {
-		for (Cell cell : Game.cb.getCells()) {
-			if (cell.getName().equals(name)) {
-				return cell;
-			}
-		}
-		return null;
-	}
-
 	public Cell createNewUndoCell(Board board, Cell cell) {
 		Knight tempKnight = (Knight) cell.getChildren().get(0);
-		Cell temp = cell;
+		cell.getChildren().remove(0);
+		Cell temp = null;
 		int i = cell.getX();
 		int j = cell.getY();
 		board.getCells().remove(cell);

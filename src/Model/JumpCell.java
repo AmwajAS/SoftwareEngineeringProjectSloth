@@ -47,7 +47,7 @@ public class JumpCell extends Cell {
 	}
 
 	public Cell createNewJumpCell(Board board, Cell cell) {
-		Cell temp = cell;
+		Cell temp = null;
 		int i = cell.getX();
 		int j = cell.getY();
 		board.getCells().remove(cell);
