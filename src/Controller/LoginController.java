@@ -7,6 +7,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.fasterxml.jackson.databind.ser.std.UUIDSerializer;
+import com.sun.tools.javac.launcher.Main;
+import com.sun.tools.sjavac.pubapi.PubApi;
+
 import Alerts.Alerts;
 import Model.User;
 import javafx.application.Platform;
@@ -29,7 +33,7 @@ import javafx.stage.WindowEvent;
 
 public class LoginController implements Initializable {
 
-	private static User user;  //we save the current user/player
+	private static User user; // we save the current user/player
 
 	@FXML
 	private BorderPane loginframe;
@@ -45,24 +49,22 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-	
-
-		//	Image image = new Image(new File("./src/images/game.gif").toURI().toString());
-		//		ImageView imageView = new ImageView(image);
 
 	}
-	/*@FXML
+
+	@FXML
 	void login(ActionEvent event) throws IOException {
-		if(name == null || name.isEmpty()) {
-			Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "Please enter you'r username.",
-					ButtonType.OK);
-		}else if(pass == null) {
-			Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "Please enter you'r password.",
-					ButtonType.OK);
-		}else if(!Sysdata.getThPlayers().isEmpty()) {
-			for(User u : Sysdata.getThPlayers()) {
-				if(u.getUsername().equals(name) && u.getPassword().equals(pass)) {
-					this.user = new User(name,pass);
+
+		String name = username.getText();
+		String pass = password.getText();
+
+		if (name == null || name.isEmpty()) {
+			Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "Please enter you'r username.", ButtonType.OK);
+		} else if (pass == null) {
+			Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "Please enter you'r password.", ButtonType.OK);
+		} else {
+			 if(isUser(name, pass)) {
+
 					Stage primaryStage = new Stage();
 					Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 					Scene scene = new Scene(root);
@@ -87,40 +89,15 @@ public class LoginController implements Initializable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}else{
-					Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn" ,"Invalid Access Or No User", ButtonType.OK);
-				} }}else {
-					Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn" ,"No User Founds", ButtonType.OK);
+				}else if (isAdmin(name, pass)) {
+					
 				}
-
-	}*/	
-	@FXML
-	void login(ActionEvent event) throws IOException {
-
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Sloth Chess Board");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
-		primaryStage.show();
-		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent t) {
-				Platform.exit();
-				System.exit(0);
+			 else {
+					Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "No User Founds", ButtonType.OK);
+				}
 			}
-		});
-		FileInputStream input;
-		try {
-			input = new FileInputStream("./src/images/logo.png");
-			Image img = new Image(input);
-			primaryStage.getIcons().add(img); // icon
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+
 	}
 
 	@FXML
@@ -151,24 +128,32 @@ public class LoginController implements Initializable {
 		}
 
 	}
+
 	private boolean isAdmin(String uname, String pass) {
 
 		return false;
 	}
 
-	private boolean isUser(String uname, String pass) {
+	private boolean isUser(String name, String pass) {
 
-		if (uname.equals("Amwaj") && pass.equals("123")) {
-			this.user = new User(uname, pass);
-
-			return true;
-
-		} else {
-			return false;
-
+		// if(!Sysdata.getThPlayers().isEmpty())
+		try {
+			Sysdata.importUsersFromJSON();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}
+		System.out.println(Sysdata.getThPlayers());
+		for (User u : Sysdata.getThPlayers()) {
+			if (u.getUsername().equals(name) && u.getPassword().equals(pass)) {
+				this.user = new User(name, pass);
+				return true;
+			}
+		}
 
+		return false;
+
+	}
 
 	public static User getUser() {
 		return user;
