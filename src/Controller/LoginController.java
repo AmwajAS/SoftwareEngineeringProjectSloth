@@ -12,6 +12,7 @@ import com.sun.tools.javac.launcher.Main;
 import com.sun.tools.sjavac.pubapi.PubApi;
 
 import Alerts.Alerts;
+import Model.Admin;
 import Model.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -45,6 +46,11 @@ public class LoginController implements Initializable {
 	private PasswordField password;
 	@FXML
 	private TextField username;
+	
+	public static final Admin admin = new Admin("admin", "123");
+
+
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -90,7 +96,30 @@ public class LoginController implements Initializable {
 						e.printStackTrace();
 					}
 				}else if (isAdmin(name, pass)) {
-					
+					Stage primaryStage = new Stage();
+					Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+					Scene scene = new Scene(root);
+					primaryStage.setScene(scene);
+					primaryStage.setTitle("Chess");
+					primaryStage.setMinHeight(800);
+					primaryStage.setMinWidth(900);
+					primaryStage.show();
+					primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+						@Override
+						public void handle(WindowEvent t) {
+							Platform.exit();
+							System.exit(0);
+						}
+					});
+					FileInputStream input;
+					try {
+						input = new FileInputStream("./src/images/logo.png");
+						Image img = new Image(input);
+						primaryStage.getIcons().add(img); // icon
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			 else {
 					Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "No User Founds", ButtonType.OK);
@@ -103,12 +132,12 @@ public class LoginController implements Initializable {
 	@FXML
 	public void signup(ActionEvent event) throws IOException {
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/View/Signup.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionPopup.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
+		primaryStage.setMinHeight(513);
+		primaryStage.setMinWidth(548);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -130,6 +159,12 @@ public class LoginController implements Initializable {
 	}
 
 	private boolean isAdmin(String uname, String pass) {
+		
+		Admin isAdmin = new Admin(uname, pass);
+
+		if(admin.equals(isAdmin)) {
+			return true;
+		}
 
 		return false;
 	}
@@ -161,6 +196,10 @@ public class LoginController implements Initializable {
 
 	public static void setUser(User user) {
 		LoginController.user = user;
+	}
+
+	public static Admin getAdmin() {
+		return admin;
 	}
 
 }

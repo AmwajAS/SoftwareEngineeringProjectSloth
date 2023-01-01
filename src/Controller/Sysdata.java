@@ -19,7 +19,8 @@ import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
- 
+
+import Model.Game;
 import Model.Question;
 import Model.User;
 
@@ -29,7 +30,8 @@ public class Sysdata {
 	static ArrayList<Question> importedQuestions = new ArrayList<>();  //saves the imported questions from the JSON file.
 	static ObjectMapper mapper = new ObjectMapper();  // We can use the mapper to parse or deserialize JSON content into a Java object.
 	static ObjectMapper usermapper = new ObjectMapper(); 
-	static HashMap<String, ArrayList<Question>> imported = new HashMap<>();
+	static ObjectMapper historymapper = new ObjectMapper();
+	static ArrayList<Game> gamesHistoryList = new ArrayList<>();
 
 
 
@@ -156,6 +158,66 @@ public class Sysdata {
 
 	}
 
+	
+	public static ArrayList<Game> importGameHistorysFromJSON() throws FileNotFoundException {
+
+		try {
+			InputStream inputStream = new FileInputStream("history.json");
+			JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909);
+			InputStream schemaStream = new FileInputStream("historyjsonschema.json");
+
+			//
+			JsonNode json = historymapper.readTree(inputStream);
+			JsonSchema schema = schemaFactory.getSchema(schemaStream);
+			Set<ValidationMessage> validationResult = schema.validate(json);
+
+			if (validationResult.isEmpty()) {
+				System.out.println("no validation errors :-)");
+				HistoryJson input = usermapper.treeToValue(json, HistoryJson.class);
+				for (Game g : input.getGamesHistory()) {
+					gamesHistoryList.add(g);
+				}
+
+			} else {
+				validationResult.forEach(vm -> System.out.println(vm.getMessage()));
+			}
+
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return gamesHistoryList;
+	}
+
+
+	public static void exportGamesHistoryToJSON() throws FileNotFoundException {
+
+		historymapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+		try {
+			HashMap<String, ArrayList<User>> outHashMap = new HashMap<>();
+			outHashMap.put("gamesHistory", thPlayers);
+			usermapper.writerWithDefaultPrettyPrinter().writeValue(new File("history.json"), outHashMap);
+			
+
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	
+	
+	
 	
 
 	public static ArrayList<Question> getImportedQuestions() {

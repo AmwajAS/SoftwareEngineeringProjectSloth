@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
@@ -46,6 +47,7 @@ public class Game {
 	private int flagging = 0;
 	private ArrayList<Cell> lastMoves;
 	private static Timer timer = new Timer();
+	private Date gamedate;
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
 		this.level = lvl;
@@ -57,6 +59,18 @@ public class Game {
 		lastMoves.add(cb.getCells().get(0));
 		addEventHandlers(cb.getChessBoard());
 	}
+	
+	
+
+	public Game(int level, User user, int score, Date gamedate) {
+		super();
+		this.level = level;
+		this.user = user;
+		this.score = score;
+		this.gamedate = gamedate;
+	}
+
+
 
 	private void addEventHandlers(GridPane chessBoard) {
 		chessBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -507,5 +521,14 @@ public class Game {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+	public Date getGamedate() {
+		return gamedate;
+	}
+
+	public void setGamedate(Date gamedate) {
+		this.gamedate = gamedate;
+	}
+	
 
 }
