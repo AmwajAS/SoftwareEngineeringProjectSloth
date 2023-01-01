@@ -18,6 +18,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class QuestionPopupController implements Initializable {
 
@@ -84,44 +85,46 @@ public class QuestionPopupController implements Initializable {
 	}
 	// TODO we need to fix this function
 	@FXML
-	public boolean checkAnswer() {
+	public void checkAnswer() {
+		boolean isCorrect = false;
 		if ((firstAnswer.isSelected() && question.getCorrect_ans() == 1) || (secondAnswer.isSelected() && question.getCorrect_ans() == 2) 
 				|| (thirdAnswer.isSelected() && question.getCorrect_ans() == 3) || (forthAnswer.isSelected() && question.getCorrect_ans() == 4)) {
 			if(question.getLevel() == 1) {
 				game.setScore(game.getScore()+1);
-				return true;
+
 			}
 			else if(question.getLevel() == 2) {
 				game.setScore(game.getScore()+2);
-				return true;
+
 			}
 			else if(question.getLevel() == 3) {
 				game.setScore(game.getScore()+3);
-				return true;
 			}
-			return true;
+			isCorrect =  true;
 		}
-		if((firstAnswer.isSelected() && question.getCorrect_ans() != 1) || (secondAnswer.isSelected() && question.getCorrect_ans() != 2) 
+		else if((firstAnswer.isSelected() && question.getCorrect_ans() != 1) || (secondAnswer.isSelected() && question.getCorrect_ans() != 2) 
 				|| (thirdAnswer.isSelected() && question.getCorrect_ans() != 3) || (forthAnswer.isSelected() && question.getCorrect_ans() != 4)) {
 			if(question.getLevel() == 1) {
 				game.setScore(game.getScore()-1);
-				return true;
+
 
 			}
 			else if(question.getLevel() == 2) {
 				game.setScore(game.getScore()-2);
-				return true;
+
 
 			}
 			else if(question.getLevel() == 3) {
 				game.setScore(game.getScore()-3);
-				return true;
+
 
 			}
-			return true;
+			isCorrect= true;
 		}
-		return false;
-
+		if (isCorrect) {
+	         Stage stage = (Stage) checkAnswerBt.getScene().getWindow();
+	         stage.close();
+	      }
 	}
 
 	public Game getGame() {

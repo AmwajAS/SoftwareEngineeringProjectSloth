@@ -408,10 +408,7 @@ public class Game {
 							    stage.show();
 							    QuesCell help = (QuesCell) cell;
 								help.createNewQuesCell(cb, cell);
-								boolean isCorrect = controller.checkAnswer();
-								if (isCorrect) {
-									stage.close();
-								}
+								controller.checkAnswer();
 
 						} catch (IOException e) {
 							// TODO 
