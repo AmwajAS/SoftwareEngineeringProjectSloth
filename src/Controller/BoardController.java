@@ -70,7 +70,7 @@ public class BoardController implements Initializable {
 	public Timeline timer;
 
 	//var 
-	public int totalScore=0;
+	public static int totalScore=0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -105,7 +105,12 @@ public class BoardController implements Initializable {
 		});
 	}
 
-
+	/*if(LoginController.getUser().getHighScore()<totalScore) {
+	editHighScore(LoginController.getUser(), totalScore);
+	Alerts.showAlert(AlertType.INFORMATION, "HighScoreIsUpdated!", 
+			"You'r new high score is"+LoginController.getUser().getHighScore(), ButtonType.OK);
+}
+System.out.println(LoginController.getUser().getHighScore());*/
 	/*public void editHighScore(User u, int newHS){
 		User newU= new User(u.getUsername(),u.getPassword());
 		newU.setHighScore(newHS);
@@ -122,18 +127,10 @@ public class BoardController implements Initializable {
 
 	//Level up function initialize a new game by the new level 
 	//It get the level and also the score in order to save the higher score 
-	public void levelUp(int currentlevel, int currentScore){
+	public void levelUp(int currentlevel){
 
 		if(currentlevel==2) {
 			second.setStyle("-fx-background-color: #89efa5; ");
-			/*	totalScore=totalScore+currentScore;
-			if(LoginController.getUser().getHighScore()<totalScore) {
-				editHighScore(LoginController.getUser(), totalScore);
-				Alerts.showAlert(AlertType.INFORMATION, "HighScoreIsUpdated!", 
-						"You'r new high score is"+LoginController.getUser().getHighScore(), ButtonType.OK);
-			}
-			System.out.println(LoginController.getUser().getHighScore());*/
-
 			scores.stop();
 			timer.stop();
 			timer = new Timeline();
@@ -158,6 +155,10 @@ public class BoardController implements Initializable {
 			forth.setStyle("-fx-background-color: #4da865; ");
 			scores.stop();
 			timer.stop();
+			
+			Game historyGame= new Game(currentlevel, LoginController.getUser(), totalScore);
+			System.out.println(historyGame.toString());
+			
 			Alerts.showAlert(AlertType.INFORMATION, "You Win", "Congrats!", ButtonType.OK);
 
 		}
@@ -177,12 +178,17 @@ public class BoardController implements Initializable {
 				seconds--;
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if(level<5 && g.getScore()>=4){ // must 15 !! 4 for tests 
+					if(level<4 && g.getScore()>=4){ // must 15 !! 4 for tests 
 						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
 						timer.stop();
 						level++;
-						levelUp(level, g.getScore());
+						totalScore=totalScore+g.getScore();
+						System.out.println(totalScore);
+						levelUp(level);
 					}else {
+						totalScore=totalScore+g.getScore();
+						Game historyGame= new Game(level, LoginController.getUser(), totalScore);
+						System.out.println(historyGame.toString());
 						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
 						timer.stop();
 					}

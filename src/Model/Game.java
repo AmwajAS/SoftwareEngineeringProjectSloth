@@ -29,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 import Alerts.Alerts;
 import Controller.BoardController;
+import Controller.LoginController;
 import Model.Board;
 import Model.Piece;
 import Model.User;
@@ -49,7 +50,7 @@ public class Game {
 	private ArrayList<Cell> lastMoves;
 	private static Timer timer = new Timer();
 	private LocalDate gamedate;
-
+	private int finalScore;
 
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
@@ -62,14 +63,14 @@ public class Game {
 		lastMoves.add(cb.getCells().get(0));
 		addEventHandlers(cb.getChessBoard());
 	}
-	
-	
 
-	public Game(int level, User user, int score) {
+
+
+	public Game(int level, User user, int finalscore) {
 		super();
 		this.level = level;
 		this.user = user;
-		this.score = score;
+		this.finalScore = finalscore;
 		this.gamedate = LocalDate.now();
 	}
 
@@ -417,6 +418,9 @@ public class Game {
 				if (temp instanceof Knight) {
 					System.out.println("Game Over!!!");
 					flag = 1;
+					BoardController.totalScore= BoardController.totalScore+getScore();
+					Game historyGame= new Game(level, LoginController.getUser(), BoardController.totalScore);
+					System.out.println(historyGame.toString());
 					Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 				}
 				cell.setOccupied(true);
@@ -449,6 +453,9 @@ public class Game {
 		if (temp instanceof Knight) {
 			this.game = false;
 			System.out.println("Game Over!!!");
+			BoardController.totalScore= BoardController.totalScore+getScore();
+			Game historyGame= new Game(level, LoginController.getUser(), BoardController.totalScore);
+			System.out.println(historyGame.toString());
 			Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 		}
 		cell.setOccupied(true);
@@ -534,6 +541,18 @@ public class Game {
 
 	public void setGamedate(LocalDate gamedate) {
 		this.gamedate = gamedate;
+	}
+	public int getFinalScore() {
+		return finalScore;
+	}
+
+	public void setFinalScore(int finalScore) {
+		this.finalScore = finalScore;
+	}
+
+	@Override
+	public String toString() {
+		return "Game [level=" + level + ", user=" + user + ", finalScore=" + finalScore + "]";
 	}
 
 
