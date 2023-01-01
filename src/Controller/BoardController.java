@@ -61,6 +61,11 @@ public class BoardController implements Initializable {
 	@FXML
 	private Text totalScoreText;
 
+	@FXML
+	private Text name;
+
+	@FXML
+	private Text newScore;
 
 	// var to the doTime() method
 	private final Integer startTime = 60;
@@ -172,7 +177,7 @@ System.out.println(LoginController.getUser().getHighScore());*/
 
 	//Level up function initialize a new game by the new level 
 	//It get the level and also the score in order to save the higher score 
-	public void levelUp(int currentlevel){
+	public void levelUp(int currentlevel) throws IOException{
 
 		if(currentlevel==2) {
 			second.setStyle("-fx-background-color: #89efa5; ");
@@ -200,16 +205,30 @@ System.out.println(LoginController.getUser().getHighScore());*/
 			forth.setStyle("-fx-background-color: #4da865; ");
 			scores.stop();
 			timer.stop();
-			
+
 			Game historyGame= new Game(currentlevel, LoginController.getUser(), totalScore);
 			System.out.println(historyGame.toString());
-			
-			
-			Alerts.showAlert(AlertType.INFORMATION, "You Win", "Congrats!", ButtonType.OK);
 
+			Stage primaryStage = new Stage();
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("/View/YouWinWindow.fxml"));
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.setTitle("Sloth Chess Board");
+				primaryStage.setMinHeight(400);
+				primaryStage.setMinWidth(500);
+				primaryStage.show();
+				primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					@Override
+					public void handle(WindowEvent t) {
+						Platform.exit();
+						System.exit(0);
+					}
+				});
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-
-
 	}
 
 	// Countdown Timer
@@ -224,13 +243,18 @@ System.out.println(LoginController.getUser().getHighScore());*/
 				seconds--;
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if(level<4 && g.getScore()>=4){ // must 15 !! 4 for tests 
+					if(level<5 && g.getScore()>=4){ // must 15 !! 4 for tests 
 						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
 						timer.stop();
 						level++;
 						totalScore=totalScore+g.getScore();
 						System.out.println(totalScore);
-						levelUp(level);
+						try {
+							levelUp(level);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}else {
 						totalScore=totalScore+g.getScore();
 						Game historyGame= new Game(level, LoginController.getUser(), totalScore);
