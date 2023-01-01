@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 import javax.swing.Timer;
-
 import Alerts.Alerts;
 import Model.Board;
 import Model.Game;
@@ -69,21 +68,19 @@ public class BoardController implements Initializable {
 	private int level=1;
 	public Timeline scores;
 	public Timeline timer;
-	// var to save the total score 
-	public int totalScore=0;
 
+	//var 
+	public int totalScore=0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		if(LoginController.getUser()==null) { // checks for me
-			System.out.println("no user");
-			playerName.setText("Player Name: me ");
-		}else {  //the right code 
-			playerName.setText("Player: " +LoginController.getUser().getUsername());
+		if(LoginController.getUser()==null) {
+			System.out.println("no user!!error in import users");
+			playerName.setText("Player Name: Error! ");
+		}else{ 
+			playerName.setText("Player: " +LoginController.getUser().getUsername());   //set the user name on the board
 
 		}
-
 		scores=new Timeline();
 		timer = new Timeline();
 		// TODO Auto-generated method stub
@@ -106,81 +103,65 @@ public class BoardController implements Initializable {
 			}
 
 		});
-
-
-		/*
-		second.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				scores.stop();
-				timer.stop();
-				seconds=60;
-				game.setScore(0);
-				level = 2;
-				initialize(location,resources);
-			}
-
-		});
-		third.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				scores.stop();
-				timer.stop();
-				seconds=60;
-				game.setScore(0);
-				level = 3;
-				game.stopTimer();
-				initialize(location,resources);
-			}
-
-		});
-		forth.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				scores.stop();
-				timer.stop();
-				seconds=60;
-				game.setScore(0);
-				level = 4;
-				game.stopTimer();
-				initialize(location,resources);
-			}
-
-		}); */
 	}
+
+
+	/*public void editHighScore(User u, int newHS){
+		User newU= new User(u.getUsername(),u.getPassword());
+		newU.setHighScore(newHS);
+		try {
+			// Sysdata.importQuestionsFromJSON();
+			Sysdata.importUsersFromJSON().remove(u);
+			Sysdata.getThPlayers().add(newU);
+			Sysdata.exportUsersToJSON();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
 
 	//Level up function initialize a new game by the new level 
 	//It get the level and also the score in order to save the higher score 
 	public void levelUp(int currentlevel, int currentScore){
-	/*	totalScore=totalScore+currentScore;
-		if(LoginController.getUser().getHighScore()<currentScore) {
-			LoginController.getUser().setHighScore(currentScore);
-		}*/
 
 		if(currentlevel==2) {
 			second.setStyle("-fx-background-color: #89efa5; ");
+			/*	totalScore=totalScore+currentScore;
+			if(LoginController.getUser().getHighScore()<totalScore) {
+				editHighScore(LoginController.getUser(), totalScore);
+				Alerts.showAlert(AlertType.INFORMATION, "HighScoreIsUpdated!", 
+						"You'r new high score is"+LoginController.getUser().getHighScore(), ButtonType.OK);
+			}
+			System.out.println(LoginController.getUser().getHighScore());*/
+
+			scores.stop();
+			timer.stop();
+			timer = new Timeline();
+			seconds=60;
+			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),currentlevel);	
+			game.setScore(1);
+			game.stopTimer();
+			doTime(game);
+			doScore(game);
 		}else if(currentlevel==3) {
 			third.setStyle("-fx-background-color: #78e495; ");
+			scores.stop();
+			timer.stop();
+			timer = new Timeline();
+			seconds=60;
+			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),currentlevel);	
+			game.setScore(1);
+			game.stopTimer();
+			doTime(game);
+			doScore(game);
 		}else if(currentlevel==4) {
 			forth.setStyle("-fx-background-color: #4da865; ");
-		}else if(currentlevel==5) {
+			scores.stop();
+			timer.stop();
+			Alerts.showAlert(AlertType.INFORMATION, "You Win", "Congrats!", ButtonType.OK);
+
 		}
 
-		scores.stop();
-		timer.stop();
-		timer = new Timeline();
-		seconds=60;
-		Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),currentlevel);	
-		game.setScore(1);
-		game.stopTimer();
-		doTime(game);
-		doScore(game);
 
 	}
 
@@ -196,18 +177,16 @@ public class BoardController implements Initializable {
 				seconds--;
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if(level<5){
-						if(g.getScore()>=4) {  // must 15 !! 4 for tests
-							Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
-							timer.stop();
-							level++;
-							levelUp(level, g.getScore());
-						}else {
-							Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
-							timer.stop();
-						}
-					} // we he wins??
-				}
+					if(level<5 && g.getScore()>=4){ // must 15 !! 4 for tests 
+						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
+						timer.stop();
+						level++;
+						levelUp(level, g.getScore());
+					}else {
+						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
+						timer.stop();
+					}
+				} 
 			}
 		});
 		timer.getKeyFrames().add(frame);

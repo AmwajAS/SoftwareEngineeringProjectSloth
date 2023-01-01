@@ -179,7 +179,7 @@ public class LoginController implements Initializable {
 		System.out.println(Sysdata.getThPlayers());
 		for (User u : Sysdata.getThPlayers()) {
 			if (u.getUsername().equals(name) && u.getPassword().equals(pass)) {
-				this.user = new User(name, pass);
+				this.user = u;
 				return true;
 			}
 		}
