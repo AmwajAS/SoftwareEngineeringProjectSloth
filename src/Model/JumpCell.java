@@ -50,10 +50,12 @@ public class JumpCell extends Cell {
 		Cell temp = null;
 		int i = cell.getX();
 		int j = cell.getY();
+		int tempCounter = cell.getCounter();
 		board.getCells().remove(cell);
 		System.out.println("****This Is the new jumpcell****");
 		Cell newCell = new Cell(i, j);
 		newCell.setName("Square" + i + j);
+		newCell.setCounter(tempCounter);
 		newCell.setPrefHeight(100);
 		newCell.setPrefWidth(100);
 		newCell.setBorder(new Border(

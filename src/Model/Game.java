@@ -368,7 +368,10 @@ public class Game {
 		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
 			setScore(((UndoCell) cell).undoMoves(cb, lastMoves,score));
 			UndoCell help = (UndoCell) cell;
-			help.createNewUndoCell(cb, cell);
+			Cell cl;
+			cl=help.createNewUndoCell(cb, cell);
+			lastMoves.removeAll(lastMoves);
+			lastMoves.add(cl);
 		}
 		if (cell instanceof JumpCell && currentPiece instanceof Knight) {
 			flagging = 1;
