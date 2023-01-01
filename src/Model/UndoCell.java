@@ -57,12 +57,14 @@ public class UndoCell extends Cell {
 		Knight tempKnight = (Knight) cell.getChildren().get(0);
 		cell.getChildren().remove(0);
 		Cell temp = null;
+		int tempCounter = cell.getCounter();
 		int i = cell.getX();
 		int j = cell.getY();
 		board.getCells().remove(cell);
 		System.out.println("*This Is the new UndoCell*");
 		Cell newCell = new Cell(i, j);
 		newCell.setName("Square" + i + j);
+		newCell.setCounter(tempCounter);
 		newCell.setPrefHeight(100);
 		newCell.setPrefWidth(100);
 		newCell.setBorder(new Border(
@@ -105,7 +107,7 @@ public class UndoCell extends Cell {
 			}
 		} while (temp == null);
 
-		return temp;
+		return newCell;
 	}
 
 }
