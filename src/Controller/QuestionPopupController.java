@@ -2,11 +2,14 @@ package Controller;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.sun.media.sound.SoftJitterCorrector;
 import com.sun.prism.paint.Color;
 
+import Model.Game;
 import Model.Question;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,24 +33,26 @@ public class QuestionPopupController implements Initializable {
 	private Button checkAnswerBt;
 	@FXML
 	private Pane questionPane;
+
 	@FXML
 	private Text questionText;
 
 	private ToggleGroup tg = new ToggleGroup();
 	Question question;
+	private Game game;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		try {
 			Sysdata.importQuestionsFromJSON();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(Sysdata.getImportedQuestions());
 
-		question = Sysdata.getImportedQuestions().get(8);  /////////////the random Questions
+		ArrayList<Question> importedQuestions = Sysdata.getImportedQuestions();
+		Random rand = new Random();
+		int index = rand.nextInt(importedQuestions.size());
+		question = importedQuestions.get(index);
 
 		makeQuestion();
 
@@ -55,12 +60,9 @@ public class QuestionPopupController implements Initializable {
 		secondAnswer.setToggleGroup(tg);
 		thirdAnswer.setToggleGroup(tg);
 		forthAnswer.setToggleGroup(tg);
-
 	}
 
-	private void makeQuestion() {
-		// TODO Auto-generated method stub
-
+	public void makeQuestion() {
 		if (question != null) {
 			questionText.setText(question.getQuestion());
 
@@ -72,40 +74,62 @@ public class QuestionPopupController implements Initializable {
 			}
 
 			if (question.getLevel() == 1) {
-				questionPane.setStyle("-fx-background-color: rgba(255, 255, 255, 0.5)");
+				questionPane.setStyle("-fx-background-color: white");
 			} else if (question.getLevel() == 2) {
-				questionPane.setStyle("-fx-background-color: rgba(255, 235, 59, 0.5)");
+				questionPane.setStyle("-fx-background-color: yellow");
 			} else {
-				questionPane.setStyle("-fx-background-color: rgba(244, 67, 54, 0.5)");
+				questionPane.setStyle("-fx-background-color: red");
 			}
-
 		}
 	}
-
+	// TODO we need to fix this function
 	@FXML
-	private boolean checkAnswer() {
-
-		RadioButton selectedRadioButton = (RadioButton) tg.getSelectedToggle();
-		String userAnswer = selectedRadioButton.getText();
-		System.out.println(userAnswer);
-
-		if (firstAnswer.isSelected() && question.getCorrect_ans() == 1) {
-			System.out.println("yes1");
-		}
-		if (secondAnswer.isSelected() && question.getCorrect_ans() == 2) {
-			System.out.println("yes2");
-		}
-		if (thirdAnswer.isSelected() && question.getCorrect_ans() == 3) {
-			System.out.println("yes3");
+	public boolean checkAnswer() {
+		if ((firstAnswer.isSelected() && question.getCorrect_ans() == 1) || (secondAnswer.isSelected() && question.getCorrect_ans() == 2) 
+				|| (thirdAnswer.isSelected() && question.getCorrect_ans() == 3) || (forthAnswer.isSelected() && question.getCorrect_ans() == 4)) {
+			if(question.getLevel() == 1) {
+				game.setScore(game.getScore()+1);
+				return true;
+			}
+			else if(question.getLevel() == 2) {
+				game.setScore(game.getScore()+2);
+				return true;
+			}
+			else if(question.getLevel() == 3) {
+				game.setScore(game.getScore()+3);
+				return true;
+			}
 			return true;
 		}
-		if (forthAnswer.isSelected() && question.getCorrect_ans() == 4) {
-			System.out.println("yes4");
+		if((firstAnswer.isSelected() && question.getCorrect_ans() != 1) || (secondAnswer.isSelected() && question.getCorrect_ans() != 2) 
+				|| (thirdAnswer.isSelected() && question.getCorrect_ans() != 3) || (forthAnswer.isSelected() && question.getCorrect_ans() != 4)) {
+			if(question.getLevel() == 1) {
+				game.setScore(game.getScore()-1);
+				return true;
+
+			}
+			else if(question.getLevel() == 2) {
+				game.setScore(game.getScore()-2);
+				return true;
+
+			}
+			else if(question.getLevel() == 3) {
+				game.setScore(game.getScore()-3);
+				return true;
+
+			}
+			return true;
 		}
-
 		return false;
-		// TODO Auto-generated method stub
 
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 }

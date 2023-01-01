@@ -15,7 +15,7 @@ import javafx.scene.effect.Glow;
 
 
 /**
- * Data structure for managing interaction with a board.
+ * Data structure for managing interaction with a board.*
  */
 public class Board {
 	Color color = Color.web("#F0E68C");
@@ -75,13 +75,18 @@ public class Board {
 		 */
 		if (level == 1) {
 			createJumpCell(3);
+			createQuesCell(3);
 		}
 		if(level == 2) {
 			createUndoCell(3);
+			createQuesCell(3);
+
 		}
 		if (level == 3) {
 			createJumpCell(2);
 			createUndoCell(2);
+			createQuesCell(3);
+
 		}
 		
 		
@@ -119,6 +124,7 @@ public class Board {
 		addPieces();
 	}
 	
+	// Creating JumpCells
 	private void createJumpCell(int times) {
 		while (times > 0) {
 			Random randI = new Random();
@@ -151,8 +157,9 @@ public class Board {
 
 		}
 	}
+	// Creating UndoCells
 	private void createUndoCell(int times) {
-		System.out.println(" ** These are the UndoCells **");
+		System.out.println(" * These are the UndoCells *");
 		while (times > 0) {
 			Random randI = new Random();
 			Random randJ = new Random();
@@ -175,6 +182,40 @@ public class Board {
 			if (temp != null) {
 				cells.remove(temp);
 				temp = new UndoCell(iRand, jRand);
+				temp.setName("Square" + iRand + jRand);
+				temp.setPrefHeight(100);
+				temp.setPrefWidth(100);
+				chessBoard.add(temp, iRand, jRand, 1, 1);
+				cells.add(temp);
+			}
+
+		}
+	}
+	
+	// Creating Question Cells
+	private void createQuesCell(int times) {
+		while (times > 0) {
+			Random randI = new Random();
+			Random randJ = new Random();
+			int iRand = randI.nextInt(7);
+			int jRand = randJ.nextInt(7);
+			Cell temp = null;
+			for (Cell c : cells) {
+				if (c.getX() == iRand && c.getY() == jRand) {
+					if (!(c instanceof BlockCell) && !(c instanceof QuesCell) && !(c instanceof JumpCell) && !(c instanceof UndoCell)) {
+						if (c.getChildren().isEmpty()) {
+							if (c.getX() != 0 && c.getY() != 0) {
+								temp = c;
+								times--;
+								System.out.println(temp.getName());
+							}
+						}
+					}
+				}
+			}
+			if (temp != null) {
+				cells.remove(temp);
+				temp = new QuesCell(iRand, jRand);
 				temp.setName("Square" + iRand + jRand);
 				temp.setPrefHeight(100);
 				temp.setPrefWidth(100);

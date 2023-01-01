@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,8 +13,11 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.DropShadow;
@@ -23,6 +27,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -30,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 import Alerts.Alerts;
 import Controller.BoardController;
 import Controller.LoginController;
+import Controller.QuestionPopupController;
 import Model.Board;
 import Model.Piece;
 import Model.User;
@@ -386,6 +393,31 @@ public class Game {
 				}
 			}
 		}
+		// if the cell instance of Question we will call the fmxl Question Controller pop-up
+				if (cell instanceof QuesCell && currentPiece instanceof Knight) {
+					  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
+					    Parent root;
+						try {
+							root = fxmlLoader.load();
+							 QuestionPopupController controller = fxmlLoader.getController();
+							    controller.setGame(this);
+							    controller.getGame().setScore(score);
+							    Scene scene = new Scene(root);
+							    Stage stage = new Stage();
+							    stage.setScene(scene);
+							    stage.show();
+							    QuesCell help = (QuesCell) cell;
+								help.createNewQuesCell(cb, cell);
+								boolean isCorrect = controller.checkAnswer();
+								if (isCorrect) {
+									stage.close();
+								}
+
+						} catch (IOException e) {
+							// TODO 
+							e.printStackTrace();
+						}
+				}
 		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
 			setScore(((UndoCell) cell).undoMoves(cb, lastMoves,score));
 			UndoCell help = (UndoCell) cell;
@@ -564,6 +596,9 @@ public class Game {
 
 	public void setScore(int score) {
 		this.score = score;
+		if(this.score <= 0) {
+			this.score=0;
+		}
 	}
 
 	public LocalDate getGamedate() {

@@ -130,7 +130,7 @@ public class LoginController implements Initializable {
 	@FXML
 	public void signup(ActionEvent event) throws IOException {
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionPopup.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/View/Signup.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
