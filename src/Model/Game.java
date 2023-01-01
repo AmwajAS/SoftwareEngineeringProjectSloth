@@ -1,5 +1,6 @@
 package Model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -47,7 +48,9 @@ public class Game {
 	private int flagging = 0;
 	private ArrayList<Cell> lastMoves;
 	private static Timer timer = new Timer();
-	private Date gamedate;
+	private LocalDate gamedate;
+
+
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
 		this.level = lvl;
@@ -62,12 +65,12 @@ public class Game {
 	
 	
 
-	public Game(int level, User user, int score, Date gamedate) {
+	public Game(int level, User user, int score) {
 		super();
 		this.level = level;
 		this.user = user;
 		this.score = score;
-		this.gamedate = gamedate;
+		this.gamedate = LocalDate.now();
 	}
 
 
@@ -525,13 +528,13 @@ public class Game {
 		this.score = score;
 	}
 
-	public Date getGamedate() {
+	public LocalDate getGamedate() {
 		return gamedate;
 	}
 
-	public void setGamedate(Date gamedate) {
+	public void setGamedate(LocalDate gamedate) {
 		this.gamedate = gamedate;
 	}
-	
+
 
 }
