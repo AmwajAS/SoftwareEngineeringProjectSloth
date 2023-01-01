@@ -80,6 +80,13 @@ public class QuestionMangController implements Initializable {
 			diffSelect.getItems().add(ql);
 		}
 		loadChart();
+		try {
+			Sysdata.importUsersFromJSON();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(Sysdata.getThPlayers());
 
 	}
 
@@ -120,6 +127,11 @@ public class QuestionMangController implements Initializable {
 							ObList.remove(SelectedQuestion);
 							refreshTable();
 							loadChart();
+							try {
+								Sysdata.exportQuestionsToJSON();
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							}
 							// showTableContent();
 
 						});

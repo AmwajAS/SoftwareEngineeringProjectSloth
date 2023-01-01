@@ -29,7 +29,8 @@ public class Sysdata {
 	static ArrayList<Question> importedQuestions = new ArrayList<>();  //saves the imported questions from the JSON file.
 	static ObjectMapper mapper = new ObjectMapper();  // We can use the mapper to parse or deserialize JSON content into a Java object.
 	static ObjectMapper usermapper = new ObjectMapper(); 
-	
+	static HashMap<String, ArrayList<Question>> imported = new HashMap<>();
+
 
 
 
@@ -56,7 +57,10 @@ public class Sysdata {
 				System.out.println("no validation errors :-)");
 				Json input = mapper.treeToValue(json, Json.class);
 				for (Question q : input.getQuestions()) {
+					//System.out.println(input.getQuestions());
 					importedQuestions.add(q);
+					//imported.put("questions", importedQuestions);
+
 				}
 
 			} else {

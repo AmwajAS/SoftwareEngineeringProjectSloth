@@ -28,10 +28,10 @@
               ]
             },
             "correct_ans": {
-              "type": "string"
+              "type": "integer"
             },
             "level": {
-              "type": "string"
+              "type": "integer"
             },
             "team": {
               "type": "string"
@@ -51,6 +51,4 @@
   "required": [
     "questions"
   ]
-}
-]
 }
