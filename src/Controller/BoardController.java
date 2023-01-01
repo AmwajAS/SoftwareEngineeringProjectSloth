@@ -103,6 +103,51 @@ public class BoardController implements Initializable {
 			}
 
 		});
+		/*
+		second.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				scores.stop();
+				timer.stop();
+				seconds=60;
+				game.setScore(0);
+				level = 2;
+				initialize(location,resources);
+			}
+
+		});
+		third.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				scores.stop();
+				timer.stop();
+				seconds=60;
+				game.setScore(0);
+				level = 3;
+				game.stopTimer();
+				initialize(location,resources);
+			}
+
+		});
+		forth.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				scores.stop();
+				timer.stop();
+				seconds=60;
+				game.setScore(0);
+				level = 4;
+				game.stopTimer();
+				initialize(location,resources);
+			}
+
+		}); */
 	}
 
 	/*if(LoginController.getUser().getHighScore()<totalScore) {
@@ -158,6 +203,7 @@ System.out.println(LoginController.getUser().getHighScore());*/
 			
 			Game historyGame= new Game(currentlevel, LoginController.getUser(), totalScore);
 			System.out.println(historyGame.toString());
+			
 			
 			Alerts.showAlert(AlertType.INFORMATION, "You Win", "Congrats!", ButtonType.OK);
 
