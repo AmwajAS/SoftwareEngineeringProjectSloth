@@ -41,7 +41,6 @@ public class Game {
 	private ArrayList<Cell> lastMoves;
 	private static Timer timer = new Timer();
 	private static Timer counterTimer =  new Timer();
-	private LocalDate gamedate;
 	private int finalScore;
 
 
@@ -64,7 +63,6 @@ public class Game {
 		this.level = level;
 		this.user = user;
 		this.finalScore = finalscore;
-		this.gamedate = LocalDate.now();
 	}
 
 
@@ -600,13 +598,6 @@ public class Game {
 		}
 	}
 
-	public LocalDate getGamedate() {
-		return gamedate;
-	}
-
-	public void setGamedate(LocalDate gamedate) {
-		this.gamedate = gamedate;
-	}
 	public int getFinalScore() {
 		return finalScore;
 	}
