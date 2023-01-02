@@ -51,17 +51,15 @@ public class Game {
 	public static Piece tempKing;
 	public static Board cb;
 	private boolean game;
-	public int timerCounter =0;
+	public int timerCounter = 0;
 	private int score = 1;
 	private int flag = 0;
 	private int flagging = 0;
 	private ArrayList<Cell> lastMoves;
 	private static Timer timer = new Timer();
-	private static Timer counterTimer =  new Timer();
+	private static Timer counterTimer = new Timer();
 	private LocalDate gamedate;
 	private int finalScore;
-	
-
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
 		this.level = lvl;
@@ -74,8 +72,6 @@ public class Game {
 		addEventHandlers(cb.getChessBoard());
 	}
 
-
-
 	public Game(int level, User user, int finalscore) {
 		super();
 		this.level = level;
@@ -83,8 +79,6 @@ public class Game {
 		this.finalScore = finalscore;
 		this.gamedate = LocalDate.now();
 	}
-
-
 
 	private void addEventHandlers(GridPane chessBoard) {
 		chessBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -192,8 +186,9 @@ public class Game {
 	// This function is for the queen's move it works like this:
 	/*
 	 * if the queen can kill the knight it kills him. if not, the queen will block
-	 * one of the future possible destination for the knight(To make it harder). if
-	 * none of the above is available it moves randomly.
+	 * one of the future possible destination for the knight(To make it harder).
+	 * if not, the queen will move as close to the knight as she can.
+	 * if none of the above is available it moves randomly.
 	 */
 	/*
 	 * tempCell is the queen, cell is the knight
@@ -227,6 +222,7 @@ public class Game {
 					dropPiece(cell);
 				}
 			}
+
 			for (String move : tempMoves) {
 				for (String knightMove : tempKnight.getPossibleMoves()) {
 					if (move.equals(knightMove)) {
@@ -238,15 +234,31 @@ public class Game {
 					}
 				}
 			}
-			Random rand = new Random();
-			int len = tempMoves.size();
 
-			String tempName = tempMoves.get(rand.nextInt(len));
-			for (Cell temp : cb.getCells()) {
-				if (temp.getName().equals(tempName)) {
-					dropPiece(temp);
+			Cell closestCell = null;
+			int minDistance = Math.max(Math.abs(cell.getX() - tempPiece.getPosX()),
+					Math.abs(cell.getY() - tempPiece.getPosY()));
+			for (String move : tempPiece.getPossibleMoves()) {
+				int distance = Math.max(Math.abs(cell.getX() - tempPiece.getSquareByName(move).getX()),
+						Math.abs(cell.getY() - tempPiece.getSquareByName(move).getY()));
+				if (distance < minDistance) {
+					closestCell = tempPiece.getSquareByName(move);
+					minDistance = distance;
 				}
+			}
+			if (closestCell != null)
+				dropPiece(closestCell);
+			else {
+				Random rand = new Random();
+				int len = tempMoves.size();
 
+				String tempName = tempMoves.get(rand.nextInt(len));
+				for (Cell temp : cb.getCells()) {
+					if (temp.getName().equals(tempName)) {
+						dropPiece(temp);
+					}
+
+				}
 			}
 		}
 	}
@@ -378,7 +390,7 @@ public class Game {
 			currentPiece.setPosY(cell.getY());
 		}
 		if (currentPiece instanceof Knight) {
-			cell.setCounter(cell.getCounter()+1);
+			cell.setCounter(cell.getCounter() + 1);
 			addCellsToArraylist(cell);
 			if (!cell.isVisited()) {
 				score++;
@@ -393,33 +405,34 @@ public class Game {
 				}
 			}
 		}
-		// if the cell instance of Question we will call the fmxl Question Controller pop-up
-				if (cell instanceof QuesCell && currentPiece instanceof Knight) {
-					  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
-					    Parent root;
-						try {
-							root = fxmlLoader.load();
-							 QuestionPopupController controller = fxmlLoader.getController();
-							    controller.setGame(this);
-							    controller.getGame().setScore(score);
-							    Scene scene = new Scene(root);
-							    Stage stage = new Stage();
-							    stage.setScene(scene);
-							    stage.show();
-							    QuesCell help = (QuesCell) cell;
-								help.createNewQuesCell(cb, cell);
-								controller.checkAnswer();
+		// if the cell instance of Question we will call the fmxl Question Controller
+		// pop-up
+		if (cell instanceof QuesCell && currentPiece instanceof Knight) {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
+			Parent root;
+			try {
+				root = fxmlLoader.load();
+				QuestionPopupController controller = fxmlLoader.getController();
+				controller.setGame(this);
+				controller.getGame().setScore(score);
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.show();
+				QuesCell help = (QuesCell) cell;
+				help.createNewQuesCell(cb, cell);
+				controller.checkAnswer();
 
-						} catch (IOException e) {
-							// TODO 
-							e.printStackTrace();
-						}
-				}
+			} catch (IOException e) {
+				// TODO
+				e.printStackTrace();
+			}
+		}
 		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
-			setScore(((UndoCell) cell).undoMoves(cb, lastMoves,score));
+			setScore(((UndoCell) cell).undoMoves(cb, lastMoves, score));
 			UndoCell help = (UndoCell) cell;
 			Cell cl;
-			cl=help.createNewUndoCell(cb, cell);
+			cl = help.createNewUndoCell(cb, cell);
 			lastMoves.removeAll(lastMoves);
 			lastMoves.add(cl);
 		}
@@ -482,8 +495,8 @@ public class Game {
 		if (temp instanceof Knight) {
 			this.game = false;
 			System.out.println("Game Over!!!");
-			BoardController.totalScore= BoardController.totalScore+getScore();
-			Game historyGame= new Game(level, LoginController.getUser(), BoardController.totalScore);
+			BoardController.totalScore = BoardController.totalScore + getScore();
+			Game historyGame = new Game(level, LoginController.getUser(), BoardController.totalScore);
 			System.out.println(historyGame.toString());
 			Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 		}
@@ -505,7 +518,7 @@ public class Game {
 	public void startTimer() {
 
 		flag = 1;
-		counterTimer = new Timer(); 
+		counterTimer = new Timer();
 		timer = new Timer();
 		timer.schedule(new TimerTask() {
 			int speed = 2000;
@@ -531,29 +544,29 @@ public class Game {
 						}
 					}
 				}
-				
-					if (timerCounter % 10 == 0) {
-						System.out.println(timerCounter);
-						speed -= 500;
-						System.out.println("this is the speed : "+speed);
-						if (speed < 0) {
-							speed = 0;
-						}
+
+				if (timerCounter % 10 == 0) {
+					System.out.println(timerCounter);
+					speed -= 500;
+					System.out.println("this is the speed : " + speed);
+					if (speed < 0) {
+						speed = 0;
 					}
-				
+				}
+
 			}
 		}, 1000, 1000);
-		
+
 		counterTimer.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
 				timerCounter++;
-				System.out.println("this is the counter :"+timerCounter);
+				System.out.println("this is the counter :" + timerCounter);
 			}
-			
+
 		}, 1000, 1000);
-		
+
 	}
 
 	public void addCellsToArraylist(Cell c) {
@@ -593,8 +606,8 @@ public class Game {
 
 	public void setScore(int score) {
 		this.score = score;
-		if(this.score <= 0) {
-			this.score=0;
+		if (this.score <= 0) {
+			this.score = 0;
 		}
 	}
 
@@ -605,6 +618,7 @@ public class Game {
 	public void setGamedate(LocalDate gamedate) {
 		this.gamedate = gamedate;
 	}
+
 	public int getFinalScore() {
 		return finalScore;
 	}
@@ -617,6 +631,5 @@ public class Game {
 	public String toString() {
 		return "Game [level=" + level + ", user=" + user + ", finalScore=" + finalScore + "]";
 	}
-
 
 }
