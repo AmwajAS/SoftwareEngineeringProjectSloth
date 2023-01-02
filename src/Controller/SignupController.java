@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -8,14 +9,22 @@ import java.util.ResourceBundle;
 
 import Alerts.Alerts;
 import Model.User;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class SignupController implements Initializable {
 
@@ -61,13 +70,41 @@ public class SignupController implements Initializable {
 			Sysdata.exportUsersToJSON();
 			clearning();
 			System.out.println(user);
-
+		 	// Close the current stage
+		    Stage currentStage = (Stage) signupBt.getScene().getWindow();
+		    currentStage.close();
+		    //Starts a new stage
+			Stage primaryStage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Sloth Chess Board");
+			primaryStage.setMinHeight(800);
+			primaryStage.setMinWidth(900);
+			primaryStage.show();
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent t) {
+					Platform.exit();
+					System.exit(0);
+				}
+			});
+			FileInputStream input;
+			try {
+				input = new FileInputStream("./src/images/logo.png");
+				Image img = new Image(input);
+				primaryStage.getIcons().add(img); // icon
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 	}
 
 	public void clearning() {

@@ -134,6 +134,10 @@ public class LoginController implements Initializable {
 
 	@FXML
 	public void signup(ActionEvent event) throws IOException {
+		// Close the current stage
+	    Stage currentStage = (Stage) loginframe.getScene().getWindow();
+	    currentStage.close();
+	    //Starts a new stage
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/Signup.fxml"));
 		Scene scene = new Scene(root);
