@@ -86,7 +86,7 @@ public class Game {
 							// Selecting a new piece
 							if (currentPiece == null) {
 								currentPiece = newPiece;
-								currentPiece.getAllPossibleMoves();
+								currentPiece.getAllPossibleMoves(level);
 								if (!currentPiece.getColor().equals("black")) {
 									currentPiece = null;
 									return;
@@ -98,7 +98,7 @@ public class Game {
 								if (currentPiece.getColor().equals(newPiece.getColor())) {
 									deselectPiece(false);
 									currentPiece = newPiece;
-									currentPiece.getAllPossibleMoves();
+									currentPiece.getAllPossibleMoves(level);
 									selectPiece(game);
 								} else {
 									return;
@@ -173,14 +173,15 @@ public class Game {
 	}
 
 	// This function is for the queen's move it works like this:
-	/*
-	 * if the queen can kill the knight it kills him. if not, the queen will block
-	 * one of the future possible destination for the knight(To make it harder). if
-	 * none of the above is available it moves randomly.
-	 */
-	/*
-	 * tempCell is the queen, cell is the knight
-	 */
+		/*
+		 * if the queen can kill the knight it kills him. if not, the queen will block
+		 * one of the future possible destination for the knight(To make it harder).
+		 * if not, the queen will move as close to the knight as she can.
+		 * if none of the above is available it moves randomly.
+		 */
+		/*
+		 * tempCell is the queen, cell is the knight
+		 */
 	public void findBestRoute(Cell tempCell, Cell cell) {
 		for (Cell temp : cb.getCells()) {
 			if (!temp.getChildren().isEmpty()) {
@@ -194,10 +195,10 @@ public class Game {
 			}
 		}
 		Piece tempKnight = (Piece) cell.getChildren().get(0);
-		tempKnight.getAllPossibleMoves();
+		tempKnight.getAllPossibleMoves(level);
 		Piece tempPiece = (Piece) tempCell.getChildren().get(0);
 		currentPiece = tempPiece;
-		tempPiece.getAllPossibleMoves();
+		tempPiece.getAllPossibleMoves(level);
 		if (tempPiece.getPossibleMoves().isEmpty()) {
 			System.out.println("bdestinationlist in findBestRoute function is empty!!!");
 			return;
@@ -210,6 +211,7 @@ public class Game {
 					dropPiece(cell);
 				}
 			}
+
 			for (String move : tempMoves) {
 				for (String knightMove : tempKnight.getPossibleMoves()) {
 					if (move.equals(knightMove)) {
@@ -221,15 +223,31 @@ public class Game {
 					}
 				}
 			}
-			Random rand = new Random();
-			int len = tempMoves.size();
 
-			String tempName = tempMoves.get(rand.nextInt(len));
-			for (Cell temp : cb.getCells()) {
-				if (temp.getName().equals(tempName)) {
-					dropPiece(temp);
+			Cell closestCell = null;
+			int minDistance = Math.max(Math.abs(cell.getX() - tempPiece.getPosX()),
+					Math.abs(cell.getY() - tempPiece.getPosY()));
+			for (String move : tempPiece.getPossibleMoves()) {
+				int distance = Math.max(Math.abs(cell.getX() - tempPiece.getSquareByName(move).getX()),
+						Math.abs(cell.getY() - tempPiece.getSquareByName(move).getY()));
+				if (distance < minDistance) {
+					closestCell = tempPiece.getSquareByName(move);
+					minDistance = distance;
 				}
+			}
+			if (closestCell != null)
+				dropPiece(closestCell);
+			else {
+				Random rand = new Random();
+				int len = tempMoves.size();
 
+				String tempName = tempMoves.get(rand.nextInt(len));
+				for (Cell temp : cb.getCells()) {
+					if (temp.getName().equals(tempName)) {
+						dropPiece(temp);
+					}
+
+				}
 			}
 		}
 	}
@@ -240,7 +258,7 @@ public class Game {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				tempKing.getAllPossibleMoves();
+				tempKing.getAllPossibleMoves(level);
 				ArrayList<String> kingTempMoves = tempKing.getPossibleMoves();
 				Cell help = cTemp;
 				for (Cell temp : cb.getCells()) {
@@ -305,7 +323,7 @@ public class Game {
 		borderGlow.setOffsetX((int) 0f);
 		borderGlow.setOffsetY((int) 0f);
 		currentPiece.setEffect(borderGlow);
-		currentPiece.getAllPossibleMoves();
+		currentPiece.getAllPossibleMoves(level);
 		currentPiece.showAllPossibleMoves(true);
 	}
 
