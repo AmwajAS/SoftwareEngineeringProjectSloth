@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.62" prefHeight="194.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserAnswerStatusController">
+   <center>
+      <Text fx:id="answerStatus" strokeType="OUTSIDE" strokeWidth="0.0" text="User Answer Status" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Text>
+   </center>
+   <right>
+      <ImageView fx:id="imageStatus" fitHeight="99.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <Button fx:id="closeBt" mnemonicParsing="false" prefHeight="22.0" prefWidth="54.0" stylesheets="@application.css" text="Close" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="340.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="Times New Roman Bold" size="12.0" />
+         </font>
+      </Button>
+   </bottom>
+</BorderPane>

@@ -106,7 +106,7 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <Button fx:id="editBt" mnemonicParsing="false" onAction="#editQuestion" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="EDIT">
+            <Button fx:id="editBt" mnemonicParsing="false" onAction="#editQuestion" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="SAVE">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
