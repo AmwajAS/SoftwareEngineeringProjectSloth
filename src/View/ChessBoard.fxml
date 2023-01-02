@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,10 +13,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="allBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardController">
+<BorderPane fx:id="allBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardController">
 	<top>
-		<HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="540.0" BorderPane.alignment="CENTER">
+		<HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="870.0" BorderPane.alignment="CENTER">
 			<children>
+      <Button fx:id="exitGame" mnemonicParsing="false" onAction="#exitGame" style="-fx-background-color: transparent;" BorderPane.alignment="TOP_LEFT">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="-fx-background-color: white;">
+               <image>
+                  <Image url="@../images/Home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+            </Button>
 				<GridPane prefHeight="80.0" prefWidth="473.0">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
