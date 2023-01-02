@@ -13,7 +13,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	public void getAllPossibleMoves() {
+	public void getAllPossibleMoves(int lvl) {
 		int x = this.getPosX();
 		int y = this.getPosY();
 		ArrayList<String> moves = new ArrayList<>();
