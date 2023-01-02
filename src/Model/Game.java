@@ -43,7 +43,7 @@ public class Game {
 	private static Timer counterTimer =  new Timer();
 	private LocalDate gamedate;
 	private int finalScore;
-	
+
 
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
@@ -173,15 +173,15 @@ public class Game {
 	}
 
 	// This function is for the queen's move it works like this:
-		/*
-		 * if the queen can kill the knight it kills him. if not, the queen will block
-		 * one of the future possible destination for the knight(To make it harder).
-		 * if not, the queen will move as close to the knight as she can.
-		 * if none of the above is available it moves randomly.
-		 */
-		/*
-		 * tempCell is the queen, cell is the knight
-		 */
+	/*
+	 * if the queen can kill the knight it kills him. if not, the queen will block
+	 * one of the future possible destination for the knight(To make it harder).
+	 * if not, the queen will move as close to the knight as she can.
+	 * if none of the above is available it moves randomly.
+	 */
+	/*
+	 * tempCell is the queen, cell is the knight
+	 */
 	public void findBestRoute(Cell tempCell, Cell cell) {
 		for (Cell temp : cb.getCells()) {
 			if (!temp.getChildren().isEmpty()) {
@@ -395,27 +395,27 @@ public class Game {
 			}
 		}
 		// if the cell instance of Question we will call the fmxl Question Controller pop-up
-				if (cell instanceof QuesCell && currentPiece instanceof Knight) {
-					  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
-					    Parent root;
-						try {
-							root = fxmlLoader.load();
-							 QuestionPopupController controller = fxmlLoader.getController();
-							    controller.setGame(this);
-							    controller.getGame().setScore(score);
-							    Scene scene = new Scene(root);
-							    Stage stage = new Stage();
-							    stage.setScene(scene);
-							    stage.show();
-							    QuesCell help = (QuesCell) cell;
-								help.createNewQuesCell(cb, cell);
-								controller.checkAnswer();
+		if (cell instanceof QuesCell && currentPiece instanceof Knight) {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
+			Parent root;
+			try {
+				root = fxmlLoader.load();
+				QuestionPopupController controller = fxmlLoader.getController();
+				controller.setGame(this);
+				controller.getGame().setScore(score);
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.show();
+				QuesCell help = (QuesCell) cell;
+				help.createNewQuesCell(cb, cell);
+				controller.checkAnswer();
 
-						} catch (IOException e) {
-							// TODO 
-							e.printStackTrace();
-						}
-				}
+			} catch (IOException e) {
+				// TODO 
+				e.printStackTrace();
+			}
+		}
 		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
 			setScore(((UndoCell) cell).undoMoves(cb, lastMoves,score));
 			UndoCell help = (UndoCell) cell;
@@ -451,6 +451,8 @@ public class Game {
 				if (temp instanceof Knight) {
 					System.out.println("Game Over!!!");
 					killFlag = 1;
+					Controller.BoardController.timer.stop();
+					Controller.BoardController.scores.stop();
 					Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 				}
 				cell.setOccupied(true);
@@ -486,6 +488,8 @@ public class Game {
 			BoardController.totalScore= BoardController.totalScore+getScore();
 			GameHistory historyGame= new GameHistory(level, LoginController.getUser(), BoardController.totalScore);
 			System.out.println(historyGame.toString());
+			Controller.BoardController.timer.stop();
+			Controller.BoardController.scores.stop();
 			Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 		}
 		cell.setOccupied(true);
@@ -541,7 +545,7 @@ public class Game {
 				}
 			}
 		}, 750, 750);
-		
+
 		counterTimer.schedule(new TimerTask() {
 
 			@Override
@@ -549,7 +553,7 @@ public class Game {
 				timerCounter++;
 				System.out.println("this is the counter :"+timerCounter);
 			}
-			
+
 		}, 1000, 1000);
 	}
 
