@@ -36,6 +36,7 @@ public class Game {
 	public static Board cb;
 	private boolean game;
 	public int timerCounter =0;
+	public 	int speed = 2000;
 	private int score = 1;
 	private int flag = 0;
 	private int flagging = 0;
@@ -208,6 +209,7 @@ public class Game {
 
 					killPiece(cell);
 					dropPiece(cell);
+					return;
 				}
 			}
 
@@ -217,6 +219,7 @@ public class Game {
 						for (Cell temp : cb.getCells()) {
 							if (temp.getName().equals(move)) {
 								dropPiece(temp);
+								return;
 							}
 						}
 					}
@@ -234,8 +237,10 @@ public class Game {
 					minDistance = distance;
 				}
 			}
-			if (closestCell != null)
+			if (closestCell != null) {
 				dropPiece(closestCell);
+				return;
+			}
 			else {
 				Random rand = new Random();
 				int len = tempMoves.size();
@@ -244,6 +249,7 @@ public class Game {
 				for (Cell temp : cb.getCells()) {
 					if (temp.getName().equals(tempName)) {
 						dropPiece(temp);
+						return;
 					}
 
 				}
@@ -276,6 +282,7 @@ public class Game {
 					if (move.equals(help.getName())) {
 						kingKillPiece(help);
 						dropKingPiece(help);
+						return;
 					}
 				}
 				/*
@@ -293,8 +300,10 @@ public class Game {
 						minDistance = distance;
 					}
 				}
-				if (closestCell != null)
+				if (closestCell != null) {
 					dropKingPiece(closestCell);
+					return;
+				}
 				// just in case something went wrong and we don't want the game to collapse, we
 				// choose a random cell for the king to jump on;
 				else {
@@ -304,6 +313,7 @@ public class Game {
 					for (Cell tempCellCheck : cb.getCells()) {
 						if (tempCellCheck.getName().equals(kingTempCellName)) {
 							dropKingPiece(tempCellCheck);
+							return;
 						}
 					}
 				}
@@ -397,6 +407,7 @@ public class Game {
 		  if (cell instanceof QuesCell && currentPiece instanceof Knight) {
 			    // Stop the timer
 			    Controller.BoardController.timer.stop();
+			    stopTimer();
 			    // Load the FXML file for the pop-up window
 			    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
 			    Parent root;
@@ -438,6 +449,9 @@ public class Game {
 			flagging = 0;
 			JumpCell help = (JumpCell) cell;
 			help.createNewJumpCell(cb, cell);
+		}
+		if(cell instanceof QuesCell) {
+			startTimer();
 		}
 		deselectPiece(true);
 	}
@@ -519,7 +533,7 @@ public class Game {
 		counterTimer = new Timer(); 
 		timer = new Timer();
 		timer.schedule(new TimerTask() {
-			int speed = 2000;
+	
 
 			@Override
 			public void run() {
