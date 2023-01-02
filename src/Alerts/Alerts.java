@@ -17,7 +17,7 @@ public abstract class Alerts {
 		alert.setTitle(title);
 		alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 		alert.show();
-		alert.showAndWait();
+		//alert.showAndWait();
 		return alert;
 	}
 

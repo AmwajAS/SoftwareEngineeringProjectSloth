@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <top>
+            <Label prefHeight="60.0" prefWidth="210.0" text="Games History" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </Label>
+         </top>
+         <center>
+            <ListView fx:id="gamesList" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #a8a8a8; -fx-background-color: #ffffff67;" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" />
+               </BorderPane.margin>
+            </ListView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
