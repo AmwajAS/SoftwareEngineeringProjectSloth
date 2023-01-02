@@ -396,6 +396,7 @@ public class Game {
 		}
 		// if the cell instance of Question we will call the fmxl Question Controller pop-up
 		if (cell instanceof QuesCell && currentPiece instanceof Knight) {
+			Controller.BoardController.timer.stop();
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
 			Parent root;
 			try {

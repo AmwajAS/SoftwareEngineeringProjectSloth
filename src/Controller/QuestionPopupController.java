@@ -203,6 +203,7 @@ public class QuestionPopupController implements Initializable {
 			Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
 			popupStage.close();
 			alertStage.close();
+			BoardController.timer.play();
 		});
 
 	}
