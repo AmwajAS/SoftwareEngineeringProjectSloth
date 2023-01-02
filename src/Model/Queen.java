@@ -16,7 +16,7 @@ public class Queen extends Piece {
 	}
 
 	@Override
-	public void getAllPossibleMoves() {
+	public void getAllPossibleMoves(int lvl) {
 		int x = this.getPosX();
 		int y = this.getPosY();
 		String name;
@@ -103,6 +103,3 @@ public class Queen extends Piece {
 	}
 	
 }
-
-
-

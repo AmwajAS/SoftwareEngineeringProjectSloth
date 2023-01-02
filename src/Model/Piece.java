@@ -83,13 +83,13 @@ public class Piece extends ImageView {
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                getAllPossibleMoves();
+                getAllPossibleMoves(1);
             }
         });
 
 
     }
-    public void getAllPossibleMoves() {}
+    public void getAllPossibleMoves(int lvl) {}
 
     public void showAllPossibleMoves(boolean val){
         if(val){

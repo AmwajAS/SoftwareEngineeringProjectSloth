@@ -103,7 +103,7 @@ public class Game {
 							// Selecting a new piece
 							if (currentPiece == null) {
 								currentPiece = newPiece;
-								currentPiece.getAllPossibleMoves();
+								currentPiece.getAllPossibleMoves(level);
 								if (!currentPiece.getColor().equals("black")) {
 									currentPiece = null;
 									return;
@@ -115,7 +115,7 @@ public class Game {
 								if (currentPiece.getColor().equals(newPiece.getColor())) {
 									deselectPiece(false);
 									currentPiece = newPiece;
-									currentPiece.getAllPossibleMoves();
+									currentPiece.getAllPossibleMoves(level);
 									selectPiece(game);
 								} else {
 									return;
@@ -211,10 +211,10 @@ public class Game {
 			}
 		}
 		Piece tempKnight = (Piece) cell.getChildren().get(0);
-		tempKnight.getAllPossibleMoves();
+		tempKnight.getAllPossibleMoves(level);
 		Piece tempPiece = (Piece) tempCell.getChildren().get(0);
 		currentPiece = tempPiece;
-		tempPiece.getAllPossibleMoves();
+		tempPiece.getAllPossibleMoves(level);
 		if (tempPiece.getPossibleMoves().isEmpty()) {
 			System.out.println("bdestinationlist in findBestRoute function is empty!!!");
 			return;
@@ -257,7 +257,7 @@ public class Game {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				tempKing.getAllPossibleMoves();
+				tempKing.getAllPossibleMoves(level);
 				ArrayList<String> kingTempMoves = tempKing.getPossibleMoves();
 				Cell help = cTemp;
 				for (Cell temp : cb.getCells()) {
@@ -322,7 +322,7 @@ public class Game {
 		borderGlow.setOffsetX((int) 0f);
 		borderGlow.setOffsetY((int) 0f);
 		currentPiece.setEffect(borderGlow);
-		currentPiece.getAllPossibleMoves();
+		currentPiece.getAllPossibleMoves(level);
 		currentPiece.showAllPossibleMoves(true);
 	}
 
