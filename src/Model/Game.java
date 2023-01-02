@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import Alerts.Alerts;
 import Controller.BoardController;
 import Controller.LoginController;
@@ -393,28 +394,35 @@ public class Game {
 			}
 		}
 		// if the cell instance of Question we will call the fmxl Question Controller pop-up
-		if (cell instanceof QuesCell && currentPiece instanceof Knight) {
-			Controller.BoardController.timer.stop();
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
-			Parent root;
-			try {
-				root = fxmlLoader.load();
-				QuestionPopupController controller = fxmlLoader.getController();
-				controller.setGame(this);
-				controller.getGame().setScore(score);
-				Scene scene = new Scene(root);
-				Stage stage = new Stage();
-				stage.setScene(scene);
-				stage.show();
-				QuesCell help = (QuesCell) cell;
-				help.createNewQuesCell(cb, cell);
-				controller.checkAnswer();
-
-			} catch (IOException e) {
-				// TODO 
-				e.printStackTrace();
-			}
-		}
+		  if (cell instanceof QuesCell && currentPiece instanceof Knight) {
+			    // Stop the timer
+			    Controller.BoardController.timer.stop();
+			    // Load the FXML file for the pop-up window
+			    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
+			    Parent root;
+			    try {
+			      root = fxmlLoader.load();
+			      QuestionPopupController controller = fxmlLoader.getController();
+			      controller.setGame(this);
+			      controller.getGame().setScore(score);
+			      // Create a new scene for the pop-up window
+			      Scene scene = new Scene(root);
+			      // Create a new stage for the pop-up window
+			      Stage stage = new Stage();		      
+			      // Set the scene for the pop-up stage
+			      stage.setScene(scene);
+			      stage.initStyle(StageStyle.UNDECORATED);
+			      // Show the pop-up stage and block the parent window until the pop-up stage is closed
+			      stage.showAndWait();
+			      // Create a new QuesCell instance
+			      QuesCell help = (QuesCell) cell;
+			      help.createNewQuesCell(cb, cell);
+			      // Check the answer for the question
+			    } catch (IOException e) {
+			      // TODO 
+			      e.printStackTrace();
+			    }
+			  }
 		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
 			setScore(((UndoCell) cell).undoMoves(cb, lastMoves,score));
 			UndoCell help = (UndoCell) cell;

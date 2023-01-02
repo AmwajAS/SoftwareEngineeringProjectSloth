@@ -114,11 +114,24 @@ public class QuestionPopupController implements Initializable {
 
 	@FXML
 	public void checkAnswer() throws IOException {
+		System.out.println("why?");
 		boolean isCorrect = true;
+		boolean hasCalled = false;
 		RadioButton selectedRadioButton = (RadioButton) tg.getSelectedToggle();
-		String userAnswer = selectedRadioButton.getText();
-		System.out.println(userAnswer);
+		if(selectedRadioButton==null) {
+			Image temp;
+			temp =new Image("/images/warning.png");
+			ImageView imageView = new ImageView(temp);
+			imageView.setFitHeight(50);
+			imageView.setFitWidth(50);
+			Alert alert = Alerts.showAlert(AlertType.INFORMATION, "Warning", "Please select an answer " , ButtonType.OK);
+			alert.setGraphic(imageView);
 
+
+		}
+		else {
+			String userAnswer = selectedRadioButton.getText();
+			System.out.println(userAnswer);
 		if (question.getCorrect_ans() == 1) { // the question correct answer
 			if (firstAnswer.isSelected()) { // the user answer
 				firstAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
@@ -183,11 +196,13 @@ public class QuestionPopupController implements Initializable {
 				CalculateScore(isCorrect);
 			}
 		}
-		Image image;
-		if (isCorrect) {
+		Image image = null;
+		if (isCorrect && !hasCalled) {
 			image = new Image("/images/6974-ai.png");
-		} else {
+			hasCalled = true;
+		} else if(!isCorrect && !hasCalled) {
 			image = new Image("/images/close.png");
+			hasCalled = true;
 		}
 		ImageView imageView = new ImageView(image);
 		imageView.setFitHeight(50);
@@ -205,6 +220,7 @@ public class QuestionPopupController implements Initializable {
 			alertStage.close();
 			BoardController.timer.play();
 		});
+		}
 
 	}
 
