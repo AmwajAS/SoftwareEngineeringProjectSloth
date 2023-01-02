@@ -36,7 +36,7 @@ public class QuesCell extends Cell{
 		super(x, y);
 		this.question=q;
 	}
-
+ 
 	public QuesCell(int x, int y) {
 		super(x, y);
 		this.setStyle("-fx-background-image: url('"+image+"'); -fx-background-size: 100px 100px; -fx-background-position: center center; -fx-background-repeat:no-repeat;");
