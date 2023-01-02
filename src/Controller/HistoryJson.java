@@ -3,15 +3,18 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.Game;
+import Model.GameHistory;
 
 public class HistoryJson {
-	private ArrayList<Game> gamesHistory;
+	
+	
+	private ArrayList<GameHistory> gamesHistory;
 
-	public ArrayList<Game> getGamesHistory() {
+	public ArrayList<GameHistory> getGamesHistory() {
 		return gamesHistory;
 	}
 
-	public void setGamesHistory(ArrayList<Game> gamesHistory) {
+	public void setGamesHistory(ArrayList<GameHistory> gamesHistory) {
 		this.gamesHistory = gamesHistory;
 	}
 

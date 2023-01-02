@@ -1,0 +1,29 @@
+{
+  "gamesHistory" : [ {
+    "chessboard" : null,
+    "level" : 1,
+    "user" : {
+      "username" : "amwaj",
+      "password" : "123",
+      "pointsInGame" : 0,
+      "highScore" : 0
+    },
+    "timerCounter" : 0,
+    "score" : 1,
+    "gamedate" : {
+      "year" : 2023,
+      "month" : "JANUARY",
+      "dayOfMonth" : 2,
+      "dayOfWeek" : "MONDAY",
+      "era" : "CE",
+      "dayOfYear" : 2,
+      "leapYear" : false,
+      "monthValue" : 1,
+      "chronology" : {
+        "id" : "ISO",
+        "calendarType" : "iso8601"
+      }
+    },
+    "finalScore" : 1
+  } ]
+}

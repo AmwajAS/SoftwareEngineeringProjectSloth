@@ -21,6 +21,7 @@ import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
 
 import Model.Game;
+import Model.GameHistory;
 import Model.Question;
 import Model.User;
 
@@ -31,7 +32,7 @@ public class Sysdata {
 	static ObjectMapper mapper = new ObjectMapper();  // We can use the mapper to parse or deserialize JSON content into a Java object.
 	static ObjectMapper usermapper = new ObjectMapper(); 
 	static ObjectMapper historymapper = new ObjectMapper();
-	static ArrayList<Game> gamesHistoryList = new ArrayList<>();
+	public static ArrayList<GameHistory> gamesHistoryList = new ArrayList<>();
 
 
 
@@ -159,22 +160,22 @@ public class Sysdata {
 	}
 
 	
-	public static ArrayList<Game> importGameHistorysFromJSON() throws FileNotFoundException {
+	public static ArrayList<GameHistory> importGameHistorysFromJSON() throws FileNotFoundException {
 
 		try {
 			InputStream inputStream = new FileInputStream("history.json");
 			JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909);
-			InputStream schemaStream = new FileInputStream("historyjsonschema.json");
+			InputStream schemaStream = new FileInputStream("historyschema.json");
 
-			//
+			
 			JsonNode json = historymapper.readTree(inputStream);
 			JsonSchema schema = schemaFactory.getSchema(schemaStream);
 			Set<ValidationMessage> validationResult = schema.validate(json);
 
 			if (validationResult.isEmpty()) {
 				System.out.println("no validation errors :-)");
-				HistoryJson input = usermapper.treeToValue(json, HistoryJson.class);
-				for (Game g : input.getGamesHistory()) {
+				HistoryJson input = historymapper.treeToValue(json, HistoryJson.class);
+				for (GameHistory g : input.getGamesHistory()) {
 					gamesHistoryList.add(g);
 				}
 
@@ -201,9 +202,9 @@ public class Sysdata {
 		historymapper.enable(SerializationFeature.INDENT_OUTPUT);
 
 		try {
-			HashMap<String, ArrayList<User>> outHashMap = new HashMap<>();
-			outHashMap.put("gamesHistory", thPlayers);
-			usermapper.writerWithDefaultPrettyPrinter().writeValue(new File("history.json"), outHashMap);
+			HashMap<String, ArrayList<GameHistory>> outHashMap = new HashMap<>();
+			outHashMap.put("gamesHistory", gamesHistoryList);
+			historymapper.writerWithDefaultPrettyPrinter().writeValue(new File("history.json"), outHashMap);
 			
 
 		} catch (JsonProcessingException e) {

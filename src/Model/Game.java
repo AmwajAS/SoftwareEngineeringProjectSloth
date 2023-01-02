@@ -3,43 +3,26 @@ package Model;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import Alerts.Alerts;
 import Controller.BoardController;
 import Controller.LoginController;
 import Controller.QuestionPopupController;
-import Model.Board;
-import Model.Piece;
-import Model.User;
 
 public class Game {
 
@@ -483,7 +466,7 @@ public class Game {
 			this.game = false;
 			System.out.println("Game Over!!!");
 			BoardController.totalScore= BoardController.totalScore+getScore();
-			Game historyGame= new Game(level, LoginController.getUser(), BoardController.totalScore);
+			GameHistory historyGame= new GameHistory(level, LoginController.getUser(), BoardController.totalScore);
 			System.out.println(historyGame.toString());
 			Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 		}

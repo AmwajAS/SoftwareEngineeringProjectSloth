@@ -3,19 +3,24 @@ package Controller;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 import com.sun.media.sound.SoftJitterCorrector;
 import com.sun.prism.paint.Color;
 
+import Alerts.Alerts;
 import Model.Game;
 import Model.Question;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -83,49 +88,125 @@ public class QuestionPopupController implements Initializable {
 			}
 		}
 	}
+
 	// TODO we need to fix this function
+	/*
+	 * this Function checks if the user answered correct for the questions pop up. 
+	 * the css for the question text changing based weather the user answered right or false.
+	 * and showing an alert to give the user an information about his answers.
+	 * 
+	 */
+	
 	@FXML
-	public void checkAnswer() {
-		boolean isCorrect = false;
-		if ((firstAnswer.isSelected() && question.getCorrect_ans() == 1) || (secondAnswer.isSelected() && question.getCorrect_ans() == 2) 
-				|| (thirdAnswer.isSelected() && question.getCorrect_ans() == 3) || (forthAnswer.isSelected() && question.getCorrect_ans() == 4)) {
-			if(question.getLevel() == 1) {
-				game.setScore(game.getScore()+1);
+	public void checkAnswer() {                           
+		boolean isCorrect = true;
+		RadioButton selectedRadioButton = (RadioButton) tg.getSelectedToggle();
+		String userAnswer = selectedRadioButton.getText();
+		System.out.println(userAnswer);
+
+		if (question.getCorrect_ans() == 1){               // the question correct answer
+			if(firstAnswer.isSelected()) {                 // the user answer
+				firstAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
+				Alerts.showAlert(AlertType.CONFIRMATION, "Question!", "Answer Correct!!", ButtonType.OK);
+				CalculateScore(isCorrect);
+
+			}else {
+				firstAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
+				selectedRadioButton.setStyle(("-fx-background-color: rgba(244, 67, 54, 0.5)"));
+				CalculateScore(!isCorrect);
 
 			}
-			else if(question.getLevel() == 2) {
-				game.setScore(game.getScore()+2);
-
-			}
-			else if(question.getLevel() == 3) {
-				game.setScore(game.getScore()+3);
-			}
-			isCorrect =  true;
+		
 		}
-		else if((firstAnswer.isSelected() && question.getCorrect_ans() != 1) || (secondAnswer.isSelected() && question.getCorrect_ans() != 2) 
-				|| (thirdAnswer.isSelected() && question.getCorrect_ans() != 3) || (forthAnswer.isSelected() && question.getCorrect_ans() != 4)) {
-			if(question.getLevel() == 1) {
-				game.setScore(game.getScore()-1);
+		if (question.getCorrect_ans() == 2){
+			if(secondAnswer.isSelected()) {
+				secondAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
+				Alerts.showAlert(AlertType.CONFIRMATION, "Question!", "Answer Correct!!", ButtonType.OK);
+				CalculateScore(isCorrect);
 
 
-			}
-			else if(question.getLevel() == 2) {
-				game.setScore(game.getScore()-2);
-
-
-			}
-			else if(question.getLevel() == 3) {
-				game.setScore(game.getScore()-3);
-
+			}else {
+				secondAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
+				selectedRadioButton.setStyle(("-fx-background-color: rgba(244, 67, 54, 0.5)"));
+				CalculateScore(!isCorrect);
 
 			}
-			isCorrect= true;
+		
 		}
-		if (isCorrect) {
-	         Stage stage = (Stage) checkAnswerBt.getScene().getWindow();
-	         stage.close();
-	      }
+
+		if (question.getCorrect_ans() == 3){
+			if(thirdAnswer.isSelected()) {
+				thirdAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
+				Alerts.showAlert(AlertType.CONFIRMATION, "Question!", "Answer Correct!!", ButtonType.OK);
+				CalculateScore(isCorrect);
+	
+
+
+			}else {
+				thirdAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
+				selectedRadioButton.setStyle(("-fx-background-color: rgba(244, 67, 54, 0.5)"));
+				CalculateScore(!isCorrect);
+
+			}
+		
+		}
+		if (question.getCorrect_ans() == 4){
+			if(forthAnswer.isSelected()) {
+				forthAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
+				Alerts.showAlert(AlertType.CONFIRMATION, "Question!", "Answer Correct!!", ButtonType.OK);
+				CalculateScore(isCorrect);
+
+			}else {
+				forthAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
+				selectedRadioButton.setStyle(("-fx-background-color: rgba(244, 67, 54, 0.5)"));
+				CalculateScore(!isCorrect);
+
+			}
+		
+		}
+
+	
+
+		
 	}
+
+/*
+ * this function calculate the user score based on the user answer and the question level. 
+ * each question level has his own formula to calculate the score.
+ * 
+ * 
+ */
+	public int CalculateScore(boolean isCorrect) {
+		if (isCorrect) { // if the user answered correct
+
+			if (question.getLevel() == 1) {  
+				game.setScore(game.getScore() + 1);   
+
+			} else if (question.getLevel() == 2) {
+				game.setScore(game.getScore() + 2);
+
+			} else if (question.getLevel() == 3) {
+				game.setScore(game.getScore() + 3);
+			}
+		}else if(!isCorrect) {    // if the user answered incorrect
+			if (question.getLevel() == 1) {
+				game.setScore(game.getScore() - 1);
+
+			} else if (question.getLevel() == 2) {
+				game.setScore(game.getScore() - 2);
+
+			} else if (question.getLevel() == 3) {
+				game.setScore(game.getScore() - 3);
+
+			}
+		}
+		//Stage stage = (Stage) checkAnswerBt.getScene().getWindow();
+		//stage.close();
+		return 0;
+
+	}
+	
+	
 
 	public Game getGame() {
 		return game;

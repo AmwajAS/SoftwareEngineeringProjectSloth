@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "gamesHistoryList": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "integer"
+            },
+            "user": {
+              "type": "array",
+              "items":[
+                {
+                    "type":"object",
+                    "properties":{
+                        "username": "sting",
+                        "password": "string",
+                        "pointsInGame": "integer",
+                        "highScore": "integer"
+                    }
+                }
+              ]
+            },
+            "finalscore": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "level",
+            "user",
+            "finalscore"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "gamesHistoryList"
+  ]
+}

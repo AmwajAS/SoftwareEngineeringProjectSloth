@@ -13,6 +13,7 @@ import javax.swing.Timer;
 import Alerts.Alerts;
 import Model.Board;
 import Model.Game;
+import Model.GameHistory;
 import Model.User;
 import javafx.scene.control.Alert;
 import javafx.animation.KeyFrame;
@@ -79,6 +80,15 @@ public class BoardController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		try {
+			Sysdata.importGameHistorysFromJSON();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		if(LoginController.getUser()==null) {
 			System.out.println("no user!!error in import users");
 			playerName.setText("Player Name: Error! ");
@@ -206,7 +216,10 @@ System.out.println(LoginController.getUser().getHighScore());*/
 			scores.stop();
 			timer.stop();
 
-			Game historyGame= new Game(currentlevel, LoginController.getUser(), totalScore);
+			GameHistory historyGame= new GameHistory(currentlevel, LoginController.getUser(), totalScore);
+			Sysdata.gamesHistoryList.add(historyGame);
+			Sysdata.exportGamesHistoryToJSON();
+
 			System.out.println(historyGame.toString());
 
 			Stage primaryStage = new Stage();
@@ -256,9 +269,21 @@ System.out.println(LoginController.getUser().getHighScore());*/
 							e.printStackTrace();
 						}
 					}else {
+						
 						totalScore=totalScore+g.getScore();
-						Game historyGame= new Game(level, LoginController.getUser(), totalScore);
+						GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore);
 						System.out.println(historyGame.toString());
+
+						try {
+							Sysdata.gamesHistoryList.add(historyGame);
+							Sysdata.exportGamesHistoryToJSON();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
+						//System.out.println(historyGame.toString());
 						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
 						timer.stop();
 					}
