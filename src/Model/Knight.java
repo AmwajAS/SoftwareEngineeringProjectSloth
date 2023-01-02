@@ -37,6 +37,15 @@ public class Knight extends Piece {
 			moves.add("Square" + (((x - 3) % 8 + 8) % 8) + (((y - 1) % 8 + 8) % 8));
 			moves.add("Square" + (((x + 1) % 8 + 8) % 8) + (((y - 3) % 8 + 8) % 8));
 			moves.add("Square" + (((x - 1) % 8 + 8) % 8) + (((y - 3) % 8 + 8) % 8));
+			
+			moves.add("Square" + (((x + 3) % 8 + 8) % 8) + (((y + 2) % 8 + 8) % 8));
+			moves.add("Square" + (((x + 3) % 8 + 8) % 8) + (((y - 2) % 8 + 8) % 8));
+			moves.add("Square" + (((x + 2) % 8 + 8) % 8) + (((y + 3) % 8 + 8) % 8));
+			moves.add("Square" + (((x - 2) % 8 + 8) % 8) + (((y + 3) % 8 + 8) % 8));
+			moves.add("Square" + (((x - 3) % 8 + 8) % 8) + (((y + 2) % 8 + 8) % 8));
+			moves.add("Square" + (((x - 3) % 8 + 8) % 8) + (((y - 2) % 8 + 8) % 8));
+			moves.add("Square" + (((x + 2) % 8 + 8) % 8) + (((y - 3) % 8 + 8) % 8));
+			moves.add("Square" + (((x - 2) % 8 + 8) % 8) + (((y - 3) % 8 + 8) % 8));
 		}
 
 		for (String move : moves) {
