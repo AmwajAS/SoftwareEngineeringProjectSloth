@@ -504,7 +504,6 @@ public class Game {
 	// implementing a thread to make a move very second for the king.
 	// just in case we're at level 3/4.
 	public void startTimer() {
-
 		flag = 1;
 		counterTimer = new Timer(); 
 		timer = new Timer();
@@ -513,12 +512,6 @@ public class Game {
 
 			@Override
 			public void run() {
-				try {
-					Thread.sleep(speed);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				Cell helper = null;
 				for (Cell kingTempCell : cb.getCells()) {
 					if (!kingTempCell.getChildren().isEmpty()) {
@@ -532,18 +525,22 @@ public class Game {
 						}
 					}
 				}
-				
-					if (timerCounter % 10 == 0) {
-						System.out.println(timerCounter);
-						speed -= 500;
-						System.out.println("this is the speed : "+speed);
-						if (speed < 0) {
-							speed = 0;
-						}
+				try {
+					Thread.sleep(speed);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (timerCounter % 10 == 0) {
+					System.out.println(timerCounter);
+					speed -= 750;
+					if (speed < 0) {
+						speed = 0;
 					}
-				
+					System.out.println("this is the speed : "+speed);
+				}
 			}
-		}, 1000, 1000);
+		}, 750, 750);
 		
 		counterTimer.schedule(new TimerTask() {
 
@@ -554,7 +551,6 @@ public class Game {
 			}
 			
 		}, 1000, 1000);
-		
 	}
 
 	public void addCellsToArraylist(Cell c) {

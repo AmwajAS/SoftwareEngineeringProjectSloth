@@ -59,36 +59,24 @@ public class BoardController implements Initializable {
 	@FXML
 	private GridPane chessBoard;
 
-	@FXML
-	private Text totalScoreText;
-
-	@FXML
-	private Text name;
-
-	@FXML
-	private Text newScore;
-
 	// var to the doTime() method
 	private final Integer startTime = 60;
 	private Integer seconds = startTime;
 	private int level=1;
 	public Timeline scores;
 	public Timeline timer;
-
-	//var 
+	//static var to save the totalPoints in game
 	public static int totalScore=0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		//importing the games history
 		try {
 			Sysdata.importGameHistorysFromJSON();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 		if(LoginController.getUser()==null) {
 			System.out.println("no user!!error in import users");
 			playerName.setText("Player Name: Error! ");
@@ -165,31 +153,10 @@ public class BoardController implements Initializable {
 		}); */
 	}
 
-	/*if(LoginController.getUser().getHighScore()<totalScore) {
-	editHighScore(LoginController.getUser(), totalScore);
-	Alerts.showAlert(AlertType.INFORMATION, "HighScoreIsUpdated!", 
-			"You'r new high score is"+LoginController.getUser().getHighScore(), ButtonType.OK);
-}
-System.out.println(LoginController.getUser().getHighScore());*/
-	/*public void editHighScore(User u, int newHS){
-		User newU= new User(u.getUsername(),u.getPassword());
-		newU.setHighScore(newHS);
-		try {
-			// Sysdata.importQuestionsFromJSON();
-			Sysdata.importUsersFromJSON().remove(u);
-			Sysdata.getThPlayers().add(newU);
-			Sysdata.exportUsersToJSON();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-
 	//Level up function initialize a new game by the new level 
 	//It get the level and also the score in order to save the higher score 
 	public void levelUp(int currentlevel) throws IOException{
-
-		if(currentlevel==2) {
+		if(currentlevel==2){
 			second.setStyle("-fx-background-color: #89efa5; ");
 			scores.stop();
 			timer.stop();
@@ -212,16 +179,26 @@ System.out.println(LoginController.getUser().getHighScore());*/
 			doTime(game);
 			doScore(game);
 		}else if(currentlevel==4) {
+			User newU= new User(LoginController.getUser().getUsername(),LoginController.getUser().getPassword());
 			forth.setStyle("-fx-background-color: #4da865; ");
 			scores.stop();
 			timer.stop();
-
+			//updating the game history
 			GameHistory historyGame= new GameHistory(currentlevel, LoginController.getUser(), totalScore);
 			Sysdata.gamesHistoryList.add(historyGame);
 			Sysdata.exportGamesHistoryToJSON();
-
 			System.out.println(historyGame.toString());
+			//updating the high Score for the player
+			try {			
+				Sysdata.getThPlayers().remove(LoginController.getUser());
+				Sysdata.getThPlayers().add(newU);
+				newU.setHighScore(totalScore);
+				Sysdata.exportUsersToJSON();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 
+			//win pop-up
 			Stage primaryStage = new Stage();
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("/View/YouWinWindow.fxml"));
@@ -256,34 +233,36 @@ System.out.println(LoginController.getUser().getHighScore());*/
 				seconds--;
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if(level<5 && g.getScore()>=4){ // must 15 !! 4 for tests 
-						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
+					if(level<4 && g.getScore()>=4){ //for level 1-3 -->must reach min 15 !! 4 for tests 
 						timer.stop();
 						level++;
+						totalScore=totalScore+g.getScore();
+						System.out.println(totalScore);
+						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
+						try {
+							levelUp(level);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}else if(level==4 && g.getScore()>=4){ //for the last level
+						timer.stop();
 						totalScore=totalScore+g.getScore();
 						System.out.println(totalScore);
 						try {
 							levelUp(level);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}else {
-						
+					}else {  // if the player didn't reach the min points and the time is over
 						totalScore=totalScore+g.getScore();
 						GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore);
 						System.out.println(historyGame.toString());
-
 						try {
 							Sysdata.gamesHistoryList.add(historyGame);
 							Sysdata.exportGamesHistoryToJSON();
 						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
-						
-						//System.out.println(historyGame.toString());
 						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
 						timer.stop();
 					}
@@ -315,31 +294,3 @@ System.out.println(LoginController.getUser().getHighScore());*/
 	}
 
 }
-
-
-
-/*	Alerts.showAlert(AlertType.INFORMATION, "Game Completed!", "congratulations, you finished the last level!!", ButtonType.OK);
-	scores.stop();
-	timer.stop();
-	totalScoreText.setText("-->" +currentScore);
-
-	Stage primaryStage = new Stage();
-	try {
-		Parent root = FXMLLoader.load(getClass().getResource("/View/TotalScore.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Total Score of the game!");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
-		primaryStage.show();
-		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent t) {
-				Platform.exit();
-				System.exit(0);
-			}
-		});
-	}catch (IOException e) {
-		e.printStackTrace();
-	}
- */

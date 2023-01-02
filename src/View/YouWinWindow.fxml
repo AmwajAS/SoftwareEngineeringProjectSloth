@@ -6,6 +6,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -13,12 +16,12 @@
    <children>
       <ImageView fitHeight="159.0" fitWidth="215.0" layoutX="163.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="170.0">
          <image>
-            <Image url="@../../../../../../Downloads/545-ai.png" />
+            <Image url="@../images/545-ai.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="400.0" fitWidth="500.0" pickOnBounds="true">
          <image>
-            <Image url="@../../../../../../Downloads/3506405-ai.png" />
+            <Image url="@../images/3506405-ai.png" />
          </image></ImageView>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0">
          <top>
@@ -42,13 +45,29 @@
             </Label>
          </center>
          <bottom>
-            <Text fx:id="newScore" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayerScore" BorderPane.alignment="CENTER">
+            <Text fx:id="newScore" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayerScore" BorderPane.alignment="CENTER">
                <font>
-                  <Font size="34.0" />
+                  <Font name="System Bold" size="34.0" />
                </font>
                <BorderPane.margin>
                   <Insets bottom="50.0" />
                </BorderPane.margin>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.42997798323631287" green="0.14958305656909943" blue="0.5701754093170166" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.3199999928474426" green="0.11840000003576279" blue="0.11840000003576279" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
             </Text>
          </bottom>
       </BorderPane>

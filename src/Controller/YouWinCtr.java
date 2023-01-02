@@ -22,7 +22,7 @@ public class YouWinCtr implements Initializable {
 		}else{ 
 			name.setText("Contgrats " +LoginController.getUser().getUsername() + " you win!");   //set the user name on the board
 		}
-		newScore.setText("--"+BoardController.totalScore+"--");
+		newScore.setText("-- "+BoardController.totalScore+" --");
 	}
 
 

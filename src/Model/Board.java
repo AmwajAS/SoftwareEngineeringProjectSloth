@@ -91,6 +91,7 @@ public class Board {
 		
 		
 		if (level == 4) {
+			createQuesCell(3);
 			int eightTimes = 0;
 			while (eightTimes < 8) {
 				Random randI = new Random();
