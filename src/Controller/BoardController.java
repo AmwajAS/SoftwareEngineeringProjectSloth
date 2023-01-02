@@ -63,8 +63,8 @@ public class BoardController implements Initializable {
 	private final Integer startTime = 60;
 	private Integer seconds = startTime;
 	private int level=1;
-	public Timeline scores;
-	public Timeline timer;
+	public static Timeline scores;
+	public static Timeline timer;
 	//static var to save the totalPoints in game
 	public static int totalScore=0;
 
@@ -179,8 +179,18 @@ public class BoardController implements Initializable {
 			doTime(game);
 			doScore(game);
 		}else if(currentlevel==4) {
-			User newU= new User(LoginController.getUser().getUsername(),LoginController.getUser().getPassword());
 			forth.setStyle("-fx-background-color: #4da865; ");
+			scores.stop();
+			timer.stop();
+			timer = new Timeline();
+			seconds=60;
+			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),currentlevel);	
+			game.setScore(1);
+			game.stopTimer();
+			doTime(game);
+			doScore(game);
+		}else if(currentlevel==5) { //if he ends the last level correctly
+			User newU= new User(LoginController.getUser().getUsername(),LoginController.getUser().getPassword());
 			scores.stop();
 			timer.stop();
 			//updating the game history
@@ -231,6 +241,8 @@ public class BoardController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				seconds--;
+				seconds--;
+				seconds--;
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
 					if(level<4 && g.getScore()>=4){ //for level 1-3 -->must reach min 15 !! 4 for tests 
@@ -246,6 +258,7 @@ public class BoardController implements Initializable {
 						}
 					}else if(level==4 && g.getScore()>=4){ //for the last level
 						timer.stop();
+						level++;
 						totalScore=totalScore+g.getScore();
 						System.out.println(totalScore);
 						try {
