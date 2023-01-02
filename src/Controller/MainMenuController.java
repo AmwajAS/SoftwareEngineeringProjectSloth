@@ -32,6 +32,8 @@ public class MainMenuController implements Initializable {
 	@FXML
 	private Button historyBt;
 	@FXML
+	private Button logoutBt;
+	@FXML
 	private ComboBox<String> theme;
 
 	@Override
@@ -53,6 +55,47 @@ public class MainMenuController implements Initializable {
 
 	public static void setThemeSelected(String themeSelected) {
 		MainMenuController.themeSelected = themeSelected;
+	}
+	@FXML
+	public void logout(ActionEvent event) throws IOException {
+	    // Close the current stage
+	    Stage currentStage = (Stage) startBt.getScene().getWindow();
+	    currentStage.close();
+		themeSelected = theme.getSelectionModel().getSelectedItem();
+		
+		if (themeSelected == null) {
+		//	theme.getSelectionModel().select("Coral");
+			setThemeSelected("Coral");
+		}
+
+		// TODO: handle exception
+	    //Starts a new stage
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Sloth Chess Board");
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(900);
+		primaryStage.show();
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
+		});
+		FileInputStream input;
+		try {
+			input = new FileInputStream("./src/images/logo.png");
+			Image img = new Image(input);
+			primaryStage.getIcons().add(img); // icon
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
 	}
 
 	@FXML
