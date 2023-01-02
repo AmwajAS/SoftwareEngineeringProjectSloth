@@ -105,17 +105,17 @@ public class QuestionPopupController implements Initializable {
 		else if((firstAnswer.isSelected() && question.getCorrect_ans() != 1) || (secondAnswer.isSelected() && question.getCorrect_ans() != 2) 
 				|| (thirdAnswer.isSelected() && question.getCorrect_ans() != 3) || (forthAnswer.isSelected() && question.getCorrect_ans() != 4)) {
 			if(question.getLevel() == 1) {
-				game.setScore(game.getScore()-1);
-
-
-			}
-			else if(question.getLevel() == 2) {
 				game.setScore(game.getScore()-2);
 
 
 			}
-			else if(question.getLevel() == 3) {
+			else if(question.getLevel() == 2) {
 				game.setScore(game.getScore()-3);
+
+
+			}
+			else if(question.getLevel() == 3) {
+				game.setScore(game.getScore()-4);
 
 
 			}
