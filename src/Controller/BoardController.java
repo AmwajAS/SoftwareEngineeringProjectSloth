@@ -95,7 +95,6 @@ public class BoardController implements Initializable {
 		first.setStyle("-fx-background-color: #b9f6ca; ");
 
 		first.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
