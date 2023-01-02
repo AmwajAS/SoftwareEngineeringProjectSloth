@@ -57,6 +57,9 @@ public class MainMenuController implements Initializable {
 
 	@FXML
 	public void startGame(ActionEvent event) throws IOException {
+	    // Close the current stage
+	    Stage currentStage = (Stage) startBt.getScene().getWindow();
+	    currentStage.close();
 		themeSelected = theme.getSelectionModel().getSelectedItem();
 		
 		if (themeSelected == null) {
@@ -65,7 +68,7 @@ public class MainMenuController implements Initializable {
 		}
 
 		// TODO: handle exception
-
+	    //Starts a new stage
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/ChessBoard.fxml"));
 		Scene scene = new Scene(root);
@@ -96,6 +99,10 @@ public class MainMenuController implements Initializable {
 
 	@FXML
 	public void questionMang(ActionEvent event) throws IOException {
+	    // Close the current stage
+	    Stage currentStage = (Stage) startBt.getScene().getWindow();
+	    currentStage.close();
+	    //Starts a new stage
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionMangement.fxml"));
 		Scene scene = new Scene(root);

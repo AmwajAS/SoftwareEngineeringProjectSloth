@@ -67,8 +67,11 @@ public class LoginController implements Initializable {
 		} else if (pass == null) {
 			Alerts.showAlert(AlertType.ERROR, "Sloth - LogIn", "Please enter you'r password.", ButtonType.OK);
 		} else {
-			 if(isUser(name, pass)) {
-
+			 if(isUser(name, pass)) {   
+				 	// Close the current stage
+				    Stage currentStage = (Stage) loginframe.getScene().getWindow();
+				    currentStage.close();
+				    //Starts a new stage
 					Stage primaryStage = new Stage();
 					Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 					Scene scene = new Scene(root);
@@ -94,6 +97,8 @@ public class LoginController implements Initializable {
 						e.printStackTrace();
 					}
 				}else if (isAdmin(name, pass)) {
+				    Stage currentStage = (Stage) loginframe.getScene().getWindow();
+				    currentStage.close();
 					Stage primaryStage = new Stage();
 					Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 					Scene scene = new Scene(root);
