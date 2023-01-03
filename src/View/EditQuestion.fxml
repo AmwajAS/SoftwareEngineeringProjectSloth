@@ -25,12 +25,12 @@
                      <graphic>
                         <ImageView fx:id="backImg" fitHeight="15.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../eclipse-workspace/BIG3/Images/undo_30px.png" />
+                              <Image url="@../images/back.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label prefHeight="34.0" prefWidth="328.0" text="E D I T    Q U E S T I O N" textAlignment="CENTER" textFill="#1b5e20" textOverrun="CLIP" wrapText="true">
+                  <Label prefHeight="34.0" prefWidth="346.0" text="E D I T    Q U E S T I O N" textAlignment="CENTER" textFill="#1b5e20" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Times New Roman Bold" size="30.0" />
                      </font>
@@ -64,7 +64,7 @@
                   <Insets left="20.0" top="30.0" />
                </VBox.margin>
             </TextArea>
-            <TextArea fx:id="fourthAnswer" prefHeight="34.0" prefWidth="475.0" promptText="Fourth Answer..." styleClass="Feild" stylesheets="@application.css">
+            <TextArea fx:id="secondAnswer" prefHeight="39.0" prefWidth="475.0" promptText="Second Answer..." styleClass="Feild" stylesheets="@application.css">
                <VBox.margin>
                   <Insets left="20.0" top="30.0" />
                </VBox.margin>
@@ -74,12 +74,12 @@
                   <Insets left="20.0" top="30.0" />
                </VBox.margin>
             </TextArea>
-            <TextArea fx:id="secondAnswer" prefHeight="39.0" prefWidth="475.0" promptText="Second Answer..." styleClass="Feild" stylesheets="@application.css">
+            <TextArea fx:id="fourthAnswer" prefHeight="34.0" prefWidth="475.0" promptText="Fourth Answer..." styleClass="Feild" stylesheets="@application.css">
                <VBox.margin>
                   <Insets left="20.0" top="30.0" />
                </VBox.margin>
             </TextArea>
-            <ComboBox fx:id="level" prefHeight="38.0" prefWidth="182.0" promptText="Level" stylesheets="@application.css">
+            <ComboBox fx:id="level" prefHeight="46.0" prefWidth="223.0" promptText="Level" stylesheets="@application.css">
                <styleClass>
                   <String fx:value="Feild" />
                   <String fx:value="list-cell" />
@@ -88,7 +88,7 @@
                   <Insets left="20.0" top="30.0" />
                </VBox.margin>
             </ComboBox>
-            <ComboBox fx:id="correctAnswer" prefHeight="38.0" prefWidth="182.0" promptText="Correct Answer" stylesheets="@application.css">
+            <ComboBox fx:id="correctAnswer" prefHeight="46.0" prefWidth="218.0" promptText="Correct Answer" stylesheets="@application.css">
                <styleClass>
                   <String fx:value="Feild" />
                   <String fx:value="list-cell" />

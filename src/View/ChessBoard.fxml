@@ -13,18 +13,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="allBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardController">
+<BorderPane fx:id="allBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardController">
 	<top>
-		<HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="870.0" BorderPane.alignment="CENTER">
+		<HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="592.0" BorderPane.alignment="CENTER">
 			<children>
       <Button fx:id="exitGame" mnemonicParsing="false" onAction="#exitGame" style="-fx-background-color: transparent;" BorderPane.alignment="TOP_LEFT">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="-fx-background-color: white;">
                <image>
-                  <Image url="@../images/Home.png" />
+                  <Image url="@../images/back.png" />
                </image>
             </ImageView>
          </graphic>
+               <HBox.margin>
+                  <Insets right="200.0" />
+               </HBox.margin>
             </Button>
 				<GridPane prefHeight="80.0" prefWidth="473.0">
 					<columnConstraints>
@@ -75,7 +78,7 @@
 								<ImageView fitHeight="22.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" />
 							</graphic>
 						</Button>
-                  <Text fx:id="playerName" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayerName" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Text fx:id="playerName" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayerName" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -84,7 +87,7 @@
 				</GridPane>
 			</children>
 			<BorderPane.margin>
-				<Insets bottom="300.0" left="200.0" right="200.0" top="10.0" />
+				<Insets bottom="300.0" left="10.0" right="10.0" top="10.0" />
 			</BorderPane.margin>
 		</HBox>
 	</top>

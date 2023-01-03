@@ -5,13 +5,15 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
-   <center>
-      <HBox alignment="CENTER" prefHeight="339.0" prefWidth="554.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+   <children>
+      <HBox alignment="CENTER" layoutX="174.0" layoutY="256.0" prefHeight="170.0" prefWidth="526.0" stylesheets="@application.css">
          <children>
             <Button fx:id="startBt" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#startGame" prefHeight="123.0" prefWidth="138.0" text="Start Game" textAlignment="CENTER" wrapText="true">
                <HBox.margin>
@@ -35,30 +37,72 @@
                </HBox.margin>
             </Button>
          </children>
-         <BorderPane.margin>
-            <Insets left="-20.0" />
-         </BorderPane.margin>
       </HBox>
-   </center>
-   <top>
-      <ComboBox fx:id="theme" prefWidth="150.0" promptText="select theme" stylesheets="@application.css" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets left="650.0" top="20.0" />
-         </BorderPane.margin>
-      </ComboBox>
-   </top>
-   <left>
-      <Button fx:id="logoutBt" mnemonicParsing="false" style="-fx-background-color: transparent;"  BorderPane.alignment="TOP_LEFT" onAction="#logout">
+      <Pane fx:id="helpPane" layoutX="203.0" layoutY="149.0" opacity="0.95" prefHeight="354.0" prefWidth="541.0" style="-fx-background-color: #2e7d32; -fx-background-radius: 70px; -fx-border-color: #000000; -fx-border-radius: 70px; -fx-border-style: dashed;">
+         <children>
+            <Text layoutX="175.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Instructions">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="35.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Each level has a 60 seconds timer. and 3 Question Cells in Random difficulty levels(easy, medium, hard)." wrappingWidth="462.419189453125">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="11.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Knights move will be: 2 cells in straight and 1 in slant or the opposite. Queen still trying to kill the Knight.In the Chess board will be a 3 Random Undo Cells (delete the Knight last 3 moves)." wrappingWidth="504.0191650390625">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="11.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Knights move Like a Regular Chess game, Queen will be trying to kill the Knight.In the Chess board will be a 3 Random Jump Cells (moves the Knights to Random cell)." wrappingWidth="504.0191650390625">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Knight will play directly, King will appear and tries to kill the Knight, every 10 seconds the King speed will boost.In the Chess board will be a 2 Random Undo Cells and 2 Jump Cells." wrappingWidth="496.09014892578125" />
+            <Text layoutX="30.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Knight will play directly, King still trying to kill the Knight, every 10 seconds the King speed will boost. In the Chess board will be a 8 Random Block Cells (Knight cant occupied these cells)." wrappingWidth="480.89019775390625" />
+            <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 1:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="10.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 3:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="10.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="10.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 4:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Button fx:id="logoutBt" layoutX="32.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fitHeight="31.0" fitWidth="34.0" styleClass="-fx-background-color: white;" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="-fx-background-color: white;">
                <image>
                   <Image url="@../images/logOut.png" />
                </image>
             </ImageView>
          </graphic>
-         <BorderPane.margin>
-            <Insets left="10.0" />
-         </BorderPane.margin>
       </Button>
-   </left>
-</BorderPane>
+      <ComboBox fx:id="theme" layoutX="597.0" layoutY="22.0" prefHeight="34.0" prefWidth="171.0" promptText="select theme" styleClass="Feild" stylesheets="@application.css" />
+      <Button fx:id="ask" layoutX="817.0" layoutY="21.0" mnemonicParsing="false" onAction="#onText" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="askImg" fitHeight="38.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/question.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="ask1" layoutX="824.0" layoutY="28.0" mnemonicParsing="false" onAction="#onText2" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: transparent;" />
+   </children>
+</AnchorPane>

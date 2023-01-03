@@ -77,8 +77,8 @@ public class LoginController implements Initializable {
 					Scene scene = new Scene(root);
 					primaryStage.setScene(scene);
 					primaryStage.setTitle("Sloth Chess Board");
-					primaryStage.setMinHeight(800);
-					primaryStage.setMinWidth(900);
+					primaryStage.setMinHeight(670);
+					primaryStage.setMinWidth(870);
 					primaryStage.show();
 					primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override

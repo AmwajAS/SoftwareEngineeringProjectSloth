@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -35,6 +36,10 @@ public class MainMenuController implements Initializable {
 	private Button logoutBt;
 	@FXML
 	private ComboBox<String> theme;
+	@FXML
+	private Button ask;
+	@FXML private Button ask1;
+	@FXML private Pane helpPane;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -44,6 +49,9 @@ public class MainMenuController implements Initializable {
 		if(LoginController.getUser() instanceof User) {
 			questionBt.setVisible(false);
 		}
+		
+		helpPane.setVisible(false);
+		ask1.setVisible(false);
 		
 		
 
@@ -205,5 +213,29 @@ public class MainMenuController implements Initializable {
 		}
 
 	}
+	
+	@FXML
+	void onText(ActionEvent event) {
+
+
+		helpPane.setVisible(true);	
+		ask1.setVisible(true);
+		ask.setVisible(true);
+
+	}
+	@FXML
+	void onText2(ActionEvent event) {
+		helpPane.setVisible(false);
+		ask.setVisible(true);
+		ask1.setVisible(false);
+	}
+
+	/*
+	 * Game Instructios:
+	 * Level 1:
+	 * 
+	 * 
+	 */
+	
 
 }
