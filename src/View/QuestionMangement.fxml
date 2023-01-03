@@ -9,15 +9,39 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionMangController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionMangController">
    <top>
       <VBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="870.0" BorderPane.alignment="CENTER">
          <children>
+            <HBox prefHeight="59.0" prefWidth="219.0">
+               <children>
+                  <Button fx:id="exitBT" onAction="#exitGame" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="22.0" prefWidth="31.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/Home.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="-11.0" left="-5.0" top="-11.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="252.0" text=" Q U E S T I O N S   " textAlignment="CENTER" textFill="#1b5e20" textOverrun="CLIP" wrapText="true">
                <font>
                   <Font name="Times New Roman Bold" size="30.0" />

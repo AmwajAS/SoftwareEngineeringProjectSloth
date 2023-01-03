@@ -56,6 +56,8 @@ public class QuestionMangController implements Initializable {
 	@FXML
 	private Button addBt;
 	@FXML
+	private Button exitBT;
+	@FXML
 	private PieChart chart;
 	@FXML
 	private ComboBox<QuestionLevel> diffSelect;
@@ -310,6 +312,41 @@ public class QuestionMangController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+	
+	@FXML
+	public void exitGame(ActionEvent event) throws IOException {
+	    // Close the current stage
+	    Stage currentStage = (Stage) exitBT.getScene().getWindow();
+	    currentStage.close();
+		// TODO: handle exception
+	    //Starts a new stage
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Sloth Chess Board");
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(900);
+		primaryStage.show();
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
+		});
+		FileInputStream input;
+		try {
+			input = new FileInputStream("./src/images/logo.png");
+			Image img = new Image(input);
+			primaryStage.getIcons().add(img); // icon
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 	}
 
