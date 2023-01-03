@@ -53,7 +53,7 @@ public class BoardController implements Initializable {
 	private GridPane chessBoard;
 
 	// var to the doTime() method
-	private final static Integer startTime = 60;
+	public final static Integer startTime = 60;
 	public static Integer seconds = startTime;
 	private int level=1;
 	public static Timeline scores;
@@ -176,29 +176,8 @@ public class BoardController implements Initializable {
 			doTime(game);
 			doScore(game);
 		}else if(currentlevel==5) { //if he ends the last level correctly
-			User newU= new User(LoginController.getUser().getUsername(),LoginController.getUser().getPassword());
 			scores.stop();
 			timer.stop();
-			//updating the game history
-			GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());
-			System.out.println(historyGame.toString());
-			try {
-				Sysdata.importGameHistorysFromJSON();
-				Sysdata.getGamesHistoryList().add(historyGame);
-				Sysdata.exportGamesHistoryToJSON();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			//updating the high Score for the player
-			try {			
-				Sysdata.getThPlayers().remove(LoginController.getUser());
-				Sysdata.getThPlayers().add(newU);
-				newU.setHighScore(totalScore);
-				Sysdata.exportUsersToJSON();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-
 			//win pop-up
 			Stage primaryStage = new Stage();
 			try {
@@ -228,13 +207,13 @@ public class BoardController implements Initializable {
 		if (timer != null) {
 			timer.stop();
 		}
-		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>(){
 			@Override
-			public void handle(ActionEvent event) {
-				seconds--;		
+			public void handle(ActionEvent event){
+				seconds--;				
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if(level<4 && g.getScore()>=4){ //for level 1-3 -->must reach min 15 !! 4 for tests 
+					if(level<4 && g.getScore()>=15){ //for level 1-3 -->must reach min 15 !! 4 for tests 
 						timer.stop();
 						level++;
 						totalScore=totalScore+g.getScore();
@@ -245,33 +224,55 @@ public class BoardController implements Initializable {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-					}else if(level==4 && g.getScore()>=4){ //for the last level
+					}else if(level==4 && g.getScore()>=15){ //for the last level
 						timer.stop();
+						scores.stop();
 						level++;
 						totalScore=totalScore+g.getScore();
 						System.out.println(totalScore);
+						User newU= new User(LoginController.getUser().getUsername(),LoginController.getUser().getPassword());
+						//updating the high Score for the player
+						if(LoginController.getUser().getHighScore()<totalScore) {
+							try {	
+								Sysdata.importUsersFromJSON();
+								Sysdata.getThPlayers().remove(new User(LoginController.getUser().getUsername(),LoginController.getUser().getPassword()));
+								newU.setHighScore(totalScore);
+								Sysdata.getThPlayers().add(newU);
+								Sysdata.exportUsersToJSON();
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							}
+							//updating the game history
+							GameHistory historyGame= new GameHistory(level, newU, totalScore, LocalDate.now().toString());
+							System.out.println(historyGame.toString());
+							try {
+								Sysdata.importGameHistorysFromJSON();
+								Sysdata.getGamesHistoryList().add(historyGame);
+								Sysdata.exportGamesHistoryToJSON();
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							}
+						}
 						try {
 							levelUp(level);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-					}else {  // if the player didn't reach the min points and the time is over
-						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
-						timer.stop();
-						totalScore=totalScore+g.getScore();
-						GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());
-						System.out.println( " axaXxXxX" +historyGame.toString());
-						System.out.println(LocalDate.now().toString());
-						try {
-							Sysdata.importGameHistorysFromJSON();
-							Sysdata.getGamesHistoryList().add(historyGame);
-							Sysdata.exportGamesHistoryToJSON();
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
-					
-					}
-				} 
+				}else {  // if the player didn't reach the min points and the time is over
+					Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
+					timer.stop();
+					totalScore=totalScore+g.getScore();
+					GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());
+					System.out.println( " axaXxXxX" +historyGame.toString());
+					System.out.println(LocalDate.now().toString());
+					try {
+						Sysdata.importGameHistorysFromJSON();
+						Sysdata.getGamesHistoryList().add(historyGame);
+						Sysdata.exportGamesHistoryToJSON();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} }
+				}
 			}
 		});
 		timer.getKeyFrames().add(frame);
@@ -297,14 +298,14 @@ public class BoardController implements Initializable {
 		scores.getKeyFrames().add(frame);
 		scores.playFromStart();
 	}
-	
+
 	@FXML
 	public void exitGame(ActionEvent event) throws IOException {
-	    // Close the current stage
-	    Stage currentStage = (Stage) exitGame.getScene().getWindow();
-	    currentStage.close();
+		// Close the current stage
+		Stage currentStage = (Stage) exitGame.getScene().getWindow();
+		currentStage.close();
 		// TODO: handle exception
-	    //Starts a new stage
+		//Starts a new stage
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 		Scene scene = new Scene(root);
@@ -329,11 +330,7 @@ public class BoardController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	}
 
-	}
-	public static int getSeconds() {
-	    return seconds;
-	}
 
 }
