@@ -1,11 +1,15 @@
 package Model;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
@@ -13,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
@@ -20,10 +25,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
+import javafx.util.Duration;
 import Alerts.Alerts;
 import Controller.BoardController;
 import Controller.LoginController;
 import Controller.QuestionPopupController;
+import Controller.Sysdata;
 
 public class Game {
 
@@ -35,17 +43,14 @@ public class Game {
 	public static Piece tempKing;
 	public static Board cb;
 	private boolean game;
-	public int timerCounter =0;
-	public 	int speed = 2000;
+	public int speed = 2000;
 	private int score = 1;
 	private int flag = 0;
 	private int flagging = 0;
+	int[] array = new int[6];
 	private ArrayList<Cell> lastMoves;
 	private static Timer timer = new Timer();
-	private static Timer counterTimer =  new Timer();
 	private int finalScore;
-
-
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
 		this.level = lvl;
@@ -56,9 +61,8 @@ public class Game {
 		lastMoves = new ArrayList<>();
 		lastMoves.add(cb.getCells().get(0));
 		addEventHandlers(cb.getChessBoard());
+		Arrays.fill(array, 0);
 	}
-
-
 
 	public Game(int level, User user, int finalscore) {
 		super();
@@ -66,8 +70,6 @@ public class Game {
 		this.user = user;
 		this.finalScore = finalscore;
 	}
-
-
 
 	private void addEventHandlers(GridPane chessBoard) {
 		chessBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -175,9 +177,9 @@ public class Game {
 	// This function is for the queen's move it works like this:
 	/*
 	 * if the queen can kill the knight it kills him. if not, the queen will block
-	 * one of the future possible destination for the knight(To make it harder).
-	 * if not, the queen will move as close to the knight as she can.
-	 * if none of the above is available it moves randomly.
+	 * one of the future possible destination for the knight(To make it harder). if
+	 * not, the queen will move as close to the knight as she can. if none of the
+	 * above is available it moves randomly.
 	 */
 	/*
 	 * tempCell is the queen, cell is the knight
@@ -240,8 +242,7 @@ public class Game {
 			if (closestCell != null) {
 				dropPiece(closestCell);
 				return;
-			}
-			else {
+			} else {
 				Random rand = new Random();
 				int len = tempMoves.size();
 
@@ -388,7 +389,7 @@ public class Game {
 			currentPiece.setPosY(cell.getY());
 		}
 		if (currentPiece instanceof Knight) {
-			cell.setCounter(cell.getCounter()+1);
+			cell.setCounter(cell.getCounter() + 1);
 			addCellsToArraylist(cell);
 			if (!cell.isVisited()) {
 				score++;
@@ -403,54 +404,73 @@ public class Game {
 				}
 			}
 		}
-		// if the cell instance of Question we will call the fmxl Question Controller pop-up
-		  if (cell instanceof QuesCell && currentPiece instanceof Knight) {
-			    // Stop the timer
-			    Controller.BoardController.timer.stop();
-			    stopTimer();
-			    // Load the FXML file for the pop-up window
-			    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
-			    Parent root;
-			    try {
-			      root = fxmlLoader.load();
-			      QuestionPopupController controller = fxmlLoader.getController();
-			      controller.setGame(this);
-			      controller.getGame().setScore(score);
-			      // Create a new scene for the pop-up window
-			      Scene scene = new Scene(root);
-			      // Create a new stage for the pop-up window
-			      Stage stage = new Stage();		      
-			      // Set the scene for the pop-up stage
-			      stage.setScene(scene);
-			      stage.initStyle(StageStyle.UNDECORATED);
-			      // Show the pop-up stage and block the parent window until the pop-up stage is closed
-			      stage.showAndWait();
-			      // Create a new QuesCell instance
-			      QuesCell help = (QuesCell) cell;
-			      help.createNewQuesCell(cb, cell);
-			      // Check the answer for the question
-			    } catch (IOException e) {
-			      // TODO 
-			      e.printStackTrace();
-			    }
-			  }
+		// if the cell instance of Question we will call the fmxl Question Controller
+		// pop-up
+		if (cell instanceof QuesCell && currentPiece instanceof Knight) {
+			// Stop the timer
+			Controller.BoardController.timer.stop();
+			stopTimer();
+			// Load the FXML file for the pop-up window
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/QuestionPopup.fxml"));
+			Parent root;
+			try {
+				root = fxmlLoader.load();
+				QuestionPopupController controller = fxmlLoader.getController();
+				controller.setGame(this);
+				controller.getGame().setScore(score);
+				// Create a new scene for the pop-up window
+				Scene scene = new Scene(root);
+				// Create a new stage for the pop-up window
+				Stage stage = new Stage();
+				// Set the scene for the pop-up stage
+				stage.setScene(scene);
+				stage.initStyle(StageStyle.UNDECORATED);
+				// Show the pop-up stage and block the parent window until the pop-up stage is
+				// closed
+				stage.showAndWait();
+				// Create a new QuesCell instance
+				QuesCell help = (QuesCell) cell;
+				help.createNewQuesCell(cb, cell);
+				// Check the answer for the question
+			} catch (IOException e) {
+				// TODO
+				e.printStackTrace();
+			}
+		}
 		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
-			setScore(((UndoCell) cell).undoMoves(cb, lastMoves,score));
+			setScore(((UndoCell) cell).undoMoves(cb, lastMoves, score));
 			UndoCell help = (UndoCell) cell;
 			Cell cl;
-			cl=help.createNewUndoCell(cb, cell);
+			cl = help.createNewUndoCell(cb, cell);
 			lastMoves.removeAll(lastMoves);
 			lastMoves.add(cl);
 		}
 		if (cell instanceof JumpCell && currentPiece instanceof Knight) {
 			flagging = 1;
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Surprise!!");
+			alert.setHeaderText("UndoCell Selected");
+			alert.setContentText("We are sorry, we have restarted your last 3 moves.");
+
+			// Set the alert's style
+			alert.getDialogPane().setStyle("-fx-background-color: orange; -fx-text-fill: white;");
+
+			// Show the alert and wait for the user to close it
+			PauseTransition delay = new PauseTransition(Duration.seconds(2)); // time that the notification disappears
+																				// after
+			delay.setOnFinished(event -> alert.hide());
+			Window window = alert.getDialogPane().getScene().getWindow();
+			window.setY(100);
+			window.setX(850);
+			delay.play();
+			alert.showAndWait();
 			Cell temp = ((JumpCell) cell).Jump(cb);
 			dropPiece(temp);
 			flagging = 0;
 			JumpCell help = (JumpCell) cell;
 			help.createNewJumpCell(cb, cell);
 		}
-		if(cell instanceof QuesCell) {
+		if (cell instanceof QuesCell && (level == 3 || level == 4)) {
 			startTimer();
 		}
 		deselectPiece(true);
@@ -475,6 +495,16 @@ public class Game {
 					Controller.BoardController.timer.stop();
 					Controller.BoardController.scores.stop();
 					Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
+					GameHistory historyGame = new GameHistory(level, LoginController.getUser(),
+							BoardController.totalScore, LocalDate.now().toString());
+					System.out.println(historyGame.toString());
+					try {
+						Sysdata.importGameHistorysFromJSON();
+						Sysdata.getGamesHistoryList().add(historyGame);
+						Sysdata.exportGamesHistoryToJSON();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
 				}
 				cell.setOccupied(true);
 				initialSquare.getChildren().removeAll();
@@ -506,12 +536,20 @@ public class Game {
 		if (temp instanceof Knight) {
 			this.game = false;
 			System.out.println("Game Over!!!");
-			BoardController.totalScore= BoardController.totalScore+getScore();
-			GameHistory historyGame= new GameHistory(level, LoginController.getUser(), BoardController.totalScore);
-			System.out.println(historyGame.toString());
+			BoardController.totalScore = BoardController.totalScore + getScore();
 			Controller.BoardController.timer.stop();
 			Controller.BoardController.scores.stop();
 			Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
+			GameHistory historyGame = new GameHistory(level, LoginController.getUser(), BoardController.totalScore,
+					LocalDate.now().toString());
+			System.out.println(historyGame.toString());
+			try {
+				Sysdata.importGameHistorysFromJSON();
+				Sysdata.getGamesHistoryList().add(historyGame);
+				Sysdata.exportGamesHistoryToJSON();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 		cell.setOccupied(true);
 		initialSquare.getChildren().removeAll();
@@ -523,17 +561,14 @@ public class Game {
 
 	public void stopTimer() {
 		timer.cancel();
-		counterTimer.cancel();
 	}
 
 	// implementing a thread to make a move very second for the king.
 	// just in case we're at level 3/4.
 	public void startTimer() {
 		flag = 1;
-		counterTimer = new Timer(); 
 		timer = new Timer();
 		timer.schedule(new TimerTask() {
-	
 
 			@Override
 			public void run() {
@@ -550,32 +585,30 @@ public class Game {
 						}
 					}
 				}
+
 				try {
 					Thread.sleep(speed);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if (timerCounter % 10 == 0) {
-					System.out.println(timerCounter);
-					speed -= 750;
-					if (speed < 0) {
-						speed = 0;
+				System.out.println("this is the speed : " + speed);
+
+				int gameTimer = BoardController.seconds;
+				System.out.println("This is the timer :" + BoardController.seconds);
+				if (gameTimer % 10 == 0 || (gameTimer - 1) % 10 == 0) {
+					gameTimer=(int) Math.floor(gameTimer/10);
+					if (array[gameTimer] == 0) {
+						System.out.println("First If is working : " + gameTimer);
+						speed -= 750;
+						if (speed < 0) {
+							speed = 0;
+						}
+						array[gameTimer]=1;
 					}
-					System.out.println("this is the speed : "+speed);
-				}
+				} 
 			}
 		}, 750, 750);
-
-		counterTimer.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				timerCounter++;
-				System.out.println("this is the counter :"+timerCounter);
-			}
-
-		}, 1000, 1000);
 	}
 
 	public void addCellsToArraylist(Cell c) {
@@ -615,8 +648,8 @@ public class Game {
 
 	public void setScore(int score) {
 		this.score = score;
-		if(this.score <= 0) {
-			this.score=0;
+		if (this.score <= 0) {
+			this.score = 0;
 		}
 	}
 
@@ -632,6 +665,5 @@ public class Game {
 	public String toString() {
 		return "Game [level=" + level + ", user=" + user + ", finalScore=" + finalScore + "]";
 	}
-
 
 }

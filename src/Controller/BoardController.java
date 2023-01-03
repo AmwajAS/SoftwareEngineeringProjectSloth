@@ -53,8 +53,8 @@ public class BoardController implements Initializable {
 	private GridPane chessBoard;
 
 	// var to the doTime() method
-	private final Integer startTime = 60;
-	private Integer seconds = startTime;
+	private final static Integer startTime = 60;
+	public static Integer seconds = startTime;
 	private int level=1;
 	public static Timeline scores;
 	public static Timeline timer;
@@ -232,12 +232,6 @@ public class BoardController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				seconds--;		
-				seconds--;
-				seconds--;
-				seconds--;
-				seconds--;
-
-
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
 					if(level<4 && g.getScore()>=4){ //for level 1-3 -->must reach min 15 !! 4 for tests 
@@ -337,6 +331,9 @@ public class BoardController implements Initializable {
 		}
 		
 
+	}
+	public static int getSeconds() {
+	    return seconds;
 	}
 
 }
