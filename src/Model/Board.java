@@ -69,64 +69,35 @@ public class Board {
 				cells.add(cell);
 			}
 		}
-		/*
-		 * creating 8 blocked cells in level 4 making sure that there is 8 different
-		 * blocked cells blocked cells are not under each of the pieces
-		 */
+
 		if (level == 1) {
-			createJumpCell(3);
-			createQuesCell(3);
+			creatTypeCells(3,"Jump");
+			creatTypeCells(3,"Question");
+			
 		}
 		if(level == 2) {
-			createUndoCell(3);
-			createQuesCell(3);
+			creatTypeCells(3,"Question");
+			creatTypeCells(3,"Undo");
 
 		}
 		if (level == 3) {
-			createJumpCell(2);
-			createUndoCell(2);
-			createQuesCell(3);
+			creatTypeCells(3,"Question");
+			creatTypeCells(2,"Undo");
+			creatTypeCells(2,"Jump");
 
 		}
 		
 		
 		if (level == 4) {
-			createQuesCell(3);
-			int eightTimes = 0;
-			while (eightTimes < 8) {
-				Random randI = new Random();
-				Random randJ = new Random();
-				int iRand = randI.nextInt(7);
-				int jRand = randJ.nextInt(7);
-				Cell temp = null;
-				for (Cell c : cells) {
-					if (c.getX() == iRand && c.getY() == jRand) {
-						if (!(c instanceof BlockCell) && !(c instanceof QuesCell)) {
-							if (c.getChildren().isEmpty()) {
-								if (c.getX() != 0 && c.getY() != 0) {
-									temp = c;
-									eightTimes++;
-								}
-							}
-						}
-					}
-				}
-				if (temp != null) {
-					cells.remove(temp);
-					temp = new BlockCell(iRand, jRand);
-					temp.setName("Square" + iRand + jRand);
-					temp.setPrefHeight(100);
-					temp.setPrefWidth(100);
-					chessBoard.add(temp, iRand, jRand, 1, 1);
-					cells.add(temp);
-				}
-			}
+			creatTypeCells(3,"Question");
+			creatTypeCells(8,"Blocked");
+				
 		}
 		addPieces();
 	}
 	
-	// Creating JumpCells
-	private void createJumpCell(int times) {
+	//Creating Unique Cells
+	private void creatTypeCells(int times, String cellType) {
 		while (times > 0) {
 			Random randI = new Random();
 			Random randJ = new Random();
@@ -148,41 +119,15 @@ public class Board {
 			}
 			if (temp != null) {
 				cells.remove(temp);
+				if(cellType == "Jump") {
 				temp = new JumpCell(iRand, jRand);
-				temp.setName("Square" + iRand + jRand);
-				temp.setPrefHeight(100);
-				temp.setPrefWidth(100);
-				chessBoard.add(temp, iRand, jRand, 1, 1);
-				cells.add(temp);
-			}
-
-		}
-	}
-	// Creating UndoCells
-	private void createUndoCell(int times) {
-		System.out.println(" * These are the UndoCells *");
-		while (times > 0) {
-			Random randI = new Random();
-			Random randJ = new Random();
-			int iRand = randI.nextInt(7);
-			int jRand = randJ.nextInt(7);
-			Cell temp = null;
-			for (Cell c : cells) {
-				if (c.getX() == iRand && c.getY() == jRand) {
-					if (!(c instanceof BlockCell) && !(c instanceof QuesCell) && !(c instanceof JumpCell) && !(c instanceof UndoCell)) {
-						if (c.getChildren().isEmpty()) {
-							if (c.getX() != 0 && c.getY() != 0) {
-								temp = c;
-								times--;
-								System.out.println(temp.getName());
-							}
-						}
-					}
+				} else if(cellType == "Undo") {
+					temp = new UndoCell(iRand, jRand);
+				} else if(cellType == "Question") {
+					temp = new QuesCell(iRand, jRand);
+				} else if(cellType == "Blocked") {
+					temp = new BlockCell(iRand, jRand);
 				}
-			}
-			if (temp != null) {
-				cells.remove(temp);
-				temp = new UndoCell(iRand, jRand);
 				temp.setName("Square" + iRand + jRand);
 				temp.setPrefHeight(100);
 				temp.setPrefWidth(100);
@@ -193,39 +138,6 @@ public class Board {
 		}
 	}
 	
-	// Creating Question Cells
-	private void createQuesCell(int times) {
-		while (times > 0) {
-			Random randI = new Random();
-			Random randJ = new Random();
-			int iRand = randI.nextInt(7);
-			int jRand = randJ.nextInt(7);
-			Cell temp = null;
-			for (Cell c : cells) {
-				if (c.getX() == iRand && c.getY() == jRand) {
-					if (!(c instanceof BlockCell) && !(c instanceof QuesCell) && !(c instanceof JumpCell) && !(c instanceof UndoCell)) {
-						if (c.getChildren().isEmpty()) {
-							if (c.getX() != 0 && c.getY() != 0) {
-								temp = c;
-								times--;
-								System.out.println(temp.getName());
-							}
-						}
-					}
-				}
-			}
-			if (temp != null) {
-				cells.remove(temp);
-				temp = new QuesCell(iRand, jRand);
-				temp.setName("Square" + iRand + jRand);
-				temp.setPrefHeight(100);
-				temp.setPrefWidth(100);
-				chessBoard.add(temp, iRand, jRand, 1, 1);
-				cells.add(temp);
-			}
-
-		}
-	}
 
 	public void setTheme(Cell cell, String theme, int i, int j) {
 		Color color1 = Color.web("#ffffff00");
