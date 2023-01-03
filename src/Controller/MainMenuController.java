@@ -174,14 +174,18 @@ public class MainMenuController implements Initializable {
 	}
 	
 	@FXML
-	public void login(ActionEvent event) throws IOException {
+	public void history(ActionEvent event) throws IOException {
+	    // Close the current stage
+	    Stage currentStage = (Stage) startBt.getScene().getWindow();
+	    currentStage.close();
+	    //Starts a new stage
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/View/HistoryGames.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
+		primaryStage.setMinHeight(611);
+		primaryStage.setMinWidth(736);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override

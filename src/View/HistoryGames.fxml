@@ -1,33 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <top>
-            <Label prefHeight="60.0" prefWidth="210.0" text="Games History" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-            </Label>
-         </top>
-         <center>
-            <ListView fx:id="gamesList" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #a8a8a8; -fx-background-color: #ffffff67;" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="30.0" left="20.0" right="20.0" />
-               </BorderPane.margin>
-            </ListView>
-         </center>
-      </BorderPane>
-   </children>
-</AnchorPane>
+<BorderPane prefHeight="611.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GamesHistoryCtrl">
+   <top>
+      <VBox prefHeight="71.0" prefWidth="696.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="31.0" prefWidth="696.0">
+               <children>
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#actionOnBack" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" stylesheets="@application.css">
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/back.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Label prefHeight="27.0" prefWidth="354.0" text="G A M E S   H I S T O R Y" textAlignment="CENTER" textFill="#1b5e20" textOverrun="CLIP" wrapText="true">
+                     <font>
+                        <Font name="Times New Roman Bold" size="30.0" />
+                     </font>
+                     <effect>
+                        <Reflection bottomOpacity="0.83" fraction="1.0" topOpacity="0.0" />
+                     </effect>
+                     <HBox.margin>
+                        <Insets left="150.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator prefHeight="2.0" prefWidth="696.0" styleClass="list-cell" stylesheets="@application.css" />
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="465.0" prefWidth="736.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="106.0" prefWidth="736.0">
+               <children>
+                  <Button fx:id="allHistory" contentDisplay="TOP" mnemonicParsing="false" onAction="#showAllHistory" prefHeight="59.0" prefWidth="78.0" style="-fx-background-color: transparent;" stylesheets="@application.css" textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="63.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../OH75TO1-ai.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="me Against all players">
+                           <font>
+                              <Font name="System Bold Italic" size="11.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <font>
+                        <Font name="Times New Roman Bold" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" right="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="myHistory" contentDisplay="TOP" mnemonicParsing="false" onAction="#showMyHistory" prefHeight="71.0" prefWidth="106.0" style="-fx-background-color: transparent;" stylesheets="@application.css" text="my history" textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="63.0" pickOnBounds="true" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="me Against all players">
+                           <font>
+                              <Font name="System Bold Italic" size="11.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <font>
+                        <Font name="Times New Roman Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="33.0" prefWidth="736.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="70.0" text="Username">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="40.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="20.0" prefWidth="37.0" text="Level">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="70.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="20.0" prefWidth="101.0" text="Score in Game">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="70.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="20.0" prefWidth="77.0" text="Game Date">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="70.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="20.0" prefWidth="82.0" text="Hight Score">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="70.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="380.0" prefWidth="736.0">
+               <children>
+                  <VBox prefHeight="380.0" prefWidth="46.0">
+                     <children>
+                        <ImageView fx:id="first" fitHeight="35.0" fitWidth="40.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/firstPlace.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="second" fitHeight="30.0" fitWidth="39.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/second.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="third" fitHeight="32.0" fitWidth="38.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../images/third.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <ListView fx:id="gamesList" opacity="0.66" prefHeight="350.0" prefWidth="665.0" style="-fx-border-color: #a8a8a8; -fx-background-color: #ffffff67;" styleClass="list-cell" stylesheets="@application.css">
+                     <HBox.margin>
+                        <Insets bottom="30.0" right="30.0" />
+                     </HBox.margin>
+                  </ListView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

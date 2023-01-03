@@ -1,17 +1,18 @@
 package Model;
 
-import java.time.LocalDate;
 
-import javafx.scene.layout.GridPane;
 
-public class GameHistory {
+public class GameHistory implements Comparable{
 	
     private int level;
 	private User user;
 	private int finalScore;
 	private String gameDate;
-
-	public GameHistory() {
+	
+/*
+ *this default Constructor for the JSON import and export use. 
+ */
+	public GameHistory() { 
 		super();
 	}
 	
@@ -70,8 +71,56 @@ public class GameHistory {
 
 	@Override
 	public String toString() {
-		return "GameHistory [level=" + level + ", user=" + user + ", finalScore=" + finalScore + ", gameDate="
-				+ gameDate + "]";
+		return user.getUsername() +"               "+level +"                          " + finalScore +"                          "	
+	+ gameDate + "                    " + user.getHighScore();
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + finalScore;
+		result = prime * result + ((gameDate == null) ? 0 : gameDate.hashCode());
+		result = prime * result + level;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GameHistory other = (GameHistory) obj;
+		if (finalScore != other.finalScore)
+			return false;
+		if (gameDate == null) {
+			if (other.gameDate != null)
+				return false;
+		} else if (!gameDate.equals(other.gameDate))
+			return false;
+		if (level != other.level)
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		//	if(this.getUser().getHighScore().compateTo(o.user.getHighScore()))
+		//	return this.getUser().getHighScore();
+		return 0;
 	}
 
 
@@ -81,12 +130,6 @@ public class GameHistory {
 
 
 
-	
-	
-	
-	
-	
-	
 	
 
 }

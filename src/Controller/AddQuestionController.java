@@ -145,6 +145,10 @@ public class AddQuestionController implements Initializable {
 
 		});
 		{
+		    // Close the current stage
+		    Stage currentStage = (Stage) back.getScene().getWindow();
+		    currentStage.close();
+		    //Starts a new stage
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionsManagement.fxml"));
 			Scene scene = new Scene(root);

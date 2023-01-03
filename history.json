@@ -25,9 +25,39 @@
       "username" : "amwaj",
       "password" : "123",
       "pointsInGame" : 0,
-      "highScore" : 0
+      "highScore" : 15
     },
     "finalScore" : 3,
+    "gameDate" : "2023-01-03"
+  }, {
+    "level" : 1,
+    "user" : {
+      "username" : "arwad",
+      "password" : "1234",
+      "pointsInGame" : 0,
+      "highScore" : 10
+    },
+    "finalScore" : 6,
+    "gameDate" : "2023-01-03"
+  }, {
+    "level" : 1,
+    "user" : {
+      "username" : "amwaj",
+      "password" : "123",
+      "pointsInGame" : 0,
+      "highScore" : 0
+    },
+    "finalScore" : 6,
+    "gameDate" : "2023-01-03"
+  }, {
+    "level" : 1,
+    "user" : {
+      "username" : "amwaj",
+      "password" : "123",
+      "pointsInGame" : 0,
+      "highScore" : 0
+    },
+    "finalScore" : 9,
     "gameDate" : "2023-01-03"
   } ]
 }

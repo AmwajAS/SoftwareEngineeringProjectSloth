@@ -98,9 +98,20 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", pointsInGame=" + pointsInGame
-				+ ", highScore=" + highScore +"]";
+		return "username=" + username +"                         highScore=" + highScore +"";
 	}
+
+
+//	@Override
+//	public int compareTo(User o) {
+//		// TODO Auto-generated method stub
+//			if(this.getHighScore().compateTo(o.getHighScore()))
+//				return this.getHighScore();
+//		
+//
+//		
+//		
+//	}
 
 
 

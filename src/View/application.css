@@ -10,8 +10,8 @@ SplitMenuButton:hover{
 	
 }
 .list-cell {
-  -fx-font: 17px "Times New Roman";
-  -fx-font-size:15.0;
+  -fx-font: 19px "Times New Roman";
+  -fx-font-size:19.0;
 }
 
 .list-cell:filled:hover { 
