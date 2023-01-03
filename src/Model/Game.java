@@ -11,18 +11,22 @@ import java.util.TimerTask;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -438,6 +442,7 @@ public class Game {
 			}
 		}
 		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
+			makeAlert("Undo");
 			setScore(((UndoCell) cell).undoMoves(cb, lastMoves, score));
 			UndoCell help = (UndoCell) cell;
 			Cell cl;
@@ -447,23 +452,7 @@ public class Game {
 		}
 		if (cell instanceof JumpCell && currentPiece instanceof Knight) {
 			flagging = 1;
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Surprise!!");
-			alert.setHeaderText("UndoCell Selected");
-			alert.setContentText("We are sorry, we have restarted your last 3 moves.");
-
-			// Set the alert's style
-			alert.getDialogPane().setStyle("-fx-background-color: orange; -fx-text-fill: white;");
-
-			// Show the alert and wait for the user to close it
-			PauseTransition delay = new PauseTransition(Duration.seconds(2)); // time that the notification disappears
-																				// after
-			delay.setOnFinished(event -> alert.hide());
-			Window window = alert.getDialogPane().getScene().getWindow();
-			window.setY(100);
-			window.setX(850);
-			delay.play();
-			alert.showAndWait();
+			makeAlert("Jump");
 			Cell temp = ((JumpCell) cell).Jump(cb);
 			dropPiece(temp);
 			flagging = 0;
@@ -519,6 +508,41 @@ public class Game {
 
 			}
 		});
+	}
+	
+	private void makeAlert(String cellType) {
+		Controller.BoardController.timer.stop();
+		if(level == 3 || level == 4) {
+		stopTimer();
+		}
+			// Create an alert with a progress indicator
+		
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Surprise!!");
+			if(cellType == "Jump") {
+			alert.setHeaderText("JumpCell Selected");
+			alert.setContentText("Now you will jump to a random cell!");
+			alert.getDialogPane().setStyle("-fx-background-color: #add8e6;"+ " -fx-text-fill: white;");
+			} else if(cellType == "Undo") {
+				alert.setHeaderText("UndoCell Selected");
+				alert.setContentText("Now your last 3 moves will be removed!.");
+				alert.getDialogPane().setStyle("-fx-background-color: orange;"+ " -fx-text-fill: white;");
+			}
+			PauseTransition delay = new PauseTransition(Duration.seconds(2)); // time that the notification disappears after
+			delay.setOnFinished(event -> alert.hide());
+			
+			// Create a progress indicator
+			ProgressIndicator progressIndicator = new ProgressIndicator();
+			alert.getDialogPane().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+
+			// Set the progress indicator as the graphic of the alert
+			alert.setGraphic(progressIndicator);
+			delay.play();
+			alert.showAndWait();
+			if(level == 3 || level == 4) {
+			startTimer();
+			}
+		Controller.BoardController.timer.play();
 	}
 
 	private void killPiece(Cell cell) {
