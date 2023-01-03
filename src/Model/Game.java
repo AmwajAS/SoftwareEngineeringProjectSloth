@@ -8,10 +8,8 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.fxml.FXMLLoader;
@@ -26,10 +24,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.Window;
 import javafx.util.Duration;
 import Alerts.Alerts;
 import Controller.BoardController;
@@ -133,7 +129,6 @@ public class Game {
 					// Clicked on piece
 					else {
 						Piece newPiece = (Piece) target;
-						Cell square = (Cell) newPiece.getParent();
 
 						// Selecting a new piece
 						if (currentPiece == null) {
@@ -567,14 +562,11 @@ public class Game {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("this is the speed : " + speed);
 
 				int gameTimer = BoardController.seconds;
-				System.out.println("This is the timer :" + BoardController.seconds);
 				if ((gameTimer % 10 == 0 && gameTimer != 60)|| (gameTimer - 1) % 10 == 0) {
 					gameTimer = (int) Math.floor(gameTimer / 10);
 					if (array[gameTimer] == 0) {
-						System.out.println("First If is working : " + gameTimer);
 						speed -= 750;
 						if (speed < 0) {
 							speed = 0;

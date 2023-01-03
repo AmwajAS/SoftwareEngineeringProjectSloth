@@ -54,7 +54,12 @@ public class Board {
 	public void setCells(ArrayList<Cell> cells) {
 		this.cells = cells;
 	}
-
+	/*
+	 * This function creates the board
+	 * it creates the cells according to the level and the type.
+	 * each level has a specific type of cells and amount.
+	 * it calls the function createTypeCells() which creates the cells listed above.
+	 */
 	private void makeBoard(GridPane chessBoard, String theme) {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -96,7 +101,14 @@ public class Board {
 		addPieces();
 	}
 	
-	//Creating Unique Cells
+	/*
+	 * This function creates the special cells 
+	 * Question cell,Undo cell, Jump cell,Block cell
+	 * it takes the int times and the type of the cell from the makeBoard function
+	 * the times shows how many cells of the same type.
+	 * it creates the cells in a random spot.
+	 * we can't have 2 cells of different types in the same spot.
+	 */
 	private void creatTypeCells(int times, String cellType) {
 		while (times > 0) {
 			Random randI = new Random();
@@ -111,7 +123,6 @@ public class Board {
 							if (c.getX() != 0 && c.getY() != 0) {
 								temp = c;
 								times--;
-								System.out.println(temp.getName());
 							}
 						}
 					}
@@ -138,7 +149,9 @@ public class Board {
 		}
 	}
 	
-
+	/*
+	 * This function creates the different themes of the board.
+	 */
 	public void setTheme(Cell cell, String theme, int i, int j) {
 		Color color1 = Color.web("#ffffff00");
 		Color color2 = Color.web("#ffffff00");
@@ -183,12 +196,18 @@ public class Board {
 		}
 
 	}
-
+	/*
+	 * This function takes the piece and takes the cell form the addPieces() function
+	 * and adds the piece to the cell.
+	 */
 	private void addPiece(Cell square, Piece piece) {
 		square.getChildren().add(piece);
 		square.setOccupied(true);
 	}
-
+	/*
+	 * This function gets called by the makeBoard function.
+	 * It calls the relevant piece according to the level of the game.
+	 */
 	private void addPieces() {
 		for (Cell cell : cells) {
 			if (cell.isOccupied())

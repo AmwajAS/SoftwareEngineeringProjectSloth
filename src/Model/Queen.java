@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 /**
  * Data structure to control a queen's movement
  * on a chess board.
+ * Queen extends the Piece
  */
 
 public class Queen extends Piece {
@@ -14,7 +15,10 @@ public class Queen extends Piece {
 		this.setType("Queen");
 		setImage();
 	}
-
+	
+	/*
+	 * This function gets all the possible moves of the queen just like in normal chess.
+	 */
 	@Override
 	public void getAllPossibleMoves(int lvl) {
 		int x = this.getPosX();

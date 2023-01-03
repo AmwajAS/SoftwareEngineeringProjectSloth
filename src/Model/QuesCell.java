@@ -36,7 +36,8 @@ public class QuesCell extends Cell{
 		super(x, y);
 		this.question=q;
 	}
- 
+	//The question cell needs to have a question mark showed on top of it.
+	//the style takes the image and sets it.
 	public QuesCell(int x, int y) {
 		super(x, y);
 		this.setStyle("-fx-background-image: url('"+image+"'); -fx-background-size: 100px 100px; -fx-background-position: center center; -fx-background-repeat:no-repeat;");
@@ -50,14 +51,10 @@ public class QuesCell extends Cell{
 		this.question = question;
 	}
 	
-//	public void showPopUp() {
-//	    Alert alert = new Alert(AlertType.INFORMATION);
-//	    alert.setTitle("Questions");
-//	    alert.setHeaderText("This is a Question");
-//	    alert.showAndWait();
-// 		TODO its just test
-//	}
-
+	/*
+	 * This function creates a new Question cell instead of the one that the knight stepped on, 
+	 * it takes a random x,y and creates a QuesCell .
+	 */
 	public Cell createNewQuesCell(Board board, Cell cell) {
 		Knight tempKnight = (Knight) cell.getChildren().get(0);
 		cell.getChildren().remove(0);

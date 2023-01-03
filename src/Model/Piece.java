@@ -90,7 +90,11 @@ public class Piece extends ImageView {
 
     }
     public void getAllPossibleMoves(int lvl) {}
-
+    /*
+     * this function shows all the possible moves with a white boarder.
+     * it takes all the moves form possibleMoves from the extended Piece type,
+     * and shows them.
+     */
     public void showAllPossibleMoves(boolean val){
         if(val){
             for(String move : possibleMoves) {

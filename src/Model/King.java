@@ -3,7 +3,9 @@ package Model;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-
+/*
+ * King extends from Piece
+ */
 public class King extends Piece {
 	public King(String color, int posX, int posY) {
 		super(color, posX, posY);
@@ -11,7 +13,13 @@ public class King extends Piece {
 		this.setType("King");
 		setImage();
 	}
-
+	
+	/*
+	 * This function gets all the possible moves of the king.
+	 * the king can move to all the 8 cells surrounding him.
+	 * including moving from one side to another.
+	 * The math in this move always gives back the 8 cells around him including the other side.
+	 */
 	@Override
 	public void getAllPossibleMoves(int lvl) {
 		int x = this.getPosX();
@@ -30,7 +38,9 @@ public class King extends Piece {
 		
 
 		
-
+		/*
+		 * after adding the moves, they get stored in the getPossibleMoves
+		 */
 		for (String move : moves) {
 			if (getSquareByName(move) != null) {
 				if (!(getSquareByName(move) instanceof BlockCell)) {

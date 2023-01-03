@@ -26,7 +26,17 @@ public class UndoCell extends Cell {
 //        return "Square" + this.x + this.y + " - " + status;
 		return "Square";
 	}
-
+	
+	/*
+	 * This function undo the last 3 moves of the knight when gets stepped on,
+	 * The lastMoves list has 4 values and we check the first 3.
+	 * if the counter of the cell is 1 it means that the knight stepped on the cell only 1 time,
+	 * so, the score should be deducted, and the cell should be marked as unvisited.
+	 * if the counter is greater than 1 it means that the knight stepped on the cell more than 1 time,
+	 * so the score should be added because it was deducted before, and the cell should still be visited,
+	 * in both ways the counter should be deducted by 1.
+	 * the function returns the new score.
+	 */
 	public int undoMoves(Board board, ArrayList<Cell> lastMoves, int score) {
 		int i ;
 		for(i=0;i<lastMoves.size()-1;i++) {
@@ -52,7 +62,11 @@ public class UndoCell extends Cell {
 			}
 		return score;
 	}
-
+	/*
+	 *This function creates a new undoCell instead of the one that the knight stepped on,
+	 *it takes a random x,y and creates the undoCell. 
+	 *and returns it.
+	 */
 	public Cell createNewUndoCell(Board board, Cell cell) {
 		Knight tempKnight = (Knight) cell.getChildren().get(0);
 		cell.getChildren().remove(0);
@@ -70,7 +84,6 @@ public class UndoCell extends Cell {
 		newCell.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		newCell.getChildren().add(tempKnight);
-		// board.setTheme(cell, board.getTheme(),i, j);
 		board.getCells().add(newCell);
 		board.getChessBoard().add(newCell, newCell.getX(), newCell.getY(), 1, 1);
 		board.setCells(board.getCells());

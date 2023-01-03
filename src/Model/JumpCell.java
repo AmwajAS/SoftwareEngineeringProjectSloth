@@ -28,7 +28,9 @@ public class JumpCell extends Cell {
 //        return "Square" + this.x + this.y + " - " + status;
 		return "Square";
 	}
-
+	/*
+	 * This function returns a random cell and it gets called when the knight steps on JumpCell cell.
+	 */
 	public Cell Jump(Board board) {
 		Cell temp = null;
 		do {
@@ -45,7 +47,10 @@ public class JumpCell extends Cell {
 
 		return temp;
 	}
-
+	/*
+	 * After the knight steps on the JumpCell and jumps to a random spot, this function gets called in the Game.
+	 * This function creates a new random JumpCell instead of the one the knight jumped on.
+	 */
 	public Cell createNewJumpCell(Board board, Cell cell) {
 		Cell temp = null;
 		int i = cell.getX();
@@ -60,7 +65,6 @@ public class JumpCell extends Cell {
 		newCell.setPrefWidth(100);
 		newCell.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		// board.setTheme(cell, board.getTheme(),i, j);
 		board.getCells().add(newCell);
 		board.getChessBoard().add(newCell, newCell.getX(), newCell.getY(), 1, 1);
 		board.setCells(board.getCells());

@@ -20,7 +20,10 @@ public class Cell extends StackPane{
     private String name;
     private boolean isVisited;
     private int counter;
-
+/*
+ * Cell is an object in the chessBoard that extends StackPane
+ * the counter variable counts how many times the knight steps on a specific cell.
+ */
 	public Cell(int x, int y){
         this.x = x;
         this.y = y;
