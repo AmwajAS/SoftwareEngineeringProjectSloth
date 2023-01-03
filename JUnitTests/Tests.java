@@ -72,7 +72,7 @@ public class Tests {
 	}
 	//Extra Test - checks if a certain user can removed successfully from the users JSON file.
 	@Test
-	public void check() {
+	public void checkUserRemove() {
 		try {	
 			Sysdata.importUsersFromJSON();
 			Sysdata.getThPlayers().remove(new User("zaher", "123"));
