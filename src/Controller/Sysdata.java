@@ -27,15 +27,14 @@ import Model.User;
 
 public class Sysdata {
 
-    static ArrayList<User> thPlayers = new ArrayList<>();  //saves the game players
-	static ArrayList<Question> importedQuestions = new ArrayList<>();  //saves the imported questions from the JSON file.
-	static ObjectMapper mapper = new ObjectMapper();  // We can use the mapper to parse or deserialize JSON content into a Java object.
-	static ObjectMapper usermapper = new ObjectMapper(); 
+	static ArrayList<User> thPlayers = new ArrayList<>(); // saves the game players
+	static ArrayList<Question> importedQuestions = new ArrayList<>(); // saves the imported questions from the JSON
+																		// file.
+	static ObjectMapper mapper = new ObjectMapper(); // We can use the mapper to parse or deserialize JSON content into
+														// a Java object.
+	static ObjectMapper usermapper = new ObjectMapper();
 	static ObjectMapper historymapper = new ObjectMapper();
 	public static ArrayList<GameHistory> gamesHistoryList = new ArrayList<>();
-
-
-
 
 	/*
 	 * This method read the Json file and creates a Questions Object. and returns an
@@ -60,9 +59,9 @@ public class Sysdata {
 				System.out.println("no validation errors :-)");
 				Json input = mapper.treeToValue(json, Json.class);
 				for (Question q : input.getQuestions()) {
-					//System.out.println(input.getQuestions());
+					// System.out.println(input.getQuestions());
 					importedQuestions.add(q);
-					//imported.put("questions", importedQuestions);
+					// imported.put("questions", importedQuestions);
 
 				}
 
@@ -101,8 +100,7 @@ public class Sysdata {
 		}
 
 	}
-	
-	
+
 	public static ArrayList<User> importUsersFromJSON() throws FileNotFoundException {
 
 		try {
@@ -139,7 +137,6 @@ public class Sysdata {
 		return thPlayers;
 	}
 
-
 	public static void exportUsersToJSON() throws FileNotFoundException {
 
 		usermapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -148,7 +145,6 @@ public class Sysdata {
 			HashMap<String, ArrayList<User>> outHashMap = new HashMap<>();
 			outHashMap.put("users", thPlayers);
 			usermapper.writerWithDefaultPrettyPrinter().writeValue(new File("users.json"), outHashMap);
-			
 
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
@@ -159,7 +155,6 @@ public class Sysdata {
 
 	}
 
-	
 	public static ArrayList<GameHistory> importGameHistorysFromJSON() throws FileNotFoundException {
 
 		try {
@@ -168,13 +163,13 @@ public class Sysdata {
 			InputStream schemaStream = new FileInputStream("historyschema.json");
 
 			
-			JsonNode json = historymapper.readTree(inputStream);
+			JsonNode json = usermapper.readTree(inputStream);
 			JsonSchema schema = schemaFactory.getSchema(schemaStream);
 			Set<ValidationMessage> validationResult = schema.validate(json);
 
 			if (validationResult.isEmpty()) {
 				System.out.println("no validation errors :-)");
-				HistoryJson input = historymapper.treeToValue(json, HistoryJson.class);
+				HistoryJson input = usermapper.treeToValue(json, HistoryJson.class);
 				for (GameHistory g : input.getGamesHistory()) {
 					gamesHistoryList.add(g);
 				}
@@ -196,16 +191,14 @@ public class Sysdata {
 		return gamesHistoryList;
 	}
 
-
 	public static void exportGamesHistoryToJSON() throws FileNotFoundException {
 
-		historymapper.enable(SerializationFeature.INDENT_OUTPUT);
+		usermapper.enable(SerializationFeature.INDENT_OUTPUT);
 
 		try {
 			HashMap<String, ArrayList<GameHistory>> outHashMap = new HashMap<>();
 			outHashMap.put("gamesHistory", gamesHistoryList);
-			historymapper.writerWithDefaultPrettyPrinter().writeValue(new File("history.json"), outHashMap);
-			
+			usermapper.writerWithDefaultPrettyPrinter().writeValue(new File("history.json"), outHashMap);
 
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
@@ -216,10 +209,6 @@ public class Sysdata {
 
 	}
 
-	
-	
-	
-	
 
 	public static ArrayList<Question> getImportedQuestions() {
 		return importedQuestions;
@@ -235,6 +224,14 @@ public class Sysdata {
 
 	public static void setThPlayers(ArrayList<User> thPlayers) {
 		Sysdata.thPlayers = thPlayers;
+	}
+
+	public static ArrayList<GameHistory> getGamesHistoryList() {
+		return gamesHistoryList;
+	}
+
+	public static void setGamesHistoryList(ArrayList<GameHistory> gamesHistoryList) {
+		Sysdata.gamesHistoryList = gamesHistoryList;
 	}
 
 //	//methods with test

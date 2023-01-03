@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.TimerTask;
@@ -73,12 +76,6 @@ public class BoardController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//importing the games history
-		try {
-			Sysdata.importGameHistorysFromJSON();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if(LoginController.getUser()==null) {
 			System.out.println("no user!!error in import users");
 			playerName.setText("Player Name: Error! ");
@@ -195,10 +192,15 @@ public class BoardController implements Initializable {
 			scores.stop();
 			timer.stop();
 			//updating the game history
-			GameHistory historyGame= new GameHistory(currentlevel, LoginController.getUser(), totalScore);
-			Sysdata.gamesHistoryList.add(historyGame);
-			Sysdata.exportGamesHistoryToJSON();
+			GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());
 			System.out.println(historyGame.toString());
+			try {
+				Sysdata.importGameHistorysFromJSON();
+				Sysdata.getGamesHistoryList().add(historyGame);
+				Sysdata.exportGamesHistoryToJSON();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			//updating the high Score for the player
 			try {			
 				Sysdata.getThPlayers().remove(LoginController.getUser());
@@ -241,7 +243,13 @@ public class BoardController implements Initializable {
 		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				seconds--;		
 				seconds--;
+				seconds--;
+				seconds--;
+				seconds--;
+
+
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
 					if(level<4 && g.getScore()>=4){ //for level 1-3 -->must reach min 15 !! 4 for tests 
@@ -266,17 +274,20 @@ public class BoardController implements Initializable {
 							e.printStackTrace();
 						}
 					}else {  // if the player didn't reach the min points and the time is over
+						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
+						timer.stop();
 						totalScore=totalScore+g.getScore();
-						GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore);
-						System.out.println(historyGame.toString());
+						GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());
+						System.out.println( " axaXxXxX" +historyGame.toString());
+						System.out.println(LocalDate.now().toString());
 						try {
-							Sysdata.gamesHistoryList.add(historyGame);
+							Sysdata.importGameHistorysFromJSON();
+							Sysdata.getGamesHistoryList().add(historyGame);
 							Sysdata.exportGamesHistoryToJSON();
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						}
-						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
-						timer.stop();
+					
 					}
 				} 
 			}

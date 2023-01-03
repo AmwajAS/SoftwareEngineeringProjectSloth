@@ -1,29 +1,33 @@
 {
   "gamesHistory" : [ {
-    "chessboard" : null,
-    "level" : 4,
+    "level" : 1,
     "user" : {
-      "username" : "arwad",
-      "password" : "1234",
+      "username" : "amwaj",
+      "password" : "123",
       "pointsInGame" : 0,
-      "highScore" : 14
+      "highScore" : 0
     },
-    "timerCounter" : 0,
-    "score" : 1,
-    "gamedate" : {
-      "year" : 2023,
-      "month" : "JANUARY",
-      "monthValue" : 1,
-      "chronology" : {
-        "id" : "ISO",
-        "calendarType" : "iso8601"
-      },
-      "dayOfYear" : 2,
-      "leapYear" : false,
-      "dayOfMonth" : 2,
-      "dayOfWeek" : "MONDAY",
-      "era" : "CE"
+    "finalScore" : 2,
+    "gameDate" : "2023-01-03"
+  }, {
+    "level" : 1,
+    "user" : {
+      "username" : "amwaj",
+      "password" : "123",
+      "pointsInGame" : 0,
+      "highScore" : 0
     },
-    "finalScore" : 15
+    "finalScore" : 2,
+    "gameDate" : "2023-01-03"
+  }, {
+    "level" : 1,
+    "user" : {
+      "username" : "amwaj",
+      "password" : "123",
+      "pointsInGame" : 0,
+      "highScore" : 0
+    },
+    "finalScore" : 3,
+    "gameDate" : "2023-01-03"
   } ]
 }

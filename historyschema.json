@@ -1,7 +1,7 @@
 {
   "type": "object",
   "properties": {
-    "gamesHistoryList": {
+    "gamesHistory": {
       "type": "array",
       "items": [
         {
@@ -11,33 +11,40 @@
               "type": "integer"
             },
             "user": {
-              "type": "array",
-              "items":[
-                {
-                    "type":"object",
-                    "properties":{
-                        "username": "sting",
-                        "password": "string",
-                        "pointsInGame": "integer",
-                        "highScore": "integer"
-                    }
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "pointsInGame": {
+                  "type": "integer"
+                },
+                "highScore": {
+                  "type": "integer"
                 }
+              },
+              "required": [
+                "username",
+                "password",
+                "pointsInGame",
+                "highScore"
               ]
             },
-            "finalscore": {
+            "finalScore": {
               "type": "integer"
+            }, 
+            "gameDate":{
+              "type": "string"
             }
-          },
-          "required": [
-            "level",
-            "user",
-            "finalscore"
-          ]
+          }
         }
       ]
     }
   },
   "required": [
-    "gamesHistoryList"
+    "gamesHistory"
   ]
 }
