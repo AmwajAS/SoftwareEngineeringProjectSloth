@@ -53,7 +53,7 @@ public class BoardController implements Initializable {
 	private GridPane chessBoard;
 
 	// var to the doTime() method
-	private final static Integer startTime = 60;
+	public final static Integer startTime = 60;
 	public static Integer seconds = startTime;
 	private int level=1;
 	public static Timeline scores;
