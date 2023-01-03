@@ -123,25 +123,12 @@ public class Game {
 									startTimer();
 								} else if (level == 1 || level == 2) {
 									if (currentPlayer.equals("white")) {
-										for (Cell temp : cb.getCells()) {
-											if (!temp.getChildren().isEmpty()) {
-												if ((Piece) temp.getChildren().get(0) != null) {
-													Piece tempPiece = (Piece) temp.getChildren().get(0);
-
-													if (tempPiece.getColor().equals("white")
-															&& tempPiece instanceof Queen
-															&& currentPlayer.equals("white")) {
-														findBestRoute(temp, cell);
-													}
-												}
-
-											}
-										}
+										Cell temp = findPiece("Queen");
+										findBestRoute(temp, cell);
 									}
 								}
 							}
 						}
-
 					}
 					// Clicked on piece
 					else {
@@ -155,7 +142,6 @@ public class Game {
 								currentPiece = null;
 								return;
 							}
-
 							selectPiece(game);
 						}
 						// Selecting other piece of same color || Killing a piece
@@ -173,7 +159,6 @@ public class Game {
 
 					System.out.println(e.getMessage());
 				}
-
 			}
 		});
 	}
@@ -189,17 +174,7 @@ public class Game {
 	 * tempCell is the queen, cell is the knight
 	 */
 	public void findBestRoute(Cell tempCell, Cell cell) {
-		for (Cell temp : cb.getCells()) {
-			if (!temp.getChildren().isEmpty()) {
-				if ((Piece) temp.getChildren().get(0) != null) {
-					Piece tempPiece = (Piece) temp.getChildren().get(0);
-					if (tempPiece instanceof Knight) {
-						cell = temp;
-						break;
-					}
-				}
-			}
-		}
+		cell = findPiece("Knight");
 		Piece tempKnight = (Piece) cell.getChildren().get(0);
 		tempKnight.getAllPossibleMoves(level);
 		Piece tempPiece = (Piece) tempCell.getChildren().get(0);
@@ -212,7 +187,6 @@ public class Game {
 			ArrayList<String> tempMoves = tempPiece.getPossibleMoves();
 			for (String move : tempMoves) {
 				if (move.equals(cell.getName())) {
-
 					killPiece(cell);
 					dropPiece(cell);
 					return;
@@ -256,7 +230,6 @@ public class Game {
 						dropPiece(temp);
 						return;
 					}
-
 				}
 			}
 		}
@@ -271,17 +244,7 @@ public class Game {
 				tempKing.getAllPossibleMoves(level);
 				ArrayList<String> kingTempMoves = tempKing.getPossibleMoves();
 				Cell help = cTemp;
-				for (Cell temp : cb.getCells()) {
-					if (!temp.getChildren().isEmpty()) {
-						if ((Piece) temp.getChildren().get(0) != null) {
-							Piece tempPiece = (Piece) temp.getChildren().get(0);
-							if (tempPiece instanceof Knight) {
-								help = temp;
-								break;
-							}
-						}
-					}
-				}
+				help = findPiece("Knight");
 				// If the king can kill the knight he does it.
 				for (String move : kingTempMoves) {
 					if (move.equals(help.getName())) {
@@ -331,7 +294,6 @@ public class Game {
 			currentPiece = null;
 			return;
 		}
-
 		DropShadow borderGlow = new DropShadow();
 		borderGlow.setColor(Color.BLACK);
 		borderGlow.setOffsetX((int) 0f);
@@ -371,7 +333,6 @@ public class Game {
 					}
 				}
 			}
-
 		});
 	}
 
@@ -505,43 +466,42 @@ public class Game {
 						timer.cancel();
 					}
 				}
-
 			}
 		});
 	}
-	
+
 	private void makeAlert(String cellType) {
 		Controller.BoardController.timer.stop();
-		if(level == 3 || level == 4) {
-		stopTimer();
+		if (level == 3 || level == 4) {
+			stopTimer();
 		}
-			// Create an alert with a progress indicator
-		
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Surprise!!");
-			if(cellType == "Jump") {
+		// Create an alert with a progress indicator
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Surprise!!");
+		if (cellType == "Jump") {
 			alert.setHeaderText("JumpCell Selected");
 			alert.setContentText("Now you will jump to a random cell!");
-			alert.getDialogPane().setStyle("-fx-background-color: #add8e6;"+ " -fx-text-fill: white;");
-			} else if(cellType == "Undo") {
-				alert.setHeaderText("UndoCell Selected");
-				alert.setContentText("Now your last 3 moves will be removed!.");
-				alert.getDialogPane().setStyle("-fx-background-color: orange;"+ " -fx-text-fill: white;");
-			}
-			PauseTransition delay = new PauseTransition(Duration.seconds(2)); // time that the notification disappears after
-			delay.setOnFinished(event -> alert.hide());
-			
-			// Create a progress indicator
-			ProgressIndicator progressIndicator = new ProgressIndicator();
-			alert.getDialogPane().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+			alert.getDialogPane().setStyle("-fx-background-color: #add8e6;" + " -fx-text-fill: white;");
+		} else if (cellType == "Undo") {
+			alert.setHeaderText("UndoCell Selected");
+			alert.setContentText("Now your last 3 moves will be removed!.");
+			alert.getDialogPane().setStyle("-fx-background-color: orange;" + " -fx-text-fill: white;");
+		}
+		PauseTransition delay = new PauseTransition(Duration.seconds(2)); // time that the notification disappears after
+		delay.setOnFinished(event -> alert.hide());
 
-			// Set the progress indicator as the graphic of the alert
-			alert.setGraphic(progressIndicator);
-			delay.play();
-			alert.showAndWait();
-			if(level == 3 || level == 4) {
+		// Create a progress indicator
+		ProgressIndicator progressIndicator = new ProgressIndicator();
+		alert.getDialogPane().setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+
+		// Set the progress indicator as the graphic of the alert
+		alert.setGraphic(progressIndicator);
+		delay.play();
+		alert.showAndWait();
+		if (level == 3 || level == 4) {
 			startTimer();
-			}
+		}
 		Controller.BoardController.timer.play();
 	}
 
@@ -597,18 +557,9 @@ public class Game {
 			@Override
 			public void run() {
 				Cell helper = null;
-				for (Cell kingTempCell : cb.getCells()) {
-					if (!kingTempCell.getChildren().isEmpty()) {
-						if ((Piece) kingTempCell.getChildren().get(0) != null) {
-							Piece tempKingCheck = (Piece) kingTempCell.getChildren().get(0);
-							if (tempKingCheck.getColor().equals("white") && tempKingCheck instanceof King) {
-								helper = kingTempCell;
-								tempKing = tempKingCheck;
-								findBestRouteKing(helper);
-							}
-						}
-					}
-				}
+				helper = findPiece("King");
+				tempKing = (Piece) helper.getChildren().get(0);
+				findBestRouteKing(helper);
 
 				try {
 					Thread.sleep(speed);
@@ -620,19 +571,47 @@ public class Game {
 
 				int gameTimer = BoardController.seconds;
 				System.out.println("This is the timer :" + BoardController.seconds);
-				if (gameTimer % 10 == 0 || (gameTimer - 1) % 10 == 0) {
-					gameTimer=(int) Math.floor(gameTimer/10);
+				if ((gameTimer % 10 == 0 && gameTimer != 60)|| (gameTimer - 1) % 10 == 0) {
+					gameTimer = (int) Math.floor(gameTimer / 10);
 					if (array[gameTimer] == 0) {
 						System.out.println("First If is working : " + gameTimer);
 						speed -= 750;
 						if (speed < 0) {
 							speed = 0;
 						}
-						array[gameTimer]=1;
+						array[gameTimer] = 1;
 					}
-				} 
+				}
 			}
 		}, 750, 750);
+	}
+
+	public Cell findPiece(String pieceType) {
+		Cell pieceCell = null;
+		for (Cell temp : cb.getCells()) {
+			if (!temp.getChildren().isEmpty()) {
+				if ((Piece) temp.getChildren().get(0) != null) {
+					Piece tempPiece = (Piece) temp.getChildren().get(0);
+					if (pieceType == "Knight") {
+						if (tempPiece instanceof Knight) {
+							pieceCell = temp;
+							break;
+						}
+					} else if (pieceType == "Queen") {
+						if (tempPiece instanceof Queen) {
+							pieceCell = temp;
+							break;
+						}
+					} else if (pieceType == "King") {
+						if (tempPiece instanceof King) {
+							pieceCell = temp;
+							break;
+						}
+					}
+				}
+			}
+		}
+		return pieceCell;
 	}
 
 	public void addCellsToArraylist(Cell c) {
