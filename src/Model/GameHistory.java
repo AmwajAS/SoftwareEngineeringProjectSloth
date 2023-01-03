@@ -1,8 +1,8 @@
 package Model;
 
+import Controller.LoginController;
 
-
-public class GameHistory implements Comparable{
+public class GameHistory implements Comparable<GameHistory>{
 	
     private int level;
 	private User user;
@@ -116,12 +116,19 @@ public class GameHistory implements Comparable{
 
 
 	@Override
-	public int compareTo(Object o) {
+	public int compareTo(GameHistory o) {
 		// TODO Auto-generated method stub
-		//	if(this.getUser().getHighScore().compateTo(o.user.getHighScore()))
-		//	return this.getUser().getHighScore();
-		return 0;
+		
+			// TODO Auto-generated method stub
+			return Integer.compare(LoginController.getUser().getHighScore(), o.getUser().getHighScore());
+
+			
+
+			
+			
+		
 	}
+
 
 
 

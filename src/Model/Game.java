@@ -441,10 +441,10 @@ public class Game {
 					Controller.BoardController.scores.stop();
 					Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 					GameHistory historyGame = new GameHistory(level, LoginController.getUser(),
-							BoardController.totalScore, LocalDate.now().toString());
+					BoardController.totalScore, LocalDate.now().toString());
 					System.out.println(historyGame.toString());
 					try {
-						Sysdata.importGameHistorysFromJSON();
+						//Sysdata.importGameHistorysFromJSON();
 						Sysdata.getGamesHistoryList().add(historyGame);
 						Sysdata.exportGamesHistoryToJSON();
 					} catch (FileNotFoundException e) {
@@ -523,7 +523,7 @@ public class Game {
 					LocalDate.now().toString());
 			System.out.println(historyGame.toString());
 			try {
-				Sysdata.importGameHistorysFromJSON();
+				//Sysdata.importGameHistorysFromJSON();
 				Sysdata.getGamesHistoryList().add(historyGame);
 				Sysdata.exportGamesHistoryToJSON();
 			} catch (FileNotFoundException e) {

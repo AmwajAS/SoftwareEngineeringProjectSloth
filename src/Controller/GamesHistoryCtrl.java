@@ -64,16 +64,15 @@ public class GamesHistoryCtrl implements Initializable {
 	}
 
 	public void showData() {
-		try {
-			System.out.println("Bug Founded");
+		
+			//System.out.println("Bug Founded");
 
-			Sysdata.importGameHistorysFromJSON();
-			Sysdata.getThPlayers();
-			System.out.println(Sysdata.getGamesHistoryList());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			if (Sysdata.getGamesHistoryList().isEmpty()) {
+				Sysdata.getThPlayers();
+				System.out.println(Sysdata.getGamesHistoryList());
+			}
+
+
 
 	}
 
@@ -106,7 +105,7 @@ public class GamesHistoryCtrl implements Initializable {
 	@FXML
 	public void showAllHistory() {
 
-		
+		User user = LoginController.getUser();
 
 		first.setVisible(true);
 		second.setVisible(true);
@@ -114,13 +113,18 @@ public class GamesHistoryCtrl implements Initializable {
 
 		if (!gamesList.getItems().isEmpty()) {
 			gamesList.getItems().clear();
-			//sortHigthScores();
 
-				gamesList.getItems().addAll(Sysdata.getGamesHistoryList());
-			}
+
+			Collections.sort(Sysdata.getGamesHistoryList(), new Comparator<GameHistory>() {
+				@Override
+				public int compare(GameHistory g1, GameHistory g2) {
+					return Integer.compare(g2.getUser().getHighScore(), g1.getUser().getHighScore());
+				}
+			});
+			
+			gamesList.getItems().addAll(Sysdata.getGamesHistoryList());
 		}
-
-	
+	}
 
 	@FXML
 	public void showMyHistory() {
@@ -146,12 +150,12 @@ public class GamesHistoryCtrl implements Initializable {
 		Sysdata.getThPlayers();
 		sortedList.addAll(Sysdata.getGamesHistoryList());
 
-//		Collections.sort(sortedList, new Comparator<GameHistory>() {
-//			@Override
-//			public int compare(GameHistory g1, GameHistory g2) {
-//				return g2.getUser().getHighScore().compareTo(g1.getUser().getHighScore());
-//			}
-//		});
+		Collections.sort(sortedList, new Comparator<GameHistory>() {
+			@Override
+			public int compare(GameHistory g1, GameHistory g2) {
+				return Integer.compare(g2.getUser().getHighScore(), g1.getUser().getHighScore());
+			}
+		});
 	}
 
 }

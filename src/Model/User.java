@@ -102,16 +102,7 @@ public class User {
 	}
 
 
-//	@Override
-//	public int compareTo(User o) {
-//		// TODO Auto-generated method stub
-//			if(this.getHighScore().compateTo(o.getHighScore()))
-//				return this.getHighScore();
-//		
-//
-//		
-//		
-//	}
+
 
 
 

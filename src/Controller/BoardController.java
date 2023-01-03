@@ -1,6 +1,5 @@
 package Controller;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,7 +30,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
-
 public class BoardController implements Initializable {
 	@FXML
 	private Text time;
@@ -55,26 +53,26 @@ public class BoardController implements Initializable {
 	// var to the doTime() method
 	public final static Integer startTime = 60;
 	public static Integer seconds = startTime;
-	private int level=1;
+	private int level = 1;
 	public static Timeline scores;
 	public static Timeline timer;
-	//static var to save the totalPoints in game
-	public static int totalScore=0;
+	// static var to save the totalPoints in game
+	public static int totalScore = 0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//importing the games history
-		if(LoginController.getUser()==null) {
+		// importing the games history
+		if (LoginController.getUser() == null) {
 			System.out.println("no user!!error in import users");
 			playerName.setText("Player Name: Error! ");
-		}else{ 
-			playerName.setText("Player: " +LoginController.getUser().getUsername());   //set the user name on the board
+		} else {
+			playerName.setText("Player: " + LoginController.getUser().getUsername()); // set the user name on the board
 
 		}
-		scores=new Timeline();
+		scores = new Timeline();
 		timer = new Timeline();
 		// TODO Auto-generated method stub
-		Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),level);
+		Game game = new Game(chessBoard, MainMenuController.getThemeSelected(), level);
 		doTime(game);
 		doScore(game);
 		first.setStyle("-fx-background-color: #b9f6ca; ");
@@ -85,112 +83,91 @@ public class BoardController implements Initializable {
 				// TODO Auto-generated method stub
 				scores.stop();
 				timer.stop();
-				seconds=60;
+				seconds = 60;
 				game.setScore(0);
 				level = 1;
-				initialize(location,resources);
+				initialize(location, resources);
 			}
 
 		});
 		/*
-		second.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				scores.stop();
-				timer.stop();
-				seconds=60;
-				game.setScore(0);
-				level = 2;
-				initialize(location,resources);
-			}
-
-		});
-		third.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				scores.stop();
-				timer.stop();
-				seconds=60;
-				game.setScore(0);
-				level = 3;
-				game.stopTimer();
-				initialize(location,resources);
-			}
-
-		});
-		forth.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				scores.stop();
-				timer.stop();
-				seconds=60;
-				game.setScore(0);
-				level = 4;
-				game.stopTimer();
-				initialize(location,resources);
-			}
-
-		}); */
+		 * second.setOnAction(new EventHandler<ActionEvent>() {
+		 * 
+		 * @Override public void handle(ActionEvent arg0) { // TODO Auto-generated
+		 * method stub scores.stop(); timer.stop(); seconds=60; game.setScore(0); level
+		 * = 2; initialize(location,resources); }
+		 * 
+		 * }); third.setOnAction(new EventHandler<ActionEvent>() {
+		 * 
+		 * @Override public void handle(ActionEvent arg0) { // TODO Auto-generated
+		 * method stub scores.stop(); timer.stop(); seconds=60; game.setScore(0); level
+		 * = 3; game.stopTimer(); initialize(location,resources); }
+		 * 
+		 * }); forth.setOnAction(new EventHandler<ActionEvent>() {
+		 * 
+		 * @Override public void handle(ActionEvent arg0) { // TODO Auto-generated
+		 * method stub scores.stop(); timer.stop(); seconds=60; game.setScore(0); level
+		 * = 4; game.stopTimer(); initialize(location,resources); }
+		 * 
+		 * });
+		 */
 	}
 
-	//Level up function initialize a new game by the new level 
-	//It get the level and also the score in order to save the higher score 
-	public void levelUp(int currentlevel) throws IOException{
-		if(currentlevel==2){
+	// Level up function initialize a new game by the new level
+	// It get the level and also the score in order to save the higher score
+	public void levelUp(int currentlevel) throws IOException {
+		if (currentlevel == 2) {
 			second.setStyle("-fx-background-color: #89efa5; ");
 			scores.stop();
 			timer.stop();
 			timer = new Timeline();
-			seconds=60;
-			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),currentlevel);	
+			seconds = 60;
+			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(), currentlevel);
 			game.setScore(1);
 			game.stopTimer();
 			doTime(game);
 			doScore(game);
-		}else if(currentlevel==3) {
+		} else if (currentlevel == 3) {
 			third.setStyle("-fx-background-color: #78e495; ");
 			scores.stop();
 			timer.stop();
 			timer = new Timeline();
-			seconds=60;
-			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),currentlevel);	
+			seconds = 60;
+			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(), currentlevel);
 			game.setScore(1);
 			game.stopTimer();
 			doTime(game);
 			doScore(game);
-		}else if(currentlevel==4) {
+		} else if (currentlevel == 4) {
 			forth.setStyle("-fx-background-color: #4da865; ");
 			scores.stop();
 			timer.stop();
 			timer = new Timeline();
-			seconds=60;
-			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(),currentlevel);	
+			seconds = 60;
+			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(), currentlevel);
 			game.setScore(1);
 			game.stopTimer();
 			doTime(game);
 			doScore(game);
-		}else if(currentlevel==5) { //if he ends the last level correctly
-			User newU= new User(LoginController.getUser().getUsername(),LoginController.getUser().getPassword());
+		} else if (currentlevel == 5) { // if he ends the last level correctly
+			User newU = new User(LoginController.getUser().getUsername(), LoginController.getUser().getPassword());
 			scores.stop();
 			timer.stop();
-			//updating the game history
-			GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());
+			// updating the game history
+			GameHistory historyGame = new GameHistory(level, LoginController.getUser(), totalScore,
+					LocalDate.now().toString());
 			System.out.println(historyGame.toString());
 			try {
-				Sysdata.importGameHistorysFromJSON();
-				Sysdata.getGamesHistoryList().add(historyGame);
-				Sysdata.exportGamesHistoryToJSON();
+				if (Sysdata.getGamesHistoryList().isEmpty()) {
+				//	Sysdata.importGameHistorysFromJSON();
+				}
+					Sysdata.getGamesHistoryList().add(historyGame);
+					Sysdata.exportGamesHistoryToJSON();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			//updating the high Score for the player
-			try {			
+			// updating the high Score for the player
+			try {
 				Sysdata.getThPlayers().remove(LoginController.getUser());
 				newU.setHighScore(totalScore);
 				Sysdata.getThPlayers().add(newU);
@@ -199,7 +176,7 @@ public class BoardController implements Initializable {
 				e.printStackTrace();
 			}
 
-			//win pop-up
+			// win pop-up
 			Stage primaryStage = new Stage();
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("/View/YouWinWindow.fxml"));
@@ -231,13 +208,13 @@ public class BoardController implements Initializable {
 		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				seconds--;		
+				seconds--;
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if(level<4 && g.getScore()>=4){ //for level 1-3 -->must reach min 15 !! 4 for tests 
+					if (level < 4 && g.getScore() >= 4) { // for level 1-3 -->must reach min 15 !! 4 for tests
 						timer.stop();
 						level++;
-						totalScore=totalScore+g.getScore();
+						totalScore = totalScore + g.getScore();
 						System.out.println(totalScore);
 						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
 						try {
@@ -245,40 +222,44 @@ public class BoardController implements Initializable {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-					}else if(level==4 && g.getScore()>=4){ //for the last level
+					} else if (level == 4 && g.getScore() >= 4) { // for the last level
 						timer.stop();
 						level++;
-						totalScore=totalScore+g.getScore();
+						totalScore = totalScore + g.getScore();
 						System.out.println(totalScore);
 						try {
 							levelUp(level);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-					}else {  // if the player didn't reach the min points and the time is over
-						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.", ButtonType.OK);
+					} else { // if the player didn't reach the min points and the time is over
+						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.",
+								ButtonType.OK);
 						timer.stop();
-						totalScore=totalScore+g.getScore();
-						GameHistory historyGame= new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());
-						System.out.println( " axaXxXxX" +historyGame.toString());
+						totalScore = totalScore + g.getScore();
+						GameHistory historyGame = new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());
+						System.out.println(historyGame.toString());
 						System.out.println(LocalDate.now().toString());
 						try {
-							Sysdata.importGameHistorysFromJSON();
-							Sysdata.getGamesHistoryList().add(historyGame);
-							Sysdata.exportGamesHistoryToJSON();
+							if (Sysdata.getGamesHistoryList().isEmpty()) {
+								Sysdata.importGameHistorysFromJSON();
+							}
+								Sysdata.getGamesHistoryList().add(historyGame);
+								Sysdata.exportGamesHistoryToJSON();
+							
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						}
-					
+
 					}
-				} 
+				}
 			}
 		});
 		timer.getKeyFrames().add(frame);
 		timer.playFromStart();
 	}
 
-	//Score calculator
+	// Score calculator
 	private void doScore(Game g) {
 		scores = new Timeline();
 		scores.setCycleCount(Timeline.INDEFINITE);
@@ -288,7 +269,7 @@ public class BoardController implements Initializable {
 		KeyFrame frame = new KeyFrame(Duration.seconds(0.1), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				score.setText("\n\n Score : "+g.getScore());
+				score.setText("\n\n Score : " + g.getScore());
 				if (seconds <= 0) {
 					scores.stop();
 				}
@@ -297,15 +278,18 @@ public class BoardController implements Initializable {
 		scores.getKeyFrames().add(frame);
 		scores.playFromStart();
 	}
-	
+
 	@FXML
 	public void exitGame(ActionEvent event) throws IOException {
-	    // Close the current stage
-	    Stage currentStage = (Stage) exitGame.getScene().getWindow();
-	    currentStage.close();
-	    timer.stop();
+		// Close the current stage
+		timer.stop();
+		Stage currentStage = (Stage) exitGame.getScene().getWindow();
+		currentStage.close();
+		timer = new Timeline();
+		seconds = 60;
+
 		// TODO: handle exception
-	    //Starts a new stage
+		// Starts a new stage
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 		Scene scene = new Scene(root);
@@ -330,11 +314,11 @@ public class BoardController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
+
 	public static int getSeconds() {
-	    return seconds;
+		return seconds;
 	}
 
 }
