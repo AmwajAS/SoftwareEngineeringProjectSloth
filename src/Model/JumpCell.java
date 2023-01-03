@@ -88,6 +88,8 @@ public class JumpCell extends Cell {
 			if (temp != null) {
 				board.getCells().remove(temp);
 				temp = new JumpCell(iRand, jRand);
+				temp.setBorder(new Border(
+						new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 				temp.setName("Square" + iRand + jRand);
 				temp.setPrefHeight(100);
 				temp.setPrefWidth(100);
