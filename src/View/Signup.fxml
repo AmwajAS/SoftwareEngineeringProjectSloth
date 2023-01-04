@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="727.0" styleClass="loginframe" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignupController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="727.0" styleClass="loginframe" stylesheets="@application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignupController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,7 +34,7 @@
                   <Insets left="200.0" right="200.0" top="300.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="signupBt" mnemonicParsing="false" onAction="#signup" prefHeight="31.0" prefWidth="74.0" styleClass="list-cell" stylesheets="@application.css" text="Signup">
+            <Button fx:id="signupBt" mnemonicParsing="false" onAction="#signup" prefHeight="31.0" prefWidth="98.0" styleClass="list-cell" stylesheets="@application.css" text="Signup">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -61,4 +63,30 @@
          </children>
       </VBox>
    </center>
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="back" mnemonicParsing="false" onAction="#actionOnBack" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" stylesheets="@application.css">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label prefHeight="27.0" prefWidth="354.0" text="S L O T H   S I G N U P" textAlignment="CENTER" textFill="#1b5e20" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Times New Roman Bold" size="30.0" />
+               </font>
+               <effect>
+                  <Reflection fraction="1.0" topOpacity="0.0" />
+               </effect>
+               <HBox.margin>
+                  <Insets left="150.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>
