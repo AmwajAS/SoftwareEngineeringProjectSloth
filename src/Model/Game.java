@@ -21,6 +21,8 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -455,44 +457,7 @@ public class Game {
 						e.printStackTrace();
 					}
 				}
-				if (score < 5) {
-					System.out.println("Game Over!!!");
-					Alert alert = new Alert(AlertType.WARNING);
-					alert.setTitle("Game Over");
-					alert.setHeaderText("Please try again.");
-					ButtonType buttonTypeTryAgain = new ButtonType("Try Again");
-					ButtonType buttonTypeExit = new ButtonType("Exit");
-					alert.getButtonTypes().setAll(buttonTypeTryAgain, buttonTypeExit);
-					Optional<ButtonType> result = alert.showAndWait();
-					if (result.isPresent()) {
-						if (result.get() == buttonTypeTryAgain) {
-							controller.restartTrigger();
-						} else if (result.get() == buttonTypeExit) {
-							controller.exitTrigger();
-						}
-					}
-				} else if (score >= 5) {
-					System.out.println("Congratulations!!");
-					Alert alert = new Alert(AlertType.WARNING);
-					alert.setTitle("Congratulations!!");
-					alert.setHeaderText("Level Up!");
-					ButtonType buttonTypeTryAgain = new ButtonType("Go To Next Level!");
-					ButtonType buttonTypeExit = new ButtonType("Exit");
-					alert.getButtonTypes().setAll(buttonTypeTryAgain, buttonTypeExit);
-					Optional<ButtonType> result = alert.showAndWait();
-					if (result.isPresent()) {
-						if (result.get() == buttonTypeTryAgain) {
-							try {
-								controller.levelUpTrigger(level + 1);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						} else if (result.get() == buttonTypeExit) {
-							controller.exitTrigger();
-						}
-					}
-				}
+				makeAlert("loseAlert");
 				cell.setOccupied(true);
 				initialSquare.getChildren().removeAll();
 				initialSquare.setOccupied(false);
@@ -531,15 +496,6 @@ public class Game {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			if (score < 5) {
-				System.out.println("Game Over!!!");
-				makeAlert("loseAlert");
-			} else if (score >= 5) {
-				makeAlert("winAlert");
-				System.out.println("Congratulations!!");
-
-			}
-
 		}
 		cell.setOccupied(true);
 		initialSquare.getChildren().removeAll();
@@ -547,6 +503,7 @@ public class Game {
 		currentPiece.setPosX(cell.getX());
 		currentPiece.setPosY(cell.getY());
 		deselectPiece(true);
+		makeAlert("loseAlert");
 	}
 
 	public void makeAlert(String type) {
@@ -555,6 +512,11 @@ public class Game {
 			alert.setTitle("Game Over");
 			alert.setHeaderText("Sorry, you lost the game!");
 			alert.setContentText("Better luck next time!");
+			Image image = new Image("/images/sadbavo.png");
+			ImageView view = new ImageView(image);
+			view.setFitHeight(80);
+		    view.setFitWidth(80);
+			alert.setGraphic(view);
 			ButtonType buttonTypeTryAgain = new ButtonType("Try Again");
 			ButtonType buttonTypeExit = new ButtonType("Exit");
 			alert.getButtonTypes().setAll(buttonTypeTryAgain, buttonTypeExit);
@@ -562,27 +524,6 @@ public class Game {
 			if (result.isPresent()) {
 				if (result.get() == buttonTypeTryAgain) {
 					controller.restartTrigger();
-				} else if (result.get() == buttonTypeExit) {
-					controller.exitTrigger();
-				}
-			}
-		} else if (type == "winAlert") {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Congratulations!!");
-			alert.setHeaderText("Well Done!");
-			alert.setContentText("Your score is higher than 15!");
-			ButtonType buttonTypeTryAgain = new ButtonType("Go To Next Level!");
-			ButtonType buttonTypeExit = new ButtonType("Exit");
-			alert.getButtonTypes().setAll(buttonTypeTryAgain, buttonTypeExit);
-			Optional<ButtonType> result = alert.showAndWait();
-			if (result.isPresent()) {
-				if (result.get() == buttonTypeTryAgain) {
-					try {
-						controller.levelUpTrigger(level + 1);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				} else if (result.get() == buttonTypeExit) {
 					controller.exitTrigger();
 				}

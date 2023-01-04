@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,8 +23,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -222,12 +227,22 @@ public class BoardController implements Initializable {
 				}
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if (level < 4 && g.getScore() >= 5) { // for level 1-3 -->must reach min 15 !! 4 for tests
+					if (level < 4 && g.getScore() >= 4) { // for level 1-3 -->must reach min 15 !! 4 for tests
 						timer.stop();
 						level++;
 						totalScore = totalScore + g.getScore();
 						System.out.println(totalScore);
-						Alerts.showAlert(AlertType.INFORMATION, "Level Up!", "Congrats Level UP!!", ButtonType.OK);
+						ButtonType levelUpButton = new ButtonType("Next Level");
+						Alert alert = new Alert(AlertType.INFORMATION, "", levelUpButton);
+						alert.setTitle("Well Done !");
+						alert.setHeaderText("Congratulations !");
+						alert.setContentText("You completed level "+(level-1)+" !");
+						Image image = new Image("/images/bravo.png");
+						ImageView view = new ImageView(image);
+						view.setFitHeight(80);
+					    view.setFitWidth(80);
+						alert.setGraphic(view);
+						alert.show();
 						try {
 							levelUp(level);
 						} catch (IOException e) {
