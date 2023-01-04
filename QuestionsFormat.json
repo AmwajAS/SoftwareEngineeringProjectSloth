@@ -78,16 +78,16 @@
     "level" : 3,
     "team" : "Sloth"
   }, {
-    "question" : "Software can be tested a s:",
-    "answers" : [ "Black box (functional)", "White box (structural)", "Answers 1 and 2 are correct", "Non of the above" ],
-    "correct_ans" : 4,
-    "level" : 1,
+    "question" : "What does AGILE means?",
+    "answers" : [ "iterative approach to project management and software development that helps teams deliver value to their customers faster and with                  fewer headaches.", "The operational domain imposes requirements.", "Describe functionality or system services.", "All of the above" ],
+    "correct_ans" : 3,
+    "level" : 2,
     "team" : "Sloth"
   }, {
-    "question" : "What does AGILE means XYZ?",
-    "answers" : [ "iterative approach to project management and software development that helps teams deliver value to their customers faster and with                  fewer headaches.", "The operational domain imposes requirements.", "Describe functionality or system services.", "All of the above" ],
-    "correct_ans" : 2,
-    "level" : 2,
+    "question" : "Software can be tested as:",
+    "answers" : [ "Black box (functional)", "White box (structural)", "Answers 1 and 2 are correct", "Non of the above" ],
+    "correct_ans" : 0,
+    "level" : 1,
     "team" : "Sloth"
   } ]
 }

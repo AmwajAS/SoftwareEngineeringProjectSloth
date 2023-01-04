@@ -1,10 +1,11 @@
 package Controller;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import Alerts.Alerts;
 import Model.Question;
 import Utils.QuestionLevel;
 import javafx.application.Platform;
@@ -16,9 +17,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -44,7 +47,7 @@ public class EditQuestionController implements Initializable {
 	private Button clearBt;
 	@FXML
 	private Button back;
-	private Question qedit = QuestionMangController.getEditSelection();
+	private Question qedit = QuestionMangController.getEditSelection(); // the selected question from the QuestionManagment view
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -56,14 +59,14 @@ public class EditQuestionController implements Initializable {
 		for (QuestionLevel ql : QuestionLevel.values()) {
 			level.getItems().add(ql);
 		}
-
+         //showing the fourth answers to the selected question
 		for (int i = 0; i < qedit.getAnswers().length; i++) {
 			firstAnswer.setText(qedit.getAnswers()[0]);
 			secondAnswer.setText(qedit.getAnswers()[1]);
 			thirdAnswer.setText(qedit.getAnswers()[2]);
 			fourthAnswer.setText(qedit.getAnswers()[3]);
 		}
-
+        //showing the question other data
 		level.getSelectionModel().select(checkLevel(qedit.getLevel()));
 		correctAnswer.getSelectionModel().select(qedit.getCorrect_ans());
 
@@ -71,7 +74,7 @@ public class EditQuestionController implements Initializable {
 
 	@FXML
 	public void editQuestion() {
-
+        //defining variables to read the field from the screen.
 		String questionEdited = null;
 		String firstEdited = null;
 		String secondEdited = null;
@@ -80,6 +83,7 @@ public class EditQuestionController implements Initializable {
 		QuestionLevel qlEdited = null;
 		int correctEdited = 0;
 		try {
+	        //reading the fields from the screen.
 			questionEdited = qtext.getText();
 			firstEdited = firstAnswer.getText();
 			secondEdited = secondAnswer.getText();
@@ -89,19 +93,21 @@ public class EditQuestionController implements Initializable {
 			qlEdited = level.getSelectionModel().getSelectedItem();
 			correctEdited = correctAnswer.getSelectionModel().getSelectedItem();
 
-		} catch (NullPointerException e) {
+		} catch (NullPointerException e) { //if any field of the fields is empty
 			// TODO: handle exception
-			System.out.println("Plesae Fill All Fileds!");
+			Alerts.showAlert(AlertType.WARNING, "Question Managments", "Plesae Fill All Fileds!", ButtonType.CLOSE);
 		}
 		String[] answersEdited = { firstEdited, secondEdited, thirdEdited, fourthEdited };
 
+		//comparing the previous question and the new question (before and after editing)
 		if (((!qedit.getQuestion().equals(questionEdited)) || (qedit.getCorrect_ans() != correctEdited)
 				|| (!qedit.getAnswers().equals(answersEdited) || checkLevel(qedit.getLevel()) != qlEdited))) {
-
+			
+         //creating a new question object
 			Question question = new Question(questionEdited, answersEdited, correctEdited, checkLevelToInt(qlEdited),
 					"Sloth");
 			try {
-				// Sysdata.importQuestionsFromJSON();
+				// updating the question list and writing to the Json file
 				Sysdata.getImportedQuestions().remove(qedit);
 				Sysdata.getImportedQuestions().add(question);
 				Sysdata.exportQuestionsToJSON();
@@ -119,7 +125,9 @@ public class EditQuestionController implements Initializable {
 	void clear() {
 		clearning();
 	}
-
+/*
+ * clear all data in the fields.
+ */
 	public void clearning() {
 
 		level.getSelectionModel().clearSelection();
@@ -141,6 +149,9 @@ public class EditQuestionController implements Initializable {
 		}
 	}
 
+	/*
+	 * converting the question level from int to QuestionLevel enum
+	 */
 	public QuestionLevel checkLevel(int level) {
 
 		Question qedit = QuestionMangController.getEditSelection();
@@ -157,6 +168,9 @@ public class EditQuestionController implements Initializable {
 
 	}
 
+	/*
+	 * converting the question level from QuestionLevel enum to int
+	 */
 	public int checkLevelToInt(QuestionLevel level) {
 
 		int levelCompare;
@@ -172,17 +186,20 @@ public class EditQuestionController implements Initializable {
 
 	}
 
-	@FXML
-	public void actionOnBack(ActionEvent event) throws IOException {
-		back.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e) -> {
-
-		});
-		{
+	
+	 @FXML
+		public void actionOnBack(ActionEvent event) throws IOException {
+		    // Close the current stage
+		    Stage currentStage = (Stage) back.getScene().getWindow();
+		    currentStage.close();
+		    //Starts a new stage
 			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionsManagement.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionMangement.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Questions Managment");
+			primaryStage.setTitle("Sloth Chess Board");
+			primaryStage.setMinHeight(800);
+			primaryStage.setMinWidth(900);
 			primaryStage.show();
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
@@ -191,7 +208,18 @@ public class EditQuestionController implements Initializable {
 					System.exit(0);
 				}
 			});
+			FileInputStream input;
+			try {
+				input = new FileInputStream("./src/images/logo.png");
+				Image img = new Image(input);
+				primaryStage.getIcons().add(img); // icon
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
 		}
-	}
+
 
 }

@@ -21,7 +21,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="31.0">
+                  <Button fx:id="back" mnemonicParsing="false" onAction="#actionOnBack" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" stylesheets="@application.css">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -35,7 +35,7 @@
                         <Font name="Times New Roman Bold" size="30.0" />
                      </font>
                      <effect>
-                        <Reflection bottomOpacity="0.83" fraction="1.0" topOpacity="0.0" />
+                        <Reflection fraction="1.0" topOpacity="0.0" />
                      </effect>
                      <HBox.margin>
                         <Insets left="250.0" />
@@ -59,24 +59,24 @@
                   <Insets left="20.0" top="30.0" />
                </VBox.margin>
             </TextArea>
-            <TextArea fx:id="firstAnswer" prefHeight="38.0" prefWidth="475.0" promptText="First Answer..." styleClass="Feild" stylesheets="@application.css">
+            <TextArea fx:id="firstAnswer" prefHeight="55.0" prefWidth="631.0" promptText="First Answer..." styleClass="Feild" stylesheets="@application.css">
                <VBox.margin>
-                  <Insets left="20.0" top="30.0" />
+                  <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </TextArea>
-            <TextArea fx:id="secondAnswer" prefHeight="39.0" prefWidth="475.0" promptText="Second Answer..." styleClass="Feild" stylesheets="@application.css">
+            <TextArea fx:id="secondAnswer" prefHeight="58.0" prefWidth="631.0" promptText="Second Answer..." styleClass="Feild" stylesheets="@application.css">
                <VBox.margin>
-                  <Insets left="20.0" top="30.0" />
+                  <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </TextArea>
-            <TextArea fx:id="thirdAnswer" prefHeight="39.0" prefWidth="475.0" promptText="Third Answer..." styleClass="Feild" stylesheets="@application.css">
+            <TextArea fx:id="thirdAnswer" prefHeight="62.0" prefWidth="631.0" promptText="Third Answer..." styleClass="Feild" stylesheets="@application.css">
                <VBox.margin>
-                  <Insets left="20.0" top="30.0" />
+                  <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </TextArea>
-            <TextArea fx:id="fourthAnswer" prefHeight="34.0" prefWidth="475.0" promptText="Fourth Answer..." styleClass="Feild" stylesheets="@application.css">
+            <TextArea fx:id="fourthAnswer" prefHeight="67.0" prefWidth="631.0" promptText="Fourth Answer..." styleClass="Feild" stylesheets="@application.css">
                <VBox.margin>
-                  <Insets left="20.0" top="30.0" />
+                  <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </TextArea>
             <ComboBox fx:id="level" prefHeight="46.0" prefWidth="220.0" promptText="Level" stylesheets="@application.css">
@@ -106,7 +106,7 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <Button fx:id="addBt" mnemonicParsing="false" onAction="#addQuestion" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="ADD">
+            <Button fx:id="addBt" mnemonicParsing="false" onAction="#addQuestion" prefHeight="23.0" prefWidth="119.0" stylesheets="@application.css" text="ADD">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
@@ -114,7 +114,7 @@
                   <Insets bottom="20.0" left="20.0" top="500.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="clearBt" mnemonicParsing="false" onAction="#clear" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" text="CLEAR">
+            <Button fx:id="clearBt" mnemonicParsing="false" onAction="#clear" prefHeight="23.0" prefWidth="121.0" stylesheets="@application.css" text="CLEAR">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>

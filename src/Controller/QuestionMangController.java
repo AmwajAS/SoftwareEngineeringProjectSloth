@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import Alerts.Alerts;
 import Model.Question;
 import Utils.QuestionLevel;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -24,11 +26,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -74,7 +78,11 @@ public class QuestionMangController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
-		loadData();
+		// first we check if the question list from the json is empty
+		if (Sysdata.getImportedQuestions().isEmpty()) {
+			loadData();
+
+		}
 		ObList = FXCollections.observableList(Sysdata.getImportedQuestions());
 		showTableContent();
 		diffSelect.getItems().clear();
@@ -82,16 +90,21 @@ public class QuestionMangController implements Initializable {
 			diffSelect.getItems().add(ql);
 		}
 		loadChart();
-		try {
-			Sysdata.importUsersFromJSON();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(Sysdata.getThPlayers());
+//		try {
+//			Sysdata.importUsersFromJSON();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println(Sysdata.getThPlayers());
 
 	}
 
+	/*
+	 * this method import the question list from the Json file and returns an array
+	 * list with question imported.
+	 * 
+	 */
 	public void loadData() {
 
 		try {
@@ -102,6 +115,10 @@ public class QuestionMangController implements Initializable {
 		}
 	}
 
+	/*
+	 * this method show all the imported question in a table, question column and
+	 * action column that contains a delete and edit buttons.
+	 */
 	public void showTableContent() {
 
 		question.setCellValueFactory(new PropertyValueFactory<Question, Question>("Question"));
@@ -117,13 +134,13 @@ public class QuestionMangController implements Initializable {
 						setText(null);
 
 					} else {
-					    deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+						// the delete button -
+						deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
 						editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
 						deleteIcon.setStyle(" -fx-cursor: hand ;" + "-glyph-size:28px;" + "-fx-fill:#ff1744;");
 						editIcon.setStyle(" -fx-cursor: hand ;" + "-glyph-size:28px;" + "-fx-fill:#00E676;");
-
+						// deleting the selected question and update the questions list
 						deleteIcon.setOnMouseClicked((MouseEvent event) -> {
-
 							Question SelectedQuestion = questionsTable.getSelectionModel().getSelectedItem();
 							Sysdata.getImportedQuestions().remove(SelectedQuestion);
 							ObList.remove(SelectedQuestion);
@@ -137,16 +154,24 @@ public class QuestionMangController implements Initializable {
 							// showTableContent();
 
 						});
+						// the edit button -
 						editIcon.setOnMouseClicked((MouseEvent event) -> {
-
+                            //getting the selected question
 							editSelection = questionsTable.getSelectionModel().getSelectedItem();
+							// opening a new window for the edit
 							Stage primaryStage = new Stage();
 							Parent root;
 							try {
+								// Close the current stage
+								Stage currentStage = (Stage) editIcon.getScene().getWindow();
+								currentStage.close();
+								// Starts a new stage
 								root = FXMLLoader.load(getClass().getResource("/View/EditQuestion.fxml"));
 								Scene scene = new Scene(root);
 								primaryStage.setScene(scene);
 								primaryStage.setTitle("Sloth Chess - Edit Question");
+								primaryStage.setMinHeight(800);
+								primaryStage.setMinWidth(900);
 								primaryStage.show();
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
@@ -171,7 +196,8 @@ public class QuestionMangController implements Initializable {
 							}
 
 						});
-
+						
+                        //putting the delete and the edit buttons in the table column
 						HBox actBox = new HBox(editIcon, deleteIcon);
 						HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
 						HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
@@ -190,11 +216,17 @@ public class QuestionMangController implements Initializable {
 		questionsTable.setItems(ObList);
 	}
 
+	/*
+	 * refresh the table after deleting any question
+	 */
 	public void refreshTable() {
 		ObList = FXCollections.observableList(Sysdata.getImportedQuestions());
 		questionsTable.setItems(ObList);
 	}
-
+	
+    /*
+    * this functions used to filter the question by its level.
+    */
 	@FXML
 	public void filterByQuestionLevel(ActionEvent event) throws IOException {
 
@@ -203,7 +235,8 @@ public class QuestionMangController implements Initializable {
 			System.out.println(filt);
 			int levelCompare;
 
-			if (filt == QuestionLevel.Easy) {
+			//converting the enum to an int for the question level comparing
+			if (filt == QuestionLevel.Easy) {    
 				levelCompare = 1;
 			} else if (filt == QuestionLevel.Meduim) {
 				levelCompare = 2;
@@ -223,16 +256,23 @@ public class QuestionMangController implements Initializable {
 			filterdList = FXCollections.observableList(result);
 			questionsTable.setItems(filterdList);
 
+		}else {
+			Alerts.showAlert(AlertType.WARNING, "Question Managments", "Please Select a Question Diffecultly level", ButtonType.CLOSE);
 		}
 
 	}
-
+/*
+ * this method is one of the Design patterns, the chart will be updated as the questions will be updated.
+ * this chart describes the number of each question in a specific level.
+ */
 	public void loadChart() {
-
+  
+		//counters for each level 
 		int easyCounter = 0;
 		int meduimCounter = 0;
 		int hardCounter = 0;
 
+		//counting the questions by level 
 		for (Question question : Sysdata.getImportedQuestions()) {
 			if (question.getLevel() == 1) {
 				easyCounter++;
@@ -242,6 +282,7 @@ public class QuestionMangController implements Initializable {
 				hardCounter++;
 			}
 		}
+		//designing the chart
 		chart.setTitle("Questions By Levels");
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
 				new PieChart.Data(QuestionLevel.Easy.toString(), easyCounter),
@@ -268,12 +309,16 @@ public class QuestionMangController implements Initializable {
 			});
 		}
 	}
-
+/*
+ * clear all data
+ */
 	@FXML
 	void clear() {
 		clearning();
 	}
-
+	/*
+	 * clear the selection
+	 */
 	public void clearning() {
 		diffSelect.getSelectionModel().clearSelection();
 		refreshTable();
@@ -287,14 +332,16 @@ public class QuestionMangController implements Initializable {
 		QuestionMangController.editSelection = editSelection;
 	}
 
+	
 	@FXML
 	public void addMoreQuestions(ActionEvent event) throws IOException {
-
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/AddQuestion.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
+		primaryStage.setMinHeight(800);
+		primaryStage.setMinWidth(900);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -314,14 +361,14 @@ public class QuestionMangController implements Initializable {
 		}
 
 	}
-	
+
 	@FXML
 	public void exitGame(ActionEvent event) throws IOException {
-	    // Close the current stage
-	    Stage currentStage = (Stage) exitBT.getScene().getWindow();
-	    currentStage.close();
+		// Close the current stage
+		Stage currentStage = (Stage) exitBT.getScene().getWindow();
+		currentStage.close();
 		// TODO: handle exception
-	    //Starts a new stage
+		// Starts a new stage
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 		Scene scene = new Scene(root);
@@ -346,7 +393,6 @@ public class QuestionMangController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 

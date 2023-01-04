@@ -22,7 +22,7 @@
          <children>
             <HBox prefHeight="59.0" prefWidth="219.0">
                <children>
-                  <Button fx:id="exitBT" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#exitGame" prefHeight="22.0" prefWidth="31.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="exitBT" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#exitGame" prefHeight="26.0" prefWidth="25.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -87,10 +87,10 @@
    <left>
       <HBox prefHeight="586.0" prefWidth="871.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="questionsTable" prefHeight="547.0" prefWidth="612.0" styleClass="list-cell" stylesheets="@application.css">
+            <TableView fx:id="questionsTable" prefHeight="548.0" prefWidth="612.0" styleClass="list-cell" stylesheets="@application.css">
                <columns>
                   <TableColumn fx:id="question" prefWidth="461.9100284576416" text="Question" />
-                  <TableColumn fx:id="action" prefWidth="124.0" text="Action" />
+                  <TableColumn fx:id="action" prefWidth="122.39996337890625" text="Action" />
                </columns>
                <HBox.margin>
                   <Insets left="5.0" />
