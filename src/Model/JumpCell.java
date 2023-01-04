@@ -16,6 +16,7 @@ public class JumpCell extends Cell {
 
 	public JumpCell(int x, int y) {
 		super(x, y);
+		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 	}
 
 	@Override
@@ -41,6 +42,8 @@ public class JumpCell extends Cell {
 			for (Cell c : board.getCells()) {
 				if ((c.getX() == xRand && c.getY() == yRand) && !(c.isOccupied()) && !(c instanceof JumpCell)) {
 					temp = c;
+					System.out.println(temp.getName());
+
 				}
 			}
 		} while (temp == null);
@@ -57,14 +60,12 @@ public class JumpCell extends Cell {
 		int j = cell.getY();
 		int tempCounter = cell.getCounter();
 		board.getCells().remove(cell);
-		System.out.println("****This Is the new jumpcell****");
 		Cell newCell = new Cell(i, j);
 		newCell.setName("Square" + i + j);
 		newCell.setCounter(tempCounter);
 		newCell.setPrefHeight(100);
 		newCell.setPrefWidth(100);
-		newCell.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		newCell.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		board.getCells().add(newCell);
 		board.getChessBoard().add(newCell, newCell.getX(), newCell.getY(), 1, 1);
 		board.setCells(board.getCells());
@@ -81,8 +82,6 @@ public class JumpCell extends Cell {
 						if (c.getChildren().isEmpty()) {
 							if (c.getX() != 0 && c.getY() != 0) {
 								temp = c;
-								System.out.println(temp.getName());
-
 							}
 						}
 					}
@@ -92,8 +91,7 @@ public class JumpCell extends Cell {
 			if (temp != null) {
 				board.getCells().remove(temp);
 				temp = new JumpCell(iRand, jRand);
-				temp.setBorder(new Border(
-						new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				temp.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 				temp.setName("Square" + iRand + jRand);
 				temp.setPrefHeight(100);
 				temp.setPrefWidth(100);

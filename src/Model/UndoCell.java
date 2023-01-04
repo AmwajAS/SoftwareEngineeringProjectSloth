@@ -15,6 +15,7 @@ public class UndoCell extends Cell {
 
 	public UndoCell(int x, int y) {
 		super(x, y);
+		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 	}
 
 	public String toString() {
@@ -75,14 +76,12 @@ public class UndoCell extends Cell {
 		int i = cell.getX();
 		int j = cell.getY();
 		board.getCells().remove(cell);
-		System.out.println("*This Is the new UndoCell*");
 		Cell newCell = new Cell(i, j);
 		newCell.setName("Square" + i + j);
 		newCell.setCounter(tempCounter);
 		newCell.setPrefHeight(100);
 		newCell.setPrefWidth(100);
-		newCell.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		newCell.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		newCell.getChildren().add(tempKnight);
 		board.getCells().add(newCell);
 		board.getChessBoard().add(newCell, newCell.getX(), newCell.getY(), 1, 1);
@@ -102,7 +101,6 @@ public class UndoCell extends Cell {
 							if (c.getX() != 0 && c.getY() != 0) {
 								temp = c;
 								System.out.println(temp.getName());
-
 							}
 						}
 					}
@@ -112,8 +110,7 @@ public class UndoCell extends Cell {
 			if (temp != null) {
 				board.getCells().remove(temp);
 				temp = new UndoCell(iRand, jRand);
-				temp.setBorder(new Border(
-						new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				temp.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 				temp.setName("Square" + iRand + jRand);
 				temp.setPrefHeight(100);
 				temp.setPrefWidth(100);

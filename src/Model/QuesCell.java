@@ -41,6 +41,7 @@ public class QuesCell extends Cell{
 	public QuesCell(int x, int y) {
 		super(x, y);
 		this.setStyle("-fx-background-image: url('"+image+"'); -fx-background-size: 100px 100px; -fx-background-position: center center; -fx-background-repeat:no-repeat;");
+		this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 	}
 
 	public Question getQuestion() {
@@ -62,13 +63,11 @@ public class QuesCell extends Cell{
 		int i = cell.getX();
 		int j = cell.getY();
 		board.getCells().remove(cell);
-		System.out.println("This Is the new Quesrion Cell");
 		Cell newCell = new Cell(i, j);
 		newCell.setName("Square" + i + j);
 		newCell.setPrefHeight(100);
 		newCell.setPrefWidth(100);
-		newCell.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		newCell.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		newCell.getChildren().add(tempKnight);
 		board.getCells().add(newCell);
 		board.getChessBoard().add(newCell, newCell.getX(), newCell.getY(), 1, 1);
@@ -97,8 +96,7 @@ public class QuesCell extends Cell{
 			if (temp != null) {
 				board.getCells().remove(temp);
 				temp = new QuesCell(iRand, jRand);
-				temp.setBorder(new Border(
-						new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				temp.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 				temp.setName("Square" + iRand + jRand);
 				temp.setPrefHeight(100);
 				temp.setPrefWidth(100);
