@@ -33,7 +33,7 @@
                         <Font name="Times New Roman Bold" size="30.0" />
                      </font>
                      <effect>
-                        <Reflection bottomOpacity="0.83" fraction="1.0" topOpacity="0.0" />
+                        <Reflection fraction="1.0" topOpacity="0.0" />
                      </effect>
                      <HBox.margin>
                         <Insets left="150.0" />
@@ -41,7 +41,7 @@
                   </Label>
                </children>
             </HBox>
-            <Separator prefHeight="2.0" prefWidth="696.0" styleClass="list-cell" stylesheets="@application.css" />
+            <Separator prefHeight="14.0" prefWidth="742.0" styleClass="list-cell" stylesheets="@application.css" />
          </children>
       </VBox>
    </top>
@@ -50,9 +50,9 @@
          <children>
             <HBox prefHeight="106.0" prefWidth="736.0">
                <children>
-                  <Button fx:id="allHistory" contentDisplay="TOP" mnemonicParsing="false" onAction="#showAllHistory" prefHeight="59.0" prefWidth="78.0" style="-fx-background-color: transparent;" stylesheets="@application.css" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="allHistory" contentDisplay="TOP" mnemonicParsing="false" onAction="#showAllHistory" prefHeight="79.0" prefWidth="84.0" style="-fx-background-color: transparent;" stylesheets="@application.css" text="me VS all" textAlignment="CENTER" wrapText="true">
                      <graphic>
-                        <ImageView fitHeight="39.0" fitWidth="63.0" pickOnBounds="true">
+                        <ImageView fitHeight="50.0" fitWidth="63.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../../../../OH75TO1-ai.png" />
                            </image>
@@ -74,10 +74,13 @@
                   </Button>
                   <Button fx:id="myHistory" contentDisplay="TOP" mnemonicParsing="false" onAction="#showMyHistory" prefHeight="71.0" prefWidth="106.0" style="-fx-background-color: transparent;" stylesheets="@application.css" text="my history" textAlignment="CENTER" wrapText="true">
                      <graphic>
-                        <ImageView fitHeight="39.0" fitWidth="63.0" pickOnBounds="true" />
+                        <ImageView fitHeight="47.0" fitWidth="54.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../../../Downloads/strategy%20(1).png" />
+                           </image></ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="me Against all players">
+                        <Tooltip text="my games history">
                            <font>
                               <Font name="System Bold Italic" size="11.0" />
                            </font>
@@ -86,6 +89,9 @@
                      <font>
                         <Font name="Times New Roman Bold" size="15.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
                   </Button>
                </children>
             </HBox>
@@ -123,7 +129,7 @@
                         <Insets left="70.0" />
                      </HBox.margin>
                   </Label>
-                  <Label prefHeight="20.0" prefWidth="82.0" text="Hight Score">
+                  <Label fx:id="hightScoreLabel" prefHeight="20.0" prefWidth="82.0" text="Hight Score">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

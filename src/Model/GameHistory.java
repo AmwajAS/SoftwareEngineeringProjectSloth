@@ -68,7 +68,9 @@ public class GameHistory implements Comparable<GameHistory>{
 		this.gameDate = gameDate;
 	}
 
-
+/*
+ * this toString used to print all players history (me VS all)
+ */
 	@Override
 	public String toString() {
 		return user.getUsername() +"               "+level +"                          " + finalScore +"                          "	
