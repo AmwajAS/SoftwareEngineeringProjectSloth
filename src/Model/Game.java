@@ -78,6 +78,9 @@ public class Game {
 			@Override
 			public void handle(MouseEvent event) {
 				try {
+					if(controller.getFlag()==0) {
+						controller.setFlag(1);
+					}
 					EventTarget target = event.getTarget();
 					// Clicked on cell
 					if (target.toString().equals("Square")) {
@@ -444,7 +447,6 @@ public class Game {
 					stopTimer();
 					GameHistory historyGame = new GameHistory(level, LoginController.getUser(),
 							BoardController.totalScore, LocalDate.now().toString());
-					System.out.println(historyGame.toString());
 					try {
 						// Sysdata.importGameHistorysFromJSON();
 						Sysdata.getGamesHistoryList().add(historyGame);
@@ -453,7 +455,7 @@ public class Game {
 						e.printStackTrace();
 					}
 				}
-				if (score < 15) {
+				if (score < 5) {
 					System.out.println("Game Over!!!");
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Game Over");
@@ -469,7 +471,7 @@ public class Game {
 							controller.exitTrigger();
 						}
 					}
-				} else if (score >= 15) {
+				} else if (score >= 5) {
 					System.out.println("Congratulations!!");
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Congratulations!!");
@@ -504,8 +506,50 @@ public class Game {
 			}
 		});
 	}
+	
+	private void killPiece(Cell cell) {
+		if (!currentPiece.getPossibleMoves().contains(cell.getName()))
+			return;
 
-	private void makeAlert(String type) {
+		Cell initialSquare = (Cell) currentPiece.getParent();
+		Piece temp = (Piece) cell.getChildren().get(0);
+		cell.getChildren().remove(0);
+		cell.getChildren().add(currentPiece);
+		if (temp instanceof Knight) {
+			this.game = false;
+			BoardController.totalScore = BoardController.totalScore + getScore();
+
+			Controller.BoardController.timer.stop();
+			Controller.BoardController.scores.stop();
+			GameHistory historyGame = new GameHistory(level, LoginController.getUser(), BoardController.totalScore,
+					LocalDate.now().toString());
+			// System.out.println(historyGame.toString());
+			try {
+				// Sysdata.importGameHistorysFromJSON();
+				Sysdata.getGamesHistoryList().add(historyGame);
+				Sysdata.exportGamesHistoryToJSON();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			if (score < 5) {
+				System.out.println("Game Over!!!");
+				makeAlert("loseAlert");
+			} else if (score >= 5) {
+				makeAlert("winAlert");
+				System.out.println("Congratulations!!");
+
+			}
+
+		}
+		cell.setOccupied(true);
+		initialSquare.getChildren().removeAll();
+		initialSquare.setOccupied(false);
+		currentPiece.setPosX(cell.getX());
+		currentPiece.setPosY(cell.getY());
+		deselectPiece(true);
+	}
+
+	public void makeAlert(String type) {
 		if (type == "loseAlert") {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Game Over");
@@ -580,47 +624,7 @@ public class Game {
 		}
 	}
 
-	private void killPiece(Cell cell) {
-		if (!currentPiece.getPossibleMoves().contains(cell.getName()))
-			return;
 
-		Cell initialSquare = (Cell) currentPiece.getParent();
-		Piece temp = (Piece) cell.getChildren().get(0);
-		cell.getChildren().remove(0);
-		cell.getChildren().add(currentPiece);
-		if (temp instanceof Knight) {
-			this.game = false;
-			BoardController.totalScore = BoardController.totalScore + getScore();
-
-			Controller.BoardController.timer.stop();
-			Controller.BoardController.scores.stop();
-			GameHistory historyGame = new GameHistory(level, LoginController.getUser(), BoardController.totalScore,
-					LocalDate.now().toString());
-			// System.out.println(historyGame.toString());
-			try {
-				// Sysdata.importGameHistorysFromJSON();
-				Sysdata.getGamesHistoryList().add(historyGame);
-				Sysdata.exportGamesHistoryToJSON();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			if (score < 15) {
-				System.out.println("Game Over!!!");
-				makeAlert("loseAlert");
-			} else if (score >= 15) {
-				makeAlert("winAlert");
-				System.out.println("Congratulations!!");
-
-			}
-
-		}
-		cell.setOccupied(true);
-		initialSquare.getChildren().removeAll();
-		initialSquare.setOccupied(false);
-		currentPiece.setPosX(cell.getX());
-		currentPiece.setPosY(cell.getY());
-		deselectPiece(true);
-	}
 
 	public void stopTimer() {
 		timer.cancel();

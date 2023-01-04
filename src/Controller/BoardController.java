@@ -56,6 +56,7 @@ public class BoardController implements Initializable {
 	private int level = 1;
 	public static Timeline scores;
 	public static Timeline timer;
+	public int flag = 0;
 	// static var to save the totalPoints in game
 	public static int totalScore = 0;
 
@@ -208,6 +209,7 @@ public class BoardController implements Initializable {
 
 	// Countdown Timer
 	private void doTime(Game g) {
+		flag = 0;
 		timer.setCycleCount(Timeline.INDEFINITE);
 		if (timer != null) {
 			timer.stop();
@@ -215,10 +217,12 @@ public class BoardController implements Initializable {
 		KeyFrame frame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				seconds--;
+				if(flag == 1) {
+					seconds--;
+				}
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if (level < 4 && g.getScore() >= 4) { // for level 1-3 -->must reach min 15 !! 4 for tests
+					if (level < 4 && g.getScore() >= 5) { // for level 1-3 -->must reach min 15 !! 4 for tests
 						timer.stop();
 						level++;
 						totalScore = totalScore + g.getScore();
@@ -341,5 +345,15 @@ public class BoardController implements Initializable {
 	public static int getSeconds() {
 		return seconds;
 	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	
+	
 
 }
