@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,6 +52,7 @@ public class Game {
 	private ArrayList<Cell> lastMoves;
 	private static Timer timer = new Timer();
 	private int finalScore;
+	BoardController controller;
 
 	public Game(GridPane chessBoard, String theme, int lvl) {
 		this.level = lvl;
@@ -439,16 +441,55 @@ public class Game {
 					killFlag = 1;
 					Controller.BoardController.timer.stop();
 					Controller.BoardController.scores.stop();
-					Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
+					stopTimer();
 					GameHistory historyGame = new GameHistory(level, LoginController.getUser(),
-					BoardController.totalScore, LocalDate.now().toString());
+							BoardController.totalScore, LocalDate.now().toString());
 					System.out.println(historyGame.toString());
 					try {
-						//Sysdata.importGameHistorysFromJSON();
+						// Sysdata.importGameHistorysFromJSON();
 						Sysdata.getGamesHistoryList().add(historyGame);
 						Sysdata.exportGamesHistoryToJSON();
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
+					}
+				}
+				if (score < 15) {
+					System.out.println("Game Over!!!");
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Game Over");
+					alert.setHeaderText("Please try again.");
+					ButtonType buttonTypeTryAgain = new ButtonType("Try Again");
+					ButtonType buttonTypeExit = new ButtonType("Exit");
+					alert.getButtonTypes().setAll(buttonTypeTryAgain, buttonTypeExit);
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.isPresent()) {
+						if (result.get() == buttonTypeTryAgain) {
+							controller.restartTrigger();
+						} else if (result.get() == buttonTypeExit) {
+							controller.exitTrigger();
+						}
+					}
+				}
+				else if(score >= 15) {
+					System.out.println("Congratulations!!");
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Congratulations!!");
+					alert.setHeaderText("Level Up!");
+					ButtonType buttonTypeTryAgain = new ButtonType("Go To Next Level!");
+					ButtonType buttonTypeExit = new ButtonType("Exit");
+					alert.getButtonTypes().setAll(buttonTypeTryAgain, buttonTypeExit);
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.isPresent()) {
+						if (result.get() == buttonTypeTryAgain) {
+							try {
+								controller.levelUpTrigger(level+1);
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						} else if (result.get() == buttonTypeExit) {
+							controller.exitTrigger();
+						}
 					}
 				}
 				cell.setOccupied(true);
@@ -504,31 +545,66 @@ public class Game {
 		if (!currentPiece.getPossibleMoves().contains(cell.getName()))
 			return;
 
-		Piece killedPiece = (Piece) cell.getChildren().get(0);
-		if (killedPiece.getType().equals("King"))
-			this.game = false;
-
 		Cell initialSquare = (Cell) currentPiece.getParent();
 		Piece temp = (Piece) cell.getChildren().get(0);
 		cell.getChildren().remove(0);
 		cell.getChildren().add(currentPiece);
 		if (temp instanceof Knight) {
 			this.game = false;
-			System.out.println("Game Over!!!");
 			BoardController.totalScore = BoardController.totalScore + getScore();
+
 			Controller.BoardController.timer.stop();
 			Controller.BoardController.scores.stop();
-			Alerts.showAlert(AlertType.WARNING, "Game Over!", "Please try again.", ButtonType.OK);
 			GameHistory historyGame = new GameHistory(level, LoginController.getUser(), BoardController.totalScore,
 					LocalDate.now().toString());
-			System.out.println(historyGame.toString());
+			// System.out.println(historyGame.toString());
 			try {
-				//Sysdata.importGameHistorysFromJSON();
+				// Sysdata.importGameHistorysFromJSON();
 				Sysdata.getGamesHistoryList().add(historyGame);
 				Sysdata.exportGamesHistoryToJSON();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			if (score < 15) {
+				System.out.println("Game Over!!!");
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Game Over");
+				alert.setHeaderText("Please try again.");
+				ButtonType buttonTypeTryAgain = new ButtonType("Try Again");
+				ButtonType buttonTypeExit = new ButtonType("Exit");
+				alert.getButtonTypes().setAll(buttonTypeTryAgain, buttonTypeExit);
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.isPresent()) {
+					if (result.get() == buttonTypeTryAgain) {
+						controller.restartTrigger();
+					} else if (result.get() == buttonTypeExit) {
+						controller.exitTrigger();
+					}
+				}
+			}
+			else if(score >= 15) {
+				System.out.println("Congratulations!!");
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Congratulations!!");
+				alert.setHeaderText("Level Up!");
+				ButtonType buttonTypeTryAgain = new ButtonType("Go To Next Level!");
+				ButtonType buttonTypeExit = new ButtonType("Exit");
+				alert.getButtonTypes().setAll(buttonTypeTryAgain, buttonTypeExit);
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.isPresent()) {
+					if (result.get() == buttonTypeTryAgain) {
+						try {
+							controller.levelUpTrigger(level+1);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else if (result.get() == buttonTypeExit) {
+						controller.exitTrigger();
+					}
+				}
+			}
+
 		}
 		cell.setOccupied(true);
 		initialSquare.getChildren().removeAll();
@@ -564,7 +640,7 @@ public class Game {
 				}
 
 				int gameTimer = BoardController.seconds;
-				if ((gameTimer % 10 == 0 && gameTimer != 60)|| (gameTimer - 1) % 10 == 0) {
+				if ((gameTimer % 10 == 0 && gameTimer != 60) || (gameTimer - 1) % 10 == 0) {
 					gameTimer = (int) Math.floor(gameTimer / 10);
 					if (array[gameTimer] == 0) {
 						speed -= 750;
@@ -659,6 +735,10 @@ public class Game {
 	@Override
 	public String toString() {
 		return "Game [level=" + level + ", user=" + user + ", finalScore=" + finalScore + "]";
+	}
+
+	public void setController(BoardController BC) {
+		this.controller = BC;
 	}
 
 }

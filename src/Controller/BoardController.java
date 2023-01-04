@@ -73,6 +73,7 @@ public class BoardController implements Initializable {
 		timer = new Timeline();
 		// TODO Auto-generated method stub
 		Game game = new Game(chessBoard, MainMenuController.getThemeSelected(), level);
+		game.setController(this);
 		doTime(game);
 		doScore(game);
 		first.setStyle("-fx-background-color: #b9f6ca; ");
@@ -117,34 +118,40 @@ public class BoardController implements Initializable {
 	// It get the level and also the score in order to save the higher score
 	public void levelUp(int currentlevel) throws IOException {
 		if (currentlevel == 2) {
+			System.out.println("This is level:"+currentlevel);
 			second.setStyle("-fx-background-color: #89efa5; ");
 			scores.stop();
 			timer.stop();
 			timer = new Timeline();
 			seconds = 60;
 			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(), currentlevel);
+			game.setController(this);
 			game.setScore(1);
 			game.stopTimer();
 			doTime(game);
 			doScore(game);
 		} else if (currentlevel == 3) {
+			System.out.println("This is level:"+currentlevel);
 			third.setStyle("-fx-background-color: #78e495; ");
 			scores.stop();
 			timer.stop();
 			timer = new Timeline();
 			seconds = 60;
 			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(), currentlevel);
+			game.setController(this);
 			game.setScore(1);
 			game.stopTimer();
 			doTime(game);
 			doScore(game);
 		} else if (currentlevel == 4) {
+			System.out.println("This is level:"+currentlevel);
 			forth.setStyle("-fx-background-color: #4da865; ");
 			scores.stop();
 			timer.stop();
 			timer = new Timeline();
 			seconds = 60;
 			Game game = new Game(chessBoard, MainMenuController.getThemeSelected(), currentlevel);
+			game.setController(this);
 			game.setScore(1);
 			game.stopTimer();
 			doTime(game);
@@ -316,7 +323,21 @@ public class BoardController implements Initializable {
 		}
 
 	}
-
+	
+	public void restartTrigger() {
+		first.setStyle("-fx-background-color: #b9f6ca; ");
+		second.setStyle("-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;");
+		third.setStyle("-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;");
+		forth.setStyle("-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;");
+		first.fire();
+	}
+	
+	public void exitTrigger() {
+		exitGame.fire();
+	}
+	public void levelUpTrigger(int lvl) throws IOException {
+		levelUp(lvl);
+	}
 	public static int getSeconds() {
 		return seconds;
 	}
