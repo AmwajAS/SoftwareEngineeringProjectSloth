@@ -1,7 +1,12 @@
 {
-  "users" : [  {
+  "users" : [ {
     "username" : "arwad",
     "password" : "1234",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  }, {
+    "username" : "moran",
+    "password" : "12",
     "pointsInGame" : 0,
     "highScore" : 0
   }, {

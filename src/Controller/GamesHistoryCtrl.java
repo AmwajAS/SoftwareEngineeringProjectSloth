@@ -48,13 +48,14 @@ public class GamesHistoryCtrl implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
+        //showing the specific player games history
 		for (GameHistory g : Sysdata.getGamesHistoryList()) {
-			if (g.getUser().equals(user)) {
+			if (g.getUser().getUsername().equals(user.getUsername())) {
 				gamesList.getItems().add(g);
 			}
 		}
-		first.setVisible(false);
+		// Invisible the 1st, 2nd, 3rd places.
+		first.setVisible(false);  
 		second.setVisible(false);
 		third.setVisible(false);
 
@@ -86,18 +87,20 @@ public class GamesHistoryCtrl implements Initializable {
 		}
 	}
 
+	/*
+	 * *this function show all players games history
+	 */
 	@FXML
 	public void showAllHistory() {
 
 		first.setVisible(true);
-		second.setVisible(true);
+		second.setVisible(true); // set Visible the 1st, 2nd, 3rd places.
 		third.setVisible(true);
 		hightScoreLabel.setVisible(true);
 
-
 		if (!gamesList.getItems().isEmpty()) {
 			gamesList.getItems().clear();
-
+            //sort the games based on the highest score for all players.
 			Collections.sort(Sysdata.getGamesHistoryList(), new Comparator<GameHistory>() {
 				@Override
 				public int compare(GameHistory g1, GameHistory g2) {
@@ -109,24 +112,24 @@ public class GamesHistoryCtrl implements Initializable {
 		}
 	}
 
+	/*
+	 * this function show the specific player games history
+	 */
 	@FXML
 	public void showMyHistory() {
-		first.setVisible(false);
+		first.setVisible(false); // Invisible the 1st, 2nd, 3rd places.
 		second.setVisible(false);
 		third.setVisible(false);
-		hightScoreLabel.setVisible(false);
-
 
 		if (!gamesList.getItems().isEmpty()) {
-			gamesList.getItems().clear();
+			gamesList.getItems().clear(); // clear the list from the old data and show a new data
 			for (GameHistory g : Sysdata.getGamesHistoryList()) {
-				if (g.getUser().equals(user)) {
+				if (g.getUser().getUsername().equals(user.getUsername())) {
 					gamesList.getItems().add(g);
 				}
 			}
 		}
 
 	}
-
 
 }
