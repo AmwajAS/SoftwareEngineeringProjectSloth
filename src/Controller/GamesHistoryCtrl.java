@@ -22,6 +22,7 @@ import javafx.stage.WindowEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class GamesHistoryCtrl implements Initializable {
 
@@ -40,13 +41,13 @@ public class GamesHistoryCtrl implements Initializable {
 	@FXML
 	private ImageView third;
 	public static List<GameHistory> sortedList;
+	@FXML
+	private Label hightScoreLabel;
+	private User user = LoginController.getUser();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
-		User user = LoginController.getUser();
-		showData();
 
 		for (GameHistory g : Sysdata.getGamesHistoryList()) {
 			if (g.getUser().equals(user)) {
@@ -56,19 +57,6 @@ public class GamesHistoryCtrl implements Initializable {
 		first.setVisible(false);
 		second.setVisible(false);
 		third.setVisible(false);
-
-	}
-
-	public void showData() {
-		
-			//System.out.println("Bug Founded");
-
-			if (Sysdata.getGamesHistoryList().isEmpty()) {
-				Sysdata.getThPlayers();
-				System.out.println(Sysdata.getGamesHistoryList());
-			}
-
-
 
 	}
 
@@ -101,15 +89,14 @@ public class GamesHistoryCtrl implements Initializable {
 	@FXML
 	public void showAllHistory() {
 
-		User user = LoginController.getUser();
-
 		first.setVisible(true);
 		second.setVisible(true);
 		third.setVisible(true);
+		hightScoreLabel.setVisible(true);
+
 
 		if (!gamesList.getItems().isEmpty()) {
 			gamesList.getItems().clear();
-
 
 			Collections.sort(Sysdata.getGamesHistoryList(), new Comparator<GameHistory>() {
 				@Override
@@ -117,7 +104,7 @@ public class GamesHistoryCtrl implements Initializable {
 					return Integer.compare(g2.getUser().getHighScore(), g1.getUser().getHighScore());
 				}
 			});
-			
+
 			gamesList.getItems().addAll(Sysdata.getGamesHistoryList());
 		}
 	}
@@ -127,8 +114,8 @@ public class GamesHistoryCtrl implements Initializable {
 		first.setVisible(false);
 		second.setVisible(false);
 		third.setVisible(false);
+		hightScoreLabel.setVisible(false);
 
-		User user = LoginController.getUser();
 
 		if (!gamesList.getItems().isEmpty()) {
 			gamesList.getItems().clear();
@@ -141,17 +128,5 @@ public class GamesHistoryCtrl implements Initializable {
 
 	}
 
-	public void sortHigthScores() {
-
-		Sysdata.getThPlayers();
-		sortedList.addAll(Sysdata.getGamesHistoryList());
-
-		Collections.sort(sortedList, new Comparator<GameHistory>() {
-			@Override
-			public int compare(GameHistory g1, GameHistory g2) {
-				return Integer.compare(g2.getUser().getHighScore(), g1.getUser().getHighScore());
-			}
-		});
-	}
 
 }
