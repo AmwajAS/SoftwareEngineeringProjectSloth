@@ -233,7 +233,7 @@ public class BoardController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				if(flag == 1) {
-					seconds--;
+					seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;
 				}
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
@@ -269,8 +269,30 @@ public class BoardController implements Initializable {
 							e.printStackTrace();
 						}
 					} else { // if the player didn't reach the min points and the time is over
-						Alerts.showAlert(AlertType.WARNING, "Game Over!", "Time is out please try again.",
-								ButtonType.OK);
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				        alert.setTitle("Game Over !");
+				        alert.setHeaderText("Time's UP !");
+				        alert.setContentText("Better Luck Next Time.");
+
+				        // Add a custom button to the alert
+				        ButtonType buttonTypeOk = new ButtonType("Exit to Main Menu");
+				        alert.getButtonTypes().setAll(buttonTypeOk);
+				        Button buttonOk = (Button) alert.getDialogPane().lookupButton(buttonTypeOk);
+
+				        // Set an event handler for the custom button
+				        buttonOk.setOnAction(new EventHandler<ActionEvent>() {
+				          @Override
+				          public void handle(ActionEvent event) {
+				            exitGame.fire();
+				          }
+				        });
+				        Image image = new Image("/images/timesup.png");
+						ImageView view = new ImageView(image);
+						view.setFitHeight(80);
+					    view.setFitWidth(80);
+						alert.setGraphic(view);
+				        // Show the alert
+				        alert.show();	
 						timer.stop();
 						totalScore = totalScore + g.getScore();
 						GameHistory historyGame = new GameHistory(level, LoginController.getUser(), totalScore, LocalDate.now().toString());

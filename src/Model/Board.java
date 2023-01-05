@@ -76,7 +76,6 @@ public class Board {
 		}
 
 		if (level == 1) {
-			//creatTypeCells(7,"Question");
 			creatTypeCells(3,"Question");
 			creatTypeCells(3,"Jump");
 			

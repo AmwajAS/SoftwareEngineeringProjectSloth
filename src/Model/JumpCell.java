@@ -40,7 +40,7 @@ public class JumpCell extends Cell {
 			int xRand = randX.nextInt(7);
 			int yRand = randY.nextInt(7);
 			for (Cell c : board.getCells()) {
-				if ((c.getX() == xRand && c.getY() == yRand) && !(c.isOccupied()) && !(c instanceof JumpCell)) {
+				if ((c.getX() == xRand && c.getY() == yRand) && !(c.isOccupied()) && !(c instanceof JumpCell)&& !(c instanceof UndoCell)) {
 					temp = c;
 
 				}
@@ -99,7 +99,7 @@ public class JumpCell extends Cell {
 			}
 		} while (temp == null);
 
-		return temp;
+		return newCell;
 	}
 
 }

@@ -409,7 +409,9 @@ public class Game {
 			dropPiece(temp);
 			flagging = 0;
 			JumpCell help = (JumpCell) cell;
-			help.createNewJumpCell(cb, cell);
+			temp = help.createNewJumpCell(cb, cell);
+			int k = lastMoves.indexOf(cell);
+			lastMoves.set(k, temp);
 		}
 		if (cell instanceof QuesCell && (level == 3 || level == 4)) {
 			startTimer();
