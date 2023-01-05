@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -35,6 +36,8 @@ public class MainMenuController implements Initializable {
 	private Button logoutBt;
 	@FXML
 	private ComboBox<String> theme;
+    @FXML
+    private Text helloUser;
 	@FXML
 	private Button ask;
 	@FXML private Button ask1;
@@ -55,7 +58,7 @@ public class MainMenuController implements Initializable {
 		
 		helpPane.setVisible(false);
 		ask1.setVisible(false);
-		
+		helloUser.setText("Hello  " +LoginController.getUser().getUsername() + " ,Welcome");   //set the user name on the board
 		
 
 	}
