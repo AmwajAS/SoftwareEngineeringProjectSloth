@@ -115,3 +115,9 @@ SplitMenuButton:hover{
     -fx-border-color: #2e7d32;
     -fx-border-width: 2;    
 }
+ .BorderPane #loginframe{
+    -fx-background-image: url("/src/images/board.png");
+    -fx-background-repeat:stretch;
+    -fx-background-size:  110%  100%;
+    -fx-background-position: bottom ;
+}

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import Model.Question;
 
 public class Json {
-	// helper Class - In order to export and import from a Json file using the
-	// Jackson Libraries
+	// helper Class - In order to export and import from a Question Json file using the
+	// Jackson Libraries (Questionformat.json file)
 	private ArrayList<Question> questions;
 
 

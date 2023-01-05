@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,8 +18,6 @@ import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
-
-import Model.Game;
 import Model.GameHistory;
 import Model.Question;
 import Model.User;
@@ -101,6 +98,13 @@ public class Sysdata {
 
 	}
 
+	/*
+	 * This method read the Json file and creates a User Object. and returns an
+	 * array with all the imported users -thplayers- after validating the Json
+	 * schema. In Order to do this we Used the Jackson Libraries, we also created a
+	 * helper class to convert the Object into a User Object ( import and the export
+	 * methods)
+	 */
 	public static ArrayList<User> importUsersFromJSON() throws FileNotFoundException {
 
 		try {
@@ -108,7 +112,6 @@ public class Sysdata {
 			JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909);
 			InputStream schemaStream = new FileInputStream("userjsonschema.json");
 
-			//
 			JsonNode json = usermapper.readTree(inputStream);
 			JsonSchema schema = schemaFactory.getSchema(schemaStream);
 			Set<ValidationMessage> validationResult = schema.validate(json);
@@ -137,6 +140,7 @@ public class Sysdata {
 		return thPlayers;
 	}
 
+	// This method updating the Json file as in the array thplayers.
 	public static void exportUsersToJSON() throws FileNotFoundException {
 
 		usermapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -155,6 +159,13 @@ public class Sysdata {
 
 	}
 
+	/*
+	 * This method read the Json file and creates a GameHistory Object. and returns
+	 * an array with all the imported users -gamesHistoryList- after validating the
+	 * Json schema. In Order to do this we Used the Jackson Libraries, we also
+	 * created a helper class to convert the Object into a GameHistory Object (
+	 * import and the export methods)
+	 */
 	public static ArrayList<GameHistory> importGameHistorysFromJSON() throws FileNotFoundException {
 
 		try {
@@ -162,7 +173,6 @@ public class Sysdata {
 			JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V201909);
 			InputStream schemaStream = new FileInputStream("historyschema.json");
 
-			
 			JsonNode json = usermapper.readTree(inputStream);
 			JsonSchema schema = schemaFactory.getSchema(schemaStream);
 			Set<ValidationMessage> validationResult = schema.validate(json);
@@ -191,6 +201,7 @@ public class Sysdata {
 		return gamesHistoryList;
 	}
 
+	// This method updating the Json file as in the array gamesHistoryList.
 	public static void exportGamesHistoryToJSON() throws FileNotFoundException {
 
 		usermapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -208,7 +219,6 @@ public class Sysdata {
 		}
 
 	}
-
 
 	public static ArrayList<Question> getImportedQuestions() {
 		return importedQuestions;
@@ -233,18 +243,5 @@ public class Sysdata {
 	public static void setGamesHistoryList(ArrayList<GameHistory> gamesHistoryList) {
 		Sysdata.gamesHistoryList = gamesHistoryList;
 	}
-
-//	//methods with test
-//	public boolean addUser(User user) {
-//		if(user==null || getThPlayers().contains(user)) 
-//			return false;
-//		return 	getThPlayers().add(user);
-//	}
-//	//methods with test
-//	public boolean removeUser(User user) {
-//		if(user == null || !getThPlayers().contains(user))   
-//			return false;
-//		return getThPlayers().remove(user);
-//	}
 
 }

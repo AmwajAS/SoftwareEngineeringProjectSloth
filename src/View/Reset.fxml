@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ResetController">
+   <children>
+      <TextField fx:id="username" layoutX="178.0" layoutY="224.0" promptText="username" styleClass="Feild" stylesheets="@application.css">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" layoutX="178.0" layoutY="299.0" promptText="Password" styleClass="Feild" stylesheets="@application.css">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="renter" layoutX="177.0" layoutY="365.0" promptText="Renter Password" styleClass="Feild" stylesheets="@application.css">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="saveBt" layoutX="438.0" layoutY="423.0" mnemonicParsing="false" onAction="#savePassword" prefHeight="31.0" prefWidth="98.0" styleClass="list-cell" stylesheets="@application.css" text="Save">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="back" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionOnBack" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" stylesheets="@application.css">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
