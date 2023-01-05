@@ -42,7 +42,6 @@ public class JumpCell extends Cell {
 			for (Cell c : board.getCells()) {
 				if ((c.getX() == xRand && c.getY() == yRand) && !(c.isOccupied()) && !(c instanceof JumpCell)) {
 					temp = c;
-					System.out.println(temp.getName());
 
 				}
 			}

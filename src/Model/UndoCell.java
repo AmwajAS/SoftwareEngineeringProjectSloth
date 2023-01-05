@@ -86,7 +86,7 @@ public class UndoCell extends Cell {
 		board.getCells().add(newCell);
 		board.getChessBoard().add(newCell, newCell.getX(), newCell.getY(), 1, 1);
 		board.setCells(board.getCells());
-		newCell.setOccupied(false);
+		newCell.setOccupied(true);
 		newCell.setVisited(true);
 		do {
 			Random randI = new Random();
@@ -100,7 +100,6 @@ public class UndoCell extends Cell {
 						if (c.getChildren().isEmpty()) {
 							if (c.getX() != 0 && c.getY() != 0) {
 								temp = c;
-								System.out.println(temp.getName());
 							}
 						}
 					}

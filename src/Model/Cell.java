@@ -27,7 +27,7 @@ public class Cell extends StackPane{
 	public Cell(int x, int y){
         this.x = x;
         this.y = y;
-        this.isOccupied = false;
+        this.setOccupied(false);
         this.isVisited = false;
         this.counter=0;
        }

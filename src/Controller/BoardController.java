@@ -124,7 +124,6 @@ public class BoardController implements Initializable {
 	// It get the level and also the score in order to save the higher score
 	public void levelUp(int currentlevel) throws IOException {
 		if (currentlevel == 2) {
-			System.out.println("This is level:"+currentlevel);
 			second.setStyle("-fx-background-color: #89efa5; ");
 			scores.stop();
 			timer.stop();
@@ -137,7 +136,6 @@ public class BoardController implements Initializable {
 			doTime(game);
 			doScore(game);
 		} else if (currentlevel == 3) {
-			System.out.println("This is level:"+currentlevel);
 			third.setStyle("-fx-background-color: #78e495; ");
 			scores.stop();
 			timer.stop();
@@ -150,7 +148,6 @@ public class BoardController implements Initializable {
 			doTime(game);
 			doScore(game);
 		} else if (currentlevel == 4) {
-			System.out.println("This is level:"+currentlevel);
 			forth.setStyle("-fx-background-color: #4da865; ");
 			scores.stop();
 			timer.stop();
@@ -191,8 +188,21 @@ public class BoardController implements Initializable {
 
 			// win pop-up
 			Stage primaryStage = new Stage();
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/YouWinWindow.fxml"));
+			Parent root;
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/View/YouWinWindow.fxml"));
+				root = fxmlLoader.load();
+				YouWinCtr winController = fxmlLoader.getController();
+				Button button = winController.getBackBt();
+				button.setOnAction(new EventHandler<ActionEvent>() {
+				    @Override
+				    public void handle(ActionEvent event) {
+				    	Stage tempStage = (Stage) button.getScene().getWindow();
+				    	tempStage.close();
+				        exitGame.fire();
+				    }
+				});
+	
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("Sloth Chess Board");

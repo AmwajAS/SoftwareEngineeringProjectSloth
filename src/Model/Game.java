@@ -84,7 +84,7 @@ public class Game {
 						controller.setFlag(1);
 					}
 					EventTarget target = event.getTarget();
-					// Clicked on cell
+					  //clicked on a cell is occupied takes the piece on the cell if not drops the already selected piece.
 					if (target.toString().equals("Square")) {
 						Cell cell = (Cell) target;
 						if (cell instanceof JumpCell) {
@@ -102,22 +102,12 @@ public class Game {
 								}
 								selectPiece(game);
 							}
-							// Selecting other piece of same color || Killing a piece
-							else {
-								if (currentPiece.getColor().equals(newPiece.getColor())) {
-									deselectPiece(false);
-									currentPiece = newPiece;
-									currentPiece.getAllPossibleMoves(level);
-									selectPiece(game);
-								} else {
-									return;
-								}
-							}
 						}
 						// Dropping a piece on blank square
 						else {
 							if (currentPiece != null) {
 								dropPiece(cell);
+								//startTimer() calls the king to move.
 								// The king will start moving as soon as the knight makes the first move;
 								// the flag is originally 0, then the first time it goes inside the if it
 								// changes to 1;
@@ -133,7 +123,9 @@ public class Game {
 							}
 						}
 					}
-					// Clicked on piece
+					/*
+					 * Clicking on a piece instead of the cell
+					 */
 					else {
 						Piece newPiece = (Piece) target;
 
@@ -146,21 +138,11 @@ public class Game {
 							}
 							selectPiece(game);
 						}
-						// Selecting other piece of same color || Killing a piece
-						else {
-							if (currentPiece.getColor().equals(newPiece.getColor())) {
-								deselectPiece(false);
-								currentPiece = newPiece;
-								selectPiece(game);
-							} else {
-								return;
-							}
-						}
 					}
-				} catch (Exception e) {
-
+				}catch(Exception e) {
 					System.out.println(e.getMessage());
 				}
+				
 			}
 		});
 	}
@@ -183,10 +165,10 @@ public class Game {
 		currentPiece = tempPiece;
 		tempPiece.getAllPossibleMoves(level);
 		if (tempPiece.getPossibleMoves().isEmpty()) {
-			System.out.println("bdestinationlist in findBestRoute function is empty!!!");
 			return;
 		} else {
 			ArrayList<String> tempMoves = tempPiece.getPossibleMoves();
+			//killing the Knight
 			for (String move : tempMoves) {
 				if (move.equals(cell.getName())) {
 					killPiece(cell);
@@ -194,7 +176,7 @@ public class Game {
 					return;
 				}
 			}
-
+			//blocking one future cell for the knight
 			for (String move : tempMoves) {
 				for (String knightMove : tempKnight.getPossibleMoves()) {
 					if (move.equals(knightMove)) {
@@ -207,7 +189,7 @@ public class Game {
 					}
 				}
 			}
-
+			//getting as close as she can to the knight
 			Cell closestCell = null;
 			int minDistance = Math.max(Math.abs(cell.getX() - tempPiece.getPosX()),
 					Math.abs(cell.getY() - tempPiece.getPosY()));
@@ -222,7 +204,9 @@ public class Game {
 			if (closestCell != null) {
 				dropPiece(closestCell);
 				return;
-			} else {
+			} 
+			//random cell
+			else {
 				Random rand = new Random();
 				int len = tempMoves.size();
 
@@ -290,7 +274,7 @@ public class Game {
 			}
 		});
 	}
-
+	//selecting the piece and showing all possible moves
 	private void selectPiece(boolean game) {
 		if (!game) {
 			currentPiece = null;
@@ -304,7 +288,7 @@ public class Game {
 		currentPiece.getAllPossibleMoves(level);
 		currentPiece.showAllPossibleMoves(true);
 	}
-
+	//changing turns, removing the possible moves
 	private void deselectPiece(boolean changePlayer) {
 		if (currentPiece != null) {
 			currentPiece.setEffect(null);
@@ -314,7 +298,7 @@ public class Game {
 				currentPlayer = currentPlayer.equals("white") ? "black" : "white";
 		}
 	}
-
+	//dropping the king's piece 
 	private void dropKingPiece(Cell c) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -337,8 +321,10 @@ public class Game {
 			}
 		});
 	}
-
+	//dropping the piece on the cell
 	private void dropPiece(Cell cell) {
+		//in flagging is 0 it means that the cell is jumpCell, so we  dont want to check if the cell is in 
+		//the possibleMoves because it is a random one on the board and might not be of the possibleMoves.
 		if (flagging == 0) {
 			if (currentPiece != null && !currentPiece.getPossibleMoves().isEmpty()) {
 				if (!currentPiece.getPossibleMoves().contains(cell.getName())) {
@@ -355,6 +341,7 @@ public class Game {
 			currentPiece.setPosX(cell.getX());
 			currentPiece.setPosY(cell.getY());
 		}
+		//changing the score and visited if the piece is the Knight
 		if (currentPiece instanceof Knight) {
 			cell.setCounter(cell.getCounter() + 1);
 			addCellsToArraylist(cell);
@@ -404,6 +391,7 @@ public class Game {
 				e.printStackTrace();
 			}
 		}
+		//UndoCell changes
 		if (cell instanceof UndoCell && currentPiece instanceof Knight) {
 			makeAlert("Undo");
 			setScore(((UndoCell) cell).undoMoves(cb, lastMoves, score));
@@ -413,6 +401,7 @@ public class Game {
 			lastMoves.removeAll(lastMoves);
 			lastMoves.add(cl);
 		}
+		//JumpCell changes
 		if (cell instanceof JumpCell && currentPiece instanceof Knight) {
 			flagging = 1;
 			makeAlert("Jump");
@@ -428,7 +417,11 @@ public class Game {
 		deselectPiece(true);
 	}
 
-	// function when the king kills the knight.
+	/*
+	 * function when the king kills the knight.
+	 * showing an alert to the player, that he lost.
+	 * stopping the game and saving the history.
+	 */
 	private void kingKillPiece(Cell cell) {
 		Platform.runLater(new Runnable() {
 			int killFlag = 0;
@@ -442,7 +435,6 @@ public class Game {
 				cell.getChildren().remove(0);
 				cell.getChildren().add(tempKing);
 				if (temp instanceof Knight) {
-					System.out.println("Game Over!!!");
 					killFlag = 1;
 					Controller.BoardController.timer.stop();
 					Controller.BoardController.scores.stop();
@@ -472,6 +464,10 @@ public class Game {
 		});
 	}
 	
+	/*
+	 * function for the queen when she kills the Knight
+	 * stopping the game, showing an alert and saving to history.
+	 */
 	private void killPiece(Cell cell) {
 		if (!currentPiece.getPossibleMoves().contains(cell.getName()))
 			return;
@@ -488,7 +484,6 @@ public class Game {
 			Controller.BoardController.scores.stop();
 			GameHistory historyGame = new GameHistory(level, LoginController.getUser(), BoardController.totalScore,
 					LocalDate.now().toString());
-			// System.out.println(historyGame.toString());
 			try {
 				// Sysdata.importGameHistorysFromJSON();
 				Sysdata.getGamesHistoryList().add(historyGame);
@@ -506,6 +501,10 @@ public class Game {
 		makeAlert("loseAlert");
 	}
 
+	/*
+	 * This function is for creating alerts,
+	 * it takes the type of the alert as a string  and creates an alert accordingly
+	 */
 	public void makeAlert(String type) {
 		if (type == "loseAlert") {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -528,7 +527,11 @@ public class Game {
 					controller.exitTrigger();
 				}
 			}
-		} else {
+		} 
+		/*
+		 * checking if the type is cell Type and creating an alert when jumping on a specific cell type.
+		 */
+		else {
 			Controller.BoardController.timer.stop();
 			if (level == 3 || level == 4) {
 				stopTimer();
@@ -566,13 +569,19 @@ public class Game {
 	}
 
 
-
+	//stopping the timer of the king
 	public void stopTimer() {
 		timer.cancel();
 	}
 
 	// implementing a thread to make a move very second for the king.
 	// just in case we're at level 3/4.
+	/*
+	 * the King starts with the speed of a move in 2 seconds
+	 * after every 10 seconds he gets faster of -750milliseconds
+	 * reaching sec 30 he starts moving the fastest of a moveevery 750millisecond
+	 * the array is for helping us to do the speed every 10 seconds.
+	 */
 	public void startTimer() {
 		flag = 1;
 		timer = new Timer();
@@ -606,7 +615,11 @@ public class Game {
 			}
 		}, 750, 750);
 	}
-
+	
+	/*
+	 *this function is for finding a piece depending on the type 
+	 *it returns the cell of the piece type it receives.
+	 */
 	public Cell findPiece(String pieceType) {
 		Cell pieceCell = null;
 		for (Cell temp : cb.getCells()) {
@@ -634,7 +647,9 @@ public class Game {
 		}
 		return pieceCell;
 	}
-
+	/*
+	 * this is for adding the cells into the arraylist, keeping only 4 cells
+	 */
 	public void addCellsToArraylist(Cell c) {
 		if (lastMoves.size() > 3) {
 			lastMoves.remove(0);
@@ -689,7 +704,8 @@ public class Game {
 	public String toString() {
 		return "Game [level=" + level + ", user=" + user + ", finalScore=" + finalScore + "]";
 	}
-
+	
+	//setting the controller to the game from the ChessBoardController
 	public void setController(BoardController BC) {
 		this.controller = BC;
 	}

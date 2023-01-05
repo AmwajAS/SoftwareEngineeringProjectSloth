@@ -63,8 +63,7 @@ public class Knight extends Piece {
 		 */
 		for (String move : moves) {
 			if (getSquareByName(move) != null) {
-				if (getSquareByName(move).isOccupied() && !(getSquareByName(move) instanceof BlockCell)
-						&& getPieceByName(move).getColor().equals(Game.currentPlayer))
+				if (getSquareByName(move).isOccupied() && !(getSquareByName(move) instanceof BlockCell))
 					continue;
 
 				this.getPossibleMoves().add(move);
