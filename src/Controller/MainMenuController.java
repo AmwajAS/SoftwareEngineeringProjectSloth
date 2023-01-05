@@ -37,8 +37,8 @@ public class MainMenuController implements Initializable {
 	private Button logoutBt;
 	@FXML
 	private ComboBox<String> theme;
-	@FXML
-	private ImageView prizeImg;
+    @FXML
+    private ImageView prizeImg;
     @FXML
     private Text helloUser;
 	@FXML
@@ -66,11 +66,18 @@ public class MainMenuController implements Initializable {
 			System.out.println("no user!!error in import users");
 			helloUser.setText("Hello: Error! ");
 		} else {
+			//Image image = new Image("/images/prize.png");
 			int highScore = 0;
 			for(User user : Sysdata.getThPlayers()) {
 				System.out.println(user);
 				if(user.getUsername().equals(LoginController.getUser().getUsername())) {
 					highScore = user.getHighScore();
+					if(highScore>=200) {
+						prizeImg.setVisible(true);
+					}
+					else if(highScore<200) {
+						prizeImg.setVisible(false);
+					}
 				}
 			}
 			helloUser.setText("Hello  " +LoginController.getUser().getUsername() + " ,Welcome \n Your High Score Is : "+highScore);   //set the user name on the board

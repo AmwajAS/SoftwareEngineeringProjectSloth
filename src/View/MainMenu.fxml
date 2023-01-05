@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
    <children>
       <ImageView fitHeight="715.0" fitWidth="896.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -77,16 +77,17 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text layoutX="10.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2:">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Text>
             <Text layoutX="10.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 4:">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
+            <Text layoutX="10.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+               
          </children>
       </Pane>
       <Button fx:id="logoutBt" layoutX="32.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent;">
@@ -109,6 +110,11 @@
          </graphic>
       </Button>
       <Button fx:id="ask1" layoutX="824.0" layoutY="28.0" mnemonicParsing="false" onAction="#onText2" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: transparent;" />
+      <ImageView fx:id="prizeImg" fitHeight="84.0" fitWidth="69.0" layoutX="711.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+       <image>
+            <Image url="@../images/prize.png" />
+         </image>
+         </ImageView>
       <Text fx:id="helloUser" layoutX="-2.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="895.6708984375" AnchorPane.bottomAnchor="581.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="35.0" />
