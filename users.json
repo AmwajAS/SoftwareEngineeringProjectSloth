@@ -1,0 +1,8 @@
+{
+  "users" : [ {
+    "username" : "test",
+    "password" : "123",
+    "pointsInGame" : 0,
+    "highScore" : 0
+  } ]
+}
