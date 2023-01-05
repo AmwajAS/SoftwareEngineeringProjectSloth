@@ -1,8 +1,8 @@
 {
   "gamesHistory" : [ {
-    "level" : 4,
+    "level" : 3,
     "user" : {
-      "username" : "amwaj",
+      "username" : "habib",
       "password" : "123",
       "pointsInGame" : 0,
       "highScore" : 160
@@ -22,22 +22,22 @@
   }, {
     "level" : 4,
     "user" : {
-      "username" : "amwaj",
+      "username" : "moran",
       "password" : "123",
       "pointsInGame" : 0,
-      "highScore" : 92
+      "highScore" : 250
     },
     "finalScore" : 6,
     "gameDate" : "2023-01-03"
   }, {
-    "level" : 1,
+    "level" : 3,
     "user" : {
       "username" : "amwaj",
       "password" : "123",
       "pointsInGame" : 0,
-      "highScore" : 0
+      "highScore" : 260
     },
-    "finalScore" : 5,
+    "finalScore" : 59,
     "gameDate" : "2023-01-03"
   }, {
     "level" : 1,
@@ -50,29 +50,29 @@
     "finalScore" : 11,
     "gameDate" : "2023-01-03"
   }, {
-    "level" : 1,
+    "level" : 4,
     "user" : {
-      "username" : "amwaj",
+      "username" : "arwad",
       "password" : "123",
       "pointsInGame" : 0,
-      "highScore" : 0
+      "highScore" : 290
     },
     "finalScore" : 5,
     "gameDate" : "2023-01-04"
   }, {
-    "level" : 2,
+    "level" : 4,
     "user" : {
-      "username" : "amwaj",
+      "username" : "habib",
       "password" : "123",
       "pointsInGame" : 0,
-      "highScore" : 0
+      "highScore" : 270
     },
     "finalScore" : 32,
     "gameDate" : "2023-01-04"
   }, {
-    "level" : 1,
+    "level" : 2,
     "user" : {
-      "username" : "amwaj",
+      "username" : "moran",
       "password" : "123",
       "pointsInGame" : 0,
       "highScore" : 0
@@ -80,39 +80,24 @@
     "finalScore" : 48,
     "gameDate" : "2023-01-04"
   }, {
-    "level" : 1,
+    "level" : 3,
     "user" : {
       "username" : "amwaj",
       "password" : "123",
       "pointsInGame" : 0,
-      "highScore" : 0
+      "highScore" : 260
     },
-    "finalScore" : 11,
+    "finalScore" : 111,
     "gameDate" : "2023-01-04"
   }, {
-    "level" : 1,
+    "level" : 4,
     "user" : {
       "username" : "amwaj",
       "password" : "123",
       "pointsInGame" : 0,
-      "highScore" : 0
+      "highScore" : 260
     },
     "finalScore" : 23,
     "gameDate" : "2023-01-04"
-  }, {
-    "level" : 1,
-    "user" : {
-      "username" : "amwaj",
-      "password" : "123",
-      "pointsInGame" : 0,
-      "highScore" : 0
-    },
-    "finalScore" : 43,
-    "gameDate" : "2023-01-04"
-
-  
-    
-  
-   
   } ]
 }

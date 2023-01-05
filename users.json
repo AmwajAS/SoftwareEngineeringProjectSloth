@@ -1,8 +1,23 @@
 {
   "users" : [ {
-    "username" : "test",
+    "username" : "arwad",
     "password" : "123",
     "pointsInGame" : 0,
-    "highScore" : 0
+    "highScore" : 290
+  }, {
+    "username" : "amwaj",
+    "password" : "123",
+    "pointsInGame" : 0,
+    "highScore" : 260
+  }, {
+    "username" : "moran",
+    "password" : "123",
+    "pointsInGame" : 0,
+    "highScore" : 280
+  }, {
+    "username" : "habib",
+    "password" : "123",
+    "pointsInGame" : 0,
+    "highScore" : 270
   } ]
 }
