@@ -58,7 +58,13 @@ public class MainMenuController implements Initializable {
 		
 		helpPane.setVisible(false);
 		ask1.setVisible(false);
-		helloUser.setText("Hello  " +LoginController.getUser().getUsername() + " ,Welcome");   //set the user name on the board
+		if (LoginController.getUser() == null) {
+			System.out.println("no user!!error in import users");
+			helloUser.setText("Hello: Error! ");
+		} else {
+			helloUser.setText("Hello  " +LoginController.getUser().getUsername() + " ,Welcome");   //set the user name on the board
+
+		}
 		
 
 	}
