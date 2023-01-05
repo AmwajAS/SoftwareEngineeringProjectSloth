@@ -233,11 +233,11 @@ public class BoardController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				if(flag == 1) {
-					seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;seconds--;
+					seconds--;
 				}
 				time.setText("RemaingTime: 00:" + seconds.toString());
 				if (seconds <= 0) {
-					if (level < 4 && g.getScore() >= 4) { // for level 1-3 -->must reach min 15 !! 4 for tests
+					if (level < 4 && g.getScore() >= 15) { // for level 1-3 -->must reach min 15 !! 4 for tests
 						timer.stop();
 						level++;
 						totalScore = totalScore + g.getScore();
@@ -258,7 +258,7 @@ public class BoardController implements Initializable {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-					} else if (level == 4 && g.getScore() >= 4) { // for the last level
+					} else if (level == 4 && g.getScore() >= 15) { // for the last level
 						timer.stop();
 						level++;
 						totalScore = totalScore + g.getScore();

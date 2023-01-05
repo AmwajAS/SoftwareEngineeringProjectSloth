@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,6 +37,8 @@ public class MainMenuController implements Initializable {
 	private Button logoutBt;
 	@FXML
 	private ComboBox<String> theme;
+	@FXML
+	private ImageView prizeImg;
     @FXML
     private Text helloUser;
 	@FXML
@@ -48,22 +51,29 @@ public class MainMenuController implements Initializable {
 		// TODO Auto-generated method stub
 		theme.getItems().addAll("Coral", "Dusk", "Wheat", "Marine", "Emerald", "Sandcastle");
 		//Invisible the manage question button for players
+		/*
 		if(LoginController.getUser() instanceof User) { 
 			questionBt.setVisible(false);
 			//visible the manage question button for the admin
 		}else if(LoginController.getUser() instanceof Admin) {
 			questionBt.setVisible(true);
-
-		}
+		}*/
 		
 		helpPane.setVisible(false);
 		ask1.setVisible(false);
+		
 		if (LoginController.getUser() == null) {
 			System.out.println("no user!!error in import users");
 			helloUser.setText("Hello: Error! ");
 		} else {
-			helloUser.setText("Hello  " +LoginController.getUser().getUsername() + " ,Welcome");   //set the user name on the board
-
+			int highScore = 0;
+			for(User user : Sysdata.getThPlayers()) {
+				System.out.println(user);
+				if(user.getUsername().equals(LoginController.getUser().getUsername())) {
+					highScore = user.getHighScore();
+				}
+			}
+			helloUser.setText("Hello  " +LoginController.getUser().getUsername() + " ,Welcome \n Your High Score Is : "+highScore);   //set the user name on the board
 		}
 		
 
