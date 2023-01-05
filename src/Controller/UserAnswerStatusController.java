@@ -4,14 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class UserAnswerStatusController implements Initializable {
 
@@ -19,19 +17,10 @@ public class UserAnswerStatusController implements Initializable {
 	private Text answerStatus;
 	@FXML
 	public static Button closeBt;
-	public static Button getCloseBt() {
-		return closeBt;
-	}
-
-
-	public static void setCloseBt(Button closeBt) {
-		UserAnswerStatusController.closeBt = closeBt;
-	}
-
 	@FXML
 	private ImageView imageStatus;
 	
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -46,11 +35,14 @@ public class UserAnswerStatusController implements Initializable {
 		
 	}
 
+	/*
+	 * this method shows the user his answer for the question feedback
+	 */
 
 	public boolean showUser() throws FileNotFoundException {
+		
 		FileInputStream input;
 
-		
 		if(QuestionPopupController.isResult() == true) {
 			answerStatus.setText("Your Answer is Correct");
 			input = new FileInputStream("./src/images/6974-ai.png");
@@ -76,6 +68,16 @@ public class UserAnswerStatusController implements Initializable {
 		 QuestionPopupController.close();
 
 	}
+	
+	public static Button getCloseBt() {
+		return closeBt;
+	}
+
+
+	public static void setCloseBt(Button closeBt) {
+		UserAnswerStatusController.closeBt = closeBt;
+	}
+
 	
 
 		

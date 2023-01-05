@@ -90,13 +90,7 @@ public class QuestionMangController implements Initializable {
 			diffSelect.getItems().add(ql);
 		}
 		loadChart();
-//		try {
-//			Sysdata.importUsersFromJSON();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println(Sysdata.getThPlayers());
+
 
 	}
 
@@ -170,8 +164,7 @@ public class QuestionMangController implements Initializable {
 								Scene scene = new Scene(root);
 								primaryStage.setScene(scene);
 								primaryStage.setTitle("Sloth Chess - Edit Question");
-								primaryStage.setMinHeight(800);
-								primaryStage.setMinWidth(900);
+						        primaryStage.setResizable(false);
 								primaryStage.show();
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
@@ -339,9 +332,8 @@ public class QuestionMangController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("/View/AddQuestion.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Chess");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
+		primaryStage.setTitle("Sloth - Add Question");
+        primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -373,9 +365,8 @@ public class QuestionMangController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Sloth Chess Board");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
+		primaryStage.setTitle("Sloth - Main Menu");
+        primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override

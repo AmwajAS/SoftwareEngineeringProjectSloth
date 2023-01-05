@@ -92,9 +92,8 @@ public class SignupController implements Initializable {
 					Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
 					Scene scene = new Scene(root);
 					primaryStage.setScene(scene);
-					primaryStage.setTitle("Sloth Chess Board");
-					primaryStage.setMinHeight(800);
-					primaryStage.setMinWidth(900);
+					primaryStage.setTitle("Sloth - Login");
+			        primaryStage.setResizable(false);
 					primaryStage.show();
 					primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
@@ -150,7 +149,8 @@ public class SignupController implements Initializable {
 			Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Questions Managment");
+			primaryStage.setTitle("Sloth - Login");
+	        primaryStage.setResizable(false);
 			primaryStage.show();
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override

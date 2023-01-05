@@ -1,6 +1,5 @@
 package Controller;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -10,14 +9,9 @@ import java.util.ResourceBundle;
 import Alerts.Alerts;
 import Model.Game;
 import Model.Question;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
@@ -29,8 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-//import jdk.internal.org.jline.reader.impl.history.DefaultHistory;
 
 public class QuestionPopupController implements Initializable {
 
@@ -49,43 +41,44 @@ public class QuestionPopupController implements Initializable {
 	@FXML
 	private Text questionText;
 
-	public static boolean result;
-	// public static Stage primaryStage = null;
+	public static boolean result;  //the answer of the user for a specific question
 
-	private ToggleGroup tg = new ToggleGroup();
+	private ToggleGroup tg = new ToggleGroup(); //grouping all the answer (in order to select only one answer)
 	Question question;
 	private Game game;
-	private Stage primaryStage;
-
-	public void setPrimaryStage(Stage primaryStage) {
-		this.primaryStage = primaryStage;
-	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
+			if(Sysdata.getImportedQuestions().isEmpty()) {
 			Sysdata.importQuestionsFromJSON();
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		//the question list
 		ArrayList<Question> importedQuestions = Sysdata.getImportedQuestions();
+		//picking a random question from the questions list
 		Random rand = new Random();
 		int index = rand.nextInt(importedQuestions.size());
 		question = importedQuestions.get(index);
 
 		makeQuestion();
 
+		//adding all the Radio Buttons to the Toggle Group (in order to select only one answer)
 		firstAnswer.setToggleGroup(tg);
 		secondAnswer.setToggleGroup(tg);
 		thirdAnswer.setToggleGroup(tg);
 		forthAnswer.setToggleGroup(tg);
 	}
-
+/*
+ * this method shows the user the random question by updating the windows fields.
+ */
 	public void makeQuestion() {
 		if (question != null) {
+			//showing the question text
 			questionText.setText(question.getQuestion());
-
+			//showing the question fourth answers
 			for (int i = 0; i < question.getAnswers().length; i++) {
 				firstAnswer.setText(question.getAnswers()[0]);
 				secondAnswer.setText(question.getAnswers()[1]);
@@ -93,6 +86,7 @@ public class QuestionPopupController implements Initializable {
 				forthAnswer.setText(question.getAnswers()[3]);
 			}
 
+			//set the question text background based on the question difficultly level.
 			if (question.getLevel() == 1) {
 				questionPane.setStyle("-fx-background-color: white");
 			} else if (question.getLevel() == 2) {
@@ -103,7 +97,7 @@ public class QuestionPopupController implements Initializable {
 		}
 	}
 
-	// TODO we need to fix this function
+	// TODO 
 	/*
 	 * this Function checks if the user answered correct for the questions pop up.
 	 * the css for the question text changing based weather the user answered right
@@ -119,6 +113,7 @@ public class QuestionPopupController implements Initializable {
 		boolean hasCalled = false;
 		RadioButton selectedRadioButton = (RadioButton) tg.getSelectedToggle();
 		if(selectedRadioButton==null) {
+			//the user did'nt selected any answer
 			Image temp;
 			temp =new Image("/images/warning.png");
 			ImageView imageView = new ImageView(temp);
@@ -130,13 +125,10 @@ public class QuestionPopupController implements Initializable {
 
 		}
 		else {
-			String userAnswer = selectedRadioButton.getText();
-			System.out.println(userAnswer);
+			//the user selected an answer and checks the his answer status (if its correct or not)
 		if (question.getCorrect_ans() == 1) { // the question correct answer
 			if (firstAnswer.isSelected()) { // the user answer
 				firstAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
-				// Alerts.showAlert(AlertType.CONFIRMATION, "Question!", "Answer Correct!!",
-				// ButtonType.OK);
 				isCorrect = true;
 				CalculateScore(isCorrect);
 			} else {
@@ -150,8 +142,6 @@ public class QuestionPopupController implements Initializable {
 		if (question.getCorrect_ans() == 2) {
 			if (secondAnswer.isSelected()) {
 				secondAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
-				// Alerts.showAlert(AlertType.CONFIRMATION, "Question!", "Answer Correct!!",
-				// ButtonType.OK);
 				isCorrect = true;
 				CalculateScore(isCorrect);
 
@@ -167,8 +157,6 @@ public class QuestionPopupController implements Initializable {
 		if (question.getCorrect_ans() == 3) {
 			if (thirdAnswer.isSelected()) {
 				thirdAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
-				// Alerts.showAlert(AlertType.CONFIRMATION, "Question!", "Answer Correct!!",
-				// ButtonType.OK);
 				isCorrect = true;
 				CalculateScore(isCorrect);
 
@@ -184,8 +172,6 @@ public class QuestionPopupController implements Initializable {
 		if (question.getCorrect_ans() == 4) {
 			if (forthAnswer.isSelected()) {
 				forthAnswer.setStyle(("-fx-background-color: rgba(76, 175, 80, 0.7)"));
-				// Alerts.showAlert(AlertType.CONFIRMATION, "Question!", "Answer Correct!!",
-				// ButtonType.OK);
 				isCorrect = true;
 				CalculateScore(isCorrect);
 
@@ -244,7 +230,6 @@ public class QuestionPopupController implements Initializable {
 			} else if (question.getLevel() == 3) {
 				game.setScore(game.getScore() + 3);
 			}
-			// showResult();
 
 		} else if (!isCorrect) { // if the user answered incorrect
 			result = false;
@@ -258,37 +243,11 @@ public class QuestionPopupController implements Initializable {
 				game.setScore(game.getScore() - 4);
 
 			}
-			// showResult();
 
 		}
-
-		// Stage stage = (Stage) checkAnswerBt.getScene().getWindow();
-		// stage.close();
 		return 0;
 
 	}
-	/*
-	 * public void showResult() throws IOException { // Stage stage = (Stage)
-	 * checkAnswerBt.getScene().getWindow(); // stage.close(); Stage primaryStage =
-	 * new Stage(); Parent root; try { root =
-	 * FXMLLoader.load(getClass().getResource("/View/UserAnswerStatus.fxml")); Scene
-	 * scene = new Scene(root); primaryStage.setScene(scene);
-	 * primaryStage.setTitle("Sloth Chess - Answer Status"); primaryStage.show(); }
-	 * catch (IOException e1) { // TODO Auto-generated catch block
-	 * e1.printStackTrace(); }
-	 * 
-	 * primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-	 * 
-	 * @Override public void handle(WindowEvent t) { Platform.exit();
-	 * System.exit(0);
-	 * 
-	 * } }); FileInputStream input; try { input = new
-	 * FileInputStream("./src/images/logo.png"); Image img = new Image(input);
-	 * primaryStage.getIcons().add(img); // icon } catch (FileNotFoundException e) {
-	 * // TODO Auto-generated catch block e.printStackTrace(); }
-	 * 
-	 * }
-	 */
 
 	public static void close() { // this functions does'nt work, please check
 

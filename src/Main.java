@@ -16,6 +16,7 @@ public class Main extends Application {
 
 	public static Stage primaryStage = null;
 
+
 	@Override
 	public void start(Stage stage) throws IOException {
 		primaryStage = stage;
@@ -23,6 +24,7 @@ public class Main extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
+        primaryStage.setResizable(false);
 		primaryStage.show();
 
 		stage.setOnCloseRequest((EventHandler<WindowEvent>) new EventHandler<WindowEvent>() {

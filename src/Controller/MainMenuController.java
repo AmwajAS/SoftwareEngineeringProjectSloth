@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import Model.Admin;
 import Model.User;
 import javafx.application.Platform;
@@ -45,9 +44,13 @@ public class MainMenuController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		theme.getItems().addAll("Coral", "Dusk", "Wheat", "Marine", "Emerald", "Sandcastle");
-		
-		if(LoginController.getUser() instanceof User) {
+		//Invisible the manage question button for players
+		if(LoginController.getUser() instanceof User) { 
 			questionBt.setVisible(false);
+			//visible the manage question button for the admin
+		}else if(LoginController.getUser() instanceof Admin) {
+			questionBt.setVisible(true);
+
 		}
 		
 		helpPane.setVisible(false);
@@ -70,9 +73,8 @@ public class MainMenuController implements Initializable {
 	    Stage currentStage = (Stage) startBt.getScene().getWindow();
 	    currentStage.close();
 		themeSelected = theme.getSelectionModel().getSelectedItem();
-		
+		//selecting a default theme
 		if (themeSelected == null) {
-		//	theme.getSelectionModel().select("Coral");
 			setThemeSelected("Coral");
 		}
 
@@ -83,8 +85,7 @@ public class MainMenuController implements Initializable {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Sloth Chess Board");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
+        primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -158,9 +159,8 @@ public class MainMenuController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionMangement.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Chess");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
+		primaryStage.setTitle("Sloth - Question Mangement");
+        primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -191,9 +191,8 @@ public class MainMenuController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("/View/HistoryGames.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Chess");
-		primaryStage.setMinHeight(611);
-		primaryStage.setMinWidth(736);
+		primaryStage.setTitle("Sloth - Games History");
+        primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -229,13 +228,5 @@ public class MainMenuController implements Initializable {
 		ask.setVisible(true);
 		ask1.setVisible(false);
 	}
-
-	/*
-	 * Game Instructios:
-	 * Level 1:
-	 * 
-	 * 
-	 */
-	
 
 }

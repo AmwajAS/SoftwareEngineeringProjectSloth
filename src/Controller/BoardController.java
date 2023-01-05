@@ -320,9 +320,8 @@ public class BoardController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Sloth Chess Board");
-		primaryStage.setMinHeight(800);
-		primaryStage.setMinWidth(900);
+		primaryStage.setTitle("Sloth - Main Menu");
+        primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override

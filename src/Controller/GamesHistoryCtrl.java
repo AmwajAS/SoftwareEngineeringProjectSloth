@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import Alerts.Alerts;
 import Model.GameHistory;
 import Model.User;
 import javafx.application.Platform;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -22,6 +24,7 @@ import javafx.stage.WindowEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 
 public class GamesHistoryCtrl implements Initializable {
@@ -48,16 +51,24 @@ public class GamesHistoryCtrl implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-        //showing the specific player games history
+		// showing the specific player games history
 		for (GameHistory g : Sysdata.getGamesHistoryList()) {
 			if (g.getUser().getUsername().equals(user.getUsername())) {
 				gamesList.getItems().add(g);
 			}
 		}
+		//if the user have no games history yet
+		if (gamesList.getItems().isEmpty()) {
+			Alerts.showAlert(AlertType.INFORMATION, "Games History",
+					"You have no games history to show! Go AND PLAY NOW ", ButtonType.OK);
+
+		}
+
 		// Invisible the 1st, 2nd, 3rd places.
-		first.setVisible(false);  
+		first.setVisible(false);
 		second.setVisible(false);
 		third.setVisible(false);
+		
 
 	}
 
@@ -75,7 +86,8 @@ public class GamesHistoryCtrl implements Initializable {
 			Parent root = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Questions Managment");
+			primaryStage.setTitle("Sloth - Main Menu");
+	        primaryStage.setResizable(false);
 			primaryStage.show();
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
@@ -100,7 +112,7 @@ public class GamesHistoryCtrl implements Initializable {
 
 		if (!gamesList.getItems().isEmpty()) {
 			gamesList.getItems().clear();
-            //sort the games based on the highest score for all players.
+			// sort the games based on the highest score for all players.
 			Collections.sort(Sysdata.getGamesHistoryList(), new Comparator<GameHistory>() {
 				@Override
 				public int compare(GameHistory g1, GameHistory g2) {
