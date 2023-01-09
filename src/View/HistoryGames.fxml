@@ -54,7 +54,7 @@
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="63.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../OH75TO1-ai.png" />
+                              <Image url="@../images/OH75TO1-ai.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -76,7 +76,7 @@
                      <graphic>
                         <ImageView fitHeight="47.0" fitWidth="54.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../../../../Downloads/strategy%20(1).png" />
+                              <Image url="@../images/strategy%20(1).png" />
                            </image></ImageView>
                      </graphic>
                      <tooltip>

@@ -2,22 +2,31 @@
   "users" : [ {
     "username" : "arwad",
     "password" : "123",
-    "pointsInGame" : 0,
-    "highScore" : 290
+    "highScore" : 290,
+    "admin" : false
   }, {
     "username" : "amwaj",
     "password" : "123",
-    "pointsInGame" : 0,
-    "highScore" : 260
+    "highScore" : 260,
+    "admin" : false
+
   }, {
     "username" : "moran",
     "password" : "123",
-    "pointsInGame" : 0,
-    "highScore" : 280
+    "highScore" : 280,
+    "admin" : false
+
   }, {
     "username" : "habib",
     "password" : "123",
-    "pointsInGame" : 0,
-    "highScore" : 270
+    "highScore" : 270,
+    "admin" : false
+
+  }, {
+    "username" : "admin",
+    "password" : "123",
+    "highScore" : 270,
+    "admin" : true
+
   } ]
 }

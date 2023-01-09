@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Alerts.Alerts;
-import Model.Admin;
 import Model.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -46,10 +45,8 @@ public class LoginController implements Initializable {
 	private TextField username;
 	@FXML
 	private Hyperlink resetBt;
-	@FXML private MediaView mv;
-
-	public static final Admin admin = new Admin("admin", "123");
-
+	@FXML
+	private MediaView mv;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -61,10 +58,8 @@ public class LoginController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	}
 
-	
+	}
 
 	@FXML
 	void login(ActionEvent event) throws IOException {
@@ -89,7 +84,7 @@ public class LoginController implements Initializable {
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("Sloth - Main Menu");
-		        primaryStage.setResizable(false);
+				primaryStage.setResizable(false);
 				primaryStage.show();
 				primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					@Override
@@ -107,7 +102,7 @@ public class LoginController implements Initializable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else if (isAdmin(name, pass)) {//checks if the user is an admin
+			} else if (isAdmin(name, pass)) {// checks if the user is an admin
 				Stage currentStage = (Stage) loginframe.getScene().getWindow();
 				currentStage.close();
 				Stage primaryStage = new Stage();
@@ -117,7 +112,7 @@ public class LoginController implements Initializable {
 				primaryStage.setTitle("Sloth - Main Menu");
 				primaryStage.setMinHeight(800);
 				primaryStage.setMinWidth(900);
-		        primaryStage.setResizable(false);
+				primaryStage.setResizable(false);
 				primaryStage.show();
 				primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					@Override
@@ -154,7 +149,7 @@ public class LoginController implements Initializable {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
-        primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -186,7 +181,7 @@ public class LoginController implements Initializable {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chess");
-        primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -210,15 +205,24 @@ public class LoginController implements Initializable {
 	/*
 	 * this method to authorize if the admin is logging in.
 	 */
-	private boolean isAdmin(String uname, String pass) {
+	private boolean isAdmin(String name, String pass) {
 
-		Admin isAdmin = new Admin(uname, pass);
+		try {
+			Sysdata.importUsersFromJSON();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (User u : Sysdata.getThPlayers()) {
+			if (u.getUsername().equals(name) && u.getPassword().equals(pass) && (u.isAdmin())) {
+				this.user = u;
+				return true;
+			}
 
-		if (admin.equals(isAdmin)) {
-			return true;
 		}
 
 		return false;
+
 	}
 
 	/*
@@ -234,9 +238,12 @@ public class LoginController implements Initializable {
 			e.printStackTrace();
 		}
 		for (User u : Sysdata.getThPlayers()) {
-			if (u.getUsername().equals(name) && u.getPassword().equals(pass)) {
-				this.user = u;
-				return true;
+			if (u.isAdmin() == false) {
+				if (u.getUsername().equals(name) && u.getPassword().equals(pass) && (!u.isAdmin())) {
+					System.out.println(u);
+					this.user = u;
+					return true;
+				}
 			}
 
 		}
@@ -244,18 +251,20 @@ public class LoginController implements Initializable {
 		return false;
 
 	}
-	/*
-	 * this function used to clear all fields after adding / not adding / setting the user
-	 */
-		public void clearning() {
 
-			if (username != null) {
-				username.setText("");
-			}
-			if (password != null) {
-				password.setText("");
-			}
+	/*
+	 * this function used to clear all fields after adding / not adding / setting
+	 * the user
+	 */
+	public void clearning() {
+
+		if (username != null) {
+			username.setText("");
 		}
+		if (password != null) {
+			password.setText("");
+		}
+	}
 
 	public static User getUser() {
 		return user;
@@ -264,11 +273,5 @@ public class LoginController implements Initializable {
 	public static void setUser(User user) {
 		LoginController.user = user;
 	}
-
-	public static Admin getAdmin() {
-		return admin;
-	}
-	
-	
 
 }

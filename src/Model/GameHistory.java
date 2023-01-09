@@ -16,59 +16,57 @@ public class GameHistory implements Comparable<GameHistory>{
 		super();
 	}
 	
-	
-	public GameHistory(int level, User user, int finalScore, String gameDate) {
-		super();
-		this.level = level;
-		this.user = user;
-		this.finalScore = finalScore;
-		this.gameDate = gameDate;
-	}
+
+public GameHistory(int level, User user, int finalScore, String gameDate) {
+	super();
+	this.level = level;
+	this.user = user;
+	this.finalScore = finalScore;
+	this.gameDate = gameDate;
+}
 
 
-
-	public int getLevel() {
-		return level;
-	}
-
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
+public int getLevel() {
+	return level;
+}
 
 
-	public User getUser() {
-		return user;
-	}
+public void setLevel(int level) {
+	this.level = level;
+}
 
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+public User getUser() {
+	return user;
+}
 
 
-	public int getFinalScore() {
-		return finalScore;
-	}
+public void setUser(User user) {
+	this.user = user;
+}
 
 
-	public void setFinalScore(int finalScore) {
-		this.finalScore = finalScore;
-	}
+public int getFinalScore() {
+	return finalScore;
+}
 
 
+public void setFinalScore(int finalScore) {
+	this.finalScore = finalScore;
+}
 
 
-	public String getGameDate() {
-		return gameDate;
-	}
+public String getGameDate() {
+	return gameDate;
+}
 
 
-	public void setGameDate(String gameDate) {
-		this.gameDate = gameDate;
-	}
+public void setGameDate(String gameDate) {
+	this.gameDate = gameDate;
+}
 
-/*
+
+	/*
  * this toString used to print all players history (me VS all)
  */
 	@Override
@@ -78,16 +76,6 @@ public class GameHistory implements Comparable<GameHistory>{
 	}
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + finalScore;
-		result = prime * result + ((gameDate == null) ? 0 : gameDate.hashCode());
-		result = prime * result + level;
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
-	}
 
 
 	@Override
@@ -124,11 +112,6 @@ public class GameHistory implements Comparable<GameHistory>{
 			// TODO Auto-generated method stub
 			return Integer.compare(LoginController.getUser().getHighScore(), o.getUser().getHighScore());
 
-			
-
-			
-			
-		
 	}
 
 

@@ -1,8 +1,6 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import Model.Admin;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +13,6 @@ import javafx.stage.WindowEvent;
 public class Main extends Application {
 
 	public static Stage primaryStage = null;
-
 
 	@Override
 	public void start(Stage stage) throws IOException {

@@ -13,18 +13,18 @@
             "password": {
               "type": "string"
             },
-            "pointsInGame": {
-              "type": "integer"
-            },
             "highScore": {
               "type": "integer"
+            },
+            "admin": {
+              "type": "boolean"
             }
           },
           "required": [
             "username",
             "password",
-            "pointsInGame",
-            "highScore"
+            "highScore",
+            "admin"
           ]
         }
       ]

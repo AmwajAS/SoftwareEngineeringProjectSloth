@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import Model.Admin;
 import Model.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -51,20 +50,19 @@ public class MainMenuController implements Initializable {
 		// TODO Auto-generated method stub
 		theme.getItems().addAll("Coral", "Dusk", "Wheat", "Marine", "Emerald", "Sandcastle");
 		//Invisible the manage question button for players
-		/*
-		if(LoginController.getUser() instanceof User) { 
+//		
+		if(!LoginController.getUser().isAdmin()) {
 			questionBt.setVisible(false);
-			//visible the manage question button for the admin
-		}else if(LoginController.getUser() instanceof Admin) {
+		}
+		else {
 			questionBt.setVisible(true);
-		}*/
+		}
 		
 		helpPane.setVisible(false);
 		ask1.setVisible(false);
 		
-		if (LoginController.getUser() == null) {
+		if (LoginController.getUser().getUsername() == null) {
 			System.out.println("no user!!error in import users");
-			helloUser.setText("Hello: Error! ");
 		} else {
 			//Image image = new Image("/images/prize.png");
 			int highScore = 0;
@@ -80,7 +78,7 @@ public class MainMenuController implements Initializable {
 					}
 				}
 			}
-			helloUser.setText("Hello  " +LoginController.getUser().getUsername() + " ,Welcome \n Your High Score Is : "+highScore);   //set the user name on the board
+			helloUser.setText("Hey  " +LoginController.getUser().getUsername() + " ,Welcome \n Your High Score Is : "+highScore);   //set the user name on the board
 		}
 		
 

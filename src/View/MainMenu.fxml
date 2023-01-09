@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
    <children>
       <ImageView fitHeight="715.0" fitWidth="896.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -112,7 +112,7 @@
       <Button fx:id="ask1" layoutX="824.0" layoutY="28.0" mnemonicParsing="false" onAction="#onText2" prefHeight="25.0" prefWidth="31.0" style="-fx-background-color: transparent;" />
       <ImageView fx:id="prizeImg" fitHeight="84.0" fitWidth="69.0" layoutX="711.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
        <image>
-            <Image url="@../images/prize.png" />
+            <Image url="@../images/545-ai.png" />
          </image>
          </ImageView>
       <Text fx:id="helloUser" layoutX="-2.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="895.6708984375" AnchorPane.bottomAnchor="581.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
