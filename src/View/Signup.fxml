@@ -17,27 +17,27 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignupController">
    <children>
-      <ImageView fitHeight="524.0" fitWidth="710.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="584.0" fitWidth="710.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@../../../../../Downloads/274316-P604AQ-700-ai%20(1).png" />
+            <Image url="@../images/bg.png" />
          </image>
       </ImageView>
-      <Pane layoutX="130.0" layoutY="146.0" opacity="0.79" prefHeight="290.0" prefWidth="446.0" style="-fx-border-color: #ffffff67; -fx-background-color: #ffffff67;">
+      <Pane layoutX="130.0" layoutY="146.0" opacity="0.79" prefHeight="290.0" prefWidth="446.0" style="-fx-border-color: #ffffff67; -fx-background-color: #ffffff67;" AnchorPane.bottomAnchor="145.0">
          <effect>
             <Glow level="0.9">
                <input>
                   <Shadow height="185.89" radius="88.8675" width="171.58">
                      <color>
-                        <Color red="0.8947368264198303" green="0.8450292348861694" blue="0.8450292348861694" opacity="0.8700000047683716" />
+                        <Color blue="0.8450292348861694" green="0.8450292348861694" opacity="0.8700000047683716" red="0.8947368264198303" />
                      </color>
                   </Shadow>
                </input>
             </Glow>
          </effect>
       </Pane>
-      <VBox prefHeight="524.0" prefWidth="710.0">
+      <VBox prefHeight="584.0" prefWidth="710.0">
          <children>
             <HBox prefHeight="114.0" prefWidth="310.0">
                <children>
@@ -70,7 +70,7 @@
                   </PasswordField>
                </children>
                <VBox.margin>
-                  <Insets left="200.0" right="200.0" />
+                  <Insets bottom="-10.0" left="200.0" right="200.0" />
                </VBox.margin>
             </HBox>
             <Button fx:id="signupBt" mnemonicParsing="false" onAction="#signup" prefHeight="31.0" prefWidth="98.0" styleClass="list-cell" stylesheets="@application.css" text="Signup">
