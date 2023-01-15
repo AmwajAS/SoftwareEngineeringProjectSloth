@@ -71,8 +71,8 @@ public void setGameDate(String gameDate) {
  */
 	@Override
 	public String toString() {
-		return user.getUsername() +"               "+level +"                          " + finalScore +"                          "	
-	+ gameDate + "                    " + user.getHighScore();
+		return user.getUsername() +"               "+level +"                          " + finalScore +"                        "	
+	+ gameDate;
 	}
 
 

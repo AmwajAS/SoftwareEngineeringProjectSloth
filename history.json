@@ -4,20 +4,20 @@
     "user" : {
       "username" : "habib",
       "password" : "123",
-      "highScore" : 160,
+      "highScore" : 0,
       "admin" : false
     },
-    "finalScore" : 9,
+    "finalScore" : 90,
     "gameDate" : "2023-01-03"
   }, {
-    "level" : 4,
+    "level" : 3,
     "user" : {
       "username" : "arwad",
       "password" : "1234",
-      "highScore" : 100,
+      "highScore" : 0,
       "admin" : false
     },
-    "finalScore" : 6,
+    "finalScore" : 100,
     "gameDate" : "2023-01-03"
   }, {
     "level" : 4,
@@ -27,17 +27,7 @@
       "highScore" : 250,
       "admin" : false
     },
-    "finalScore" : 6,
-    "gameDate" : "2023-01-03"
-  }, {
-    "level" : 3,
-    "user" : {
-      "username" : "amwaj",
-      "password" : "123",
-      "highScore" : 260,
-      "admin" : false
-    },
-    "finalScore" : 59,
+    "finalScore" : 250,
     "gameDate" : "2023-01-03"
   }, {
     "level" : 1,
@@ -57,7 +47,7 @@
       "highScore" : 290,
       "admin" : false
     },
-    "finalScore" : 5,
+    "finalScore" : 290,
     "gameDate" : "2023-01-04"
   }, {
     "level" : 4,
@@ -67,7 +57,7 @@
       "highScore" : 270,
       "admin" : false
     },
-    "finalScore" : 32,
+    "finalScore" : 270,
     "gameDate" : "2023-01-04"
   }, {
     "level" : 2,
@@ -80,24 +70,14 @@
     "finalScore" : 48,
     "gameDate" : "2023-01-04"
   }, {
-    "level" : 3,
-    "user" : {
-      "username" : "amwaj",
-      "password" : "123",
-      "highScore" : 260,
-      "admin" : false
-    },
-    "finalScore" : 111,
-    "gameDate" : "2023-01-04"
-  }, {
     "level" : 4,
     "user" : {
       "username" : "amwaj",
       "password" : "123",
-      "highScore" : 260,
+      "highScore" : 280,
       "admin" : false
     },
-    "finalScore" : 23,
+    "finalScore" : 280,
     "gameDate" : "2023-01-04"
   }, {
     "level" : 3,
@@ -109,5 +89,25 @@
     },
     "finalScore" : 4,
     "gameDate" : "2023-01-09"
+  }, {
+    "level" : 4,
+    "user" : {
+      "username" : "habib",
+      "password" : "123",
+      "highScore" : 160,
+      "admin" : false
+    },
+    "finalScore" : 160,
+    "gameDate" : "2023-01-09"
+  }, {
+    "level" : 1,
+    "user" : {
+      "username" : "amwaj",
+      "password" : "123",
+      "highScore" : 260,
+      "admin" : false
+    },
+    "finalScore" : 7,
+    "gameDate" : "2023-01-15"
   } ]
 }
