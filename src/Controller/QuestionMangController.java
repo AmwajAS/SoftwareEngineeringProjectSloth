@@ -131,7 +131,8 @@ public class QuestionMangController implements Initializable {
 						// the delete button -
 						deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
 						editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
-						deleteIcon.setStyle(" -fx-cursor: hand ;" + "-glyph-size:28px;" + "-fx-fill:#ff1744;");
+						deleteIcon.setId("icon");
+						deleteIcon.setStyle(" -fx-cursor: hand ;" + "-glyph-size:28px;" + "-fx-fill:#f44336;");
 						editIcon.setStyle(" -fx-cursor: hand ;" + "-glyph-size:28px;" + "-fx-fill:#00E676;");
 						// deleting the selected question and update the questions list
 						deleteIcon.setOnMouseClicked((MouseEvent event) -> {
@@ -213,8 +214,10 @@ public class QuestionMangController implements Initializable {
 	 * refresh the table after deleting any question
 	 */
 	public void refreshTable() {
-		ObList = FXCollections.observableList(Sysdata.getImportedQuestions());
-		questionsTable.setItems(ObList);
+		
+		showTableContent();
+	//	ObList = FXCollections.observableList(Sysdata.getImportedQuestions());
+		//questionsTable.setItems(ObList);
 	}
 	
     /*

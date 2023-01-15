@@ -16,11 +16,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionMangController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" style="-fx-background-color: #e8f5e9;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionMangController">
    <top>
       <VBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="870.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="59.0" prefWidth="219.0">
+            <HBox prefHeight="59.0" prefWidth="219.0" style="-fx-background-color: white;">
                <children>
                   <Button fx:id="exitBT" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#exitGame" prefHeight="26.0" prefWidth="25.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -90,10 +90,10 @@
    <left>
       <HBox prefHeight="586.0" prefWidth="871.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="questionsTable" prefHeight="548.0" prefWidth="612.0" styleClass="list-cell" stylesheets="@application.css">
+            <TableView fx:id="questionsTable" prefHeight="576.0" prefWidth="605.0" styleClass="list-cell" stylesheets="@application.css">
                <columns>
-                  <TableColumn fx:id="question" prefWidth="461.9100284576416" text="Question" />
-                  <TableColumn fx:id="action" prefWidth="122.39996337890625" text="Action" />
+                  <TableColumn fx:id="question" prefWidth="484.800012588501" text="Question" />
+                  <TableColumn fx:id="action" prefWidth="97.60003662109375" text="Action" />
                </columns>
                <HBox.margin>
                   <Insets left="5.0" />
