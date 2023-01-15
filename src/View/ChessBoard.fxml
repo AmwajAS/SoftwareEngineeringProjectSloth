@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -10,85 +11,125 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="allBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardController">
+<BorderPane fx:id="allBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="870.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardController">
 	<top>
-		<HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="592.0" BorderPane.alignment="CENTER">
-			<children>
-      <Button fx:id="exitGame" mnemonicParsing="false" onAction="#exitGame" style="-fx-background-color: transparent;" BorderPane.alignment="TOP_LEFT">
-         <graphic>
-            <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="-fx-background-color: white;">
-               <image>
-                  <Image url="@../images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-               <HBox.margin>
-                  <Insets right="200.0" />
-               </HBox.margin>
-            </Button>
-				<GridPane prefHeight="80.0" prefWidth="473.0">
-					<columnConstraints>
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-					</columnConstraints>
-					<rowConstraints>
-						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-					</rowConstraints>
-					<children>
-						<Button fx:id="first" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="1">
-							<font>
-								<Font name="Times New Roman Bold" size="19.0" />
-							</font>
-						</Button>
-						<Button fx:id="second" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="2" GridPane.columnIndex="1">
-							<font>
-								<Font name="Times New Roman Bold" size="19.0" />
-							</font>
-						</Button>
-						<Button fx:id="third" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="3" GridPane.columnIndex="2">
-							<font>
-								<Font name="Times New Roman Bold" size="19.0" />
-							</font>
-						</Button>
-						<Button fx:id="forth" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="4" GridPane.columnIndex="3">
-							<font>
-								<Font name="Times New Roman Bold" size="19.0" />
-							</font>
-						</Button>
-						<Text fx:id="time" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" GridPane.rowIndex="2">
-							<font>
-								<Font name="System Bold" size="20.0" />
-							</font>
-						</Text>
-						<Text fx:id="score" layoutX="485.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="116.681640625" GridPane.rowIndex="3">
-							<font>
-								<Font name="System Bold" size="20.0" />
-							</font>
-						</Text>
-						<Button cancelButton="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="50.0" style="-fx-background-color: transparent;" GridPane.rowIndex="2">
-							<graphic>
-								<ImageView fitHeight="22.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" />
-							</graphic>
-						</Button>
-                  <Text fx:id="playerName" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayerName" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Text>
-					</children>
-				</GridPane>
-			</children>
+		<HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="137.0" prefWidth="850.0" BorderPane.alignment="CENTER">
 			<BorderPane.margin>
-				<Insets bottom="300.0" left="10.0" right="10.0" top="10.0" />
+				<Insets bottom="300.0" left="10.0" right="10.0" top="5.0" />
 			</BorderPane.margin>
+         <children>
+            <VBox prefHeight="122.0" prefWidth="850.0">
+               <children>
+                  <HBox prefHeight="38.0" prefWidth="850.0">
+                     <children>
+                        <Button fx:id="exitGame" mnemonicParsing="false" onAction="#exitGame" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <ImageView fitHeight="31.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="-fx-background-color: white;">
+                                 <image>
+                                    <Image url="@../images/back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets right="150.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="first" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="46.0" prefWidth="116.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="1">
+                           <font>
+                              <Font name="Times New Roman Bold" size="19.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="second" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="46.0" prefWidth="116.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="2">
+                           <font>
+                              <Font name="Times New Roman Bold" size="19.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="third" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="46.0" prefWidth="116.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="3">
+                           <font>
+                              <Font name="Times New Roman Bold" size="19.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="forth" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="46.0" prefWidth="116.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="4">
+                           <font>
+                              <Font name="Times New Roman Bold" size="19.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="93.0" prefWidth="850.0">
+                     <children>
+                        <GridPane prefHeight="84.0" prefWidth="751.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.2000274658203" minWidth="10.0" prefWidth="87.0000015258789" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.2000030517578" minWidth="10.0" prefWidth="390.5999694824219" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.9999450683594" minWidth="10.0" prefWidth="69.00003051757807" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.19992065429688" minWidth="10.0" prefWidth="202.40004272460942" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="54.19998779296875" minHeight="10.0" prefHeight="45.599996948242186" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="45.6000030517578" minHeight="10.0" prefHeight="45.6000030517578" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                           <children>
+                              <ButtonBar prefHeight="55.0" prefWidth="86.0" />
+                              <Text fx:id="time" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" wrappingWidth="314.5429723262787" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="2.0" left="10.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <ImageView fitHeight="28.0" fitWidth="43.0" pickOnBounds="true" smooth="false" GridPane.rowIndex="1">
+                                 <image>
+                                    <Image url="@../images/score%20(2).png" />
+                                 </image>
+                                 <GridPane.margin>
+                                    <Insets left="30.0" top="2.0" />
+                                 </GridPane.margin>
+                              </ImageView>
+                              <Text fx:id="score" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="314.21643447875977" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" top="2.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text fx:id="playerName" strokeType="OUTSIDE" strokeWidth="0.0" text="PlayerName:" GridPane.columnIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="61.0" fitWidth="84.0" pickOnBounds="true" smooth="false">
+                                 <image>
+                                    <Image url="@../images/sand.gif" />
+                                 </image>
+                                 <GridPane.margin>
+                                    <Insets bottom="2.0" left="10.0" />
+                                 </GridPane.margin>
+                              </ImageView>
+                              <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" smooth="false" GridPane.columnIndex="2">
+                                 <image>
+                                    <Image url="@../images/dvector.png" />
+                                 </image>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </ImageView>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
 		</HBox>
 	</top>
 	<center>

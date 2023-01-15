@@ -1,13 +1,11 @@
 package Controller;
 
-import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import Alerts.Alerts;
 import Model.Game;
 import Model.GameHistory;
 import Model.User;
@@ -27,8 +25,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -84,19 +80,19 @@ public class BoardController implements Initializable {
 		doScore(game);
 		first.setStyle("-fx-background-color: #b9f6ca; ");
 
-		first.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				scores.stop();
-				timer.stop();
-				seconds = 60;
-				game.setScore(0);
-				level = 1;
-				initialize(location, resources);
-			}
-
-		});
+//		forth.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent arg0) {
+//				// TODO Auto-generated method stub
+//				scores.stop();
+//				timer.stop();
+//				seconds = 30;
+//				game.setScore(10);
+//				level = 4;
+//				initialize(location, resources);
+//			}
+//
+//		});
 		/*
 		 * second.setOnAction(new EventHandler<ActionEvent>() {
 		 * 

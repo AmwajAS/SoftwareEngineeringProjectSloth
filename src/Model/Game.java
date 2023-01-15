@@ -30,7 +30,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import Alerts.Alerts;
 import Controller.BoardController;
 import Controller.LoginController;
 import Controller.QuestionPopupController;

@@ -115,9 +115,34 @@ SplitMenuButton:hover{
     -fx-border-color: #2e7d32;
     -fx-border-width: 2;    
 }
- .BorderPane #loginframe{
-    -fx-background-image: url("/src/images/board.png");
-    -fx-background-repeat:stretch;
-    -fx-background-size:  110%  100%;
-    -fx-background-position: bottom ;
+.text-field {
+    -fx-prompt-text-fill: gray;
+    -fx-text-inner-color: white;
+}
+
+.text-field:empty .text {
+    -fx-effect: null ;
+}
+#icon{
+
+    -fx-fill:#f44336;
+}
+.table-view *.scroll-bar:horizontal *.increment-button,
+.table-view *.scroll-bar:horizontal *.decrement-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-arrow, 
+.table-view *.scroll-bar:horizontal *.decrement-arrow {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-shape: null;
+}
+#historyPane{
+    -fx-background-image : url("/SoftwareEngineeringProject/src/images/bg.png");
 }
