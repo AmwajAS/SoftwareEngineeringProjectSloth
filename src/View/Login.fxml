@@ -5,19 +5,69 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="loginframe" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="727.0" styleClass="loginframe" stylesheets="@application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+<AnchorPane fx:id="loginframe" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
+   <children>
+      <ImageView fitHeight="620.0" fitWidth="734.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../images/slothh.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="146.0" layoutY="147.0" opacity="0.79" prefHeight="306.0" prefWidth="414.0" style="-fx-border-color: #ffffff67; -fx-background-color: #ffffff67;">
+         <effect>
+            <Glow level="1.0">
+               <input>
+                  <Shadow height="255.0" radius="127.0" width="255.0">
+                     <color>
+                        <Color red="0.8947368264198303" green="0.8450292348861694" blue="0.8450292348861694" opacity="0.8700000047683716" />
+                     </color>
+                  </Shadow>
+               </input>
+            </Glow>
+         </effect>
+      </Pane>
+      <VBox layoutX="264.0" layoutY="336.0" prefHeight="111.0" prefWidth="210.0">
          <children>
-            <HBox prefHeight="51.0" prefWidth="727.0">
+            <Hyperlink fx:id="resetBt" onAction="#resetPassword" text="forget Password?">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="85.0" />
+               </VBox.margin>
+            </Hyperlink>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dont have an account? join us now ">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Text>
+            <Button fx:id="signupBt" mnemonicParsing="false" onAction="#signup" prefHeight="31.0" prefWidth="95.0" styleClass="list-cell" stylesheets="@application.css" text="Sign up">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="227.0" layoutY="209.0" prefHeight="126.0" prefWidth="332.0">
+         <children>
+            <HBox prefHeight="70.0" prefWidth="332.0">
                <children>
                   <ImageView fitHeight="36.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -30,19 +80,8 @@
                      </font>
                   </TextField>
                </children>
-               <VBox.margin>
-                  <Insets left="200.0" right="200.0" top="300.0" />
-               </VBox.margin>
             </HBox>
-            <Button fx:id="loginBt" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="74.0" styleClass="list-cell" stylesheets="@application.css" text="Login">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="480.0" />
-               </VBox.margin>
-            </Button>
-            <HBox prefHeight="51.0" prefWidth="727.0">
+            <HBox prefHeight="51.0" prefWidth="302.0">
                <children>
                   <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true">
                      <image>
@@ -54,40 +93,17 @@
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </PasswordField>
-               </children>
-               <VBox.margin>
-                  <Insets left="200.0" right="200.0" />
-               </VBox.margin>
-            </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Hyperlink fx:id="resetBt" onAction="#resetPassword" text="forget Password?">
-                     <font>
-                        <Font name="System Bold Italic" size="13.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="315.0" />
-                     </VBox.margin>
-                  </Hyperlink>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dont have an account? join us now ">
-                     <font>
-                        <Font name="System Italic" size="13.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="230.0" top="30.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Button fx:id="signupBt" mnemonicParsing="false" onAction="#signup" prefHeight="31.0" prefWidth="95.0" styleClass="list-cell" stylesheets="@application.css" text="Sign up">
+                  <Button fx:id="loginBt" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="73.0" styleClass="list-cell" stylesheets="@application.css" text="Login">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets left="280.0" />
-                     </VBox.margin>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
                   </Button>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
-   </center>
-</BorderPane>
+   </children>
+</AnchorPane>

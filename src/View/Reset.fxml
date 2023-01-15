@@ -1,43 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ResetController">
    <children>
-      <TextField fx:id="username" layoutX="178.0" layoutY="224.0" promptText="username" styleClass="Feild" stylesheets="@application.css">
+      <ImageView fitHeight="516.0" fitWidth="606.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../../../../../Downloads/274316-P604AQ-700-ai%20(1).png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="99.0" layoutY="115.0" opacity="0.79" prefHeight="323.0" prefWidth="420.0" style="-fx-border-color: #ffffff67; -fx-background-color: #ffffff67;">
+         <effect>
+            <Glow level="0.9">
+               <input>
+                  <Shadow height="185.89" radius="88.8675" width="171.58">
+                     <color>
+                        <Color red="0.8947368264198303" green="0.8450292348861694" blue="0.8450292348861694" opacity="0.8700000047683716" />
+                     </color>
+                  </Shadow>
+               </input>
+            </Glow>
+         </effect>
+      </Pane>
+      <TextField fx:id="username" layoutX="178.0" layoutY="192.0" prefHeight="42.0" prefWidth="199.0" promptText="username" styleClass="Feild" stylesheets="@application.css">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="password" layoutX="178.0" layoutY="299.0" promptText="Password" styleClass="Feild" stylesheets="@application.css">
+      <PasswordField fx:id="password" layoutX="178.0" layoutY="268.0" prefHeight="42.0" prefWidth="199.0" promptText="Password" styleClass="Feild" stylesheets="@application.css">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </PasswordField>
-      <PasswordField fx:id="renter" layoutX="177.0" layoutY="365.0" promptText="Renter Password" styleClass="Feild" stylesheets="@application.css">
+      <PasswordField fx:id="renter" layoutX="177.0" layoutY="345.0" prefHeight="42.0" prefWidth="199.0" promptText="Renter Password" styleClass="Feild" stylesheets="@application.css">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </PasswordField>
-      <Button fx:id="saveBt" layoutX="438.0" layoutY="423.0" mnemonicParsing="false" onAction="#savePassword" prefHeight="31.0" prefWidth="98.0" styleClass="list-cell" stylesheets="@application.css" text="Save">
+      <Button fx:id="saveBt" layoutX="260.0" layoutY="422.0" mnemonicParsing="false" onAction="#savePassword" prefHeight="31.0" prefWidth="98.0" styleClass="list-cell" stylesheets="@application.css" text="Save">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="back" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#actionOnBack" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" stylesheets="@application.css">
-         <graphic>
-            <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/back.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <HBox layoutX="-3.0" prefHeight="34.0" prefWidth="606.0" style="-fx-background-color: white;">
+         <children>
+            <Button fx:id="back" mnemonicParsing="false" onAction="#actionOnBack" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" stylesheets="@application.css">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label prefHeight="34.0" prefWidth="362.0" text="R E S E T    P A S S W O R D" textAlignment="CENTER" textFill="#1b5e20" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Times New Roman Bold" size="30.0" />
+               </font>
+               <effect>
+                  <Reflection fraction="1.0" topOpacity="0.0" />
+               </effect>
+               <HBox.margin>
+                  <Insets left="70.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

@@ -22,9 +22,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -34,7 +32,7 @@ public class LoginController implements Initializable {
 	private static User user; // we save the current user/player
 
 	@FXML
-	private BorderPane loginframe;
+	private AnchorPane loginframe;
 	@FXML
 	private Button signupBt;
 	@FXML
@@ -48,6 +46,8 @@ public class LoginController implements Initializable {
 	@FXML
 	private MediaView mv;
 
+	public static javafx.scene.media.MediaPlayer play= null;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -58,6 +58,22 @@ public class LoginController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+//		Media media= new Media(getClass().getResource("/images/chess.mp4").toExternalForm());
+//		play = new MediaPlayer(media);
+//		mv.setMediaPlayer(play);
+//		play.setOnEndOfMedia(new Runnable() {
+//			
+//			@Override
+//			public void  run() {
+//				play.seek(Duration.ZERO);
+//				play.play();
+//			}
+//		});
+//		play.play();
+//
+//		mv.toBack();
+//		
 
 	}
 
@@ -110,8 +126,6 @@ public class LoginController implements Initializable {
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("Sloth - Main Menu");
-				primaryStage.setMinHeight(800);
-				primaryStage.setMinWidth(900);
 				primaryStage.setResizable(false);
 				primaryStage.show();
 				primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

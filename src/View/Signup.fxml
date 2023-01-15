@@ -5,44 +5,58 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="727.0" styleClass="loginframe" stylesheets="@application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignupController">
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="704.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignupController">
+   <children>
+      <ImageView fitHeight="524.0" fitWidth="710.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../../../../../Downloads/274316-P604AQ-700-ai%20(1).png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="130.0" layoutY="146.0" opacity="0.79" prefHeight="290.0" prefWidth="446.0" style="-fx-border-color: #ffffff67; -fx-background-color: #ffffff67;">
+         <effect>
+            <Glow level="0.9">
+               <input>
+                  <Shadow height="185.89" radius="88.8675" width="171.58">
+                     <color>
+                        <Color red="0.8947368264198303" green="0.8450292348861694" blue="0.8450292348861694" opacity="0.8700000047683716" />
+                     </color>
+                  </Shadow>
+               </input>
+            </Glow>
+         </effect>
+      </Pane>
+      <VBox prefHeight="524.0" prefWidth="710.0">
          <children>
-            <HBox prefHeight="51.0" prefWidth="727.0">
+            <HBox prefHeight="114.0" prefWidth="310.0">
                <children>
                   <ImageView fitHeight="36.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/logo.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="username" promptText="username" styleClass="Feild" stylesheets="@application.css">
+                  <TextField fx:id="username" promptText="username" style="-fx-text-fill: white;" styleClass="Feild" stylesheets="@application.css">
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </TextField>
                </children>
                <VBox.margin>
-                  <Insets left="200.0" right="200.0" top="300.0" />
+                  <Insets left="200.0" right="200.0" top="200.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="signupBt" mnemonicParsing="false" onAction="#signup" prefHeight="31.0" prefWidth="98.0" styleClass="list-cell" stylesheets="@application.css" text="Signup">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="480.0" />
-               </VBox.margin>
-            </Button>
-            <HBox prefHeight="51.0" prefWidth="727.0">
+            <HBox prefHeight="53.0" prefWidth="310.0">
                <children>
                   <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -59,12 +73,17 @@
                   <Insets left="200.0" right="200.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <Button fx:id="signupBt" mnemonicParsing="false" onAction="#signup" prefHeight="31.0" prefWidth="98.0" styleClass="list-cell" stylesheets="@application.css" text="Signup">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="300.0" top="50.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
-   </center>
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="36.0" prefWidth="704.0" style="-fx-background-color: white;">
          <children>
             <Button fx:id="back" mnemonicParsing="false" onAction="#actionOnBack" prefHeight="31.0" prefWidth="31.0" style="-fx-background-color: transparent;" stylesheets="@application.css">
                <graphic>
@@ -88,5 +107,5 @@
             </Label>
          </children>
       </HBox>
-   </top>
-</BorderPane>
+   </children>
+</AnchorPane>
