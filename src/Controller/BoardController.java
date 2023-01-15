@@ -38,6 +38,8 @@ public class BoardController implements Initializable {
 	private Text score;
 	@FXML
 	private Button first;
+    @FXML
+    private Button restart;
 	@FXML
 	private Button exitGame;
 	@FXML
@@ -80,19 +82,19 @@ public class BoardController implements Initializable {
 		doScore(game);
 		first.setStyle("-fx-background-color: #b9f6ca; ");
 
-//		forth.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent arg0) {
-//				// TODO Auto-generated method stub
-//				scores.stop();
-//				timer.stop();
-//				seconds = 30;
-//				game.setScore(10);
-//				level = 4;
-//				initialize(location, resources);
-//			}
-//
-//		});
+		restart.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				scores.stop();
+				timer.stop();
+				seconds = 60;
+				game.setScore(1);
+				level = 1;
+				initialize(location, resources);
+			}
+
+		});
 		/*
 		 * second.setOnAction(new EventHandler<ActionEvent>() {
 		 * 
@@ -375,7 +377,7 @@ public class BoardController implements Initializable {
 		second.setStyle("-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;");
 		third.setStyle("-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;");
 		forth.setStyle("-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;");
-		first.fire();
+		restart.fire();
 	}
 	
 	public void exitTrigger() {
