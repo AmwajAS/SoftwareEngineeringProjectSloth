@@ -1,7 +1,5 @@
 package Model;
 
-import javax.swing.ImageIcon;
-
 import java.util.ArrayList;
 /*
  * Knight extends from Piece

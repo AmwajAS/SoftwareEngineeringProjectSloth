@@ -3,7 +3,6 @@ package Model;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;

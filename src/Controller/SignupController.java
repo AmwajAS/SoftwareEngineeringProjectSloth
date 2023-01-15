@@ -48,7 +48,6 @@ public class SignupController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(Sysdata.thPlayers);
 
 	}
 
@@ -80,10 +79,11 @@ public class SignupController implements Initializable {
 			} else {
 				try {
 					// add the user to the system
+					Alerts.showAlert(AlertType.INFORMATION, "Sloth - Signup",
+							"User added Successfuly. ", ButtonType.OK);
 					Sysdata.getThPlayers().add(user);
 					Sysdata.exportUsersToJSON();
 					clearning();
-					System.out.println(user);
 					// Close the current stage
 					Stage currentStage = (Stage) signupBt.getScene().getWindow();
 					currentStage.close();

@@ -51,12 +51,9 @@ public class Sysdata {
 			Set<ValidationMessage> validationResult = schema.validate(json);
 
 			if (validationResult.isEmpty()) {
-				System.out.println("no validation errors :-)");
 				Json input = mapper.treeToValue(json, Json.class);
 				for (Question q : input.getQuestions()) {
-					// System.out.println(input.getQuestions());
 					importedQuestions.add(q);
-					// imported.put("questions", importedQuestions);
 
 				}
 
@@ -115,7 +112,6 @@ public class Sysdata {
 			Set<ValidationMessage> validationResult = schema.validate(json);
 
 			if (validationResult.isEmpty()) {
-				System.out.println("no validation errors :-)");
 				UserJson input = usermapper.treeToValue(json, UserJson.class);
 				for (User u : input.getUsers()) {
 					thPlayers.add(u);
@@ -176,7 +172,6 @@ public class Sysdata {
 			Set<ValidationMessage> validationResult = schema.validate(json);
 
 			if (validationResult.isEmpty()) {
-				System.out.println("no validation errors :-)");
 				HistoryJson input = usermapper.treeToValue(json, HistoryJson.class);
 				for (GameHistory g : input.getGamesHistory()) {
 					gamesHistoryList.add(g);

@@ -90,13 +90,14 @@ public class MainMenuController implements Initializable {
 		}
 
 		// Invisible the manage question button for players
-//		
+		
 		if (!LoginController.getUser().isAdmin()) {
 			questionBt.setVisible(false);
 		} else {
 			questionBt.setVisible(true);
 		}
 
+		// Invisible the help button
 		helpPane.setVisible(false);
 		ask1.setVisible(false);
 
@@ -106,7 +107,6 @@ public class MainMenuController implements Initializable {
 			// Image image = new Image("/images/prize.png");
 			int highScore = 0;
 			for (User user : Sysdata.getThPlayers()) {
-				System.out.println(user);
 				if (user.getUsername().equals(LoginController.getUser().getUsername())) {
 					highScore = user.getHighScore();
 					if (highScore >= 200) {

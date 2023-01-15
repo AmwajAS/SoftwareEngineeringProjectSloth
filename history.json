@@ -109,5 +109,15 @@
     },
     "finalScore" : 7,
     "gameDate" : "2023-01-15"
+  }, {
+    "level" : 1,
+    "user" : {
+      "username" : "amwaj",
+      "password" : "123",
+      "highScore" : 260,
+      "admin" : false
+    },
+    "finalScore" : 4,
+    "gameDate" : "2023-01-15"
   } ]
 }

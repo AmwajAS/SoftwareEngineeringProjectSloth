@@ -9,7 +9,6 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class UndoCell extends Cell {
 

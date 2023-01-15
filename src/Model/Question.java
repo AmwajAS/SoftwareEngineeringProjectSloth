@@ -1,9 +1,6 @@
 package Model;
 
 import java.util.Arrays;
-import java.util.Iterator;
-
-import javafx.scene.control.Button;
 
 public class Question { 
 

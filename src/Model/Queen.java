@@ -1,8 +1,6 @@
 package Model;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-
 /**
  * Data structure to control a queen's movement
  * on a chess board.

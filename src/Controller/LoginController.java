@@ -216,11 +216,9 @@ public class LoginController implements Initializable {
 	 */
 	private boolean isUser(String name, String pass) {
 
-
 		for (User u : Sysdata.getThPlayers()) {
 			if (u.isAdmin() == false) {
 				if (u.getUsername().equals(name) && u.getPassword().equals(pass) && (!u.isAdmin())) {
-					System.out.println(u);
 					this.user = u;
 					return true;
 				}

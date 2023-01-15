@@ -51,7 +51,7 @@ public class ResetController implements Initializable {
 		reuser = username.getText();
 		String pass = password.getText();
 		repass = renter.getText();
-		
+
 		// checking if all fields not empty
 		if (reuser.equals(null) || reuser.isEmpty()) {
 			Alerts.showAlert(AlertType.ERROR, "Sloth - Reset", "Please enter you'r username.", ButtonType.OK);
@@ -62,15 +62,15 @@ public class ResetController implements Initializable {
 
 		} else {
 			// checks if the 2 fields of passwords are the same
-			if (!pass.equals(repass)) { 
+			if (!pass.equals(repass)) {
 				Alerts.showAlert(AlertType.WARNING, "Sloth - Reset", "Password does'nt match, try again.",
 						ButtonType.OK);
 			} else {
 
 				User oldUser = new User(reuser, pass);
 				User newUser = userContains(oldUser);
-				//update the user new password
-				if (newUser != null) { 
+				// update the user new password
+				if (newUser != null) {
 					// newUser.setPassword(repass);
 					Sysdata.getThPlayers().remove(oldUser);
 					Sysdata.getThPlayers().add(newUser);
@@ -98,9 +98,10 @@ public class ResetController implements Initializable {
 		}
 
 	}
-/*
- * updates the user object in the games history Json file
- */
+
+	/*
+	 * updates the user object in the games history Json file
+	 */
 	private void updateHistory(User newUser) {
 		// TODO Auto-generated method stub
 		if (Sysdata.getGamesHistoryList().isEmpty()) {
@@ -125,9 +126,11 @@ public class ResetController implements Initializable {
 		}
 
 	}
-/*
- * this method checks if the user contains in the players list and update his new password
- */
+
+	/*
+	 * this method checks if the user contains in the players list and update his
+	 * new password
+	 */
 	private User userContains(User u) {
 		// TODO Auto-generated method stub
 		// checks if the users list is empty
@@ -141,7 +144,6 @@ public class ResetController implements Initializable {
 		}
 		for (User user : Sysdata.getThPlayers()) {
 			if (u.getUsername().equals(user.getUsername())) {
-				System.out.println(user.getPassword());
 				user.setPassword(repass);
 				return user;
 
@@ -167,7 +169,7 @@ public class ResetController implements Initializable {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Sloth - Login");
-	        primaryStage.setResizable(false);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
@@ -178,9 +180,10 @@ public class ResetController implements Initializable {
 			});
 		}
 	}
-/*
- * clearing all the fields after setting / un setting the password for the user.
- */
+
+	/*
+	 * clearing all the fields after setting / un setting the password for the user.
+	 */
 	public void clearning() {
 
 		if (username != null) {
