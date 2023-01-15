@@ -24,10 +24,10 @@
     "user" : {
       "username" : "moran",
       "password" : "123",
-      "highScore" : 250,
+      "highScore" : 280,
       "admin" : false
     },
-    "finalScore" : 250,
+    "finalScore" : 280,
     "gameDate" : "2023-01-03"
   }, {
     "level" : 1,
@@ -74,20 +74,20 @@
     "user" : {
       "username" : "amwaj",
       "password" : "123",
-      "highScore" : 280,
+      "highScore" : 260,
       "admin" : false
     },
-    "finalScore" : 280,
+    "finalScore" : 260,
     "gameDate" : "2023-01-04"
   }, {
-    "level" : 3,
+    "level" : 4,
     "user" : {
       "username" : "admin",
       "password" : "123",
       "highScore" : 270,
       "admin" : true
     },
-    "finalScore" : 4,
+    "finalScore" : 270,
     "gameDate" : "2023-01-09"
   }, {
     "level" : 4,
