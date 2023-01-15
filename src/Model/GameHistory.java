@@ -1,6 +1,9 @@
 package Model;
 
 import Controller.LoginController;
+/*
+ * this class handle all the players history games.
+ */
 
 public class GameHistory implements Comparable<GameHistory>{
 	

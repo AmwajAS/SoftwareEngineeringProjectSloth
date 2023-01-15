@@ -52,29 +52,6 @@ public class LoginController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
-		try {
-			Sysdata.importGameHistorysFromJSON();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-//		Media media= new Media(getClass().getResource("/images/chess.mp4").toExternalForm());
-//		play = new MediaPlayer(media);
-//		mv.setMediaPlayer(play);
-//		play.setOnEndOfMedia(new Runnable() {
-//			
-//			@Override
-//			public void  run() {
-//				play.seek(Duration.ZERO);
-//				play.play();
-//			}
-//		});
-//		play.play();
-//
-//		mv.toBack();
-//		
-
 	}
 
 	@FXML
@@ -221,12 +198,6 @@ public class LoginController implements Initializable {
 	 */
 	private boolean isAdmin(String name, String pass) {
 
-		try {
-			Sysdata.importUsersFromJSON();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		for (User u : Sysdata.getThPlayers()) {
 			if (u.getUsername().equals(name) && u.getPassword().equals(pass) && (u.isAdmin())) {
 				this.user = u;
@@ -245,12 +216,7 @@ public class LoginController implements Initializable {
 	 */
 	private boolean isUser(String name, String pass) {
 
-		try {
-			Sysdata.importUsersFromJSON();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		for (User u : Sysdata.getThPlayers()) {
 			if (u.isAdmin() == false) {
 				if (u.getUsername().equals(name) && u.getPassword().equals(pass) && (!u.isAdmin())) {

@@ -37,6 +37,20 @@ public class Main extends Application {
 			}
 		});
 		Main.loadLogo();
+		
+		try {
+			Sysdata.importGameHistorysFromJSON();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Sysdata.importUsersFromJSON();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	static void loadLogo() {

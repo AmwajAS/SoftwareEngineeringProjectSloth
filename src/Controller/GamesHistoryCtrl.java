@@ -54,7 +54,6 @@ public class GamesHistoryCtrl implements Initializable {
 	@FXML
 	private Pane me;
 
-
 	private User user = LoginController.getUser();
 
 	@Override
