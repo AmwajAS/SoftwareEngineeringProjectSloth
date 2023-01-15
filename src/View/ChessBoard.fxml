@@ -65,7 +65,7 @@
                               <Font name="Times New Roman Bold" size="19.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="50.0" />
+                              <Insets left="130.0" />
                            </HBox.margin>
                         </Button>
                         <Button fx:id="second" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="46.0" prefWidth="116.0" style="-fx-background-color: transparent; -fx-border-radius: 5; -fx-background-radius: 5;" text="2">
