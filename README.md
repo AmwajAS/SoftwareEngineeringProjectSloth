@@ -39,3 +39,15 @@ The project is build as an OOP in Java.
 Different design patterns were used: MVC,Factory,Observable.
 The Front End in the project is built by JavaFX.
 Tests were built and checked in the project.
+
+
+![login](https://github.com/AmwajAS/SoftwareEngineeringProjectSloth/assets/99044391/f9c30410-4c9f-4a09-ac60-8fceb549e06e)
+
+
+
+https://github.com/AmwajAS/SoftwareEngineeringProjectSloth/assets/99044391/063f197d-4fc5-4b17-95f2-b32a7e8d4a9d
+
+
+
+https://github.com/AmwajAS/SoftwareEngineeringProjectSloth/assets/99044391/fb3dd16b-ec83-4499-9e68-5a66e950970b
+
